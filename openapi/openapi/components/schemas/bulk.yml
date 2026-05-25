@@ -1,0 +1,25 @@
+BulkMissionObject:
+  type: object
+  properties:
+    uuid:
+      type: string
+      description: Unique identifier for the bulk mission.
+    template_name:
+      type: string
+      description: The file name of the template used to create this bulk mission.
+    count:
+      type: integer
+      description: Total number of sign tasks to be created and sent.
+    processing_count:
+      type: integer
+      description: Number of sign tasks still being processed.
+    completed_count:
+      type: integer
+      description: Number of sign tasks that have been completed.
+    status:
+      type: string
+      enum: [processing, completed]
+      description: "Mission status. `completed` means all sign requests are finished."
+    created_at:
+      type: integer
+      description: Unix timestamp when the mission was created.

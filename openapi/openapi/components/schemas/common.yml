@@ -1,0 +1,44 @@
+BlankSuccessResponse:
+  type: object
+  properties:
+    data:
+      type: string
+      example: ok
+
+TokenObject:
+  type: object
+  properties:
+    access_token:
+      type: string
+    token_type:
+      type: string
+    expires_in:
+      type: integer
+      description: Expiration time in seconds.
+    refresh_token:
+      type: string
+    created_at:
+      type: integer
+      description: Creation timestamp.
+    for_app:
+      type: string
+      description: Application name the token belongs to.
+
+PaginationMeta:
+  type: object
+  properties:
+    current_page:
+      type: integer
+    total_pages:
+      type: integer
+
+ErrorResponse:
+  type: object
+  required: [error_code, error_message]
+  properties:
+    error_code:
+      type: integer
+      description: Numeric error code identifying the specific error.
+    error_message:
+      type: string
+      description: Human-readable error message.

@@ -1,0 +1,361 @@
+SignTaskOwnerObject:
+  type: object
+  properties:
+    name:
+      type: string
+    sequence:
+      type: integer
+    email:
+      type: string
+    action_type:
+      type: string
+      example: sent
+    icon_url:
+      type: string
+SignTaskThumbnailObject:
+  type: object
+  properties:
+    original:
+      type: string
+      nullable: true
+    completed:
+      type: string
+      nullable: true
+FieldSettingOptionsObject:
+  type: object
+  properties:
+    force:
+      type: boolean
+    default:
+      oneOf:
+        - type: string
+        - type: boolean
+    read_only:
+      type: boolean
+    is_multi_line:
+      type: boolean
+    font_size:
+      type: integer
+    font_size_fixed:
+      type: boolean
+    alignment:
+      type: string
+      enum: [left, center, right]
+    alignment_fixed:
+      type: boolean
+    length:
+      type: integer
+    validation:
+      type: string
+      nullable: true
+      enum: [null, email, letters, numbers, regex]
+    validation_regex:
+      type: string
+      nullable: true
+    date_format:
+      type: string
+    date_setting:
+      type: string
+      enum: [current_only, future_enable, past_enable, no_limit]
+    zone:
+      type: boolean
+FieldSettingObject:
+  type: object
+  properties:
+    field_type:
+      type: string
+      enum: [signature, textfield, datefield, checkbox, radio, systemtime]
+    field_value:
+      oneOf:
+        - type: string
+        - type: boolean
+    object_id:
+      type: string
+      description: >
+        Client-generated UUID identifying this field. Must match one of the entries in the top-level `pdf_object_info` array. Used interchangeably with `field_object_id` in some client implementations.
+
+    field_object_id:
+      type: string
+      description: Alias for `object_id`. Provided for client compatibility.
+    custom_id:
+      type: string
+      description: Custom identifier for the field, defined by the client.
+    field_group_object_id:
+      type: string
+      description: Groups this field with other fields under a shared field_setting_group. Must match a `field_group_object_id` in `field_setting_groups`.
+    page:
+      type: integer
+      description: 0-based page index where this field appears.
+    coord:
+      type: array
+      description: "[ldx1, ldy2, rhx2, rhy2] coordinates of the field on the page."
+      items:
+        type: number
+    width:
+      type: number
+      description: Field width override (used by some client renderers).
+    border_color:
+      type: string
+      description: Field border color (hex or named color).
+    background_color:
+      type: string
+      description: Field background color (hex or named color).
+    is_date:
+      type: boolean
+      description: If true, the field is treated as a date field by the renderer.
+    style:
+      type: object
+      description: Additional style metadata defined by the client.
+    options:
+      $ref: '#/FieldSettingOptionsObject'
+StageSettingObject:
+  type: object
+  properties:
+    forward_enable:
+      type: boolean
+      description: Allow signer to forward the task.
+    decline_enable:
+      type: boolean
+      description: Allow signer to decline the task.
+    viewable_in_processing:
+      type: boolean
+      description: Whether this stage's document is visible to the signer while the task is in progress.
+    viewable_in_completed:
+      type: boolean
+      description: Whether this stage's document is visible to the signer after the task is completed.
+    reviewed_skip_confirm:
+      type: boolean
+      description: If true, the reviewer skips the confirmation step after reviewing.
+    viewable_in_processing_attachments:
+      type: array
+      description: List of attachment IDs visible to this signer while the task is in progress.
+      items:
+        type: string
+SignStageAttachmentSettingObject:
+  type: object
+  properties:
+    attachment_id:
+      type: string
+    file_name:
+      type: string
+    force:
+      type: boolean
+    viewable_in_processing:
+      type: boolean
+    viewable_in_processing_attachments:
+      type: array
+      items:
+        type: string
+    viewable_in_completed:
+      type: boolean
+SignStageCustomMessageSettingObject:
+  type: object
+  properties:
+    processing_viewable:
+      type: boolean
+    completed_viewable:
+      type: boolean
+SignStageObject:
+  type: object
+  properties:
+    stage_id:
+      type: integer
+    task_id:
+      type: integer
+    stage_type:
+      type: string
+      enum: [SignStage, DummyStage]
+    email:
+      type: string
+      nullable: true
+    name:
+      type: string
+    action:
+      type: string
+      enum: [sign, review]
+    actor_info:
+      type: object
+      nullable: true
+    sequence:
+      type: integer
+    action_type:
+      type: string
+      enum: [initial, processing, done, declined, canceled, signed, modifying, reviewed]
+    icon_url:
+      type: string
+    need_otp_verify:
+      type: boolean
+    field_settings:
+      type: array
+      items:
+        $ref: '#/FieldSettingObject'
+    custom_message_setting:
+      $ref: '#/SignStageCustomMessageSettingObject'
+      nullable: true
+    attachment_settings:
+      type: array
+      items:
+        $ref: '#/SignStageAttachmentSettingObject'
+      nullable: true
+    attachment_count:
+      type: integer
+    stage_setting:
+      $ref: '#/StageSettingObject'
+TaskSettingCcInfoObject:
+  type: object
+  properties:
+    email:
+      type: string
+    name:
+      type: string
+TaskSettingReferenceSettingObject:
+  type: object
+  properties:
+    reference_id:
+      type: string
+    file_name:
+      type: string
+    reference_type:
+      type: string
+      enum: [pdf, png]
+TaskSettingObject:
+  type: object
+  properties:
+    deadline:
+      type: integer
+      nullable: true
+    forget_remind:
+      type: boolean
+    expire_remind:
+      type: boolean
+    remind_days_before_expire:
+      type: integer
+      nullable: true
+    expires_in_days:
+      type: integer
+      nullable: true
+      description: >
+        Remaining days until the deadline. Computed at response time. Returns -1 if the deadline has already passed. Null if no deadline is set.
+
+    need_otp_verify:
+      type: boolean
+    receiver_lang:
+      type: string
+      enum: [en, zh-tw]
+      nullable: true
+      description: Language used for invitation and notification emails sent to signers.
+    need_ca:
+      type: boolean
+      nullable: true
+      description: If true, requires CA (Certificate Authority) signature for this task.
+    cc_info:
+      type: array
+      items:
+        $ref: '#/TaskSettingCcInfoObject'
+      nullable: true
+    message:
+      type: string
+      nullable: true
+    completed_message:
+      type: string
+      nullable: true
+    reference_setting:
+      $ref: '#/TaskSettingReferenceSettingObject'
+      nullable: true
+    completed_reference_setting:
+      $ref: '#/TaskSettingReferenceSettingObject'
+      nullable: true
+DeclineReasonObject:
+  properties:
+    content:
+      type: string
+    created_at:
+      format: date-time
+      type: string
+    id:
+      type: integer
+    status:
+      type: string
+    system_reserved:
+      type: boolean
+    updated_at:
+      format: date-time
+      type: string
+  type: object
+SignTaskObject:
+  allOf:
+    - type: object
+      properties:
+        task_id:
+          type: integer
+        file_name:
+          type: string
+        has_order:
+          type: boolean
+        sign_type:
+          type: string
+          enum: [sign_and_send, create_and_invite]
+        created_at:
+          type: integer
+        modified_at:
+          type: integer
+        status:
+          type: string
+          enum: [draft, waiting, completed, declined, expired, deleted]
+        current_stage_ids:
+          type: array
+          items:
+            type: integer
+          nullable: true
+        current_member_turn:
+          type: boolean
+        own_by_me:
+          type: boolean
+        stage_infos:
+          type: array
+          items:
+            $ref: '#/SignStageObject'
+        task_owner_info:
+          $ref: '#/SignTaskOwnerObject'
+        thumbnail:
+          $ref: '#/SignTaskThumbnailObject'
+        decline_reasons:
+          type: array
+          items:
+            $ref: '#/DeclineReasonObject'
+        tag_info:
+          type: array
+          nullable: true
+          description: Tags attached to this task by the current member.
+          items:
+            type: string
+        access_info:
+          $ref: '#/AccessInfo'
+    - $ref: '#/TaskSettingObject'
+AccessInfo:
+  type: object
+  properties:
+    view:
+      type: boolean
+    sign:
+      type: boolean
+    review:
+      type: boolean
+    decline:
+      type: boolean
+    confirm:
+      type: boolean
+    delete:
+      type: boolean
+    update:
+      type: boolean
+    download_task:
+      type: boolean
+    download_audit_trail:
+      type: boolean
+    download_attachment:
+      type: boolean
+    change_signer:
+      type: boolean
+    manage_tags:
+      type: boolean

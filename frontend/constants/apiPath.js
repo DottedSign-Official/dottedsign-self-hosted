@@ -1,0 +1,108 @@
+const apiPath = {
+  // NOTE: sign
+  signature: "/api/v1/signatures",
+  signTask: "/api/v1/sign_tasks",
+  signEnvelope: "/api/v1/envelopes",
+  previewSharedSignTask: "/api/v1/sign_tasks/read_from_preview_share_link",
+  previewShareLink: "/api/v1/sign_tasks/preview_share_link",
+  previewShareLinkEnvelope: "/api/v1/envelopes/preview_share_link",
+  signFilterTask: "/api/v1/sign_tasks/filter",
+  getSearch: "/api/v1/sign_tasks/search",
+  getAuditTrail: "/api/v1/sign_tasks/audit_trail_pdf",
+  getAuditTrailHistory: "/api/v1/sign_tasks/audit_trail",
+  resendRequest: "/api/v1/members/send_confirm",
+  postDraftStart: "/api/v1/sign_tasks/start",
+  postSetup: "/api/v1/task_settings/setup",
+  postEnvelopeSetup: "/api/v1/envelope_settings/setup",
+  postOtpResend: "/api/v1/sign_tasks/trigger_verify",
+  postSignAndSend: "/api/v1/sign_tasks/sign_and_send",
+  postFastSigningConsent: "/api/v1/sign_tasks/consent",
+  postNotifySender: "/api/v1/sign_tasks/change_signer_requisition",
+  putChangeSigner: "/api/v1/sign_tasks/change_signer",
+  getAttachmentUploadUrl: "/api/v1/attachment/upload_info",
+  downloadAttachment: "/api/v1/files/download_attachment",
+  replaceAttachment: "/api/v1/files/replace",
+  putPreference: "/api/v1/members/preference",
+  label: "/api/v1/tags",
+  license: "/api/v1/license_info",
+  template: "/api/v1/templates",
+  templateShare: "/api/v1/templates/share_settings",
+  getFileStatus: "/api/v1/file/upload_status",
+  bulk: "/api/v1/sign_tasks/bulk",
+  signingGroup: "/api/v1/combinations",
+  getTasksAdmin: "/api/v1/sign_tasks/admin/tasks",
+  changeFileName: "/api/v1/sign_tasks/change_task_name",
+  groupPermission: "/api/v1/sign_tasks/admin/permission",
+  getReporting: "/api/v1/sign_tasks/admin/report",
+  getReportingMember: "/api/v1/sign_tasks/admin/member_report",
+  getReportingCsv: "/api/v1/sign_tasks/admin/summary_csv",
+  getReportingMemberCsv: "/api/v1/sign_tasks/admin/member_summary_csv",
+  declineToSign: "/api/v1/sign_tasks/decline",
+  postKiosk: "/api/v1/sign_tasks/kiosk",
+  postKioskVerify: "/api/v1/sign_tasks/kiosk/verify",
+  putKioskSign: "/api/v1/sign_tasks/kiosk/sign",
+  guestSignature: "/api/v1/signatures/guest_signature",
+  getGraAuthorizeStatus: "/api/v1/sign_tasks/gra_authorize_status",
+  postReissueTask: "/api/v1/sign_tasks/reissue",
+  postDuplicateSignTask: "/api/v1/sign_tasks/duplicate",
+  postDuplicateEnvelope: "/api/v1/envelopes/duplicate",
+  saveAsTemplate: "/api/v1/sign_tasks/save_as_template",
+  publicForm: "/api/v1/public_forms",
+
+  // NOTE: member
+  putUser: "/api/v1/members/modify",
+  putPassword: "/api/v1/members/change_password",
+  postAvatarUpload: "/api/v1/members/upload_avatar",
+  getContacts: "/api/v1/members/contact_list",
+  organization: "/api/v1/groups",
+  postGroupMember: "/api/v1/groups/add_member",
+  delGroupMember: "/api/v1/groups/remove_member",
+  groupDeclineReason: "/api/v1/groups/sign_tasks/decline_reasons",
+  getMemberRole: "/api/v4/group/member_role",
+  setMemberRole: "/api/v1/groups/assign_role",
+  postIcon: "/api/v1/groups/upload_icon",
+  getPermissions: "/api/v1/sign_tasks/admin/permission",
+  putPermissions: "/api/v1/sign_tasks/admin/change_permission",
+  delOrgIcon: "/api/v5/group/remove_icon",
+  profile: "/api/v1/members/profile",
+
+  // NOTE: common"
+  postSheet: "/sheet",
+  convertImagesToVideo: "/api/v1/signatures/images_to_mp4_base64",
+  shortenLink: "/api/v1/shorten_link",
+
+  // NOTE: login
+  checkEmail: "/api/v1/members/email_check",
+  login: "/oauth/token",
+  register: "/api/v1/members/register",
+  forgetPwd: "/api/v1/members/forget_password",
+  resetPwd: "/api/v1/members/reset_password",
+  postVerify: "/api/v1/members/confirm",
+
+  // NOTE: accept group invite
+  postAccept: "/api/v1/groups/accept",
+
+  getSearchDeveloper: "/api/v1/developer/tasks",
+  getSearchTaskId: "/api/v1/developer/task_detail",
+  adminDeclineReasons: "/api/v1/developer/sign_tasks/decline_reasons",
+  getAllMembers: "/api/v1/developer/members",
+  modifyMemberStatus: "/api/v1/developer/members/modify_status",
+  developerGroup: "/api/v1/developer/groups",
+  changeMemberRole: "/api/v1/developer/groups/change_member_role_in_group",
+  removeMemberFromGroup: "/api/v1/developer/groups/remove_member_from_group",
+  assignGroupMember: "/api/v1/developer/groups/assign_member_to_group",
+  getSidekiqRetryList: "/api/v1/developer/debug_tools/sidekiq_retry_list",
+  postDeveloperRollback: "/api/v1/developer/reissue",
+  postAdminRollback: "/api/v1/sign_tasks/admin/reissue",
+
+  // NOTE: system_cas
+  systemCA: "/api/v1/system_cas",
+
+  // NOTE: admin
+  rolesAdmin: "/api/v1/sign_tasks/admin/roles",
+
+  // NOTE:developer
+  retryCA: "/api/v1/developer/task_retry_ca",
+};
+
+export default apiPath;

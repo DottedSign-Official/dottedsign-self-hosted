@@ -1,0 +1,64 @@
+---
+  en:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 'Notification: Change of Security Settings'
+          title: Your Settings of One-Time Password Has Been Changed
+          content_1: We have detected a change of your one-time password settings made on %{change_time}. You can log in DottedSign to check out your change.
+  hant:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 安全驗證設定變更通知
+          title: 您的一次性密碼設定已更改
+          content_1: 我們於%{change_time}偵測到您變更了一次性安全驗證碼的設定。您可以登入點點簽進行確認。
+  hans:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 安全验证设定变更通知
+          title: 您的一次性密码设定已更改
+          content_1: 我们于%{change_time}检测到您变更了一次性安全验证码的设置。您可以登录点点签进行确认。
+  ja:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 通知：セキュリティ設定の変更
+          title: ワンタイムパスワードの設定が変更されました
+          content_1: "%{change_time}に行われたワンタイムパスワード設定の変更を検出しました。DottedSignにログインして変更を確認できます。"
+  it:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 'Attenzione: modifica parametri di sicurezza'
+          title: I parametri della password usa e getta sono cambiati
+          content_1: abbiamo notato una modifica dei parametri della password fatta il %{change_time}. Accedi a DottedSign per confermare la modifica.
+  de:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 'Benachrichtigung: Änderung der Sicherheitseinstellungen'
+          title: Die Einstellungen für Ihr Einmalpasswort wurden geändert
+          content_1: wir haben eine Änderung an Ihren Einmalpasswort Einstellungen festgestellt, die am %{change_time} durchgeführt wurde. Sie können sich bei DottedSign einloggen um Ihre Änderung anzusehen.
+  es:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 'Notificación: cambio de configuración de seguridad'
+          title: Se ha cambiado la configuración de la contraseña de un solo uso
+          content_1: Hemos detectado un cambio en la configuración de su contraseña de un solo uso hecho en %{change_time}. Puede iniciar sesión en DottedSign para verificar su cambio.
+  fr:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: 'Notification: Modification des Paramètres de Sécurité'
+          title: Vos Paramètres de Mot de Passe à Usage Unique Ont Été Modifiés
+          content_1: We have detected a change of your one-time password settings made on %{change_time}. Vous pouvez vous connecter à DottedSign pour vérifier votre modification.
+  ko:
+    sign_mailer:
+      verify_method_changed:
+        default:
+          subject: '알림: 보안 설정의 변경'
+          title: 임시 비밀번호의 설정이 변경되었습니다.
+          content_1: "%{change_time}에 만들어진 임시 비밀번호 설정의 변경을 확인했습니다. DottedSign에 로그인하여 변경 사항을 확인할 수 있습니다."

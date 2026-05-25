@@ -1,0 +1,91 @@
+---
+en:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: Here Is Your Copy of %{doc_name}
+        title: Here Is Your Copy of "%{doc_name}"
+        content_1:
+          less_than_10_mb_html: The attached is the copy of <strong>"%{doc_name}"</strong>. You can also download the file in DottedSign.
+          more_than_10_mb_html: Please download the copy of <strong>"%{doc_name}"</strong> in DottedSign as the file size was too big.
+        button: View & Download
+hant:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: "%{doc_name}的複件備份"
+        title: 點點簽中的"%{doc_name}"複件備份
+        content_1:
+          less_than_10_mb_html: 附檔為複件備份：<strong>"%{doc_name}"</strong>。您也可以在點點簽中下載檔案。
+          more_than_10_mb_html: 因檔案過大，請至點點簽中下載複件備份：<strong>"%{doc_name}"</strong>。
+        button: 檢視並下載
+hans:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: "%{doc_name}的复件备份"
+        title: 点点签中的"%{doc_name}"复件备份
+        content_1:
+          less_than_10_mb_html: 附档为复件备份：<strong>"%{doc_name}"</strong>。您也可以在点点签中下载档案。
+          more_than_10_mb_html: 因档案过大，请至点点签中下载复件备份：<strong>"%{doc_name}"</strong>。
+        button: 检视并下载
+ja:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: こちらが%{doc_name}のコピーです
+        title: DottedSignでドキュメントのコピー
+        content_1:
+          less_than_10_mb_html: <strong>"%{doc_name}"</strong>のコピーが添付されています。 DottedSignでファイルをダウンロードすることもできます。
+          more_than_10_mb_html: ファイルサイズが大きすぎるため、DottedSignで<strong>"%{doc_name}"</strong>のコピーをダウンロードしてください。
+        button: 閲覧＆ダウンロード
+it:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: Ecco la tua copia di %{doc_name}
+        title: Copia documento in DottedSign
+        content_1:
+          less_than_10_mb_html: in allegato la copia di <strong>"%{doc_name}"</strong>. Puoi anche scaricare il file in DottedSign.
+          more_than_10_mb_html: Le dimensioni del file superano i limiti, si prega di scaricare la copia di <strong>"%{doc_name}"</strong> da DottedSign.
+        button: Visualizza e scarica
+de:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: Hier ist Ihre Kopie von %{doc_name}
+        title: Dokumentenkopie in DottedSign
+        content_1:
+          less_than_10_mb_html: die angehängte Datei ist eine Kopie von <strong>"%{doc_name}"</strong>. Sie können diese Datei auch in DottedSign herunterladen.
+          more_than_10_mb_html: Bitte laden Sie die Kopie von <strong>"%{doc_name}"</strong> in DottedSign herunter, da die Datei zu groß war.
+        button: Ansehen & Herunterladen
+es:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: Aquí está su copia de %{doc_name}
+        title: Copia del documento en DottedSign
+        content_1:
+          less_than_10_mb_html: El documento adjunto es la copia de <strong>"%{doc_name}"</strong>.}" También puede descargar el archivo en DottedSign.
+          more_than_10_mb_html: Por favor, descargue la copia de <strong>"%{doc_name}"</strong> en DottedSign ya que el tamaño del archivo es demasiado grande.
+        button: Ver y descargar
+fr:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: Voici Votre Copie de %{doc_name}
+        title: Copie de Document dans DottedSign
+        content_1:
+          less_than_10_mb_html: La pièce jointe est la copie de <strong>"%{doc_name}"</strong>. " Vous pouvez également télé charger le fichier dans DottedSign.
+          more_than_10_mb_html: Veuillez télécharger la copie de <strong>"%{doc_name}"</strong> dans DottedSign car la taille du fichier était trop grande.
+        button: Afficher et Télécharger
+ko:
+  sign_mailer:
+    doc_backup:
+      default:
+        subject: 여기는 %{doc_name}의 복사본입니다
+        title: DottedSign에 문서 복사본
+        content_1:
+          less_than_10_mb_html: 첨부문서는 <strong>"%{doc_name}"</strong>입니다. DottedSign에서 또한 파일을 다운로드할 수 있습니다.
+          more_than_10_mb_html: 파일 크기가 너무 크므로 <strong>"%{doc_name}"</strong>의 사본을 DottedSign에서 다운로드하십시오.
+        button: 보기 및 다운로드

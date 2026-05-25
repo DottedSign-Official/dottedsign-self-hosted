@@ -1,0 +1,215 @@
+development: &development
+  sign_task:
+    create_task:
+      with_sign_url_enable: <%= ENV['WITH_SIGN_URL_ENABLE'].env_presence || false %>
+  ca:
+    ca_enable: <%= ENV['DEFAULT_CA_ENABLE']|| false %>
+  lang: &lang zh-TW
+  profile:
+    language: *lang
+  preference:
+    date_format: yyyy/mm/dd
+    forget_remind: true
+    expire_remind: true
+    remind_days_before_expire: 1
+    otp_via_email: false
+    otp_via_phone: false
+    receiver_lang: *lang
+    force_receiver_otp: false
+    signature_timestamp: false
+    time_zone: Etc/UTC
+  field_options:
+    signature:
+      force: true
+      placeholder: null
+      visible_ca: false
+      photo: false
+    textfield:
+      force: true
+      default: ""
+      read_only: false
+      is_multi_line: true
+      placeholder: null
+      font_size: 14
+      font_size_fixed: false
+      alignment: left
+      alignment_fixed: false
+      length: 200
+      validation: null
+      validation_regex: null
+    datefield:
+      force: true
+      default: null
+      read_only: false
+      placeholder: null
+      font_size_fixed: false
+      alignment: left
+      alignment_fixed: false
+      date_setting: no_limit
+      date_format: yyyy/mm/dd
+      font_size: 14
+      zone: 0
+    checkbox:
+      force: false
+      default: false
+      read_only: false
+    radio:
+      force: false
+      default: false
+      read_only: false
+    systemtime:
+      force: false
+      read_only: true
+      format: year_roc
+    link:
+      force: true
+      default: null
+      read_only: false
+      placeholder: null
+      font_size: 14
+      font_size_fixed: false
+      alignment: left
+      alignment_fixed: true
+      length: 200
+    image:
+      force: true
+      placeholder: null
+      read_only: false
+  field_group_options:
+    checkbox:
+      force: false
+      read_only: false
+      min_quantity: 1
+      max_quantity: 50
+    radio:
+      force: false
+      read_only: false
+      min_quantity: 2
+      max_quantity: 50
+  template_share_access:
+    group_share:
+      admin: false
+      manager: false
+      member: false
+  combination_share_access:
+    group_share:
+      admin: false
+      manager: false
+      member: false
+  stage_setting:
+    forward_enable: false
+    decline_enable: false
+    viewable_in_processing: true
+    viewable_in_processing_attachments: []
+    viewable_in_completed: true
+    reviewed_skip_confirm: true
+  role_priority:
+    admin: 1
+    manager: 2
+    member: 3
+  permissions:
+    admin:
+      manage_users: true
+      view_users: true
+      manage_permission: true
+      view_team_tasks: true
+      download_processing_task_self_sender: true
+      download_processing_task_group_sender: true
+      download_processing_task_self_signer: true
+      download_processing_task_group_signer: true
+      download_completed_task_self_sender: true
+      download_completed_task_group_sender: true
+      download_completed_task_self_signer: true
+      download_completed_task_group_signer: true
+      download_sign_and_send_self_task: true
+      download_sign_and_send_group_task: true
+      download_audit_trail_self_sender: true
+      download_audit_trail_group_sender: true
+      download_audit_trail_self_signer: true
+      download_audit_trail_group_signer: true
+      delete_processing_task_self_sender: true
+      delete_sign_and_send_self_task: true
+      manage_company_name: true
+      manage_company_logo: true
+      manage_email_display_name: true
+      manage_decline_reasons: true
+      share_template: true
+      share_combination: true
+      bulk_send: true
+      allow_kiosk: true
+      report_access: true
+      manage_system_ca: true
+    manager:
+      manage_users: false
+      view_users: true
+      manage_permission: false
+      view_team_tasks: true
+      download_processing_task_self_sender: true
+      download_processing_task_group_sender: true
+      download_processing_task_self_signer: true
+      download_processing_task_group_signer: true
+      download_completed_task_self_sender: true
+      download_completed_task_group_sender: true
+      download_completed_task_self_signer: true
+      download_completed_task_group_signer: true
+      download_sign_and_send_self_task: true
+      download_sign_and_send_group_task: true
+      download_audit_trail_self_sender: true
+      download_audit_trail_group_sender: true
+      download_audit_trail_self_signer: true
+      download_audit_trail_group_signer: true
+      delete_processing_task_self_sender: true
+      delete_sign_and_send_self_task: true
+      manage_company_name: true
+      manage_company_logo: true
+      manage_email_display_name: true
+      manage_decline_reasons: true
+      share_template: true
+      share_combination: true
+      bulk_send: true
+      allow_kiosk: true
+      report_access: true
+      manage_system_ca: false
+    member:
+      manage_users: false
+      view_users: false
+      manage_permission: false
+      view_team_tasks: false
+      download_processing_task_self_sender: true
+      download_processing_task_group_sender: false
+      download_processing_task_self_signer: true
+      download_processing_task_group_signer: false
+      download_completed_task_self_sender: true
+      download_completed_task_group_sender: false
+      download_completed_task_self_signer: true
+      download_completed_task_group_signer: false
+      download_sign_and_send_self_task: true
+      download_sign_and_send_group_task: false
+      download_audit_trail_self_sender: true
+      download_audit_trail_group_sender: false
+      download_audit_trail_self_signer: true
+      download_audit_trail_group_signer: false
+      delete_processing_task_self_sender: true
+      delete_sign_and_send_self_task: true
+      manage_company_name: false
+      manage_company_logo: false
+      manage_email_display_name: false
+      manage_decline_reasons: false
+      share_template: false
+      share_combination: false
+      bulk_send: false
+      allow_kiosk: true
+      report_access: false
+      manage_system_ca: false
+
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+qa:
+  <<: *development
+
+production:
+  <<: *development

@@ -1,0 +1,47 @@
+development: &development
+  enable: <%= ENV['MAIL_ENABLE'].env_presence || false %>
+  delivery_method: <%= ENV['MAIL_DELIVERY_METHOD'].env_presence || 'smtp'  %>
+  smtp_domain: <%= ENV['SMTP_DOMAIN'].env_presence || 'rabbit.com' %>
+  smtp_default_sender: <%= ENV['SMTP_DEFAULT_SENDER'].env_presence %>
+  smtp_display_name: <%= ENV['SMTP_DISPLAY_NAME'].env_presence %>
+  smtp_user: <%= ENV['SMTP_USER'].env_presence || 'jackrabbit@rabbit.com' %>
+  host: <%= ENV['MAIL_HOST'].env_presence || 'http://localhost:3000' %>
+  path:
+    confirmation_instruction: <%= ENV['CONFIRM_PATH'].env_presence || '/api/internal/mailer/confirmation_instruction' %>
+    welcome: <%= ENV['WELCOME_PATH'].env_presence || '/api/internal/mailer/first_time_welcome' %>
+    group_invite: <%= ENV['GROUP_INVITE_PATH'].env_presence || '/api/internal/mailer/group_invite' %>
+    group_cancel: <%= ENV['GROUP_CANCEL_PATH'].env_presence || '/api/internal/mailer/group_cancel' %>
+    sign_request: <%= ENV['SIGN_REQUEST_PATH'].env_presence || '/api/internal/mailer/sign_request' %>
+    sign_complete: <%= ENV['SIGN_COMPLETE_PATH'].env_presence || '/api/internal/mailer/sign_complete' %>
+    kiosk_complete: <%= ENV['KIOSK_COMPLETE_PATH'].env_presence || '/api/internal/mailer/kiosk_complete' %>
+    sign_decline: <%= ENV['SIGN_DECLINE_PATH'].env_presence || '/api/internal/mailer/sign_decline' %>
+    sign_modify: <%= ENV['SIGN_MODIFY_PATH'].env_presence || '/api/internal/mailer/sign_modify' %>
+    sign_confirm: <%= ENV['SIGN_CONFIRM_PATH'].env_presence || '/api/internal/mailer/sign_confirm' %>
+    sign_pass: <%= ENV['SIGN_PASS_PATH'].env_presence || '/api/internal/mailer/sign_pass' %>
+    forget_password: <%= ENV['FORGET_PASSWORD_PATH'].env_presence || '/api/internal/mailer/forget_password' %>
+    document_backup: <%= ENV['DOC_BACKUP_PATH'].env_presence || '/api/internal/mailer/doc_backup' %>
+    forget_remind: <%= ENV['FORGET_REMIND_PATH'].env_presence || '/api/internal/mailer/forget_remind' %>
+    expire_remind: <%= ENV['EXPIRE_REMIND_PATH'].env_presence || '/api/internal/mailer/expire_remind' %>
+    signer_verify: <%= ENV['EMAIL_VERIFY_PATH'].env_presence || '/api/internal/mailer/signer_verify' %>
+    signer_verify_via_sms: <%= ENV['SMS_VERIFY_PATH'].env_presence || '/api/internal/mailer/sms/sign_verify' %>
+    verify_method_changed: <%= ENV['VERIFY_METHOD_CHANGE_PATH'].env_presence || '/api/internal/mailer/verify_method_changed' %>
+    forward_request: <%= ENV['FORWARD_REQUEST_PATH'].env_presence || '/api/internal/mailer/forward_request' %>
+    task_update: <%= ENV['TASK_UPDATE_PATH'].env_presence || '/api/internal/mailer/task_update' %>
+    task_disable: <%= ENV['TASK_DISABLE_PATH'].env_presence || '/api/internal/mailer/task_disable' %>
+    owner_changed_notification: <%= ENV['OWNER_CHANGED_NOTIFY_PATH'].env_presence || '/api/internal/mailer/owner_changed_notification' %>
+    task_deleted_remind: <%= ENV['TASK_DELETED_REMIND_PATH'].env_presence || '/api/internal/mailer/task_deleted_remind' %>
+    deadline_change: <%= ENV['DEADLINE_CHANGE_PATH'].env_presence || '/api/internal/mailer/deadline_change' %>
+    cc_start_notification: <%= ENV['CC_START_PATH'].env_presence || '/api/internal/mailer/cc_sign_start' %>
+    cc_completed_notification: <%= ENV['CC_COMPLETE_PATH'].env_presence || '/api/internal/mailer/cc_sign_complete' %>
+    system_ca_fail_notify: <%= ENV['SYSTEM_CA_FAIL_NOTIFY_PATH'].env_presence || '/api/internal/mailer/system_ca_fail_notify' %>
+    signer_ca_fail_notify: <%= ENV['SIGNER_CA_FAIL_NOTIFY_PATH'].env_presence || '/api/internal/mailer/signer_ca_fail_notify' %>
+    public_form_compress_download: <%= ENV['PUBLIC_FORM_COMPRESS_DOWNLOAD_MAIL_PATH'].env_presence || '/api/internal/mailer/public_form_compress_download' %>
+
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+production:
+  <<: *development

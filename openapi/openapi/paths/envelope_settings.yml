@@ -1,0 +1,36 @@
+/api/v1/envelope_settings/setup:
+  post:
+    tags: [Envelope Settings]
+    summary: Setup Envelope Settings
+    description: |
+      Configure signing stage settings for a draft envelope.
+      Must be called before starting the envelope.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [envelope_id]
+                properties:
+                  envelope_id:
+                    type: integer
+                    description: ID of the envelope to configure.
+                  stages:
+                    type: array
+                    description: Stage setting configurations for each signing stage.
+                    items:
+                      $ref: '../components/schemas/requests.yml#/SignStageRequestObject'
+                  task_setting:
+                    $ref: '../components/schemas/requests.yml#/TaskSettingRequestObject'
+    responses:
+      '200':
+        description: Envelope settings saved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'

@@ -1,0 +1,74 @@
+---
+  en:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: You'll Receive %{doc_name} Once All Parties Finish Signing
+          title: Keep You Posted
+          content_1_html: You'll receive the completed task <strong>"%{doc_name}"</strong> once all parties finish signing since %{sender_name} (%{sender_email}) has copied you as the recipient on the signature request. Lay back and wait for further notification.
+          content_2: 'Signers involved in the signature request:'
+  hant:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: "%{doc_name}簽署文件完成後會自動同步給您"
+          title: 同步接收文件副本
+          content_1_html: '%{sender_name} (%{sender_email}) 已將您加入簽署邀請<strong>"%{doc_name}"</strong>的副本收件人。所有簽署人完成文件簽署後，您會同步收到完整的文件檔案，請耐心等待。'
+          content_2: 相關的簽署者：
+  hans:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: "%{doc_name}签署文件完成后会自动同步给您"
+          title: 同步接收文件副本
+          content_1_html: '%{sender_name} (%{sender_email}) 已将您加入签署邀请<strong>"%{doc_name}"</strong>的副本收件人。所有签署人完成文件签署后，您会同步收到完整的文件档案，请耐心等待。'
+          content_2: 相关的签署者：
+  ja:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: 全員が署名を完了すると、%{doc_name}が届きます
+          title: コピーを同時に受け取る
+          content_1_html: '%{sender_name} (%{sender_email})が署名リクエストの受信者としてあなたをコピーしたため、すべての当事者が署名を完了すると、完了したタスク<strong>"%{doc_name}"</strong>を受け取ります。 全員の署名が終わるまで気長にお待ちください。'
+          content_2: 署名リクエストに関与した署名者：
+  it:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: Riceverai %{doc_name} quando tutti i partecipanti hanno finito di firmare
+          title: Ti teniamo aggiornato
+          content_1_html: Riceverai il task completo <strong>"%{doc_name}"</strong> quando tutti i partecipanti avranno firmato poiché%{sender_name} (%{sender_email}) ti ha messo in copia come destinatario nella richiesta di firma. Rilassati e aspetta ulteriori notifiche.
+          content_2: 'Firmatari inclusi nella richiesta di firma:'
+  de:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: Sie werden %{doc_name} erhalten, sobald alle Parteien unterschrieben haben
+          title: Bleiben Sie auf dem Laufenden
+          content_1_html: Sie werden die vervollständigte Anfrage <strong>"%{doc_name}"</strong> erhalten, sobald alle Parteien unterschrieben haben, da %{sender_name} (%{sender_email}) Sie als Empfänger der Unterschriftsanfrage kopiert hat. Entspannen Sie sich und warten Sie auf weitere Benachrichtigungen.
+          content_2: 'Involvierte Unterschriftsgeber:'
+  es:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: Recibirá %{doc_name} una vez que todas las partes hayan terminado de firmar
+          title: Mantenerlo informado
+          content_1_html: Recibirá la tarea completada <strong>"%{doc_name}"</strong> una vez que todas las partes terminen de firmar desde %{sender_name} (%{sender_email}) le ha copiado como destinatario en la solicitud de firma. Relájese y espere a que se le notifique.
+          content_2: 'Firmantes implicados en la solicitud de firma:'
+  fr:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: Vous Recevrez %{doc_name} Une Fois que Toutes les Parties Ont Fini de Signer
+          title: Vous Tenir au Courant
+          content_1_html: Vous recevrez la tâche terminée <strong>"%{doc_name}"</strong> une fois que toutes les parties ont fini de signer depuis %{sender_name} (%{sender_email}) vous a copié en tant que destinataire sur la demande de signature. Allongez-vous et attendez une autre notification.
+          content_2: 'Signataires impliqués dans la demande de signature:'
+  ko:
+    sign_mailer:
+      cc_sign_start:
+        default:
+          subject: 모든 당사자가 서명을 끝내면 %{doc_name}을 받을겁니다
+          title: 계속 게시
+          content_1_html: 서명요청에 수신자로%{sender_name} (%{sender_email})을 복사한 이후 모든 당사자의 서명을 끝마치면 <strong>"%{doc_name}"</strong> 완료작업을 받습니다. 마음을 편하게 하고 추가 알림을 기다리세요.
+          content_2: '서명요청에 관계된 서명자:'
+  

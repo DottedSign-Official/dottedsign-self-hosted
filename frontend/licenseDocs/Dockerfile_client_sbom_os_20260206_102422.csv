@@ -1,0 +1,14 @@
+﻿套件名稱,安裝來源,套件 URL,License 名稱,License URL,VCS URL,備註
+curl,[直接依賴],https://tracker.debian.org/pkg/curl,"curl
+OLDAP-2.8
+ISC
+curl or ISC
+GPL-2+ with Autoconf-data exception
+FSFUL or curl
+GPL-3+ with Autoconf-data exception
+FSFULLR or GPL-2+ with Libtool exception
+GPL-2+ with Libtool exception
+BSD-4-Clause-UC
+FSFULLR
+X11
+FSFUL",https://metadata.ftp-master.debian.org/changelogs/main/c/curl/curl_8.18.0-2_copyright,https://salsa.debian.org/debian/curl,

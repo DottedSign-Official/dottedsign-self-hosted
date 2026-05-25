@@ -1,0 +1,212 @@
+/api/v1/members/register:
+  post:
+    tags: [Members - Auth]
+    summary: Register Member
+    description: Register a new member. A confirmation email will be sent after registration.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [client_id, client_secret, email, password]
+            properties:
+              client_id:
+                type: string
+              client_secret:
+                type: string
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+                format: password
+              name:
+                type: string
+    responses:
+      '200':
+        description: Member registered successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/member.yml#/MemberAuthResponse'
+/api/v1/members/login:
+  post:
+    tags: [Members - Auth]
+    summary: Member Login
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [client_id, client_secret, email, password]
+            properties:
+              client_id:
+                type: string
+              client_secret:
+                type: string
+              email:
+                type: string
+                format: email
+              password:
+                type: string
+                format: password
+    responses:
+      '200':
+        description: Login successful.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/member.yml#/MemberAuthResponse'
+/api/v1/members/send_confirm:
+  post:
+    tags: [Members - Auth]
+    summary: Send Confirmation Email
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+      required: false
+    responses:
+      '200':
+        description: Confirmation email sent.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+    security:
+      - BearerAuth: []
+/api/v1/members/confirm:
+  post:
+    tags: [Members - Auth]
+    summary: Confirm Member Account
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [confirmation_token]
+            properties:
+              confirmation_token:
+                type: string
+    responses:
+      '200':
+        description: Account confirmed.
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas/common.yml#/BlankSuccessResponse
+/api/v1/members/forget_password:
+  post:
+    tags: [Members - Auth]
+    summary: Forget Password
+    description: Send a password reset email to the member.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [email]
+            properties:
+              email:
+                type: string
+                format: email
+    responses:
+      '200':
+        description: Password reset email sent.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/members/reset_password:
+  put:
+    tags: [Members - Auth]
+    summary: Reset Password
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              password:
+                format: password
+                type: string
+              password_confirmation:
+                format: password
+                type: string
+              reset_password_token:
+                type: string
+            required:
+              - reset_password_token
+              - password
+              - password_confirmation
+            type: object
+    responses:
+      '200':
+        description: Password reset successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/members/email_check:
+  post:
+    tags: [Members - Auth]
+    summary: Check Email Availability
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [email]
+            properties:
+              email:
+                type: string
+                format: email
+    responses:
+      '200':
+        description: Email check result.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                available:
+                  type: boolean
+/api/v1/members/change_password:
+  put:
+    tags: [Members - Auth]
+    summary: Change Password
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              old_password:
+                format: password
+                type: string
+              password:
+                format: password
+                type: string
+              password_confirmation:
+                format: password
+                type: string
+            required:
+              - old_password
+              - password
+              - password_confirmation
+            type: object
+    responses:
+      '200':
+        description: Password changed successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'

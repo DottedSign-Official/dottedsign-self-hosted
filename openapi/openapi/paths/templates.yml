@@ -1,0 +1,443 @@
+/api/v1/templates:
+  get:
+    tags: [Templates]
+    summary: List Templates
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: search_tags
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+        description: Tag filter.
+      - name: terms
+        in: query
+        schema:
+          type: string
+        description: Search by template name.
+      - name: code
+        in: query
+        schema:
+          type: string
+        description: Filter templates by code (substring match, case-insensitive).
+      - name: exclude_actions
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+            enum: [sign, review]
+        style: form
+        explode: true
+        description: Exclude templates that contain stages with the specified action types.
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Templates list retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/common.yml#/PaginationMeta'
+                - type: object
+                  properties:
+                    templates:
+                      type: array
+                      items:
+                        $ref: '../components/schemas/template.yml#/TemplateListItem'
+                    total_count:
+                      type: integer
+  post:
+    tags: [Templates]
+    summary: Create Template
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [file_name, has_order, stages]
+            properties:
+              file_name:
+                type: string
+              has_order:
+                type: boolean
+              stages:
+                type: array
+                items:
+                  $ref: '../components/schemas/requests.yml#/SignStageRequestObject'
+              tags:
+                type: array
+                items:
+                  type: string
+              code:
+                type: string
+                description: Optional unique code identifier for the template.
+              group_id:
+                type: integer
+                description: Group to associate the template with.
+    responses:
+      '200':
+        description: Template created.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/template.yml#/TemplateDetailObject'
+                - type: object
+                  properties:
+                    upload_link:
+                      type: string
+                      description: Pre-signed URL to upload the template PDF file.
+/api/v1/templates/{id}:
+  get:
+    tags: [Templates]
+    summary: Get Template Detail
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/TemplateIdPath'
+    responses:
+      '200':
+        description: Template detail retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/template.yml#/TemplateDetailObject'
+                - type: object
+                  properties:
+                    download_link:
+                      type: string
+                      description: Pre-signed URL to download the template PDF file.
+  put:
+    tags: [Templates]
+    summary: Update Template
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/TemplateIdPath'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              file_name:
+                type: string
+              has_order:
+                type: boolean
+              stages:
+                type: array
+                items:
+                  $ref: '../components/schemas/requests.yml#/SignStageRequestObject'
+              tags:
+                type: array
+                items:
+                  type: string
+              code:
+                type: string
+                description: Optional unique code identifier for the template.
+              group_id:
+                type: integer
+                description: Group to associate the template with.
+    responses:
+      '200':
+        description: Template updated.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/template.yml#/TemplateDetailObject'
+                - type: object
+                  properties:
+                    upload_link:
+                      type: string
+                      description: Pre-signed URL to upload the template PDF file.
+  patch:
+    tags: [Templates]
+    summary: Update Template (Partial)
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/TemplateIdPath'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                description: Optional unique code identifier for the template.
+                type: string
+              file_name:
+                type: string
+              group_id:
+                description: Group to associate the template with.
+                type: integer
+              has_order:
+                type: boolean
+              stages:
+                items:
+                  $ref: ../components/schemas/requests.yml#/SignStageRequestObject
+                type: array
+              tags:
+                items:
+                  type: string
+                type: array
+            type: object
+    responses:
+      '200':
+        description: Template updated.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: ../components/schemas/template.yml#/TemplateDetailObject
+                - properties:
+                    upload_link:
+                      description: Pre-signed URL to upload the template PDF file.
+                      type: string
+                  type: object
+  delete:
+    tags: [Templates]
+    summary: Delete Template
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/TemplateIdPath'
+    responses:
+      '200':
+        description: Template deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/templates/duplicate:
+  post:
+    tags: [Templates]
+    summary: Duplicate Template
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [template_id]
+            properties:
+              template_id:
+                type: integer
+                description: ID of the template to duplicate.
+              template_name:
+                type: string
+                description: Name for the duplicated template. Defaults to the original template's name if omitted.
+    responses:
+      '200':
+        description: Template duplicated.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                template_id:
+                  type: integer
+                  description: ID of the newly created template.
+                template_name:
+                  type: string
+                  description: File name of the newly created template.
+                created_at:
+                  type: integer
+                  description: Creation timestamp (Unix epoch seconds).
+/api/v1/templates/share_settings/share_template:
+  put:
+    tags: [Templates]
+    summary: Share Template with Members
+    description: Share a template to the current member's active group. Requires the current member to be the template owner.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [template_id]
+            properties:
+              template_id:
+                type: integer
+                description: ID of the template to share.
+    responses:
+      '200':
+        description: Template shared.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/templates/share_settings/share_list:
+  get:
+    tags: [Templates]
+    summary: Get Template Share List
+    description: Returns the list of templates shared within the current member's group. Requires group admin role.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: filter_type
+        in: query
+        schema:
+          type: string
+          enum: [self, other]
+        description: |
+          Filter the share list by origin:
+          - `self`: templates shared by members within the current user's own group.
+          - `other`: templates shared to the current user's group by other groups.
+          Omit to return all shared templates.
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Share list retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                total_count:
+                  type: integer
+                  description: Total number of shared templates.
+                current_page:
+                  type: integer
+                  description: Current page number.
+                total_pages:
+                  type: integer
+                  description: Total number of pages.
+                shares:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      template_id:
+                        type: integer
+                        description: Template ID.
+                      name:
+                        type: string
+                        description: Template file name.
+                      code:
+                        type: string
+                        description: Template code.
+                      self_group_share:
+                        type: boolean
+                        description: Whether the template is shared by the current member's own group.
+                      share_groups:
+                        type: array
+                        description: List of groups this template is shared with.
+                        items:
+                          type: object
+                          properties:
+                            group_id:
+                              type: integer
+                              description: Group ID.
+                            name:
+                              type: string
+                              description: Group name.
+/api/v1/templates/share_settings/admin_share:
+  put:
+    tags: [Templates]
+    summary: Admin Share Template to Group
+    description: Share a template to one or more groups. Requires group admin role and the template must be owned by the current member's group.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [template_id, group_ids]
+            properties:
+              template_id:
+                type: integer
+                description: ID of the template to share.
+              group_ids:
+                type: array
+                description: IDs of the groups to share the template with.
+                items:
+                  type: integer
+    responses:
+      '200':
+        description: Template shared to group.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/templates/share_settings/admin_remove_share:
+  delete:
+    tags: [Templates]
+    summary: Admin Remove Template Share from Group
+    description: Remove a template's share from a specific group. Requires group admin role.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: template_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: ID of the template to unshare.
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: ID of the group to remove the share from.
+    responses:
+      '200':
+        description: Template share removed.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/templates/file_share:
+  post:
+    tags: [Templates]
+    summary: Share Template Original File to Sign Task
+    description: |
+      Link a template's original PDF file to a sign task, avoiding the need to re-upload the file.
+
+      This is used in the sign task creation workflow when the task is created from a template:
+      1. Create a sign task via `POST /api/v1/sign_tasks`.
+      2. Instead of uploading a PDF via `upload_link`, call this API to link the template's file.
+      3. Wait for the `task_uploaded` socket event or poll `GET /api/v1/sign_tasks/read` until `xfdf_ready` is `true`.
+      4. Call `POST /api/v1/sign_tasks/start` to send invitations.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [template_id, sign_task_id]
+            properties:
+              template_id:
+                type: integer
+                description: Template ID whose original file will be used.
+              sign_task_id:
+                type: integer
+                description: Sign task ID to link the file to.
+    responses:
+      '200':
+        description: Template file linked to sign task successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'

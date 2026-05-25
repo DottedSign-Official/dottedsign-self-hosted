@@ -1,0 +1,20 @@
+MemberAuthFailed:
+  summary: member auth failed
+  description: The Authorization header is missing, expired, or the bearer token does not match any active session.
+  value:
+    error_code: 401202
+    error_message: member auth failed
+
+TaskNotAccessible:
+  summary: task is not accessible
+  description: The authenticated member is not a participant (owner or signer) of this task.
+  value:
+    error_code: 403036
+    error_message: task is not accessible
+
+TaskNotFound:
+  summary: task not found
+  description: No sign task exists with the given `sign_task_id` or `envelope_id`.
+  value:
+    error_code: 404031
+    error_message: task not found

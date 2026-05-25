@@ -1,0 +1,1 @@
+export const GL_UNIFORMS_ARRAY_SIZE_MAX = 20;

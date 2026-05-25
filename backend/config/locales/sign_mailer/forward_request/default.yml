@@ -1,0 +1,91 @@
+---
+en:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name} Requested to Change Signer of %{doc_name}"
+        title: Request for Changing Signer
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) has requested you to change signer of <strong>"%{doc_name}"</strong> because he/she is not the correct recipient.'
+        content_2: 'Here is the message from %{sender_name}:'
+        message: Please change signer to %{name}(%{email}).
+        button: Go to Task
+hant:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name}請求變更%{doc_name}的簽署者"
+        title: 變更簽署人請求
+        content_1_html: 由於%{sender_name} (<font color="#0076ff">%{sender_email}</font>) 非本文件之正確收文者，因此請求變更<strong>"%{doc_name}"</strong>的簽署人。
+        content_2: 以下為%{sender_name}傳送給您的訊息：
+        message: 請變更<strong>"%{doc_name}"</strong>的簽署人為%{name}(%{email})。
+        button: 前往文件
+hans:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name}请求变更%{doc_name}的签署者"
+        title: 变更签署人请求
+        content_1_html: 由于%{sender_name} (<font color="#0076ff">%{sender_email}</font>) 非本文件之正确收文者，因此请求变更<strong>"%{doc_name}"</strong>的签署人。
+        content_2: 以下为%{sender_name}传送给您的讯息：
+        message: 请变更[文件名称]的签署人为%{name}(%{email})。
+        button: 前往文件
+ja:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name} %{doc_name}の署名者の変更をリクエストしました"
+        title: 署名者の変更のリクエスト
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) は、正しい受取人ではないため、<strong>"%{doc_name}"</strong>の署名者の変更を要求しました。'
+        content_2: "%{sender_name}からのメッセージは次のとおりです："
+        message: 署名者を%{name}(%{email})に変更してください。
+        button: タスクに移動
+it:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name} ha chiesto di cambiare firmatario per %{doc_name}"
+        title: Richiesta cambio firmatario
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) ha chiesto la modifica del firmatario <strong>"%{doc_name}"</strong> perché non è il destinatario corretto.'
+        content_2: 'Ecco il messaggio di %{sender_name}:'
+        message: Sostituire il firmatario con %{name}(%{email}).
+        button: Vai al task
+de:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name} Anfrage zur Änderung des Unterschriftgebers von %{doc_name}"
+        title: Anfrage zur Änderung des Unterschriftgebers
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) hat Sie gebeten den Unterzeichner von <strong>"%{doc_name}"</strong> zu ändern, da er/sie nicht der korrekte Ansprechpartner ist.'
+        content_2: 'Ecco il messaggio di %{sender_name}:'
+        message: Bitte ändern Sie den Unterzeichner auf %{name}(%{email})
+        button: Zu Aufgabe wechseln
+es:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name} ha solicitado que se cambie el firmante de %{doc_name}"
+        title: Solicitud de cambio de firmante
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) le ha pedido que cambie el firmante de <strong>"%{doc_name}"</strong> porque no es el destinatario correcto.'
+        content_2: 'Aquí está el mensaje de %{sender_name}:'
+        message: Cambie el firmante a %{name}(%{email}).
+        button: Ir a la tarea
+fr:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name} Demande de Changement de Signataire de %{doc_name}"
+        title: Demande de Changement de Signataire
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) vous a demandé de changer de signataire de <strong>"%{doc_name}"</strong> car il/elle n''est pas le bon destinataire.'
+        content_2: 'Voici le message de %{sender_name}:'
+        message: Veuillez remplacer le signataire par %{name}(%{email}).
+        button: Aller à la Tâche
+ko:
+  sign_mailer:
+    forward_request:
+      default:
+        subject: "%{sender_name}은 %{doc_name}의 서명자의 변경을 요청했습니다"
+        title: 서명자 변경 요청
+        content_1_html: '%{sender_name} (<font color="#0076ff">%{sender_email}</font>) 는(은) <strong>"%{doc_name}"</strong>의 서명자 변경을 요청했습니다. 정확한 수신자가 아니기 때문입니다.'
+        content_2: '여기 %{sender_name}에 메시지가 있습니다:'
+        message: "%{name}(%{email})에서 서명인을 변경하세요."
+        button: 작업으로 이동

@@ -1,0 +1,35 @@
+LicenseInfoObject:
+  type: object
+  properties:
+    expires_at:
+      type: string
+    group_enable:
+      type: boolean
+    sign_task:
+      type: object
+      properties:
+        kiosk_task_enable:
+          type: boolean
+        decline_task_enable:
+          type: boolean
+        change_signer_enable:
+          type: boolean
+    otp_verify:
+      type: object
+      properties:
+        smtp_enable:
+          type: boolean
+        sms_enable:
+          type: boolean
+        cht_cert_enable:
+          type: boolean
+    authenticate_member:
+      type: object
+      properties:
+        ldap_enable:
+          type: boolean
+    certificate_authority:
+      type: object
+      properties:
+        system_ca_enable:
+          type: boolean

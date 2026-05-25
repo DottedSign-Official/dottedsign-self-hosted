@@ -1,0 +1,126 @@
+en:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} Requested You to Sign %{doc_name}"
+          without_signer_name: It's Your Turn to Sign %{doc_name}
+        title: Waiting for You to Sign
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) has requested your signature for <strong>"%{doc_name}"</strong>.'
+          line_2_html: Don't forget to finish signing by the expiry date %{deadline}.
+        content_2: 'Here is the message from %{sender_name}:'
+        content_3_html: "*Please note that if you are not registered to DottedSign, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View & Sign
+hant:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} 邀請您簽署 %{doc_name}"
+          without_signer_name: 您有新的簽署邀請：%{doc_name}
+        title: 正在等待您的簽署
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) 邀請您簽署 <strong>"%{doc_name}"</strong>。'
+          line_2_html: 請在期限內完成簽名：%{deadline}。
+        content_2: 以下為%{sender_name}傳送給您的訊息：
+        content_3_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看並簽署
+hans:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} 邀请您签署 %{doc_name}"
+          without_signer_name: 您有新的签署邀请：%{doc_name}
+        title: 正在等待您的签名
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) 邀请您签署 <strong>"%{doc_name}"</strong>。'
+          line_2_html: 请在期限内完成签名： %{deadline}。
+        content_2: 以下为%{sender_name}传送给您的讯息：
+        content_3_html: 请注意：若您尚未註册点点签，为了保障签署安全性，此连结将于<strong>2天</strong>内失效。
+        button: 查看并签名
+ja:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} は %{doc_name}に署名するように招待しました"
+          without_signer_name: 新しい署名の招待があります：%{doc_name}
+        title: 署名する準備ができました
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email})さんが、<strong>"%{doc_name}"</strong>の署名をリクエストしました。'
+          line_2_html: 有効期限%{deadline}までに署名を完了することを忘れないでください。
+        content_2: "%{sender_name}からのメッセージは以下のとおりです。"
+        content_3_html: ご注意：DottedSignにご登録でない場合、このリンクは<strong>2日</strong>のみ有効です。 これはドキュメントへの不正アクセス防止の措置です。
+        button: 閲覧＆署名
+it:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} Ti ha chiesto di firmare %{doc_name}"
+          without_signer_name: Tocca a te firmare %{doc_name}
+        title: In attesa della tua firma
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) ti ha chiesto di firmare <strong>"%{doc_name}"</strong>.'
+          line_2_html: Ricorda di firmare prima della scadenza %{deadline}.
+        content_2: 'Ecco il messaggio da %{sender_name}:'
+        content_3_html: "*Si prega di notare che se non sei registrato a DottedSign, questo link scadrà tra <strong>2 giorni</strong>. Questo per prevenire l'accesso non autorizzato al documento."
+        button: Visualizza & firma
+de:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} bittet Sie %{doc_name} zu unterschreiben"
+          without_signer_name: Sie sind an der Reihe %{doc_name} zu unterschreiben
+        title: Wartet auf Ihre Unterschrift
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) hat Ihre Unterschrift für <strong>"%{doc_name}"</strong> angefragt.'
+          line_2_html: Vergessen Sie nicht Ihre Unterschrift vor dem Ablaufdatum %{deadline} zu vervollständigen.
+        content_2: 'Hier ist die Nachricht von %{sender_name}:'
+        content_3_html: "*Bitte beachten Sie, dass dieser Link in <strong>2 Tagen abläuft</strong>, wenn Sie nicht bei DottedSign registriert sind. Dies dient dazu, das Dokument vor unberechtigtem Zugriff zu schützen."
+        button: Ansehen & Unterzeichnen
+es:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} le pidió que firmara %{doc_name}"
+          without_signer_name: Es su turno de firmar %{doc_name}
+        title: Esperando a que firme
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) ha solicitado su firma para <strong>"%{doc_name}"</strong>.'
+          line_2_html: No se olvide de finalizar la firma antes de la fecha de vencimiento %{deadline}.
+        content_2: 'Aquí está el mensaje de %{sender_name}:'
+        content_3_html: "*Tenga en cuenta que, en caso de no registrarse en DottedSign, este enlace expirará en <strong>2 días</strong>. Lo hacemos así para prevenir accesos no autorizados."
+        button: Ver & firmar
+fr:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name} Vous a Demandé de Signer %{doc_name}"
+          without_signer_name: C'est à Vous de Signer %{doc_name}
+        title: En Attente de Votre Signature
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) a demandé votre signature pour <strong>"%{doc_name}"</strong>.'
+          line_2_html: N'oubliez pas de terminer la signature avant la date d'expiration %{deadline}.
+        content_2: 'Voici le message de %{sender_name}:'
+        content_3_html: "*Veuillez noter que si vous n'êtes pas inscrit à DottedSign, ce lien expirera dans <strong>2 jours</strong>. Ceci est pour empêcher l'accès non autorisé au document."
+        button: Afficher et Signer
+ko:
+  sign_mailer:
+    sign_request:
+      sign:
+        subject:
+          with_signer_name: "%{sender_name}은(는) %{doc_name}에 서명하라고 요청하였습니다"
+          without_signer_name: "%{doc_name}을(를) 서명할 차례입니다."
+        title: 서명을 기다리는 중입니다.
+        content_1:
+          line_1_html: '%{sender_name} (%{sender_email}) 은(는) <strong>"%{doc_name}"</strong>에게 서명을 요청하였습니다.'
+          line_2_html: 만기일 %{deadline}까지 서명을 끝내는걸 잊지마세요.
+        content_2: '여기 %{sender_name}로부터의 메시지가 있습니다:'
+        content_3_html: DottedSign에 등록하지 않은 경우, 이 링크는 <strong>2일</strong> 내에 만료됨을 참고하십시오. 이는 무단 접근으로부터 문서를 보호하기 위함입니다.
+        button: 보기 및 서명

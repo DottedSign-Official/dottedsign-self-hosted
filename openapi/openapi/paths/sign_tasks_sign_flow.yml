@@ -1,0 +1,591 @@
+/api/v1/sign_tasks/consent:
+  post:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Consent to Sign Task
+    description: Required for quick sign (non-registered) members before reading/signing.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                properties:
+                  sign_task_id:
+                    type: integer
+                  envelope_id:
+                    type: integer
+                  code:
+                    type: string
+                  check:
+                    type: boolean
+                  work_id:
+                    type: string
+    responses:
+      '200':
+        description: Consent recorded.
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  description: When check=true, returns the cached consent value.
+                  properties:
+                    accepted_at:
+                      type: integer
+                      description: Unix timestamp when consent was accepted.
+                    client:
+                      type: string
+                    ip_address:
+                      type: string
+                    work_id:
+                      type: string
+                - type: object
+                  description: When check=false (cancel), returns a success message.
+                  properties:
+                    message:
+                      type: string
+                      example: cancel agreement success
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              invalid_preview_code:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/InvalidPreviewCode'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              code_expire:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/CodeExpire'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotFound'
+/api/v1/sign_tasks/trigger_verify:
+  post:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Trigger OTP Verification
+    description: Send OTP to member for identity verification.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [uuid, signer_email]
+                properties:
+                  sign_task_id:
+                    type: integer
+                  envelope_id:
+                    type: integer
+                  uuid:
+                    type: string
+                  signer_email:
+                    type: string
+                    format: email
+    responses:
+      '200':
+        description: OTP sent.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              verify_step_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/VerifyStepNotFound'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/MemberAuthFailed'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              stage_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/StageNotFound'
+              verify_source_not_set:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/VerifySourceNotSet'
+      '406':
+        description: Not Acceptable
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              deliver_otp_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/DeliverOtpFailed'
+/api/v1/sign_tasks/sign:
+  put:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Sign the Task
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                properties:
+                  sign_task_id:
+                    type: integer
+                  envelope_id:
+                    type: integer
+                  code:
+                    type: string
+                  signature_info:
+                    type: array
+                    items:
+                      $ref: '../components/schemas/requests.yml#/SignatureInfoItemObject'
+                  verify_info:
+                    $ref: '../components/schemas/requests.yml#/VerifyInfoObject'
+                  attachment_info:
+                    type: array
+                    items:
+                      $ref: '../components/schemas/requests.yml#/AttachmentInfoItemObject'
+          examples:
+            sign_task:
+              $ref: '../components/examples/requests/sign_task_sign_flow_requests.yml#/SignTask'
+    responses:
+      '200':
+        description: Task signed.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_signable:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotSignable'
+              not_signer_turn:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/NotSignerTurn'
+              stage_already_done:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/StageAlreadyDone'
+              field_content_invalid:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/FieldContentInvalid'
+              invalid_object_id:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/InvalidObjectId'
+              execute_type_not_allow:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/ExecuteTypeNotAllow'
+              attachment_not_ready:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/AttachmentNotReady'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotAccessible'
+              quick_sign_not_accepted:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/QuickSignNotAccepted'
+              task_was_expired:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskWasExpired'
+              task_was_declined:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskWasDeclined'
+              need_to_check_security:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/NeedToCheckSecurity'
+              stage_need_verify:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/StageNeedVerify'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotFound'
+              stage_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/StageNotFound'
+              signature_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/SignatureNotFound'
+/api/v1/sign_tasks/decline:
+  post:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Decline Sign Task
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required:
+                  - reply_to
+                properties:
+                  decline_reason_id:
+                    description: ID of a preset DeclineReason.
+                    type: integer
+                  envelope_id:
+                    description: Envelope ID. Required if sign_task_id is not provided.
+                    type: integer
+                  message:
+                    description: Additional message to accompany the decline.
+                    type: string
+                  reason:
+                    description: Free-form decline reason label.
+                    type: string
+                  reply_to:
+                    description: Email addresses to CC on the decline notification.
+                    type: array
+                    items:
+                      type: string
+                  sign_task_id:
+                    description: Sign task ID. Required if envelope_id is not provided.
+                    type: integer
+          examples:
+            decline_task:
+              $ref: '../components/examples/requests/sign_task_sign_flow_requests.yml#/DeclineTask'
+    responses:
+      '200':
+        description: Task declined.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_waiting:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotWaiting'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              decline_not_allowed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/DeclineNotAllowed'
+              task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotAccessible'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotFound'
+              decline_reason_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/DeclineReasonNotFound'
+/api/v1/sign_tasks/reissue:
+  post:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Reissue Sign Task
+    description: |
+      Reissue a declined sign task to re-send signing invitations.
+      The task must be in `declined` status. After reissue, the task returns to `waiting` status
+      and signers who had not yet signed will receive new invitation emails.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [sign_task_id]
+                properties:
+                  sign_task_id:
+                    type: integer
+                  stage_id:
+                    type: integer
+    responses:
+      '200':
+        description: Task reissued.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_reissuable:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotReissuable'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_owned:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotOwned'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotFound'
+/api/v1/sign_tasks/review:
+  post:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Review Sign Task
+    description: |
+      Submit a review decision (pass or reject) for a sign task.
+      Server records a `review_passed` or `review_rejected` event in the audit trail.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [sign_task_id]
+                properties:
+                  sign_task_id:
+                    type: integer
+                    description: Task ID.
+                  review_message:
+                    type: string
+                    description: Required when rejecting (result is reject).
+                  review_fields:
+                    type: array
+                    description: >
+                      Review decisions for each sign field. If any entry has `accepted: false`, the review is treated as rejected and `review_message` becomes required.
+
+                    items:
+                      type: object
+                      required: [field_object_id, accepted]
+                      properties:
+                        field_object_id:
+                          type: string
+                          description: The `field_object_id` of the sign field being reviewed.
+                        accepted:
+                          type: boolean
+                          description: Whether this field's value is accepted.
+                  review_attachments:
+                    type: array
+                    description: >
+                      Review decisions for each attachment. If any entry has `accepted: false`, the review is treated as rejected and `review_message` becomes required.
+
+                    items:
+                      type: object
+                      required: [attachment_id, accepted]
+                      properties:
+                        attachment_id:
+                          type: string
+                          description: The `attachment_id` of the attachment being reviewed.
+                        accepted:
+                          type: boolean
+                          description: Whether this attachment is accepted.
+          examples:
+            review_task_pass:
+              $ref: '../components/examples/requests/sign_task_sign_flow_requests.yml#/ReviewTaskPass'
+    responses:
+      '200':
+        description: Review submitted. Returns updated task info.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              invalid_review_info:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/InvalidReviewInfo'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotAccessible'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotFound'
+/api/v1/sign_tasks/confirm:
+  post:
+    tags: [Sign Tasks - Sign Flow]
+    summary: Confirm Sign Task
+    description: |
+      Confirm a completed sign task. Server records a `confirmed` event in the audit trail.
+
+      If the signer requires identity verification:
+      1. Call this API without `verify_info` — server sends OTP and returns a `uuid`.
+      2. Call again with `verify_info` containing the `uuid` and the OTP as `verify_data`.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [sign_task_id]
+                properties:
+                  sign_task_id:
+                    type: integer
+                    description: Task ID.
+                  code:
+                    type: string
+                  verify_info:
+                    allOf:
+                      - $ref: '../components/schemas/requests.yml#/VerifyInfoFullObject'
+                      - description: OTP verification info. Required on second call when verification is needed.
+    responses:
+      '200':
+        description: Task confirmed. Returns updated task info.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_is_not_completed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskIsNotCompleted'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotAccessible'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/TaskNotFound'
+      '406':
+        description: Not Acceptable
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              verify_failed:
+                $ref: '../components/examples/errors/sign_task_sign_flow_errors.yml#/VerifyFailed'

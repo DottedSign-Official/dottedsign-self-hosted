@@ -1,0 +1,25 @@
+{
+	"warning_pdf_task_login": "Please login first to view the document.",
+	"warning_pdf_task_deny": "You are not included in this signing task.",
+	"warning_pdf_task_wait": "Please wait patiently until your turn to sign the document.",
+	"warning_pdf_task_wait_all": "Please wait patiently until all parties finish signing.",
+	"warning_pdf_task_wait_all_admin": "This task is currently in progress.",
+  "warning_pdf_task_wait_checking": "Please wait patiently until all checkers finish checking.",
+	"warning_pdf_task_wait_server":"This task is currently in processing.",
+	"warning_pdf_task_handling": "Task processing. Please wait a while.",
+	"warning_pdf_task_not_finished": "The signing process is not yet complete.",
+	"warning_pdf_task_expired": "Task expired",
+	"warning_pdf_task_declined": "Task decline",
+	"warning_auth_error_login_first": "To verify signer's identity, please <u id='getStarted'> log in </u> JackRabbit with <b id='hintEmail'></b> to sign the document.",
+	"warning_auth_error_login_first_no_email": "To verify signer's identity, please <u id='getStarted'> log in </u> JackRabbit to sign the document.",
+	"warning_auth_error_no_email": "Please login to continue",
+	"warning_auth_error_need_confirm": "Please confirm your verification email or <u id='resendReq'>resend the request</u>.",
+	"warning_group_access_denied": "You are unable to view the tasks due to the expiry of the Admin's subscription. To restore your access, please contact the Admin to renew the subscription. ",
+	"warning_group_expired": "Your subscription is currently expired. To restore your access, please contact your Admin to renew the subscription.",
+	"warning_group_expired_admin": "Your subscription is currently expired. To restore you and your team's full access, please <u id='nav-upgrade'>renew your subscription</u>.",
+	"warning_group_task_suspended": "This task has been suspended due to the expiry of the Sender's subscription. All signing parties involved are unable to sign this document.",
+  "warning_system_ca": "This task uses system credentials to verify the identity of the signer, please log in to continue",
+
+  "warning_pdf_task_reviewing": "Please view and check the fields.",
+	"warning_pdf_task_review_passed": "Your document has been checked. Click Finish to proceed."
+}

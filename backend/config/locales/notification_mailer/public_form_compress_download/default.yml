@@ -1,0 +1,24 @@
+---
+en:
+  notification_mailer:
+    public_form_compress_download:
+      default:
+        subject: 'Download Link for %{form_name}'
+        title: 'Download Your Form: "%{form_name}"'
+        content_1_html: >
+          The completed form <strong>"%{form_name}"</strong> is ready.
+          Please click the link below to download:
+          <br/><br/>
+        button: 'Download File'
+
+zh-TW:
+  notification_mailer:
+    public_form_compress_download:
+      default:
+        subject: '%{form_name} 的下載連結'
+        title: '下載您的表單：%{form_name}'
+        content_1_html: >
+          您的表單 <strong>「%{form_name}」</strong> 已完成。
+          請點擊下方連結下載檔案：
+          <br/><br/>
+        button: '下載檔案'

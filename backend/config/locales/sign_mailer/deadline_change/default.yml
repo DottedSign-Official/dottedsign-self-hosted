@@ -1,0 +1,82 @@
+---
+en:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 'Notification: Expiration Date Change of %{doc_name}'
+        title: Expiry Date Changed by the Sender
+        content_1_html: The expiration date of <strong>"%{doc_name}"</strong> requested by %{sender_name} (%{sender_email}) has been changed to %{deadline}. Don’t forget to sign the document.
+        content_2_html: "*Please note that if you are not registered to DottedSign on-premise, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View & Sign
+hant:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 簽署任務期限變更通知：%{doc_name}
+        title: 發文者已更改簽署任務期限
+        content_1_html: '%{sender_name} (%{sender_email}) 已變更文件任務 <strong>"%{doc_name}"</strong> 的簽署期限至 %{deadline}。請在期限內完成簽名。'
+        content_2_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看並簽署
+hans:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 签署任务期限变更通知：%{doc_name}
+        title: 发文者已更改签署任务期限
+        content_1_html: '%{sender_name} (%{sender_email})已变更文件任务 <strong>"%{doc_name}"</strong> 的签署期限至 %{deadline}。请在期限内完成签名。'
+        content_2_html: 请注意：若您尚未註册点点签，为了保障签署安全性，此连结将于<strong>2天</strong>内失效。
+        button: 查看并签名
+ja:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 通知：%{doc_name} の有効期限の変更
+        title: 著者が署名期限を変更しました
+        content_1_html: '%{sender_name} (%{sender_email})からリクエストされた<strong>"%{doc_name}"</strong>の有効期限が%{deadline}に変更されました。文書に署名することを忘れないでください。'
+        content_2_html: ご注意：DottedSign on-premiseにご登録でない場合、このリンクは<strong>2日</strong>のみ有効です。 これはドキュメントへの不正アクセス防止の措置です。
+        button: 閲覧＆署名
+it:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 'Attenzione: cambio scadenza di %{doc_name}'
+        title: Data di scadenza modificata dal mittente
+        content_1_html: la scadenza di <strong>"%{doc_name}"</strong> richiesta da %{sender_name} (%{sender_email}) è stata cambiata al %{deadline}. Ricorda di firmare il documento
+        content_2_html: "*Si prega di notare che se non sei registrato a DottedSign on-premise, questo link scadrà tra <strong>2 giorni</strong>. Questo per prevenire l'accesso non autorizzato al documento."
+        button: Visualizza & firma
+de:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 'Benachrichtigung: Ablaufdatum auf den %{doc_name} geändert'
+        title: Ablaufdatum geändert durch den Absender
+        content_1_html: das Ablaufdatum von <strong>"%{doc_name}"</strong>, angefragt von %{sender_name} (%{sender_email}) wurde auf %{deadline} geändert. Vergessen Sie nicht das Dokument zu unterschreiben.
+        content_2_html: "*Bitte beachten Sie, dass dieser Link in <strong>2 Tagen abläuft</strong>, wenn Sie nicht bei DottedSign on-premise registriert sind. Dies dient dazu, das Dokument vor unberechtigtem Zugriff zu schützen."
+        button: Ansehen & Unterzeichnen
+es:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 'Notificación: Fecha de vencimiento Cambio de %{doc_name}'
+        title: Fecha de vencimiento modificada por el remitente
+        content_1_html: la fecha de vencimiento de <strong>"%{doc_name}"</strong> solicitada por %{sender_name} (%{sender_email}) se ha cambiado ha %{deadline}. No olvide firmar el documento.
+        content_2_html: "*Tenga en cuenta que, en caso de no registrarse en DottedSign on-premise, este enlace expirará en <strong>2 días</strong>. Lo hacemos así para prevenir accesos no autorizados."
+        button: Ver y firmar
+fr:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: 'Notification: Changement de Date d''Expiration de %{doc_name}'
+        title: Date d'Expiration Modifiée par l'Expéditeur
+        content_1_html: La date d'expiration de <strong>"%{doc_name}"</strong> demandé par %{sender_name} (%{sender_email}) a été changé en %{deadline}. N'oubliez pas de signer le document.
+        content_2_html: "*Veuillez noter que si vous n'êtes pas inscrit à DottedSign on-premise, ce lien expirera dans <strong>2 jours</strong>. Ceci est pour empêcher l'accès non autorisé au document."
+        button: Afficher et Signer
+ko:
+  sign_mailer:
+    deadline_change:
+      default:
+        subject: '알림: %{doc_name}의 만료일 변경'
+        title: 보낸 사람이 변경 한 만료 날짜
+        content_1_html: '%{sender_name} (%{sender_email})에 의해 요청된 <strong>"%{doc_name}"</strong>의 만료일은 %{deadline}로 변경되었습니다. 문서에 서명하는걸 잊지마세요.'
+        content_2_html: DottedSign on-premise에 등록하지 않은 경우, 이 링크는 <strong>2일</strong> 내에 만료됨을 참고하십시오. 이는 무단 접근으로부터 문서를 보호하기 위함입니다.
+        button: 보기 및 서명

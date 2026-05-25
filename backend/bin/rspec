@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+filtered_args=()
+for arg in "$@"; do
+  case "$arg" in
+    --tty|--color)
+      ;;
+    *)
+      filtered_args+=("$arg")
+      ;;
+  esac
+done
+
+exec rspec "${filtered_args[@]}"

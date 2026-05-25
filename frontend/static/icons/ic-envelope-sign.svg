@@ -1,0 +1,41 @@
+<svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M45.9296 9.72271C38.3533 7.34963 29.1957 11.0013 26.1779 18.0301C24.5295 21.8694 23.143 35.4237 8.07225 38.476C-4.54677 41.0318 14.0237 60.378 38.2483 55.0884C47.0268 53.1716 58 45.3882 58 26.9968C58 19.9458 55.3999 12.6891 45.9296 9.72271Z" fill="#D7DEF9"/>
+<rect x="33" y="27" width="26" height="20" transform="rotate(90 33 27)" fill="#465AE7"/>
+<path d="M30.619 24L33 27L13 27L15.381 24L30.619 24Z" fill="#465AE7"/>
+<rect x="14" y="25" width="18" height="24" fill="white"/>
+<path d="M16 29L30 29" stroke="black" stroke-linecap="round"/>
+<path d="M16 31L30 31" stroke="black" stroke-linecap="round"/>
+<path d="M16 39L30 39" stroke="black" stroke-linecap="round"/>
+<path d="M16 33L30 33" stroke="black" stroke-linecap="round"/>
+<path d="M16 41L30 41" stroke="black" stroke-linecap="round"/>
+<path d="M16 35L24 35" stroke="black" stroke-linecap="round"/>
+<path d="M23 28L33 27V53H23V28Z" fill="#9FABFF"/>
+<path d="M23 28L13 27V53H23V28Z" fill="url(#paint0_linear_1268_493)"/>
+<path d="M30.619 50L33 53L13 53L15.381 50L30.619 50Z" fill="#465AE7"/>
+<rect x="35" y="17" width="18" height="24" fill="white"/>
+<path d="M37 21L51 21" stroke="#666666" stroke-linecap="round"/>
+<path d="M37 23L51 23" stroke="#666666" stroke-linecap="round"/>
+<path d="M37 29L51 29" stroke="#666666" stroke-linecap="round"/>
+<path d="M37 31L51 31" stroke="#666666" stroke-linecap="round"/>
+<path d="M37 33L51 33" stroke="#666666" stroke-linecap="round"/>
+<path d="M37 25L46 25" stroke="#666666" stroke-linecap="round"/>
+<path d="M37 27L46 27" stroke="#666666" stroke-linecap="round"/>
+<rect x="42" y="37" width="10" height="3" fill="#D7DEF9"/>
+<path d="M43 39.1084C43.6667 39.2751 44.1 39.2079 44.5 37.6079C44.9 36.0079 45.6667 37.9414 46 39.1081C46.1667 39.4413 46.2 39.8076 47 38.6076C47.3333 38.1076 47.8333 38.4408 48 39.1076C49 38.1076 49 40.1076 51 39.1081" stroke="black" stroke-width="0.5" stroke-linecap="round"/>
+<rect x="29" y="21" width="18" height="24" fill="white"/>
+<path d="M31 25L45 25" stroke="#666666" stroke-linecap="round"/>
+<path d="M31 27L45 27" stroke="#666666" stroke-linecap="round"/>
+<path d="M31 34L45 34" stroke="#666666" stroke-linecap="round"/>
+<path d="M31 29L45 29" stroke="#666666" stroke-linecap="round"/>
+<path d="M31 36L45 36" stroke="#666666" stroke-linecap="round"/>
+<path d="M31 31L39 31" stroke="#666666" stroke-linecap="round"/>
+<rect x="36" y="41" width="10" height="3" fill="#D7DEF9"/>
+<path d="M37 43.1084C37.6667 43.2751 38.1 43.2079 38.5 41.6079C38.9 40.0079 39.6667 41.9414 40 43.1081C40.1667 43.4413 40.2 43.8076 41 42.6076C41.3333 42.1076 41.8333 42.4408 42 43.1076C43 42.1076 43 44.1076 45 43.1081" stroke="black" stroke-width="0.5" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_1268_493" x1="18" y1="27" x2="18" y2="53" gradientUnits="userSpaceOnUse">
+<stop stop-color="#9FABFF"/>
+<stop offset="0.495" stop-color="#6E7FF2"/>
+<stop offset="1" stop-color="#465AE7"/>
+</linearGradient>
+</defs>
+</svg>

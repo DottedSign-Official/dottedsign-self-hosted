@@ -1,0 +1,15 @@
+{
+    "search_placeholder_form_title": "搜尋表單標題...",
+    "public_form_name": "表單名稱",
+    "public_form_sender": "寄件者",
+    "public_form_receivers": "收件者",
+    "public_form_created_at": "建立時間",
+    "public_form_response": "回覆數量",
+    "public_form_terminated": "已終止",
+    "public_form": "公開表單",
+    "public_form_terminated_desc": "此公開表單已被終止，無法再使用。",
+    "public_form_desc": "公開表單可讓您收集回應，並在需要時進行管理。",
+    "form_signer": "表單簽署者",
+
+    "btn_add_public_form": "+ 建立新表單"
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>toolbar_check</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="toolbar_check" fill="#00BFA5">
+            <g id="Check_bt_on" transform="translate(4.000000, 5.000000)">
+                <path d="M5.11238578,8.50175 L1.76682452,5.11875 C1.3626359,4.71075 0.707330087,4.71075 0.303141466,5.11875 C-0.101047155,5.52675 -0.101047155,6.18875 0.303141466,6.59675 L4.35903422,10.69775 C4.56713133,10.90675 4.84025879,11.00675 5.11238578,11.00175 C5.38451277,11.00675 5.6586407,10.90675 5.86573734,10.69775 L14.6968585,1.78475 C15.1010472,1.37575 15.1010472,0.71475 14.6968585,0.30675 C14.2926699,-0.10225 13.6373641,-0.10225 13.2331755,0.30675 L5.11238578,8.50175 Z" id="Checked-Icon"></path>
+            </g>
+        </g>
+    </g>
+</svg>

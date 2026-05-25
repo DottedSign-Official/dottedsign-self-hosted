@@ -1,0 +1,164 @@
+SingleSignerMinimal:
+  summary: Single signer — signature field only
+  description: |
+    The simplest valid request: one signer, one signature field.
+    `pdf_object_info` must contain the same UUID as `field_object_id` in `xfdf_info`.
+    After creation, upload the PDF to `upload_link`, then call `POST /api/v1/sign_tasks/start`.
+  value:
+    file_name: "contract.pdf"
+    has_order: true
+    client: web
+    ip_address: "192.168.1.100"
+    pdf_object_info:
+      - "DottedSign_a1b2c3d4-0000-11ec-89b0-0242ac120001"
+    stages:
+      - email: "alice@example.com"
+        name: "Alice Chen"
+        action: sign
+        xfdf_info:
+          - field_type: signature
+            field_object_id: "DottedSign_a1b2c3d4-0000-11ec-89b0-0242ac120001"
+            page: 0
+            coord: [72, 680, 252, 720]
+
+OrderedTwoSigners:
+  summary: Two signers in sequence with mixed fields
+  description: |
+    Two signers must sign in order (`has_order: true`). Signer 2 receives the invitation
+    only after Signer 1 completes. `pdf_object_info` must list all UUIDs from both stages.
+  value:
+    file_name: "nda_agreement.pdf"
+    has_order: true
+    client: web
+    ip_address: "192.168.1.100"
+    pdf_object_info:
+      - "DottedSign_a1b2c3d4-0001-11ec-89b0-0242ac120001"
+      - "DottedSign_a1b2c3d4-0002-11ec-89b0-0242ac120001"
+      - "DottedSign_a1b2c3d4-0003-11ec-89b0-0242ac120001"
+    stages:
+      - email: "alice@example.com"
+        name: "Alice Chen"
+        action: sign
+        xfdf_info:
+          - field_type: signature
+            field_object_id: "DottedSign_a1b2c3d4-0001-11ec-89b0-0242ac120001"
+            page: 0
+            coord: [72, 680, 252, 720]
+          - field_type: datefield
+            field_object_id: "DottedSign_a1b2c3d4-0002-11ec-89b0-0242ac120001"
+            page: 0
+            coord: [72, 640, 220, 665]
+            options:
+              force: true
+              date_format: "YYYY/MM/DD"
+              date_setting: no_limit
+      - email: "bob@example.com"
+        name: "Bob Lin"
+        action: sign
+        xfdf_info:
+          - field_type: signature
+            field_object_id: "DottedSign_a1b2c3d4-0003-11ec-89b0-0242ac120001"
+            page: 0
+            coord: [300, 680, 480, 720]
+
+CreateWithFileMinimal:
+  summary: Create with file — single signer, base64 PDF
+  description: |
+    Minimal request for `POST /api/v1/sign_tasks/create_with_file`.
+    `file` is the **base64-encoded PDF content** (no `data:application/pdf;base64,` prefix).
+    The task is auto-started after the file pipeline finishes — no separate upload or `/start` call needed.
+
+    Stages do not need `xfdf_info` / `pdf_object_info` — when the document has no pre-defined fields,
+    signers will place their own signatures during signing.
+  value:
+    file: "JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9MZW5ndGggNCAwIFI+PnN0cmVhbQ...(base64-encoded PDF)"
+    file_name: "contract.pdf"
+    has_order: true
+    client: web
+    ip_address: "192.168.1.100"
+    stages:
+      - email: "alice@example.com"
+        name: "Alice Chen"
+        action: sign
+
+CreateWithFileFull:
+  summary: Create with file — multi-stage with sign URL, settings, and OTP
+  description: |
+    Full-featured `create_with_file` payload demonstrating ordered sign+review stages,
+    deadline + expire reminder, CC recipient, OTP verification, custom messages,
+    and `with_sign_url: true` to receive direct sign URLs in the response.
+  value:
+    file: "JVBERi0xLjQKJeLjz9MKMyAwIG9iago8PC9MZW5ndGggNCAwIFI+PnN0cmVhbQ...(base64-encoded PDF)"
+    file_name: "nda_agreement.pdf"
+    has_order: true
+    with_sign_url: true
+    client: web
+    ip_address: "192.168.1.100"
+    user_agent: "PostmanRuntime/7.x"
+    inform_enable: true
+    forget_remind: true
+    deadline: 1751846400
+    expire_remind: true
+    remind_days_before_expire: 2
+    receiver_lang: zh-tw
+    message: "請您盡快簽署此合約，謝謝"
+    completed_message: "感謝您完成簽署"
+    cc_info:
+      - email: "manager@example.com"
+        name: "Eve Manager"
+    stages:
+      - email: "alice@example.com"
+        name: "Alice Chen"
+        action: sign
+        verify:
+          - verify_type: phone
+            verify_source: "+886912345678"
+            occassion: sign
+        stage_setting:
+          forward_enable: false
+          decline_enable: true
+          viewable_in_processing: true
+          viewable_in_completed: true
+      - email: "bob@example.com"
+        name: "Bob Lin"
+        action: review
+
+WithDeadlineAndSettings:
+  summary: With deadline, CC recipients, OTP verification, and custom messages
+  description: |
+    Demonstrates task-level settings: 7-day deadline with expiry reminder,
+    CC recipient, custom signer/completion messages, phone OTP before signing,
+    and English notification emails.
+  value:
+    file_name: "purchase_order.pdf"
+    has_order: true
+    client: web
+    ip_address: "192.168.1.100"
+    deadline: 1751846400
+    expire_remind: true
+    remind_days_before_expire: 2
+    inform_enable: true
+    receiver_lang: en
+    message: "Please review and sign the attached document at your earliest convenience."
+    completed_message: "Thank you for signing. A copy will be sent to your email."
+    cc_info:
+      - email: "manager@example.com"
+        name: "Eve Manager"
+    pdf_object_info:
+      - "DottedSign_e1f2a3b4-0001-11ec-89b0-0242ac120005"
+    stages:
+      - email: "frank@example.com"
+        name: "Frank Su"
+        action: sign
+        verify:
+          - verify_type: phone
+            verify_source: "+886912345678"
+            occassion: sign
+        stage_setting:
+          forward_enable: true
+          decline_enable: true
+        xfdf_info:
+          - field_type: signature
+            field_object_id: "DottedSign_e1f2a3b4-0001-11ec-89b0-0242ac120005"
+            page: 0
+            coord: [72, 680, 252, 720]

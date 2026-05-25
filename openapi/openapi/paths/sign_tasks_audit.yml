@@ -1,0 +1,149 @@
+/api/v1/sign_tasks/audit_trail:
+  get:
+    tags: [Sign Tasks - Audit]
+    summary: Get Audit Trail
+    description: Retrieve the audit trail for a sign task, showing all events and actions taken.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Sign task ID.
+      - name: envelope_id
+        in: query
+        schema:
+          type: integer
+        description: Envelope ID.
+    responses:
+      '200':
+        description: Audit trail retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+                - type: object
+                  properties:
+                    audit_trail:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          event_date:
+                            type: string
+                            description: "Date the event occurred (e.g. 04/13/2026)."
+                          event_time:
+                            type: string
+                            description: "Time the event occurred (e.g. 08:30:00 UTC)."
+                          action_name:
+                            type: string
+                            description: Action performed on the task.
+                          role:
+                            type: string
+                            description: Who performed the action.
+                          ip_address:
+                            type: string
+                            description: IP address of the actor.
+                          device:
+                            type: string
+                            description: Device used by the actor.
+                          sign_mode:
+                            type: string
+                            description: Sign mode used.
+                          tid:
+                            type: string
+                            nullable: true
+                            description: Transaction ID (for identity verification events).
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_audit_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_audit_errors.yml#/TaskNotAccessible'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_audit_errors.yml#/TaskNotFound'
+/api/v1/sign_tasks/audit_trail_pdf:
+  get:
+    tags: [Sign Tasks - Audit]
+    summary: Download Audit Trail PDF
+    description: Download the audit trail as a PDF file directly.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Sign task ID.
+      - name: envelope_id
+        in: query
+        schema:
+          type: integer
+        description: Envelope ID.
+      - name: client
+        in: query
+        schema:
+          type: string
+          enum: [web, app]
+      - name: ip_address
+        in: query
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Audit trail PDF file.
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_audit_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_audit_errors.yml#/TaskNotAccessible'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_audit_errors.yml#/TaskNotFound'

@@ -1,0 +1,479 @@
+/api/v1/developer/tasks:
+  get:
+    tags: [Developer]
+    summary: Developer List Tasks
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+      - name: search_email
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search_task_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: search_envelope_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: start_from
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: end_at
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search_task_status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: search_ca_status
+        in: query
+        required: false
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Developer task list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_infos:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+                total_count:
+                  type: integer
+                current_page:
+                  type: integer
+                total_pages:
+                  type: integer
+/api/v1/developer/task_detail:
+  get:
+    tags: [Developer]
+    summary: Developer Get Task Detail
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Task detail retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+/api/v1/developer/reissue:
+  post:
+    tags: [Developer]
+    summary: Developer Reissue Task
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [sign_task_id, stage_id]
+            properties:
+              sign_task_id:
+                type: integer
+              stage_id:
+                type: integer
+    responses:
+      '200':
+        description: Task reissued.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/developer/members:
+  get:
+    tags: [Developer]
+    summary: Developer List Members
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+      - name: search_email
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter_status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter_none_group
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: search_group_name
+        in: query
+        required: false
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Member list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                members:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/member.yml#/MemberObject'
+/api/v1/developer/members/modify_status:
+  put:
+    tags: [Developer]
+    summary: Developer Modify Member Status
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [email, status]
+            properties:
+              email:
+                type: string
+                format: email
+              status:
+                type: string
+                enum: [active, inactive]
+    responses:
+      '200':
+        description: Member status modified.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/developer/groups:
+  get:
+    tags: [Developer]
+    summary: Developer List Groups
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+      - name: search_group_name
+        in: query
+        required: false
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Group list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groups:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/group.yml#/GroupObject'
+  post:
+    tags: [Developer]
+    summary: Developer Create Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_name]
+            properties:
+              group_name:
+                type: string
+    responses:
+      '200':
+        description: Group created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/group.yml#/GroupObject'
+  put:
+    tags: [Developer]
+    summary: Developer Update Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, group_name]
+            properties:
+              group_id:
+                type: integer
+              group_name:
+                type: string
+    responses:
+      '200':
+        description: Group updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/group.yml#/GroupObject'
+/api/v1/developer/groups/assign_member_to_group:
+  post:
+    tags: [Developer]
+    summary: Developer Assign Member to Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, assignee_email, role]
+            properties:
+              group_id:
+                type: integer
+              assignee_email:
+                type: string
+                format: email
+              role:
+                type: string
+    responses:
+      '200':
+        description: Member assigned to group.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/developer/groups/remove_member_from_group:
+  delete:
+    tags: [Developer]
+    summary: Developer Remove Member from Group
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: assignee_email
+        in: query
+        required: true
+        schema:
+          type: string
+          format: email
+    responses:
+      '200':
+        description: Member removed from group.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/developer/groups/change_member_role_in_group:
+  put:
+    tags: [Developer]
+    summary: Developer Change Member Role in Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [assignee_email, roles]
+            properties:
+              assignee_email:
+                type: string
+                format: email
+              roles:
+                type: array
+                items:
+                  type: string
+    responses:
+      '200':
+        description: Member role changed.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/developer/task_retry_ca:
+  put:
+    tags: [Developer]
+    summary: Developer Retry CA Verification
+    description: |
+      Trigger a CA (Certificate Authority) identity verification retry for a sign task.
+      Accessible to super admins only.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [sign_task_id]
+            properties:
+              sign_task_id:
+                type: integer
+                description: ID of the sign task to retry CA verification for.
+    responses:
+      '200':
+        description: CA retry triggered.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                result:
+                  type: string
+                  example: ok
+/api/v1/developer/sign_tasks/decline_reasons:
+  get:
+    tags: [Developer]
+    summary: Developer List Decline Reasons
+    security:
+      - BearerAuth: []
+    parameters: []
+    responses:
+      '200':
+        description: Decline reasons list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                decline_reasons:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/sign_task.yml#/DeclineReasonObject'
+  post:
+    tags: [Developer]
+    summary: Developer Create Decline Reason
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [content]
+            properties:
+              content:
+                type: string
+    responses:
+      '200':
+        description: Decline reason created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/DeclineReasonObject'
+  put:
+    tags: [Developer]
+    summary: Developer Update Decline Reason
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [decline_reason_id, content]
+            properties:
+              decline_reason_id:
+                type: integer
+              content:
+                type: string
+    responses:
+      '200':
+        description: Decline reason updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/DeclineReasonObject'
+  delete:
+    tags: [Developer]
+    summary: Developer Delete Decline Reason
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: decline_reason_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Decline reason deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/developer/debug_tools/sidekiq_retry_list:
+  get:
+    tags: [Developer]
+    summary: Get Sidekiq Retry List
+    description: Returns the list of jobs currently in the Sidekiq retry queue. Accessible to super admins only.
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Sidekiq retry list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                retry_list:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      jid:
+                        type: string
+                        description: Sidekiq job ID.
+                      queue:
+                        type: string
+                        description: Queue name.
+                      class:
+                        type: string
+                        description: Worker class name.
+                      error_message:
+                        type: string
+                        description: Last error message.
+                      retry_count:
+                        type: integer
+                        description: Number of retries attempted.
+                      retried_at:
+                        type: number
+                        description: Unix timestamp of last retry attempt.

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>ic-info</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-533.000000, -232.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="ic-info" transform="translate(533.000000, 232.000000)">
+                <path d="M12,0 C5.376,0 0,5.376 0,12 C0,18.624 5.376,24 12,24 C18.624,24 24,18.624 24,12 C24,5.376 18.624,0 12,0 Z M12,17.9999999 C11.34,17.9999999 10.8,17.4599998 10.8,16.8 L10.8,12 C10.8,11.34 11.34,10.8 12,10.8 C12.66,10.8 13.2,11.34 13.2,12 L13.2,16.8 C13.2,17.4599998 12.66,17.9999999 12,17.9999999 Z M13.2,8.39999999 L10.8,8.39999999 L10.8,6 L13.2,6 L13.2,8.39999999 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,200 @@
+doorkeeper_forbidden:
+  error_code: 403_001
+  error_message: doorkeeper_forbidden
+invalid_action:
+  error_code: 403_002
+  error_message: not allow for this action
+task_owner_is_not_you:
+  app_code: 4007
+  error_code: 403_030
+  error_message: task owner is not you
+need_to_check_security:
+  app_code: 4009
+  error_code: 403_031
+  error_message: security check process not finished
+over_monthly_task_usage:
+  app_code: 4013
+  error_code: 403_032
+  error_message: over monthly task usage
+task_not_owned:
+  app_code: 4030
+  error_code: 403_033
+  error_message: current member not own this task
+stage_need_verify:
+  app_code: 4032
+  error_code: 403_034
+  error_message: require verify
+code_expire:
+  error_code: 403_035
+  error_message: code is already expired
+task_not_accessible:
+  error_code: 403_036
+  error_message: task is not accessible
+quick_sign_not_accepted:
+  error_code: 403_037
+  error_message: task is not accepted to quick sign
+forward_not_allowed:
+  error_code: 403_038
+  error_message: member not allowed to forward this stage
+need_to_setup_inperson:
+  error_code: 403_039
+  error_message: need to setup inperson first
+task_was_forwarded:
+  error_code: 403_040
+  error_message: task has forwarded to others
+group_task_not_accessible:
+  error_code: 403_041
+  error_message: tasks of group not accessible to member
+over_template_usage:
+  error_code: 403_042
+  error_message: over template usage
+not_allow_to_gdpr:
+  error_code: 403_043
+  error_message: not allow to gdpr remove
+template_not_accessible:
+  error_code: 403_044
+  error_message: template not accessible to member
+template_not_sharable:
+  error_code: 403_045
+  error_message: template not sharable
+no_bulk_send_permission:
+  error_code: 403_046
+  error_message: no bulk send permission
+file_already_uploaded:
+  error_code: 403_047
+  error_message: the file is already uploaded before
+task_was_declined:
+  error_code: 403_048
+  error_message: the task has been declined.
+decline_not_allowed:
+  error_code: 403_049
+  error_message: member is not allowed to decline this stage
+file_not_viewable:
+  error_code: 403_050
+  error_message: file can not be viewed
+tag_not_own:
+  error_code: 403_051
+  error_message: you don't own these tags
+template_not_allow_to_modify:
+  error_code: 403_052
+  error_message: the template is temporarily unavailable for modifying, retry the action later.
+template_not_owned:
+  error_code: 403_053
+  error_message: the template is not owned by the member
+member_no_group:
+  error_code: 403_054
+  error_message: member no belongs to any group
+task_was_expired:
+  error_code: 403_055
+  error_message: task was expired
+group_not_accessible:
+  error_code: 403_056
+  error_message: group is not accessible
+group_resource_not_accessible:
+  error_code: 403_057
+  error_message: resource is not accessible for group
+over_form_usage:
+  error_code: 403_058
+  error_message: over public form usage
+system_ca_not_accessible:
+  error_code: 403_059
+  error_message: system ca not accessible
+decline_reason_not_accessible:
+  error_code: 403_060
+  error_message: decline reason not accessible
+role_is_assigned:
+  error_code: 403_061
+  error_message: still members are assigned roles
+role_not_allow_to_delete:
+  error_code: 403_062
+  error_message: "role: `admin`, `manager`, `member` can not be remove"
+member_not_group_admin:
+  error_code: 403_063
+  error_message: member not group admin
+invalid_member_management_group:
+  error_code: 403_064
+  error_message: Invalid member management group
+envelope_was_expired:
+  error_code: 403_065
+  error_message: envelope was expired
+envelope_was_declined:
+  error_code: 403_066
+  error_message: the envelope has been declined.
+envelope_not_accessible:
+  error_code: 403_067
+  error_message: envelope is not accessible
+combination_not_accessible:
+  error_code: 403_068
+  error_message: combination is not accessible
+task_is_draft:
+  error_code: 403_069
+  error_message: task is draft
+task_not_duplicable:
+  error_code: 403_070
+  error_message: task not in a duplicable status
+envelope_not_duplicable:
+  error_code: 403_071
+  error_message: envelope not in a duplicable status
+voucher_not_belongs:
+  error_code: 403_100
+  error_message: voucher not belongs to member
+subscription_not_belongs:
+  error_code: 403_101
+  error_message: subscription not belongs to member
+invoice_not_belongs:
+  error_code: 403_102
+  error_message: invoice not belongs to member
+campaign_mail_template_not_allow:
+  error_code: 403_103
+  error_message: campaign mail template type is not allowed
+zendesk_login_need_confirm:
+  error_code: 403_200
+  error_message: need to confirm email before login to zendesk
+account_suspended:
+  error_code: 403_201
+  error_message: user account is suspended
+require_api_key:
+  error_code: 403_202
+  error_message: you are not add the header api-key at your request, please check it.
+no_permission:
+  error_code: 403_401
+  error_message: User has no permission to do this operation
+share_link_file_only:
+  error_code: 403_402
+  error_message: Available only on file share link
+message_not_found:
+  error_code: 403_501
+  error_message: message not found
+kiosk_not_allowed:
+  error_code: 403_900
+  error_message: not allowed to use kiosk feature
+form_not_owned:
+  error_code: 403_901
+  error_message: member not owner of public form
+forbidden_license:
+  error_code: 403_1201
+  error_message: provided licence forbidden to call this api
+not_group_member:
+  error_code: 403_1202
+  error_message: member not belongs to group
+action_forbidden:
+  error_code: 403_1203
+  error_message: member not allowed to do action
+only_for_developer:
+  error_code: 403_1301
+  error_message: only developer can access
+admin_only_self_changeable:
+  error_code: 403_1302
+  error_message: admin can only change by self
+not_owner:
+  error_code: 403_1303
+  error_message: not owner
+envelope_not_owned:
+  error_code: 403_065
+  error_message: current member not own this envelope
+task_not_transferable:
+  error_code: 403_1304
+  error_message: task is not transferable
+envelope_not_transferable:
+  error_code: 403_1305
+  error_message: envelope is not transferable

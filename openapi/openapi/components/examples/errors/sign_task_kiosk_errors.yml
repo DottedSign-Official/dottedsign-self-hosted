@@ -1,0 +1,90 @@
+MemberAuthFailed:
+  summary: member auth failed
+  description: The Authorization header is missing, expired, or the bearer token does not match any active session.
+  value:
+    error_code: 401202
+    error_message: member auth failed
+
+TemplateDeleted:
+  summary: template has deleted
+  description: The referenced template has been deleted and is no longer available for creating kiosk tasks.
+  value:
+    error_code: 400053
+    error_message: template has deleted
+
+KioskNotAllowed:
+  summary: not allowed to use kiosk feature
+  description: The organization's plan does not include the kiosk feature; contact your administrator to enable it.
+  value:
+    error_code: 403900
+    error_message: not allowed to use kiosk feature
+
+OverMonthlyTaskUsage:
+  summary: over monthly task usage
+  description: The monthly task creation quota has been reached; wait until the next billing cycle or upgrade the plan.
+  value:
+    error_code: 403032
+    error_message: over monthly task usage
+
+TemplateNotFound:
+  summary: template not found
+  description: No template exists with the given `template_id`.
+  value:
+    error_code: 404035
+    error_message: template not found
+
+SignerInfoNotReady:
+  summary: signer info not ready yet
+  description: The kiosk stage requires signer information (name/email/phone) that has not been provided; re-call this endpoint with the required `actor_info` fields.
+  value:
+    error_code: 400901
+    error_message: signer info not ready yet
+
+KioskRepeatAccess:
+  summary: kiosk can not access same stage over 1 time
+  description: Each kiosk stage can only be accessed once; this stage has already been visited and cannot be re-entered.
+  value:
+    error_code: 400903
+    error_message: kiosk can not access same stage over 1 time
+
+KioskDelaySSign:
+  summary: kiosk can not delay so long to sign
+  description: Too much time elapsed between reading (verify) and signing the kiosk task; the session has expired. Start over with a new verify call.
+  value:
+    error_code: 400904
+    error_message: kiosk can not delay so long to sign
+
+KioskNotRead:
+  summary: kiosk sign without read
+  description: The kiosk task must be read via `POST /kiosk/verify` before it can be signed.
+  value:
+    error_code: 400905
+    error_message: kiosk sign without read
+
+FieldContentInvalid:
+  summary: field content invalid
+  description: A sign field value does not pass server-side validation (e.g., date format error, required field is empty).
+  value:
+    error_code: 400062
+    error_message: field content invalid
+
+InvalidObjectId:
+  summary: invalid object id
+  description: The field object UUIDs in `signature_info` do not match any stored sign field objects for this task.
+  value:
+    error_code: 400091
+    error_message: invalid object id
+
+TaskNotFound:
+  summary: task not found
+  description: No sign task exists with the given `sign_task_id`.
+  value:
+    error_code: 404031
+    error_message: task not found
+
+StageNotFound:
+  summary: stage not found
+  description: No active stage was found for the current signer in this task.
+  value:
+    error_code: 404032
+    error_message: stage not found

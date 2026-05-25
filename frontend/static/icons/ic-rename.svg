@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="24px" viewBox="0 0 25 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>ic-rename</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-589.000000, -630.000000)">
+            <g id="ic-rename" transform="translate(589.000000, 630.000000)">
+                <rect id="Rectangle-33" fill-opacity="0.01" fill="#FFFFFF" x="0" y="0" width="24" height="24"></rect>
+                <g id="Group-8" transform="translate(0.000000, 1.000000)">
+                    <path d="M14.6666667,9.75765308 L14.6666667,19.2409214 L13.443299,15.655012 L5.22336769,15.655012 L3.43642611,20.8928571 L0,20.8928571 L7.50515463,0 L11.161512,0 L14.6666667,9.75765308 Z M6.18556701,12.8458884 L12.4810997,12.8458884 L9.40206185,3.68697479 L9.29209622,3.68697479 L6.18556701,12.8458884 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+                    <path d="M20.0000001,0.696428571 L20.0000001,20.8928571 L20.0000001,0.696428571 Z M16.0000001,0.696428571 L24,0.696428571 L16.0000001,0.696428571 Z M16.0000001,21.5892857 L24,21.5892857 L16.0000001,21.5892857 Z" id="Combined-Shape" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

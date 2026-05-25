@@ -1,0 +1,71 @@
+/api/v1/files/upload/{code}:
+  post:
+    tags: [Files]
+    summary: Upload File
+    description: Upload a PDF file using the upload URL obtained from task creation.
+    parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+        description: File upload code from task creation response.
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required: [file]
+            properties:
+              file:
+                type: string
+                format: binary
+                description: PDF file to upload.
+    responses:
+      '200':
+        description: File uploaded successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/files/download/{code}:
+  get:
+    tags: [Files]
+    summary: Download File
+    security: []
+    parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+        description: File download code.
+    responses:
+      '200':
+        description: File content.
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+/api/v1/files/download_attachment:
+  get:
+    tags: [Files]
+    summary: Download Attachment
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: file_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Attachment download link.
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary

@@ -1,0 +1,41 @@
+{
+  "login": "登入",
+  "back_to_login": "返回登入",
+  "login_placeholder": "您的信箱",
+  "forget_password": "忘記密碼？",
+  "reset_password":"重設密碼",
+  "sign_up": "註冊",
+  "continue": "繼續",
+
+  "new_password":"新密碼",
+  "confirm":"新密碼確認",
+  "reset_success_title":"重設密碼成功!",
+  "reset_success_hint":"請使用新密碼重新登入",
+
+  "ldap_login_title":"LDAP 登入",
+  "ldap_welcome_title": "LDAP 歡迎",
+  "ldap_login":"使用 LDAP 登入",
+  "general_login":"返回一般登入",
+
+  "create_account": "創建你的帳號",
+  "name": "姓名",
+  "email": "信箱",
+  "password": "密碼",
+  "password_hint": "最少 8 個字",
+  "password_mismatch_hint":"確認密碼不一致",
+  "next": "下一步",
+
+  "find_email": "查找您的電子郵件",
+
+  "welcome": "歡迎",
+  "enter_password": "輸入您的密碼",
+  "invalid_email": "錯誤的信箱格式",
+  "invalid_password": "無效密碼",
+  "email_sent": "信件已發送!",
+  "check_email": "請檢查您的信箱。",
+  "congrats": "恭喜！",
+  "verify_email": "請檢查您的信箱並立即驗證。",
+
+  "email_empty":"信箱不可為空白",
+  "email_invalid":"信箱格式錯誤"
+}

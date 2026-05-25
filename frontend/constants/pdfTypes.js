@@ -1,0 +1,9 @@
+export const SET_DOCUMENT = "set_document";
+export const SET_VIEWPORT = "set_viewport";
+export const SET_CURRENT_PAGE = "set_current_page";
+export const SET_TOTAL_PAGE = "set_total_page";
+export const SET_THUMBNAILS = "set_thumbnails";
+export const RESET_PDF = "reset_pdf";
+export const SET_IS_MOBILE = "set_is_mobile";
+export const SET_IS_RENDER_DONE = "set_is_render_done";
+export const SET_TO_RENDER_PAGES = "set_to_render_pages";

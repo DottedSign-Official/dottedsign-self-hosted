@@ -1,0 +1,47 @@
+/api/v1/shorten_link:
+  post:
+    tags: [Shorten Link]
+    summary: Create Shorten Link
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [target_url]
+            properties:
+              target_url:
+                type: string
+                format: uri
+    responses:
+      '200':
+        description: Shortened link created.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                shorten_link:
+                  type: string
+/api/v1/shorten_link/{uuid}:
+  get:
+    tags: [Shorten Link]
+    summary: Get Shorten Link Info
+    parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Link info retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target_url:
+                  type: string

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>web/ic_fileDownload </title>
+    <desc>Created with Sketch.</desc>
+    <g id="web/ic_fileDownload-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="round-insert_drive_file-24px">
+            <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+            <path d="M7.625,4 C6.73125,4 6.008125,4.72 6.008125,5.6 L6,18.4 C6,19.28 6.723125,20 7.616875,20 L17.375,20 C18.26875,20 19,19.28 19,18.4 L19,9.464 C19,9.04 18.829375,8.632 18.520625,8.336 L14.59625,4.472 C14.295625,4.168 13.88125,4 13.450625,4 L7.625,4 Z M13.3125,8.8 L13.3125,5.2 L17.78125,9.6 L14.125,9.6 C13.678125,9.6 13.3125,9.24 13.3125,8.8 Z" id="Shape" fill-opacity="0.38" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

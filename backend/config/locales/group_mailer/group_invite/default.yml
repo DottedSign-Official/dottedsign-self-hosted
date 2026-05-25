@@ -1,0 +1,17 @@
+---
+en:
+  group_mailer:
+    group_invite:
+      default:
+        subject: You Are Invited to Join DottedSign
+        content_1: Greetings,
+        content_2: You are invited to join DottedSign by your team administrator. To get full access to DottedSign, please activate your account by clicking the button below.
+        button: Immediate start
+hant:
+  group_mailer:
+    group_invite:
+      default:
+        subject: 邀請您加入DottedSign
+        content_1: 您好，
+        content_2: 貴單位的帳號管理者邀情您加入點點簽 DottedSign 服務。請在服務啟用後至電子信箱中收取驗證信，驗證您的帳號。
+        button: 立即啟用

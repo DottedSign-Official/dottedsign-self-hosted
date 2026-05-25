@@ -1,0 +1,16 @@
+en:
+  sign_mailer:
+    task_deleted_remind:
+      default:
+        subject: "The signed task for %{task_name} has been deleted by %{sender_name}"
+        title: "Task Deleted"
+        content_1: "The signed task %{task_name} has been deleted by the initiator %{sender_name}."
+        content_2: "If this was not done by you, please ignore this email."
+hant:
+  sign_mailer:
+    task_deleted_remind:
+      default:
+        subject: "%{sender_name}已將%{task_name}的簽署任務刪除"
+        title: "任務已被刪除"
+        content_1: "簽署任務 %{task_name}, 已被發起人: %{sender_name} 刪除。"
+        content_2: "如果這不是您本人所為，請忽略此電子郵件。"

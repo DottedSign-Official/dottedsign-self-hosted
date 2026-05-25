@@ -1,0 +1,82 @@
+---
+en:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: Your Signing Request %{doc_name} Will Expire on %{deadline}
+        title: Waiting for Your to Sign
+        content_1_html: <strong>"%{doc_name}"</strong> sent by %{sender_name} (%{sender_email}) will expire on %{deadline}. Don't forget to sign the document.
+        content_2_html: "*Please note that if you are not registered to DottedSign on-premise, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View & Sign
+hant:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: 您的簽署文件%{doc_name}將在%{deadline}到期
+        title: 正在等待您的簽署
+        content_1_html: '%{sender_name} (%{sender_email}) 邀請您簽名的<strong>"%{doc_name}"</strong>即將在 %{deadline} 到期，請盡快完成簽署。'
+        content_2_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看並簽署
+hans:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: 您的签署文件%{doc_name}将在 %{deadline}到期
+        title: 正在等待您的签名
+        content_1_html: '%{sender_name} (%{sender_email}) 邀请您签名的<strong>"%{doc_name}"</strong>即将在%{deadline}到期，请尽快完成签署。'
+        content_2_html: 请注意：若您尚未註册点点签，为了保障签署安全性，此连结将于<strong>2天</strong>内失效。
+        button: 查看并签名
+ja:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: あなたの署名リクエスト%{doc_name}は %{deadline} に期限が切れます
+        title: あなたの署名待ちです
+        content_1_html: '%{sender_name} (%{sender_email})さ が送信した<strong>"%{doc_name}"</strong>は%{deadline} に期限が切れます。 必ずドキュメントに署名してください。'
+        content_2_html: ご注意：DottedSign on-premiseにご登録でない場合、このリンクは<strong>2日</strong>のみ有効です。 これはドキュメントへの不正アクセス防止の措置です。
+        button: 閲覧＆署名
+it:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: La tua richiesta di firma %{doc_name} scade il %{deadline}
+        title: In attesa della tua firma
+        content_1_html: <strong>"%{doc_name}"</strong> inviato da %{sender_name} (%{sender_email}) scade il %{deadline}. Ricorda di firmare il documento
+        content_2_html: "*Si prega di notare che se non sei registrato a DottedSign on-premise, questo link scadrà tra <strong>2 giorni</strong>. Questo per prevenire l'accesso non autorizzato al documento."
+        button: Visualizza & firma
+de:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: Ihre Unterschriftenanfrage %{doc_name} wird am %{deadline} ablaufen
+        title: Wartet auf Ihre Unterschrift
+        content_1_html: <strong>"%{doc_name}"</strong> gesendet von %{sender_name} (%{sender_email})  wird am %{deadline} ablaufen. Vergessen Sie nicht das Dokument zu unterschreiben.
+        content_2_html: "*Bitte beachten Sie, dass dieser Link in <strong>2 Tagen abläuft</strong>, wenn Sie nicht bei DottedSign on-premise registriert sind. Dies dient dazu, das Dokument vor unberechtigtem Zugriff zu schützen."
+        button: Ansehen & Unterzeichnen
+es:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: Su solicitud de firma %{doc_name} vencerá el %{deadline}
+        title: Esperando a que firme
+        content_1_html: <strong>"%{doc_name}"</strong> enviado por %{sender_name} (%{sender_email})  vencerá el %{deadline}. No olvide firmar el documento.
+        content_2_html: "*Tenga en cuenta que, en caso de no registrarse en DottedSign on-premise, este enlace expirará en <strong>2 días</strong>. Lo hacemos así para prevenir accesos no autorizados."
+        button: Ver y firmar
+fr:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: Votre Demande de Signature %{doc_name} Expirera le %{deadline}
+        title: En Attente de Votre Signature
+        content_1_html: <strong>"%{doc_name}"</strong> envoyé par %{sender_name} (%{sender_email})  expirera le %{deadline}. N'oubliez pas de signer le document.
+        content_2_html: "*Veuillez noter que si vous n'êtes pas inscrit à DottedSign on-premise, ce lien expirera dans <strong>2 jours</strong>. Ceci est pour empêcher l'accès non autorisé au document."
+        button: Afficher et Signer
+ko:
+  sign_mailer:
+    expire_remind:
+      default:
+        subject: 서명요청 %{doc_name}은(는) %{deadline}에 끝납니다
+        title: 귀하의 서명을 기다리는 중
+        content_1_html: '%{sender_name} (%{sender_email}) 에 의해 보내진 ,<strong>"%{doc_name}"</strong>은(는) %{deadline} 에 끝납니다. 문서에 서명하는걸 잊지 마세요.'
+        content_2_html: DottedSign on-premise에 등록하지 않은 경우, 이 링크는 <strong>2일</strong> 내에 만료됨을 참고하십시오. 이는 무단 접근으로부터 문서를 보호하기 위함입니다.
+        button: 보기 및 서명

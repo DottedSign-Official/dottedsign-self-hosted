@@ -1,0 +1,15 @@
+{
+    "search_placeholder_form_title": "Search form title...",
+    "public_form_name": "Form Name",
+    "public_form_sender": "Sender",
+    "public_form_receivers": "Receivers",
+    "public_form_created_at": "Created At",
+    "public_form_response": "Responses",
+    "public_form_terminated": "Terminated",
+    "public_form": "Public Form",
+    "public_form_terminated_desc": "This public form has been terminated and can no longer be used.",
+    "public_form_desc": "Public forms allow you to collect responses and manage them as needed.",
+    "form_signer": "Form Signer",
+
+    "btn_add_public_form": "+ Create New"
+}

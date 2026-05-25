@@ -1,0 +1,118 @@
+---
+en:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: You Have Changed the Signer of %{doc_name}
+          other_update: "%{old_receiver_name} Has Changed the Signer of %{doc_name}"
+        title: Signer Changed
+        content_1:
+          self_change_html: You have already changed the signer of <strong>"%{doc_name}"</strong> from %{old_receiver_name} (%{old_receiver_email}) to %{new_receiver_name} (%{new_receiver_email}).
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email}) has already changed the signer of <strong>"%{doc_name}"</strong> to %{new_receiver_name} (%{new_receiver_email}).'
+        content_2: 'Here is the message from %{old_receiver_name}:'
+        button: Go to Task
+hant:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: 您已變更%{doc_name}的簽署者
+          other_update: "%{old_receiver_name}已變更%{doc_name}的簽署者"
+        title: 簽署者已變更
+        content_1:
+          self_change_html: 您已成功將<strong>"%{doc_name}"</strong>的簽署者從%{old_receiver_name} (%{old_receiver_email})變更為%{new_receiver_name} (%{new_receiver_email})。
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email})已將 <strong>"%{doc_name}"</strong> 的簽署者變更為%{new_receiver_name} (%{new_receiver_email})。'
+        content_2: 以下為%{old_receiver_name}傳送給您的訊息：
+        button: 前往文件
+hans:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: 您已变更%{doc_name}的签署者
+          other_update: "%{old_receiver_name}已变更%{doc_name}的签署者"
+        title: 签署者已变更
+        content_1:
+          self_change_html: 您已成功将<strong>"%{doc_name}"</strong>的签署者从%{old_receiver_name} (%{old_receiver_email})变更为%{new_receiver_name} (%{new_receiver_email})。
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email})已将 <strong>"%{doc_name}"</strong> 的签署者变更为%{new_receiver_name} (%{new_receiver_email})。'
+        content_2: 以下为%{old_receiver_name}传送给您的讯息：
+        button: 前往文件
+ja:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: "%{doc_name}の署名者を変更しました"
+          other_update: "%{old_receiver_name}は%{doc_name}の署名者を変更しました。"
+        title: 署名者が変更されました
+        content_1:
+          self_change_html: <strong>"%{doc_name}"</strong>の署名者を%{old_receiver_name} (%{old_receiver_email})さんから%{new_receiver_name} (%{new_receiver_email})さんに変更しました 。
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email})は<strong>"%{doc_name}"</strong> の署名者を%{new_receiver_name} (%{new_receiver_email})へ変更済みです。'
+        content_2: "%{old_receiver_name}からのメッセージは次のとおりです："
+        button: タスクに移動
+it:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: Hai modificato il firmatario di %{doc_name}
+          other_update: "%{old_receiver_name} ha modificato il firmatario di %{doc_name}"
+        title: Firmatario cambiato
+        content_1:
+          self_change_html: Hai già modificato il firmatario di <strong>"%{doc_name}"</strong> da %{old_receiver_name} (%{old_receiver_email}) a %{new_receiver_name} (%{new_receiver_email}).
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email}) ha già modificato il firmatario di <strong>"%{doc_name}"</strong> to %{new_receiver_name} (%{new_receiver_email}).'
+        content_2: 'Ecco il messaggio di %{old_receiver_name}:'
+        button: Vai al task
+de:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: Sie haben den Unterzeichner von %{doc_name} geändert
+          other_update: "%{old_receiver_name} hat den Unterzeichner von %{doc_name} geändert"
+        title: Unterschriftsgeber geändert
+        content_1:
+          self_change_html: Sie haben den Unterzeichner von <strong>"%{doc_name}"</strong> bereits von %{old_receiver_name} (%{old_receiver_email}) auf %{new_receiver_name} (%{new_receiver_email}) geändert.
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email}) hat bereits den Unterzeichner von <strong>"%{doc_name}"</strong> auf %{new_receiver_name} (%{new_receiver_email}) geändert.'
+        content_2: 'Ecco il messaggio di %{old_receiver_name}:'
+        button: Zu Aufgabe wechseln
+es:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: Ha cambiado el firmante de %{doc_name}
+          other_update: "%{old_receiver_name} ha cambiado el firmante de %{doc_name}"
+        title: Firmante cambiado
+        content_1:
+          self_change_html: Ya ha cambiado el firmante de <strong>"%{doc_name}"</strong> de %{old_receiver_name} (%{old_receiver_email}) a %{new_receiver_name} (%{new_receiver_email}).
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email}) ya ha cambiado el firmante de <strong>"%{doc_name}"</strong> a %{new_receiver_name} (%{new_receiver_email}).'
+        content_2: 'Aquí está el mensaje de %{old_receiver_name}:'
+        button: Ir a la tarea
+fr:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: Vous Avez Changé le Signataire de %{doc_name}
+          other_update: "%{old_receiver_name} A Changé le Signataire de %{doc_name}"
+        title: Signataire Changé
+        content_1:
+          self_change_html: Vous avez déjà changé le signataire de <strong>"%{doc_name}"</strong> de %{old_receiver_name} (%{old_receiver_email}) à %{new_receiver_name} (%{new_receiver_email}).
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email}) a déjà changé le signataire de <strong>"%{doc_name}"</strong> à %{new_receiver_name} (%{new_receiver_email}).'
+        content_2: 'Voici le message de %{old_receiver_name}:'
+        button: Aller à la Tâche
+ko:
+  sign_mailer:
+    task_update:
+      default:
+        subject:
+          self_update: "%{doc_name}의 서명자를 변경했습니다"
+          other_update: "%{old_receiver_name} 님이 %{doc_name}의 서명자를 변경했습니다"
+        title: 서명인 변경
+        content_1:
+          self_change_html: <strong>"%{doc_name}"</strong> 의 서명자를 %{old_receiver_name} (%{old_receiver_email}) 님에서 %{new_receiver_name} (%{new_receiver_email}) 님으로 이미 변경했습니다.
+          other_change_html: '%{old_receiver_name} (%{old_receiver_email}) 님이 <strong>"%{doc_name}"</strong>의 서명자를 %{new_receiver_name} (%{new_receiver_email}) 님으로 이미 변경했습니다.'
+        content_2: '여기 %{old_receiver_name}에 메시지가 있습니다:'
+        button: 작업으로 이동

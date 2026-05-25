@@ -1,0 +1,209 @@
+InvalidPreviewCode:
+  summary: invalid preview code
+  description: The `code` parameter is malformed or does not match any valid quick sign preview code for this task.
+  value:
+    error_code: 400061
+    error_message: invalid preview code
+
+CodeExpire:
+  summary: code is already expired
+  description: The quick sign preview code has passed its expiry time; the signer must request a new invitation link.
+  value:
+    error_code: 403035
+    error_message: code is already expired
+
+TaskNotFound:
+  summary: task not found
+  description: No sign task exists with the given task identifier.
+  value:
+    error_code: 404031
+    error_message: task not found
+
+VerifyStepNotFound:
+  summary: not valid verify uuid
+  description: The provided `uuid` does not match any pending verification step; obtain a valid UUID from the `identity_verify_token` returned by `GET /read`.
+  value:
+    error_code: 400039
+    error_message: not valid verify uuid
+
+MemberAuthFailed:
+  summary: member auth failed
+  description: The Authorization header is missing, expired, or the bearer token does not match any active session.
+  value:
+    error_code: 401202
+    error_message: member auth failed
+
+StageNotFound:
+  summary: stage not found
+  description: No active stage was found for the current signer in the referenced task.
+  value:
+    error_code: 404032
+    error_message: stage not found
+
+VerifySourceNotSet:
+  summary: verify source not set
+  description: The stage does not have an identity verification source (phone/email) configured; contact the task owner.
+  value:
+    error_code: 404033
+    error_message: verify source not set
+
+DeliverOtpFailed:
+  summary: otp deliver failed
+  description: The OTP delivery service (SMS or email) failed to send the verification code; check the phone number or email address on the stage.
+  value:
+    error_code: 406032
+    error_message: otp deliver failed
+
+TaskNotSignable:
+  summary: only waiting task can be signed
+  description: The task is not in `waiting` status (for example, it is completed, declined, or cancelled) and cannot be signed.
+  value:
+    error_code: 400038
+    error_message: only waiting task can be signed
+
+NotSignerTurn:
+  summary: task is not signer turn
+  description: The task uses ordered signing and it is not the current member's turn to sign yet.
+  value:
+    error_code: 400044
+    error_message: task is not signer turn
+
+StageAlreadyDone:
+  summary: stage has already signed
+  description: This stage has already been signed and cannot be submitted again.
+  value:
+    error_code: 400046
+    error_message: stage has already signed
+
+FieldContentInvalid:
+  summary: field content invalid
+  description: A sign field value does not pass server-side validation, such as a date format error or a missing required value.
+  value:
+    error_code: 400062
+    error_message: field content invalid
+
+InvalidObjectId:
+  summary: invalid object id
+  description: The field object UUIDs in `signature_info` do not match any stored sign field objects for this task; verify the object IDs are correct.
+  value:
+    error_code: 400091
+    error_message: invalid object id
+
+ExecuteTypeNotAllow:
+  summary: execute type not allow
+  description: The requested action type is not permitted for this stage, such as attempting to sign a review-only stage.
+  value:
+    error_code: 400047
+    error_message: execute type not allow
+
+AttachmentNotReady:
+  summary: attachment not ready
+  description: Required attachment files have not finished uploading; wait for all attachments to be processed before signing.
+  value:
+    error_code: 400051
+    error_message: attachment not ready
+
+TaskNotAccessible:
+  summary: task is not accessible
+  description: The authenticated member is not a participant (owner or signer) of this task.
+  value:
+    error_code: 403036
+    error_message: task is not accessible
+
+QuickSignNotAccepted:
+  summary: task is not accepted to quick sign
+  description: The signer attempted to use quick sign but the task owner has not enabled it for this stage.
+  value:
+    error_code: 403037
+    error_message: task is not accepted to quick sign
+
+TaskWasExpired:
+  summary: task was expired
+  description: The task's signing deadline has passed; contact the task owner to reissue the task.
+  value:
+    error_code: 403055
+    error_message: task was expired
+
+TaskWasDeclined:
+  summary: the task has been declined
+  description: The task has already been declined by one of the signers and can no longer be signed.
+  value:
+    error_code: 403048
+    error_message: the task has been declined.
+
+NeedToCheckSecurity:
+  summary: security check process not finished
+  description: The signer must complete a required security check before they can sign this task.
+  value:
+    error_code: 403031
+    error_message: security check process not finished
+
+StageNeedVerify:
+  summary: require verify
+  description: Identity verification (OTP) is required before signing; call `POST /trigger_verify` to initiate the OTP flow first.
+  value:
+    error_code: 403034
+    error_message: require verify
+
+SignatureNotFound:
+  summary: signature not found
+  description: The signature referenced in `signature_info` does not exist for this member; the signer may need to create a signature first.
+  value:
+    error_code: 404030
+    error_message: signature not found
+
+TaskNotWaiting:
+  summary: task is not waiting
+  description: Declining is only allowed when the task is in `waiting` status; the task may already be completed, declined, or cancelled.
+  value:
+    error_code: 400035
+    error_message: task is not waiting
+
+DeclineNotAllowed:
+  summary: member is not allowed to decline this stage
+  description: The stage settings do not permit the current member to decline; check the task's stage configuration.
+  value:
+    error_code: 403049
+    error_message: member is not allowed to decline this stage
+
+DeclineReasonNotFound:
+  summary: decline reason not found
+  description: No preset decline reason exists with the given `decline_reason_id`; use a valid ID or omit the field.
+  value:
+    error_code: 404042
+    error_message: decline reason not found
+
+TaskNotReissuable:
+  summary: task is not reissuable
+  description: The task is not in a reissuable state; only tasks in `declined` status can be reissued.
+  value:
+    error_code: 400922
+    error_message: task is not reissuable
+
+TaskNotOwned:
+  summary: current member not own this task
+  description: The authenticated member is not the owner of this task; only the task owner can reissue it.
+  value:
+    error_code: 403033
+    error_message: current member not own this task
+
+InvalidReviewInfo:
+  summary: review info invalid
+  description: The review fields or attachments contain invalid data, or `review_message` is missing when one or more items are rejected.
+  value:
+    error_code: 400068
+    error_message: review info invalid
+
+TaskIsNotCompleted:
+  summary: task is not completed
+  description: The task must be fully completed (all signers have signed) before it can be confirmed.
+  value:
+    error_code: 400032
+    error_message: task is not completed
+
+VerifyFailed:
+  summary: stage verify failed
+  description: The submitted OTP code is incorrect or has expired; request a new OTP and try again.
+  value:
+    error_code: 406031
+    error_message: stage verify failed

@@ -1,0 +1,95 @@
+PublicFormObject:
+  type: object
+  description: A public form that allows multiple signers to submit signatures without individual email invitations.
+  properties:
+    id:
+      type: integer
+      description: Public form ID.
+    uuid:
+      type: string
+      description: Public form UUID (used in signer-facing URLs).
+    form_name:
+      type: string
+      description: Name of the public form.
+    description:
+      type: string
+      nullable: true
+      description: Optional description of the form.
+    status:
+      type: string
+      enum: [draft, publish, unpublish, deleted]
+      description: Current status of the form.
+    goal_num:
+      type: integer
+      nullable: true
+      description: Target number of submissions.
+    end_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: Expiry date-time for accepting submissions.
+    signer_infos:
+      type: array
+      description: Signer role configurations.
+      items:
+        type: object
+        properties:
+          signer_type:
+            type: string
+            description: Type of signer.
+          name:
+            type: string
+          email:
+            type: string
+            format: email
+            nullable: true
+          phone:
+            type: string
+            nullable: true
+          requisite:
+            type: object
+            properties:
+              name:
+                type: boolean
+              email:
+                type: boolean
+    created_at:
+      type: string
+      format: date-time
+      description: Creation timestamp.
+    updated_at:
+      type: string
+      format: date-time
+      description: Last updated timestamp.
+
+FormTaskObject:
+  type: object
+  description: A form task instance representing a single submission of a public form.
+  properties:
+    task_id:
+      type: integer
+      description: Sign task ID created for this form submission.
+    form_uuid:
+      type: string
+      description: UUID of the parent public form.
+    status:
+      type: string
+      description: Current signing status.
+    xfdf:
+      type: string
+      nullable: true
+      description: XFDF annotation data for the form fields.
+    images:
+      type: array
+      description: Page image URLs for rendering the form.
+      items:
+        type: string
+    signer_info:
+      type: object
+      description: Information about the current signer.
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email

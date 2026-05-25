@@ -1,0 +1,7 @@
+{
+  "required": "不得為空",
+  "should_be_an_email": "請輸入正確的信箱格式",
+  "should_not_have_whitespace": "前後不能有空白字元",
+  "invalid_password": "無效密碼",
+  "exceed_length_limit":"超過長度限制"
+}

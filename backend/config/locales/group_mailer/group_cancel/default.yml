@@ -1,0 +1,20 @@
+en:
+  group_mailer:
+    group_cancel:
+      default:
+        subject: "We Missed You at DottedSign"
+        title: "We Missed You at DottedSign"
+        content_1: "Hi,"
+        content_2: "Your account has been removed from Dotted Sign by your administrator."
+        content_3_html: "We are sorry to see you leaving. If you’d like to activate your account for Dotted Sign again, please contact your team administrator %{sender_email}."
+        signature_html: "Best Regards,<br> DottedSign"
+hant:
+  group_mailer:
+    group_cancel:
+      default:
+        subject: "您的 Dotted Sign 帳號已被移除"
+        title: "您的 Dotted Sign 帳號已被移除"
+        content_1: "Hi,"
+        content_2: "您的 Dotted Sign 帳號已被貴單位的帳號管理者移除。"
+        content_3_html: "若您需要重啟服務，請與帳號管理者: %{sender_email} 聯繫。感謝您的使用，期待下次繼續為您服務！"
+        signature_html: "Sincerely,<br/> DottedSign"

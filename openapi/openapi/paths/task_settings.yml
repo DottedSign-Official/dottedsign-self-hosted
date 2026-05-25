@@ -1,0 +1,48 @@
+/api/v1/task_settings/setup:
+  post:
+    tags: [Sign Tasks]
+    summary: Setup Task Settings
+    description: |
+      Configure task-level settings such as deadline, reminders, language, and CC recipients.
+      Can be used to update settings after a task has been created.
+
+      Example request body:
+      ```json
+      {
+        "sign_task_id": 2613,
+        "need_otp_verify": false,
+        "receiver_lang": "en",
+        "forget_remind": true,
+        "expire_remind": true,
+        "remind_days_before_expire": 1,
+        "deadline": 1764662904
+      }
+      ```
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/TaskSettingRequestObject'
+              - type: object
+                required: [sign_task_id]
+                properties:
+                  sign_task_id:
+                    type: integer
+                    description: Sign task ID.
+                  envelope_id:
+                    type: integer
+                    description: Envelope ID (alternative to sign_task_id).
+    responses:
+      '200':
+        description: Task settings updated.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_setting:
+                  $ref: '../components/schemas/sign_task.yml#/TaskSettingObject'

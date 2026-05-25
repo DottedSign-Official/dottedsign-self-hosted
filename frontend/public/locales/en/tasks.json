@@ -1,0 +1,16 @@
+{
+	"menu_sign_send_title": "Sign Yourself",
+	"menu_sign_send_desc": "You are the only signer",
+	"menu_create_form_title": "Get Signatures",
+	"menu_create_form_desc": "Assign signing fields to others",
+	"menu_front_desk_title": "Front Desk Signing",
+	"menu_front_desk_desc": "Sign with templates on the spot",
+	"menu_envelope_sign_title": "Envelope Signatures",
+	"menu_envelope_sign_desc": "Assign an envelope containing multiple documents to the same signer",
+	"filter_all": "All",
+	"filter_expire_soon": "Expiring",
+	"hint_expired": "Expired",
+	"hint_expire_today": "Expire Today",
+	"hint_expire": "Expire in",
+	"days": "days"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>toolbar_volume_01</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="4.001 0.4608 4.001 9.5303 0.53975 9.5303 0.53975 0.4608 4.001 0.4608"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="toolbar_volume_01">
+            <g id="volume" transform="translate(0.000000, 3.000000)">
+                <g id="Group-3" transform="translate(0.000000, -0.000400)" fill="#FFFFFF">
+                    <path d="M10.4336,0.0986 C10.0856,-0.0674 9.6756,-0.0214 9.3746,0.2196 L4.6496,3.9996 L0.9996,3.9996 C0.4476,3.9996 -0.0004,4.4476 -0.0004,4.9996 L-0.0004,10.9996 C-0.0004,11.5526 0.4476,11.9996 0.9996,11.9996 L4.6496,11.9996 L9.3746,15.7806 C9.5556,15.9256 9.7776,15.9996 9.9996,15.9996 C10.1476,15.9996 10.2956,15.9676 10.4336,15.9016 C10.7796,15.7346 10.9996,15.3846 10.9996,14.9996 L10.9996,0.9996 C10.9996,0.6156 10.7796,0.2656 10.4336,0.0986" id="Fill-1"></path>
+                </g>
+                <g id="Group-6" transform="translate(13.000000, 2.999600)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-5"></g>
+                    <path d="M1.54,9.5303 C1.284,9.5303 1.028,9.4323 0.833,9.2373 C0.442,8.8473 0.442,8.2143 0.833,7.8233 C2.392,6.2633 2.392,3.7263 0.833,2.1673 C0.442,1.7773 0.442,1.1443 0.833,0.7533 C1.224,0.3633 1.856,0.3633 2.247,0.7533 C4.586,3.0923 4.586,6.8983 2.247,9.2373 C2.052,9.4323 1.796,9.5303 1.54,9.5303" id="Fill-4" fill="#FFFFFF" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,48 @@
+MemberAuthFailed:
+  summary: member auth failed
+  description: The Authorization header is missing, expired, or the bearer token does not match any active session.
+  value:
+    error_code: 401202
+    error_message: member auth failed
+
+NoBulkSendPermission:
+  summary: no bulk send permission
+  description: The authenticated member does not have the bulk send permission enabled for their account.
+  value:
+    error_code: 403046
+    error_message: no bulk send permission
+
+TemplateDeleted:
+  summary: template has deleted
+  description: The referenced template has been deleted and is no longer available for creating tasks.
+  value:
+    error_code: 400053
+    error_message: template has deleted
+
+NotMatchStagesLength:
+  summary: input stages length not match template's stages
+  description: The number of `stages` entries in each task must match the number of stages defined in the template.
+  value:
+    error_code: 400910
+    error_message: input stages length not match template's stages
+
+OverMonthlyTaskUsage:
+  summary: over monthly task usage
+  description: The monthly task creation quota has been reached; wait until the next billing cycle or upgrade the plan.
+  value:
+    error_code: 403032
+    error_message: over monthly task usage
+
+TemplateNotFound:
+  summary: template not found
+  description: No template exists with the given `template_id`.
+  value:
+    error_code: 404035
+    error_message: template not found
+
+MissionNotFound:
+  summary: mission not found
+  description: No bulk mission exists with the given `mission_uuid`.
+  value:
+    error_code: 404040
+    error_message: mission not found

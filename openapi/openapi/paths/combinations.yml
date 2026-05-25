@@ -1,0 +1,287 @@
+/api/v1/combinations/list:
+  get:
+    tags: [Combinations]
+    summary: List Combinations
+    description: Returns a paginated list of combinations available to the current member's group.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: quantity
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Maximum number of combinations to return (non-paginated limit).
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Combination list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                combinations:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/combination.yml#/CombinationObject'
+                current_page:
+                  type: integer
+                total_pages:
+                  type: integer
+/api/v1/combinations/{id}:
+  get:
+    tags: [Combinations]
+    summary: Get Combination Detail
+    description: Returns the detail of a single combination.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Combination ID.
+    responses:
+      '200':
+        description: Combination detail.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/combination.yml#/CombinationObject'
+  put:
+    tags: [Combinations]
+    summary: Update Combination
+    description: Update an existing combination's name, description, order flag, and stages.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Combination ID.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              description:
+                description: Optional description.
+                type: string
+              has_order:
+                description: Whether stages must be signed in order.
+                type: boolean
+              name:
+                description: Combination name.
+                type: string
+              stages:
+                description: Stage definitions.
+                items:
+                  properties:
+                    email:
+                      description: Signer email.
+                      format: email
+                      type: string
+                    name:
+                      description: Signer name.
+                      type: string
+                    stage_setting:
+                      description: Stage-level settings.
+                      type: object
+                    verify:
+                      description: Verification configuration.
+                      type: object
+                  type: object
+                type: array
+            type: object
+    responses:
+      '200':
+        description: Combination updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/combination.yml#/CombinationObject'
+  patch:
+    tags: [Combinations]
+    summary: Partial Update Combination
+    description: Partially update a combination.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Combination ID.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              has_order:
+                type: boolean
+              stages:
+                type: array
+                items:
+                  type: object
+    responses:
+      '200':
+        description: Combination updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/combination.yml#/CombinationObject'
+  delete:
+    tags: [Combinations]
+    summary: Delete Combination
+    description: Delete a combination. This does not affect sign tasks already created from it.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Combination ID.
+    responses:
+      '200':
+        description: Combination deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/combinations:
+  post:
+    tags: [Combinations]
+    summary: Create Combination
+    description: Create a new reusable combination of sign stages for the current member's group.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [name, has_order]
+            properties:
+              name:
+                type: string
+                description: Combination name.
+              description:
+                type: string
+                description: Optional description.
+              has_order:
+                type: boolean
+                description: Whether stages must be signed in order.
+              stages:
+                type: array
+                description: Stage definitions.
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      description: Signer email.
+                    name:
+                      type: string
+                      description: Signer name.
+                    stage_setting:
+                      type: object
+                      description: Stage-level settings.
+                    verify:
+                      type: object
+                      description: Verification configuration.
+    responses:
+      '200':
+        description: Combination created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/combination.yml#/CombinationObject'
+/api/v1/combinations/group_share:
+  post:
+    tags: [Combinations]
+    summary: Set Combination Group Share Permissions
+    description: Configure which group roles (admin/manager/member/custom) can use combinations.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              combination_id:
+                description: ID of the combination to update sharing permissions for.
+                type: integer
+              group_permission:
+                description: Role-based permission flags.
+                properties:
+                  admin:
+                    type: boolean
+                  custom:
+                    type: boolean
+                  manager:
+                    type: boolean
+                  member:
+                    type: boolean
+                type: object
+            required:
+              - combination_id
+            type: object
+    responses:
+      '200':
+        description: Group share permissions updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/combinations/share_info:
+  get:
+    tags: [Combinations]
+    summary: Get Combination Share Info
+    description: Returns the current group-level share permission settings for combinations.
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Share info retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                group_permission:
+                  type: object
+                  description: Role-based permission flags.
+                  properties:
+                    admin:
+                      type: boolean
+                    manager:
+                      type: boolean
+                    member:
+                      type: boolean
+                    custom:
+                      type: boolean
+    parameters:
+      - description: ID of the combination to get share info for.
+        in: query
+        name: combination_id
+        required: true
+        schema:
+          type: integer

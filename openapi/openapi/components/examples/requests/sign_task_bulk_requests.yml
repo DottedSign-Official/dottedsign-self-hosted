@@ -1,0 +1,70 @@
+SingleRecipientMission:
+  summary: One task — single role template
+  description: |
+    Create a bulk mission with a single task. The template must have exactly one role;
+    `stages[].role` maps the template role to the actual signer.
+  value:
+    template_id: 101
+    client: web
+    ip_address: "192.168.1.100"
+    tasks:
+      - file_name: "nda_alice.pdf"
+        message: "Please sign the NDA before the project kick-off."
+        stages:
+          - role: "Signer"
+            email: "alice@example.com"
+            name: "Alice Chen"
+
+MultipleRecipientsMission:
+  summary: Multiple tasks — same template, different signers
+  description: |
+    Send the same template to multiple recipients in one bulk mission.
+    Each entry in `tasks` produces an independent sign task.
+  value:
+    template_id: 101
+    client: web
+    ip_address: "192.168.1.100"
+    tasks:
+      - file_name: "nda_alice.pdf"
+        stages:
+          - role: "Signer"
+            email: "alice@example.com"
+            name: "Alice Chen"
+      - file_name: "nda_bob.pdf"
+        stages:
+          - role: "Signer"
+            email: "bob@example.com"
+            name: "Bob Lin"
+      - file_name: "nda_carol.pdf"
+        stages:
+          - role: "Signer"
+            email: "carol@example.com"
+            name: "Carol Wu"
+
+MultiRoleTemplateMission:
+  summary: Multi-role template — two signers per task
+  description: |
+    Template has two roles (Party A and Party B). Each task in the bulk mission
+    maps both roles to real signers. Roles must match exactly what is defined in the template.
+  value:
+    template_id: 202
+    client: web
+    ip_address: "192.168.1.100"
+    tasks:
+      - file_name: "contract_team_a.pdf"
+        message: "Please sign the service contract."
+        stages:
+          - role: "Party A"
+            email: "alice@example.com"
+            name: "Alice Chen"
+          - role: "Party B"
+            email: "bob@example.com"
+            name: "Bob Lin"
+      - file_name: "contract_team_b.pdf"
+        stages:
+          - role: "Party A"
+            email: "carol@example.com"
+            name: "Carol Wu"
+          - role: "Party B"
+            email: "dave@example.com"
+            name: "Dave Huang"

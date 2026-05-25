@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>web/ic_contact</title>
+    <desc>Created with Sketch.</desc>
+    <g id="web/ic_contact" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="round-email-24px-(1)">
+            <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+            <path d="M18.4,6 L5.6,6 C4.72,6 4.008,6.73125 4.008,7.625 L4,17.375 C4,18.26875 4.72,19 5.6,19 L18.4,19 C19.28,19 20,18.26875 20,17.375 L20,7.625 C20,6.73125 19.28,6 18.4,6 Z M18.08,9.453125 L12.424,13.044375 C12.168,13.206875 11.832,13.206875 11.576,13.044375 L5.92,9.453125 C5.72,9.323125 5.6,9.10375 5.6,8.868125 C5.6,8.32375 6.184,7.99875 6.64,8.283125 L12,11.6875 L17.36,8.283125 C17.816,7.99875 18.4,8.32375 18.4,8.868125 C18.4,9.10375 18.28,9.323125 18.08,9.453125 Z" id="Shape" fill-opacity="0.38" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

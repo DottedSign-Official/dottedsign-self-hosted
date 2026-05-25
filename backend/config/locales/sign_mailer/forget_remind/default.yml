@@ -1,0 +1,82 @@
+---
+en:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: Don't Forget to Sign %{doc_name} Requested by %{sender_name}
+        title: '"%{doc_name}" is Waiting for You to Sign'
+        content_1_html: '%{sender_name} has sent you <strong>"%{doc_name}"</strong> for signature %{pass_days} days ago. Please click on the button to sign the document.'
+        content_2_html: "*Please note that if you are not registered to DottedSign on-premise, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View & Sign
+hant:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: "%{sender_name}邀請您簽署%{doc_name}"
+        title: '"%{doc_name}"正在等待您的簽署'
+        content_1_html: '%{sender_name}在%{pass_days}天前寄送了一則簽名邀請<strong>"%{doc_name}"</strong>給您，請點擊下方按鈕以查看並簽署文件。'
+        content_2_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看並簽署
+hans:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: "%{sender_name}邀请您签名%{doc_name}"
+        title: '"%{doc_name}"正在等待您的签名'
+        content_1_html: '%{sender_name}在%{pass_days}天前寄送了一则签名邀请<strong>"%{doc_name}"</strong>给您，请点击下方按钮以查看并签署文件。'
+        content_2_html: 请注意：若您尚未註册点点签，为了保障签署安全性，此连结将于<strong>2天</strong>内失效。
+        button: 查看并签名
+ja:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: 必ず%{sender_name}さんがリクエストした%{doc_name}を署名してください
+        title: '"%{doc_name}"は他のメンバーが署名待ちです。'
+        content_1_html: '%{sender_name}さんが%{pass_days}日前に署名用に<strong>"%{doc_name}"</strong>を送信しました。 このボタンをクリックしてドキュメントを署名してください。'
+        content_2_html: ご注意：DottedSign on-premiseにご登録でない場合、このリンクは<strong>2日</strong>のみ有効です。 これはドキュメントへの不正アクセス防止の措置です。
+        button: 閲覧＆署名
+it:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: Ricorda di firmare %{doc_name} su richiesta di %{sender_name}
+        title: '"%{doc_name}" in attesa della tua firma'
+        content_1_html: '%{sender_name} ti ha inviato <strong>"%{doc_name}"</strong> da firmare %{pass_days} giorni fa. Cliccare per firmare il documento'
+        content_2_html: "*Si prega di notare che se non sei registrato a DottedSign on-premise, questo link scadrà tra <strong>2 giorni</strong>. Questo per prevenire l'accesso non autorizzato al documento."
+        button: Visualizza & firma
+de:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: Vergessen Sie nicht %{doc_name} zu unterschreiben. Angefragt von %{sender_name}
+        title: '"%{doc_name}" wartet auf Ihre Unterschrift'
+        content_1_html: '%{sender_name} hat Ihnen <strong>"%{doc_name}"</strong> vor %{pass_days} Tagen zur Unterschrift geschickt. Bitte klicken Sie auf die Schaltfläche um das Dokument zu unterschreiben.'
+        content_2_html: "*Bitte beachten Sie, dass dieser Link in <strong>2 Tagen abläuft</strong>, wenn Sie nicht bei DottedSign on-premise registriert sind. Dies dient dazu, das Dokument vor unberechtigtem Zugriff zu schützen."
+        button: Ansehen & Unterzeichnen
+es:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: No olvide firmar %{doc_name} Solicitado por %{sender_name}
+        title: '"%{doc_name}" está esperando que firme'
+        content_1_html: '%{sender_name} le ha enviado <strong>"%{doc_name}"</strong> para que lo firme %{pass_days} hace algunos días. Haga clic en el botón para firmar el documento.'
+        content_2_html: "*Tenga en cuenta que, en caso de no registrarse en DottedSign on-premise, este enlace expirará en <strong>2 días</strong>. Lo hacemos así para prevenir accesos no autorizados."
+        button: Ver & firmar
+fr:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: N'oubliez Pas de Signer %{doc_name} Demandé par %{sender_name}
+        title: '"%{doc_name}" Attend que Vous Signiez'
+        content_1_html: '%{sender_name} vous a envoyé <strong>"%{doc_name}"</strong> pour la signature il y a %{pass_days} jours. Veuillez cliquer sur le bouton pour signer le document.'
+        content_2_html: "*Veuillez noter que si vous n'êtes pas inscrit à DottedSign on-premise, ce lien expirera dans <strong>2 jours</strong>. Ceci est pour empêcher l'accès non autorisé au document."
+        button: Afficher et Signer
+ko:
+  sign_mailer:
+    forget_remind:
+      default:
+        subject: "%{sender_name}에의해 요청된 %{doc_name}에 서명하는걸 잊지 마세요"
+        title: '"%{doc_name}"는 서명하기를 기다리고 있습니다.'
+        content_1_html: '%{sender_name} 는(은) %{pass_days}일 전에 서명을 위해 <strong>"%{doc_name}"</strong>을(를) 보냈습니다. 문서에 서명하려면 버튼을 클릭하십시오.'
+        content_2_html: DottedSign on-premise에 등록하지 않은 경우, 이 링크는 <strong>2일</strong> 내에 만료됨을 참고하십시오. 이는 무단 접근으로부터 문서를 보호하기 위함입니다.
+        button: 보기 및 서명

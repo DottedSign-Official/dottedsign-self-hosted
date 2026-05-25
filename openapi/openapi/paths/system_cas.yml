@@ -1,0 +1,200 @@
+/api/v1/system_cas/list:
+  get:
+    tags: [System CAs]
+    summary: List System CAs
+    description: Returns all system CA configurations belonging to the current member's group, including secret fields.
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: System CA list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                system_cas:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/system_ca.yml#/SystemCAObject'
+
+/api/v1/system_cas:
+  get:
+    tags: [System CAs]
+    summary: Get System CA
+    description: Returns a single system CA configuration including secret fields.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: System CA ID.
+    responses:
+      '200':
+        description: System CA detail.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/system_ca.yml#/SystemCAObject'
+  post:
+    tags: [System CAs]
+    summary: Create System CA
+    description: Create a new system CA configuration for the current member's group.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [name, cluster_id, token, email, pem]
+            properties:
+              name:
+                type: string
+                description: Display name for this CA.
+              cluster_id:
+                type: string
+                description: CA cluster identifier.
+              token:
+                type: string
+                description: Authentication token for the CA service.
+              email:
+                type: string
+                format: email
+                description: Contact email for this CA.
+              pem:
+                type: string
+                description: PEM-encoded certificate content.
+    responses:
+      '200':
+        description: System CA created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/system_ca.yml#/SystemCAObject'
+  put:
+    tags: [System CAs]
+    summary: Update System CA
+    description: Update an existing system CA configuration.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [id]
+            properties:
+              id:
+                type: integer
+                description: System CA ID to update.
+              name:
+                type: string
+                description: Display name for this CA.
+              cluster_id:
+                type: string
+                description: CA cluster identifier.
+              token:
+                type: string
+                description: Authentication token for the CA service.
+              email:
+                type: string
+                format: email
+                description: Contact email for this CA.
+              pem:
+                type: string
+                description: PEM-encoded certificate content.
+    responses:
+      '200':
+        description: System CA updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/system_ca.yml#/SystemCAObject'
+  delete:
+    tags: [System CAs]
+    summary: Delete System CA
+    description: Delete a system CA configuration.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: System CA ID to delete.
+    responses:
+      '200':
+        description: System CA deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+
+/api/v1/system_cas/access_list:
+  put:
+    tags: [System CAs]
+    summary: Update System CA Access List
+    description: Set the list of member emails who are allowed to use this system CA.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [id, members]
+            properties:
+              id:
+                type: integer
+                description: System CA ID.
+              members:
+                type: array
+                description: Array of member emails to grant access.
+                items:
+                  type: string
+                  format: email
+    responses:
+      '200':
+        description: Access list updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/system_ca.yml#/SystemCAObject'
+
+/api/v1/system_cas/system_ca_list_from_email:
+  get:
+    tags: [System CAs]
+    summary: Get System CAs Accessible by Email
+    description: |
+      Returns system CA configurations accessible to a given email address.
+      Does not require group setup — used for CA lookup during signing.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
+          format: email
+        description: Email address to look up accessible CAs for.
+    responses:
+      '200':
+        description: System CAs accessible by the given email.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                system_cas:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/system_ca.yml#/SystemCAObject'

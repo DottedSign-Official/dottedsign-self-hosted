@@ -1,0 +1,14 @@
+development: &development
+  service_name: <%= ENV['SMS_SERVICE_NAME'].env_presence || 'mitake' %>
+  host: <%= ENV['SMS_HOST'].env_presence || 'https://smsapi.mitake.com.tw' %>
+  path: <%= ENV['SMS_PATH'].env_presence || '/api/mtk/SmSend?CharsetURL=UTF8' %>
+  user_name: <%= ENV['SMS_USER_NAME'].env_presence %>
+  password: <%= ENV['SMS_PASSWORD'].env_presence %>
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+production:
+  <<: *development

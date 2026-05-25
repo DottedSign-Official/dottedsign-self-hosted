@@ -1,0 +1,100 @@
+---
+en:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: Signer of %{doc_name} Has Been Changed
+          other_disable: "%{sender_name} Has Changed the Signer of %{doc_name}"
+        title: Signer Changed
+        content_1:
+          self_disable_html: You have handed over the signing privilege of <strong>"%{doc_name}"</strong> to %{new_receiver_name} (%{new_receiver_email}).
+          other_disable_html: '%{sender_name} (%{sender_email}) has removed you from signing <strong>"%{doc_name}"</strong>.'
+hant:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: 已移轉%{doc_name}的簽署權限
+          other_disable: "%{sender_name}已變更%{doc_name}的簽署者"
+        title: 簽署者已變更
+        content_1:
+          self_disable_html: 您已將<strong>"%{doc_name}"</strong>的簽署者變更為%{new_receiver_name} (%{new_receiver_email})。
+          other_disable_html: '%{sender_name} (%{sender_email})已停止您簽署<strong>"%{doc_name}"</strong>的權限。'
+hans:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: 已移转%{doc_name}的签署权限
+          other_disable: "%{sender_name}已变更%{doc_name}"
+        title: 签署者已变更
+        content_1:
+          self_disable_html: 您已将<strong>"%{doc_name}"</strong>的签署者变更为%{new_receiver_name} (%{new_receiver_email})。
+          other_disable_html: '%{sender_name} (%{sender_email})已停止您签署<strong>"%{doc_name}"</strong>的权限。'
+ja:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: "%{doc_name}の署名者が変更されました。"
+          other_disable: "%{sender_name}さんは%{doc_name}の署名者を変更しました"
+        title: 署名者が変更されました
+        content_1:
+          self_disable_html: <strong>"%{doc_name}"</strong>の署名権限を%{new_receiver_name} (%{new_receiver_email})へ譲渡しました。
+          other_disable_html: '%{sender_name} (%{sender_email})さんにより、<strong>"%{doc_name}"</strong>への署名ができなくなりました。'
+it:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: Il firmatario di %{doc_name} è stato modificato
+          other_disable: "%{sender_name} ha modificato il firmatario di %{doc_name}"
+        title: Firmatario cambiato
+        content_1:
+          self_disable_html: Hai concesso i privilegi di firma di <strong>"%{doc_name}"</strong> a %{new_receiver_name} (%{new_receiver_email}).
+          other_disable_html: '%{sender_name} (%{sender_email}) ha disabilitato la tua firma a <strong>"%{doc_name}"</strong>.'
+de:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: Der Unterzeichner von %{doc_name} wurde geändert
+          other_disable: "%{sender_name} hat den Unterzeichner von %{doc_name} geändert"
+        title: Unterschriftsgeber geändert
+        content_1:
+          self_disable_html: Sie haben das Unterschriftenprivileg von <strong>"%{doc_name}"</strong> an %{new_receiver_name} (%{new_receiver_email}) übertragen.
+          other_disable_html: '%{sender_name} (%{sender_email}) hat Sie als Unterzeichner von <strong>"%{doc_name}"</strong> deaktiviert.'
+es:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: El firmante de %{doc_name} ha sido cambiado
+          other_disable: "%{sender_name} ha cambiado el firmante de %{doc_name}"
+        title: Firmante cambiado
+        content_1:
+          self_disable_html: Usted ha entregado el privilegio de firma de <strong>"%{doc_name}"</strong> a %{new_receiver_name} (%{new_receiver_email}).
+          other_disable_html: '%{sender_name} (%{sender_email}) le ha impedido que firme <strong>"%{doc_name}"</strong>.'
+fr:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: Le Signataire de %{doc_name} a Été Modifié
+          other_disable: "%{sender_name} A changé le signataire de %{doc_name}"
+        title: Signataire Changé
+        content_1:
+          self_disable_html: Vous avez remis le privilège de signature de <strong>"%{doc_name}"</strong> à %{new_receiver_name} (%{new_receiver_email}).
+          other_disable_html: '%{sender_name} (%{sender_email}) vous a empêché de signer <strong>"%{doc_name}"</strong>.'
+ko:
+  sign_mailer:
+    task_disable:
+      default:
+        subject:
+          self_disable: "%{doc_name}의 서명자가 변경되었습니다"
+          other_disable: "%{sender_name}는 %{doc_name}의 서명자를 변경했습니다"
+        title: 서명인 변경
+        content_1:
+          self_disable_html: <strong>"%{doc_name}"</strong>의 서명 권한을 %{new_receiver_name} (%{new_receiver_email}) 님에게 넘겼습니다.
+          other_disable_html: '%{sender_name} (%{sender_email})은(는) <strong>"%{doc_name}"</strong> 서명에서 귀하를 제외시켰습니다."'

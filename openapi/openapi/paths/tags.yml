@@ -1,0 +1,217 @@
+/api/v1/tags:
+  get:
+    tags: [Tags]
+    summary: List Tags
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Tags list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+                  description: Ordered list of tag names belonging to the current member.
+    parameters:
+      - name: search_name
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter tags by name (partial match).
+  post:
+    tags: [Tags]
+    summary: Create Tag
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [new_tag]
+            properties:
+              new_tag:
+                type: string
+                description: Name of the new tag to create.
+    responses:
+      '200':
+        description: Tag created.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated ordered list of tag names after creation.
+/api/v1/tags/modify:
+  put:
+    tags: [Tags]
+    summary: Modify Tag
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [old_tag, new_tag]
+            properties:
+              old_tag:
+                type: string
+                description: Current name of the tag to rename.
+              new_tag:
+                type: string
+                description: New name for the tag.
+    responses:
+      '200':
+        description: Tag modified.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated ordered list of tag names after modification.
+/api/v1/tags/remove:
+  delete:
+    tags: [Tags]
+    summary: Remove Tag
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: remove_tag
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Name of the tag to remove.
+    responses:
+      '200':
+        description: Tag removed.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated ordered list of tag names after removal.
+/api/v1/tags/manage:
+  put:
+    tags: [Tags]
+    summary: Manage Tags on Sign Task
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [taggable_type, taggable_id]
+            properties:
+              taggable_type:
+                type: string
+                description: Type of the resource to tag. One of SignTask, Envelope, Template, or Batch.
+                enum: [SignTask, Envelope, Template, Batch]
+              taggable_id:
+                description: >
+                  ID(s) of the target resource. For non-Batch types, an integer or array of integers. For Batch type, an object with `task_ids` and `envelope_ids` arrays.
+
+                oneOf:
+                  - type: integer
+                  - type: array
+                    items:
+                      type: integer
+                  - type: object
+                    properties:
+                      task_ids:
+                        type: array
+                        items:
+                          type: integer
+                      envelope_ids:
+                        type: array
+                        items:
+                          type: integer
+              add_tags:
+                type: array
+                items:
+                  type: string
+                description: Tag names to add to the target resource(s).
+              remove_tags:
+                type: array
+                items:
+                  type: string
+                description: Tag names to remove from the target resource(s).
+    responses:
+      '200':
+        description: Tags managed.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      taggable_id:
+                        type: integer
+                        description: ID of the tagged resource.
+                      taggable_type:
+                        type: string
+                        description: Type of the tagged resource.
+                      tag_info:
+                        type: object
+                        description: Tag information for the resource.
+/api/v1/tags/move_behind:
+  put:
+    tags: [Tags]
+    summary: Reorder Tags
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [move_tag]
+            properties:
+              move_tag:
+                type: string
+                description: Name of the tag to move.
+              behind_tag:
+                type: string
+                nullable: true
+                description: Move this tag behind `behind_tag`. Omit or pass null to move to the front.
+    responses:
+      '200':
+        description: Tags reordered.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: string
+                  description: Updated ordered list of tag names after reordering.

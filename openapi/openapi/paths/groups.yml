@@ -1,0 +1,373 @@
+/api/v1/groups:
+  get:
+    tags: [Groups]
+    summary: List Groups
+    description: List all groups. Member must be a group admin.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: search_group_name
+        in: query
+        schema:
+          type: string
+        description: Fuzzy search by group name.
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Groups list retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/common.yml#/PaginationMeta'
+                - type: object
+                  properties:
+                    groups:
+                      type: array
+                      items:
+                        $ref: '../components/schemas/group.yml#/GroupObject'
+                    total_count:
+                      type: integer
+  post:
+    tags: [Groups]
+    summary: Create Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              group_name:
+                type: string
+            required:
+              - group_name
+            type: object
+    responses:
+      '200':
+        description: Group created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/group.yml#/GroupObject'
+/api/v1/groups/{group_id}:
+  get:
+    tags: [Groups]
+    summary: Get Group Detail
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/GroupIdPath'
+    responses:
+      '200':
+        description: Group details retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/group.yml#/GroupObject'
+  put:
+    tags: [Groups]
+    summary: Update Group
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/GroupIdPath'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+    responses:
+      '200':
+        description: Group updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/group.yml#/GroupObject'
+  patch:
+    tags: [Groups]
+    summary: Update Group (Partial)
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/GroupIdPath'
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+    responses:
+      '200':
+        description: Group updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/group.yml#/GroupObject'
+  delete:
+    tags: [Groups]
+    summary: Delete Group
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/GroupIdPath'
+    responses:
+      '200':
+        description: Group deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/groups/upload_icon:
+  post:
+    tags: [Groups]
+    summary: Upload Group Icon
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              group_icon:
+                format: binary
+                type: string
+              group_id:
+                type: integer
+            required:
+              - group_id
+              - group_icon
+            type: object
+    responses:
+      '200':
+        description: Icon uploaded.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/groups/add_member:
+  post:
+    tags: [Groups]
+    summary: Add Member to Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, email]
+            properties:
+              group_id:
+                type: integer
+              email:
+                type: string
+                format: email
+    responses:
+      '200':
+        description: Member added.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/groups/remove_member:
+  delete:
+    tags: [Groups]
+    summary: Remove Member from Group
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
+          format: email
+    responses:
+      '200':
+        description: Member removed.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/groups/assign_role:
+  put:
+    tags: [Groups]
+    summary: Assign Role in Group
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              email:
+                format: email
+                type: string
+              group_id:
+                type: integer
+              roles:
+                items:
+                  type: string
+                type: array
+            required:
+              - group_id
+              - email
+              - roles
+            type: object
+    responses:
+      '200':
+        description: Role assigned.
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  items:
+                    type: string
+                  type: array
+              type: object
+/api/v1/groups/accept:
+  post:
+    tags: [Groups]
+    summary: Accept Group Invitation
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              invite_token:
+                type: string
+              name:
+                type: string
+              password:
+                type: string
+            required:
+              - invite_token
+            type: object
+    responses:
+      '200':
+        description: Invitation accepted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/groups/sign_tasks/decline_reasons:
+  get:
+    tags: [Groups]
+    summary: List Group Decline Reasons
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Decline reasons list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                decline_reasons:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/sign_task.yml#/DeclineReasonObject'
+  post:
+    tags: [Groups]
+    summary: Create Group Decline Reason
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, content]
+            properties:
+              group_id:
+                type: integer
+              content:
+                type: string
+    responses:
+      '200':
+        description: Decline reason created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/DeclineReasonObject'
+  put:
+    tags: [Groups]
+    summary: Update Group Decline Reason
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              content:
+                type: string
+              decline_reason_id:
+                type: integer
+              group_id:
+                type: integer
+            required:
+              - group_id
+              - decline_reason_id
+              - content
+            type: object
+    responses:
+      '200':
+        description: Decline reason updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/DeclineReasonObject'
+  delete:
+    tags: [Groups]
+    summary: Delete Group Decline Reason
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: decline_reason_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Decline reason deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'

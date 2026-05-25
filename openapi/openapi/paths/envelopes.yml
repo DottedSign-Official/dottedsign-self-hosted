@@ -1,0 +1,568 @@
+/api/v1/envelopes:
+  post:
+    tags: [Envelopes]
+    summary: Create Envelope
+    description: |
+      Create an envelope task that groups multiple sign tasks together.
+      An envelope allows multiple documents to be sent to signers as a bundle.
+
+      Workflow:
+      1. Upload files to obtain `envelope_file_id` values.
+      2. Call this API with `file_list` and `stages` to create the envelope.
+      3. Upload reference files using `reference_upload_links` from the response if needed.
+      4. Call `POST /api/v1/envelopes/start` to send signing invitations.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - $ref: '../components/schemas/requests.yml#/TaskSettingRequestObject'
+              - type: object
+                properties:
+                  owner_id:
+                    type: integer
+                    description: Member ID of the envelope owner. Defaults to the current member.
+                  group_id:
+                    type: integer
+                    description: Group ID the envelope belongs to.
+                  sign_type:
+                    type: string
+                    enum: [create_and_invite]
+                    description: Envelope signing type. Currently only `create_and_invite` is supported.
+                  has_order:
+                    type: boolean
+                    description: Whether signers must sign in sequential order.
+                  envelope_name:
+                    type: string
+                    description: Display name of the envelope.
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                    description: Tag labels to attach to the envelope.
+                  file_list:
+                    type: array
+                    description: List of documents to include in the envelope.
+                    items:
+                      type: object
+                      properties:
+                        envelope_file_id:
+                          type: string
+                          description: Temporary file ID returned from the file upload endpoint.
+                        file_name:
+                          type: string
+                          description: Display name of the file.
+                        page_num:
+                          type: integer
+                          description: Number of pages in the file.
+                        file_size_text:
+                          type: string
+                          description: Human-readable file size (e.g. "1.2 MB").
+                  stages:
+                    type: array
+                    description: |
+                      Signing stages shared across all files in the envelope.
+                      Each stage defines one signer or reviewer.
+                      Items in `xfdf_info`, `attachment_setting`, and `field_setting_groups`
+                      must include `envelope_file_id` to associate fields with a specific file.
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          description: Email of the signer/reviewer.
+                        name:
+                          type: string
+                          description: Display name of the signer/reviewer.
+                        action:
+                          type: string
+                          enum: [sign, review]
+                          default: sign
+                          description: |
+                            Stage action type.
+                            - `sign` (default): The signer fills in fields and signs the document.
+                            - `review`: The reviewer only reads the document. A review stage must follow at least one sign stage.
+                        pdf_object_info:
+                          type: array
+                          items:
+                            type: string
+                          description: List of field object UUIDs for this stage across all files.
+                        custom_message_setting:
+                          $ref: '../components/schemas/sign_task.yml#/SignStageCustomMessageSettingObject'
+                        stage_setting:
+                          $ref: '../components/schemas/sign_task.yml#/StageSettingObject'
+                        xfdf_info:
+                          type: array
+                          description: Field settings. Each item must include `envelope_file_id` to associate with a specific file.
+                          items:
+                            allOf:
+                              - $ref: '../components/schemas/sign_task.yml#/FieldSettingObject'
+                              - type: object
+                                properties:
+                                  envelope_file_id:
+                                    type: string
+                                    description: Associates this field setting with a specific file in the envelope.
+                        field_setting_groups:
+                          type: array
+                          description: Field group settings. Each item must include `envelope_file_id`.
+                          items:
+                            type: object
+                            properties:
+                              field_group_type:
+                                type: string
+                              field_group_object_id:
+                                type: string
+                              options:
+                                type: object
+                              envelope_file_id:
+                                type: string
+                                description: Associates this group with a specific file in the envelope.
+                        attachment_setting:
+                          type: array
+                          description: Attachment settings. Each item must include `envelope_file_id`.
+                          items:
+                            allOf:
+                              - $ref: '../components/schemas/sign_task.yml#/SignStageAttachmentSettingObject'
+                              - type: object
+                                properties:
+                                  envelope_file_id:
+                                    type: string
+                                    description: Associates this attachment with a specific file in the envelope.
+                        verify:
+                          type: array
+                          items:
+                            $ref: '../components/schemas/requests.yml#/OtpVerifyRequestObject'
+    responses:
+      '200':
+        description: Envelope created.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                envelope_id:
+                  type: integer
+                  description: ID of the created envelope.
+                envelope_name:
+                  type: string
+                  description: Display name of the envelope.
+                status:
+                  type: string
+                  enum: [draft, waiting, completed, declined, expired, deleted]
+                  description: Current envelope status. Will be `draft` after creation.
+                stage_infos:
+                  type: array
+                  description: Display info for each signing stage.
+                  items:
+                    type: object
+                    properties:
+                      stage_id:
+                        type: integer
+                      sequence:
+                        type: integer
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      action:
+                        type: string
+                      action_type:
+                        type: string
+                        nullable: true
+                task_infos:
+                  type: array
+                  description: Per-file task information for the created tasks.
+                  items:
+                    type: object
+                    properties:
+                      task_id:
+                        type: integer
+                        description: ID of the created sign task.
+                      envelope_file_id:
+                        type: string
+                        description: The `envelope_file_id` provided in the request, for client-side mapping.
+                      file_name:
+                        type: string
+                        description: Display name of the file.
+                      download_link:
+                        type: string
+                        description: Download URL for the original file.
+                      file_info:
+                        type: object
+                        properties:
+                          page_num:
+                            type: integer
+                          file_size_text:
+                            type: string
+                reference_upload_links:
+                  type: object
+                  description: Upload links for reference files attached to this envelope. Present when reference files have not yet been uploaded.
+                completed_reference_upload_links:
+                  type: object
+                  description: Upload links for completed-state reference files. Present when completed reference files have not yet been uploaded.
+                tag_info:
+                  type: object
+                  description: Tag information for the envelope.
+/api/v1/envelopes/{id}:
+  put:
+    tags: [Envelopes]
+    summary: Update Envelope
+    description: Update a draft envelope task. Only envelopes in `draft` status can be updated.
+    security:
+      - BearerAuth: []
+    parameters:
+      - description: Envelope ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - $ref: '../components/schemas/requests.yml#/TaskSettingRequestObject'
+              - type: object
+                properties:
+                  owner_id:
+                    type: integer
+                    description: Member ID of the envelope owner.
+                  group_id:
+                    type: integer
+                    description: Group ID the envelope belongs to.
+                  sign_type:
+                    type: string
+                    enum: [create_and_invite]
+                  has_order:
+                    type: boolean
+                    description: Whether signers must sign in sequential order.
+                  envelope_name:
+                    type: string
+                    description: Display name of the envelope.
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  file_list:
+                    type: array
+                    description: |
+                      Updated list of documents. Existing tasks can be referenced by `task_id`;
+                      new files use `envelope_file_id` from the upload endpoint.
+                    items:
+                      type: object
+                      properties:
+                        envelope_file_id:
+                          type: string
+                          description: Temporary file ID for new files.
+                        task_id:
+                          type: integer
+                          description: Existing task ID (for files already in the envelope).
+                        file_name:
+                          type: string
+                        page_num:
+                          type: integer
+                        file_size_text:
+                          type: string
+                  stages:
+                    type: array
+                    description: |
+                      Updated signing stages. Items in `xfdf_info`, `attachment_setting`,
+                      and `field_setting_groups` use `envelope_file_id` (new files) or
+                      `task_id` (existing files) to associate fields with specific files.
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                        name:
+                          type: string
+                        action:
+                          type: string
+                          enum: [sign, review]
+                          default: sign
+                        pdf_object_info:
+                          type: array
+                          items:
+                            type: string
+                        custom_message_setting:
+                          $ref: '../components/schemas/sign_task.yml#/SignStageCustomMessageSettingObject'
+                        stage_setting:
+                          $ref: '../components/schemas/sign_task.yml#/StageSettingObject'
+                        xfdf_info:
+                          type: array
+                          items:
+                            allOf:
+                              - $ref: '../components/schemas/sign_task.yml#/FieldSettingObject'
+                              - type: object
+                                properties:
+                                  envelope_file_id:
+                                    type: string
+                                  task_id:
+                                    type: integer
+                        field_setting_groups:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              field_group_type:
+                                type: string
+                              field_group_object_id:
+                                type: string
+                              options:
+                                type: object
+                              envelope_file_id:
+                                type: string
+                              task_id:
+                                type: integer
+                        attachment_setting:
+                          type: array
+                          items:
+                            allOf:
+                              - $ref: '../components/schemas/sign_task.yml#/SignStageAttachmentSettingObject'
+                              - type: object
+                                properties:
+                                  envelope_file_id:
+                                    type: string
+                                  task_id:
+                                    type: integer
+                        verify:
+                          type: array
+                          items:
+                            $ref: '../components/schemas/requests.yml#/OtpVerifyRequestObject'
+    responses:
+      '200':
+        description: Envelope updated.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                envelope_id:
+                  type: integer
+                  description: ID of the updated envelope.
+                envelope_name:
+                  type: string
+                  description: Display name of the envelope.
+                status:
+                  type: string
+                  enum: [draft, waiting, completed, declined, expired, deleted]
+                stage_infos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      stage_id:
+                        type: integer
+                      sequence:
+                        type: integer
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      action:
+                        type: string
+                      action_type:
+                        type: string
+                        nullable: true
+                task_infos:
+                  type: array
+                  description: Per-file task information.
+                  items:
+                    type: object
+                    properties:
+                      task_id:
+                        type: integer
+                      envelope_file_id:
+                        type: string
+                        description: Present only for newly added files.
+                      file_name:
+                        type: string
+                      download_link:
+                        type: string
+                      file_info:
+                        type: object
+                        properties:
+                          page_num:
+                            type: integer
+                          file_size_text:
+                            type: string
+                reference_upload_links:
+                  type: object
+                  description: Upload links for reference files. Present when reference files have not yet been uploaded.
+                completed_reference_upload_links:
+                  type: object
+                  description: Upload links for completed-state reference files. Present when not yet uploaded.
+                tag_info:
+                  type: object
+  delete:
+    tags: [Envelopes]
+    summary: Delete Envelope
+    description: Delete a draft envelope task.
+    security:
+      - BearerAuth: []
+    parameters:
+      - description: Envelope ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Envelope deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/envelopes/start:
+  post:
+    tags: [Envelopes]
+    summary: Start Envelope
+    description: Start a draft envelope to send signing invitations to all signers.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [envelope_id]
+                properties:
+                  envelope_id:
+                    type: integer
+                    description: Envelope ID.
+    responses:
+      '200':
+        description: Envelope started.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_for_owner_after_start:
+                  type: string
+                  enum: [waiting_for_me, waiting_for_other]
+                  description: |
+                    The task list category the owner should navigate to after starting.
+                    - `waiting_for_me`: The owner is the first signer and action is required immediately.
+                    - `waiting_for_other`: Another signer acts first; the owner is waiting.
+/api/v1/envelopes/duplicate:
+  post:
+    tags: [Envelopes]
+    summary: Duplicate Envelope
+    description: Create a copy of an existing envelope task as a new draft.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [envelope_id]
+                properties:
+                  envelope_id:
+                    type: integer
+                    description: Envelope ID to duplicate.
+    responses:
+      '200':
+        description: Envelope duplicated.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                envelope_id:
+                  type: integer
+                  description: ID of the newly created draft envelope.
+/api/v1/envelopes/{envelope_id}/change_owner:
+  post:
+    tags: [Envelopes]
+    summary: Change Envelope Owner
+    description: |
+      Transfer ownership of an envelope task to another member.
+      Only the current envelope owner can perform this action.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: envelope_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Envelope ID.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [new_owner]
+            properties:
+              new_owner:
+                type: object
+                required: [email]
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    description: Email of the member to transfer ownership to.
+    responses:
+      '200':
+        description: Envelope ownership transferred.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_owner:
+                  type: string
+                  description: Display name of the new owner after the transfer.
+/api/v1/envelopes/preview_share_link:
+  get:
+    tags: [Envelopes]
+    summary: Get Envelope Preview Share Link
+    description: Generate a shareable preview link for an envelope.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: envelope_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Envelope ID.
+      - name: will_expired
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+        description: |
+          Whether the generated link should expire.
+          Defaults to `true`. Pass `false` to generate a permanent link.
+    responses:
+      '200':
+        description: Preview share link generated.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                share_link:
+                  type: string
+                  description: |
+                    Shareable preview URL. The URL includes an embedded JWT token (`?code=...`).
+                    No separate `code` field is returned.

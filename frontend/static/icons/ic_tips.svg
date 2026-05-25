@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>web/ic_tips</title>
+    <desc>Created with Sketch.</desc>
+    <g id="web/ic_tips" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="emoji_objects-24px" transform="translate(4.000000, 3.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Master">
+                <path d="M8,0 C7.54,0 7.07,0.04 6.6,0.14 C3.84,0.67 1.64,2.9 1.12,5.66 C0.64,8.27 1.6,10.67 3.34,12.22 C3.77,12.6 4,13.13 4,13.69 L4,16 C4,17.1 4.9,18 6,18 L6.28,18 C6.63,18.6 7.26,19 8,19 C8.74,19 9.38,18.6 9.72,18 L10,18 C11.1,18 12,17.1 12,16 L12,13.69 C12,13.14 12.22,12.6 12.64,12.23 C14.09,10.95 15,9.08 15,7 C15,3.13 11.87,0 8,0 Z M10,14 L6,14 L6,13 L10,13 L10,14 Z M6,16 L6,15 L10,15 L10,16 L6,16 Z M11.31,10.74 C11.22,10.82 11.15,10.92 11.07,11 L4.92,11 C4.84,10.91 4.77,10.81 4.68,10.73 C3.36,9.55 2.77,7.79 3.09,6.03 C3.45,4.09 5.05,2.48 6.98,2.1 C7.32,2.03 7.66,2 8,2 C10.76,2 13,4.24 13,7 C13,8.43 12.39,9.79 11.31,10.74 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

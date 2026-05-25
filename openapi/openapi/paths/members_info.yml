@@ -1,0 +1,252 @@
+/api/v1/members/me:
+  get:
+    tags: [Members - Info]
+    summary: Get Current Member Info
+    description: Obtain the current member's information and preference settings.
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Member info retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/member.yml#/MemberObject'
+                - type: object
+                  properties:
+                    signatures:
+                      type: array
+                      items:
+                        $ref: '../components/schemas/signature.yml#/SignatureObject'
+                      nullable: true
+    parameters:
+      - in: query
+        name: include_signature
+        required: false
+        schema:
+          type: boolean
+/api/v1/members/timelines:
+  get:
+    tags: [Members - Info]
+    summary: Get Member Timelines
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: ../components/parameters.yml#/PageQuery
+      - $ref: ../components/parameters.yml#/PerPageQuery
+      - in: query
+        name: show_delete
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: start_from
+        required: false
+        schema:
+          format: date-time
+          type: string
+      - in: query
+        name: end_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+    responses:
+      '200':
+        description: Timelines retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                timelines:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      created_at:
+                        type: integer
+                        description: Unix timestamp of when the event occurred.
+                      file_status:
+                        type: string
+                        description: Status of the associated sign task file.
+                      action_name:
+                        type: string
+                        description: Name of the action performed.
+                      role:
+                        type: string
+                        description: Role of the member in the event.
+                      file_name:
+                        type: string
+                        description: File name of the associated sign task.
+                      sign_task_id:
+                        type: integer
+                        description: ID of the associated sign task.
+                      task_deleted:
+                        type: boolean
+                        description: Whether the task has been deleted.
+                      task_expired:
+                        type: boolean
+                        description: Whether the task has expired.
+                      thumbnail:
+                        type: object
+                        nullable: true
+                        description: Thumbnail info of the associated sign task.
+                current_page:
+                  type: integer
+                  description: Current page number.
+                total_pages:
+                  type: integer
+                  description: Total number of pages.
+/api/v1/members/upload_avatar:
+  post:
+    tags: [Members - Info]
+    summary: Upload Member Avatar
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required: [avatar]
+            properties:
+              avatar:
+                type: string
+                format: binary
+    responses:
+      '200':
+        description: Avatar uploaded.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+/api/v1/members/contact_list:
+  get:
+    tags: [Members - Info]
+    summary: Get Member Contact List
+    security:
+      - BearerAuth: []
+    parameters: []
+    responses:
+      '200':
+        description: Contact list retrieved.
+        content:
+          application/json:
+            schema:
+              items:
+                properties:
+                  email:
+                    type: string
+                  name:
+                    type: string
+                  phone:
+                    nullable: true
+                    type: string
+                type: object
+              type: array
+/api/v1/members/preference:
+  put:
+    tags: [Members - Info]
+    summary: Update Member Preferences
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/member.yml#/MemberPreferenceObject
+              - properties:
+                  phone_code:
+                    type: string
+                  phone_number:
+                    type: string
+                type: object
+    responses:
+      '200':
+        description: Preferences updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/member.yml#/MemberObject'
+/api/v1/members/modify:
+  put:
+    tags: [Members - Info]
+    summary: Modify Member Info
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              lang:
+                type: string
+              name:
+                type: string
+            type: object
+    responses:
+      '200':
+        description: Member info updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/member.yml#/MemberObject'
+/api/v1/members/profile:
+  get:
+    tags: [Members - Info]
+    summary: Get Member Profile
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Member profile retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/member.yml#/MemberProfileObject'
+  put:
+    tags: [Members - Info]
+    summary: Update Member Profile
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              address:
+                nullable: true
+                type: string
+              email:
+                nullable: true
+                type: string
+              first_name:
+                nullable: true
+                type: string
+              full_name:
+                nullable: true
+                type: string
+              nationality:
+                nullable: true
+                type: string
+              organization:
+                nullable: true
+                type: string
+              telephone:
+                nullable: true
+                type: string
+            type: object
+    responses:
+      '200':
+        description: Profile updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/member.yml#/MemberProfileObject'

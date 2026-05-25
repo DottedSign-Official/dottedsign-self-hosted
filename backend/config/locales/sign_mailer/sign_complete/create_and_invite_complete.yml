@@ -1,0 +1,153 @@
+en:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 'Your Task Was Completed with Signatures from All Parties: %{doc_name}'
+        title: 'Task Completed: "%{doc_name}"'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: The attached is your completed file <strong>"%{doc_name}"</strong>. You can also go to DottedSign to download the file and digital audit trail.
+            more_than_10_mb_html: Please download the completed file and digital audit trail <strong>"%{doc_name}"</strong> in DottedSign as the file size was too big.
+          task_downloadable:
+            less_than_10_mb_html: The attached is your completed file <strong>"%{doc_name}"</strong>. You can also go to DottedSign to view and download the file.
+            more_than_10_mb_html: Please go to DottedSign to view and download the completed file <strong>"%{doc_name}"</strong> as the file size was too big.
+          audit_downloadable_html: The document <strong>"%{doc_name}"</strong> has been signed by all parties. You can go to DottedSign to view the signed file and download the digital audit trail. If you'd like to download the file, please contact your admin.
+          both_not_downloadable_html: The document <strong>"%{doc_name}"</strong> has been signed by all parties. You can go to DottedSign to view the signed file. If you'd like to download the file, please contact your admin.
+        message_content: 'Here is the message from %{sender_name}:'
+        button: Go to DottedSign
+hant:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 您的文件已完成簽署：%{doc_name}
+        title: '"%{doc_name}" 已完成簽署'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: 附檔為已完成的簽署任務：<strong>"%{doc_name}"</strong>。您也可以在點點簽中下載檔案及數位稽核軌跡。
+            more_than_10_mb_html: 您的簽署任務<strong>"%{doc_name}"</strong>已完成。因檔案過大，請至點點簽中下載檔案及數位稽核軌跡。
+          task_downloadable:
+            less_than_10_mb_html: 附檔為已完成的簽署任務：<strong>"%{doc_name}"</strong>。您也可以在點點簽中查看及下載檔案。
+            more_than_10_mb_html: 您的簽署任務<strong>"%{doc_name}"</strong>已完成。因檔案過大，請至點點簽查看及下載檔案。
+          audit_downloadable_html: 您的簽署任務<strong>"%{doc_name}"</strong>已被所有簽署者完成。您可以在點點簽中查看完成簽署的檔案，及下載數位稽核軌跡檔。如欲下載檔案，請聯繫您的帳號管理者。
+          both_not_downloadable_html: 您的簽署任務<strong>"%{doc_name}"</strong>已被所有簽署者完成。您可以在點點簽中查看完成簽署的檔案。如欲下載檔案，請聯繫您的帳號管理者。
+        message_content: 以下為%{sender_name}傳送給您的訊息：
+        button: 前往點點簽
+hans:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 您的文件已完成签名：%{doc_name}
+        title: '"%{doc_name}" 已完成签名'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: 附档为已完成的签署任务：<strong>"%{doc_name}"</strong>。您也可以在点点签中下载档案及数位稽核轨迹。
+            more_than_10_mb_html: 您的签署任务<strong>"%{doc_name}"</strong>已完成。因档案过大，请至点点签中下载档案及数位稽核轨迹。
+          task_downloadable:
+            less_than_10_mb_html: 附档为已完成的签署任务：<strong>"%{doc_name}"</strong>。您也可以在点点签中查看及下载档案。
+            more_than_10_mb_html: 您的签署任务<strong>"%{doc_name}"</strong>已完成。因档案过大，请至点点签查看及下载档案。
+          audit_downloadable_html: 您的签署任务<strong>"%{doc_name}"</strong>已被所有签署者完成。您可以在点点签中查看完成签署的档案，及下载数位稽核轨迹档。如欲下载档案，请联系您的帐号管理者。
+          both_not_downloadable_html: 您的签署任务<strong>"%{doc_name}"</strong>已被所有签署者完成。您可以在点点签中查看完成签署的档案。如欲下载档案，请联系您的帐号管理者。
+        message_content: 以下为%{sender_name}传送给您的讯息：
+        button: 前往点点签
+ja:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 全員が署名して完了したタスク：%{doc_name}
+        title: 完了タスク："%{doc_name}"
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: 添付は完成したファイル<strong>"%{doc_name}"</strong>です。 DottedSignでファイルとデジタル監査証跡をダウンロードすることもできます。
+            more_than_10_mb_html: ファイルサイズが大きすぎるためDottedSignで完了したファイルとデジタル監査証跡<strong>"%{doc_name}"</strong>をダウンロードしてください。
+          task_downloadable:
+            less_than_10_mb_html: 添付は完成したファイル<strong>"%{doc_name}"</strong>です。 DottedSignでファイルを表示、ダウンロードすることもできます。
+            more_than_10_mb_html: ファイルサイズが大きすぎるため、DottedSignで完了したファイルを<strong>"%{doc_name}"</strong>を表示、ダウンロードしてください。
+          audit_downloadable_html: ドキュメント<strong>"%{doc_name}"</strong>は全ての関係者に署名されました。 DottedSignで署名したファイルを表示し、デジタル監査証跡をダウンロードすることができます。 ファイルのダウンロードがご希望の方は、管理者へご連絡ください。
+          both_not_downloadable_html: ドキュメント<strong>"%{doc_name}"</strong>は全ての関係者に署名されました。 DottedSignで署名したファイルを表示することができます。 ファイルのダウンロードがご希望の方は、管理者へご連絡ください。
+        message_content: "%{sender_name}からのメッセージは以下のとおりです。"
+        button: DottedSignへ
+it:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 'Task completato e firmato da tutti i partecipanti: %{doc_name}'
+        title: 'Task completato: "%{doc_name}"'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: In allegato il file completo <strong>"%{doc_name}"</strong>. Puoi anche scaricare il file e la traccia di audit digitale su DottedSign.
+            more_than_10_mb_html: Le dimensioni del file superano i limiti, si prega di scaricare il file completo e la traccia di audit digitale <strong>"%{doc_name}"</strong> da DottedSign.
+          task_downloadable:
+            less_than_10_mb_html: In allegato il file completo <strong>"%{doc_name}"</strong>. Puoi anche visualizzare e scaricare il file su DottedSign.
+            more_than_10_mb_html: Le dimensioni del file superano i limiti, si prega di visualizzare e scaricare il file completo <strong>"%{doc_name}"</strong> da DottedSign.
+          audit_downloadable_html: Il documento <strong>"%{doc_name}"</strong> è stato firmato da tutte le parti. Vai su DottedSign per visualizzare il file firmato e scaricare la traccia di audit digitale. Per scaricare il file contattare l'amministratore.
+          both_not_downloadable_html: Il documento <strong>"%{doc_name}"</strong> è stato firmato da tutte le parti. Puoi visualizzare il file firmato su DottedSign. Per scaricare il file contattare l'amministratore.
+        message_content: 'Ecco il messaggio da %{sender_name}:'
+        button: Vai su DottedSign
+de:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 'Ihre Aufgabe wurde mit Unterschriften aller Parteien vervollständigt: %{doc_name}'
+        title: 'Aufgabe erfüllt: "%{doc_name}"'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: Das angehängte Dokument ist Ihre fertige Datei "<strong>"%{doc_name}"</strong>." Sie können auch auf DottedSign gehen, um die Datei und das digitale Audit-Protokoll herunterzuladen.
+            more_than_10_mb_html: Bitte laden Sie die fertige Datei und den digitalen Audit-Pfad <strong>"%{doc_name}"</strong> in DottedSign herunter, da die Datei zu groß war.
+          task_downloadable:
+            less_than_10_mb_html: Das angehängte Dokument ist Ihre fertige Datei "<strong>"%{doc_name}"</strong>." Sie können auch auf DottedSign gehen, um die Datei anzuschauen und herunterzuladen.
+            more_than_10_mb_html: Bitte gehen Sie auf DottedSign, um die fertige Datei <strong>"%{doc_name}"</strong> anzusehen und herunterzuladen, da die Datei zu groß war.
+          audit_downloadable_html: Das Dokument "<strong>"%{doc_name}"</strong>" wurde von allen Parteien unterzeichnet. Sie können auf DottedSign gehen um das unterzeichnete Dokument anzusehen und das digitale Audit Protokoll herunterzuladen. Wenn Sie die Datei herunterladen möchten, wenden Sie sich bitte an Ihren Administrator.
+          both_not_downloadable_html: Das Dokument "<strong>"%{doc_name}"</strong>" wurde von allen Parteien unterzeichnet. Sie können auf DottedSign gehen um das unterzeichnete Dokument anzusehen. Wenn Sie die Datei herunterladen möchten, wenden Sie sich bitte an Ihren Administrator.
+        message_content: 'Hier ist die Nachricht von %{sender_name}:'
+        button: Zu DottedSign wechseln
+es:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 'Su tarea se completó con las firmas de todas las partes: %{doc_name}'
+        title: 'Tarea completada: "%{doc_name}"'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: El adjunto es su archivo completo <strong>"%{doc_name}"</strong>. También puede ir a DottedSign y descargar el archivo y la pista de auditoría digital.
+            more_than_10_mb_html: Por favor, descargue el archivo completo y la pista de auditoría digital <strong>"%{doc_name}"</strong> en DottedSign ya que el tamaño del archivo es demasiado grande.
+          task_downloadable:
+            less_than_10_mb_html: El adjunto es su archivo completo <strong>"%{doc_name}"</strong>. También puede ir a DottedSign para ver y descargar el archivo.
+            more_than_10_mb_html: Por favor, vaya a DottedSign para ver y descargar el archivo completo <strong>"%{doc_name}"</strong> ya que el tamaño del archivo es demasiado grande.
+          audit_downloadable_html: El documento <strong>"%{doc_name}"</strong> ha sido firmado por todas las partes. Puede ir a DottedSign para ver el archivo firmado y descargar la pista de auditoría digital.  Si desea descargar el archivo, póngase en contacto con su administrador.
+          both_not_downloadable_html: El documento <strong>"%{doc_name}"</strong> ha sido firmado por todas las partes. Puede ir a DottedSign para ver el archivo firmado. Si desea descargar el archivo, póngase en contacto con su administrador.
+        message_content: 'Aquí está el mensaje de %{sender_name}:'
+        button: Ir a DottedSign
+fr:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: 'Votre Tâche a Été Accomplie avec les Signatures de Toutes les Parties: %{doc_name}'
+        title: 'Tâche Terminée: "%{doc_name}"'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: La pièce jointe est votre fichier complet <strong>"%{doc_name}"</strong>. Vous pouvez également vous rendre sur DottedSign pour télécharger le fichier et la piste d'audit numérique.
+            more_than_10_mb_html: Veuillez télécharger le fichier complété et la piste d'audit numérique <strong>"%{doc_name}"</strong> dans DottedSign car la taille du fichier était trop grande.
+          task_downloadable:
+            less_than_10_mb_html: La pièce jointe est votre fichier complet <strong>"%{doc_name}"</strong>. Vous pouvez également accéder à DottedSign pour afficher et télécharger le fichier.
+            more_than_10_mb_html: Veuillez vous rendre sur DottedSign pour afficher et télécharger le fichier complet <strong>"%{doc_name}"</strong> car la taille du fichier était trop grande.
+          audit_downloadable_html: Le document <strong>"%{doc_name}"</strong> a été signé par toutes les parties. Vous pouvez accéder DottedSign pour afficher le fichier signé et télécharger la piste d'audit numérique. Si vous souhaitez télécharger le fichier, veuillez contacter votre administrateur.
+          both_not_downloadable_html: Le document <strong>"%{doc_name}"</strong> a été signé par toutes les parties. Vous pouvez accéder DottedSign pour afficher le fichier signé. Si vous souhaitez télécharger le fichier, veuillez contacter votre administrateur.
+        message_content: 'Voici le message de %{sender_name}:'
+        button: Aller sur DottedSign
+ko:
+  sign_mailer:
+    sign_complete:
+      create_and_invite_complete:
+        subject: '작업은 모든 당사자에게 서명으로 완료되었습니다: %{doc_name}'
+        title: '완료 작업: "%{doc_name}"'
+        content_1:
+          both_downloadable:
+            less_than_10_mb_html: 첨부문서는 완료 파일 <strong>"%{doc_name}"</strong>입니다. DottedSign으로 이동해서 파일과 디지털 감사 추적을 다운로드할 수도 있습니다.
+            more_than_10_mb_html: 파일 크기가 너무 크므로 완료 파일과 디지털 감사 추적 <strong>"%{doc_name}"</strong>을(를) DottedSign에서 다운로드하십시오.
+          task_downloadable:
+            less_than_10_mb_html: 첨부문서는 완료 파일 <strong>"%{doc_name}"</strong>입니다. DottedSign으로 이동해서 파일을 보고 다운로드할 수도 있습니다.
+            more_than_10_mb_html: 파일 크기가 너무 크므로 DottedSign으로 이동해서 완료 파일 <strong>"%{doc_name}"</strong>을(를) 보고 다운로드하십시오.
+          audit_downloadable_html: 문서 <strong>"%{doc_name}"</strong>은(는) 모든 당사자에게 서명되었습니다. DottedSign으로 이동해서 서명파일을 보고 디지털 감사추적을 다운로드할 수 있습니다. 파일을 다운로드하려면 관리자에게 문의하십시오.
+          both_not_downloadable_html: 문서 <strong>"%{doc_name}"</strong>은(는) 모든 당사자에게 서명되었습니다. DottedSign으로 이동해서 서명파일을 볼 수 있습니다. 파일을 다운로드하려면 관리자에게 문의하십시오.
+        message_content: '여기 %{sender_name}로부터의 메시지가 있습니다:'
+        button: DottedSign으로 이동

@@ -1,0 +1,41 @@
+{
+  "login": "Login",
+  "back_to_login": "Back to login",
+  "login_placeholder": "Your Email",
+  "forget_password": "Forget Password?",
+  "reset_password":"Reset your password",
+  "sign_up": "Sign up",
+  "continue": "Continue",
+
+  "new_password":"New Password",
+  "confirm":"Confirm",
+  "reset_success_title":"Reset password success!",
+  "reset_success_hint":"Please login with your new password.",
+
+  "ldap_login_title":"LDAP Login",
+  "ldap_welcome_title": "LDAP Welcome",
+  "ldap_login":"Sign in with LDAP",
+  "general_login":"Back to general login",
+
+  "create_account": "Create your Account",
+  "name": "Name",
+  "email": "Email",
+  "password": "Password",
+  "password_hint": "Use 8 or more characters",
+  "password_mismatch_hint":"password mismatch",
+  "next": "Next",
+
+  "find_email": "Find your email",
+  "email_sent": "Email sent!",
+  "check_email": "Please check your mail box.",
+
+  "congrats": "Congrats!",
+  "verify_email": "Please check your mail box and verify now.",
+  "invalid_email": "Invalid Email",
+  "invalid_password": "Invalid Password",
+  "welcome": "Welcome",
+  "enter_password": "Enter your password",
+
+  "email_empty":"Email is empty",
+  "email_invalid":"Email is invalid"
+}

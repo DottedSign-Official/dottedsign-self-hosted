@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>ic-edit-00</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-1224.000000, -288.000000)">
+            <g id="ic-edit-00" transform="translate(1224.000000, 288.000000)">
+                <rect id="Rectangle-4" fill-opacity="0.01" fill="#FFFFFF" x="0" y="0" width="24" height="24"></rect>
+                <path d="M0,17.6739207 L0,21.3889719 C0,21.7311476 0.268852389,22 0.611028151,22 L4.32607927,22 C4.48494659,22 4.64381391,21.9388972 4.75379898,21.8166916 L18.0986537,8.48405745 L13.5159426,3.90134632 L0.183308441,17.2339805 C0.0611028137,17.3561861 0,17.5028329 0,17.6739207 Z M21.6426169,4.94009417 C21.8714202,4.71175955 22,4.40178995 22,4.07854448 C22,3.75529902 21.8714202,3.4453294 21.6426169,3.2169948 L18.7830052,0.35738307 C18.5546706,0.128579811 18.2447009,0 17.9214555,0 C17.59821,0 17.2882405,0.128579811 17.0599058,0.35738307 L14.8235428,2.59374609 L19.4062539,7.17645717 L21.6426169,4.94009417 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

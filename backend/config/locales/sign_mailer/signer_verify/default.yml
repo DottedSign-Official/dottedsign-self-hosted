@@ -1,0 +1,64 @@
+---
+en:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: Your DottedSign on-premise Verification Code
+        title: Prove Your Signer Identity
+        content_1_html: You are required to enter the following code to sign <strong>"%{doc_name}"</strong> sent by %{sender_name} (%{sender_email}). Please enter the code in 10 minutes.<br /><br />Your verification code:<br />
+hant:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: 您的電子簽名安全密碼驗證
+        title: 請使用密碼以驗證簽署者身份
+        content_1_html: 您必須在十分鐘內輸入以下安全密碼，以簽署由%{sender_name} (%{sender_email}) 發送給您的 <strong>"%{doc_name}"</strong> 。<br /><br />您的驗證碼：<br />
+hans:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: 您的DottedSign on-premise安全密码验证
+        title: 请使用密码以验证签署者身份
+        content_1_html: 您必须在十分钟内输入以下安全密码，以签署由%{sender_name} (%{sender_email}) 发送给您的 <strong>"%{doc_name}"</strong> 。<br /><br />您的验证码：<br />
+ja:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: DottedSign on-premise検証コード
+        title: 署名者の身元を証明
+        content_1_html: '%{sender_name} (%{sender_email}) さんが送信した <strong>"%{doc_name}"</strong> を署名する場合、次のコードを入力する必要があります。 10分以内にコードを入力してください。 <br /><br />あなたの認証コード：<br />'
+it:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: Il tuo codice di verifica DottedSign on-premise
+        title: Conferma la tua identità
+        content_1_html: inserisci il seguente codice per firmare <strong>"%{doc_name}"</strong> inviato da %{sender_name} (%{sender_email}). Inserire il codice entro 10 minuti. <br /><br />Il tuo codice di verifica:<br />
+de:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: Ihr DottedSign on-premise Verifizierungs-Code
+        title: Bestätigen Sie Ihre Unterzeichner-Identität
+        content_1_html: Sie müssen den folgenden Code eingeben um zu unterschreiben <strong>"%{doc_name}"</strong> gesendet von %{sender_name} (%{sender_email}). Bitte nutzen Sie den Code innerhalb von 10 Minuten.<br /><br />Ihr Verifizierungs-Code:<br />
+es:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: Su código de verificación de DottedSign on-premise
+        title: Demuestre su identidad de firmante
+        content_1_html: Se requiere que introduzca el siguiente código para firmar <strong>"%{doc_name}"</strong> enviado por %{sender_name} (%{sender_email}). <br /><br />Ingrese el código en 10 minutos. Su código de verificación:<br />
+fr:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: Votre Code de Vérification DottedSign on-premise
+        title: Prouvez Votre Identité de Signataire
+        content_1_html: Vous devez entrer le code suivant pour signer <strong>"%{doc_name}"</strong> envoyé par %{sender_name} (%{sender_email}). Veuillez saisir le code dans 10 minutes.<br /><br />Votre code de vérification:<br />
+ko:
+  sign_mailer:
+    signer_verify:
+      default:
+        subject: DottedSign on-premise 인증 코드
+        title: 서명자 신원 증명
+        content_1_html: '%{sender_name} (%{sender_email}) 에 의해 보내진 <strong>"%{doc_name}"</strong> 에 서명할 다음 코드를 입력해야 합니다. 10 분 안에 코드를 입력하세요.<br /><br />인증 코드:<br />'

@@ -1,0 +1,18 @@
+en:
+  sign_mailer:
+    signer_ca_fail_notify:
+      default:
+        subject: "Certificate embossing failed, please re-sign %{doc_name}."
+        title: "Certificate embossing failed, please re-sign."
+        content_1_html: Don't forget to finish re-signing by the expiry date %{deadline}.
+        content_2_html: "*Please note that if you are not registered to DottedSign, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View & Re-Sign
+hant:
+  sign_mailer:
+    signer_ca_fail_notify:
+      default:
+        subject: "憑證壓製失敗，請重新簽署 %{doc_name}。"
+        title: "憑證壓製失敗，請重新簽署。"
+        content_1_html: 請在期限內完成簽名：%{deadline}。
+        content_2_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看並重新簽署

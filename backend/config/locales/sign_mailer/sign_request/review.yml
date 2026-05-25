@@ -1,0 +1,99 @@
+en:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} Has Requested You to Review %{doc_name}"
+          without_signer_name: It's Your Turn to Review %{doc_name}
+        title: Waiting for You to Review
+        content_1_html: '%{sender_name} (%{sender_email}) has requested your review the signed content completed by %{signer_name} in <strong>"%{doc_name}"</strong>.'
+        content_2_html: "*Please note that if you are not registered to DottedSign, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View & Review
+hant:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} 邀請您檢查 %{doc_name}"
+          without_signer_name: 您有新的檢查邀請：%{doc_name}
+        title: 正在等待您的檢查
+        content_1_html: '%{sender_name} (%{sender_email}) 邀請您檢查 %{signer_name} 於 <strong>"%{doc_name}"</strong> 填寫的內容。'
+        content_2_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看 & 檢查
+hans:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} 邀请您检查 %{doc_name}"
+          without_signer_name: 您有新的检查邀请：%{doc_name}
+        title: 正在等待您的检查
+        content_1_html: '%{sender_name} (%{sender_email}) 邀请您检查 %{signer_name} 於 <strong>"%{doc_name}"</strong> 填寫的內容。'
+        content_2_html: 请注意：若您尚未註册点点签，为了保障签署安全性，此连结将于<strong>2天</strong>内失效。
+        button: 查看 & 检查
+ja:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name}から %{doc_name} の確認をリクエストしました。"
+          without_signer_name: "%{doc_name} を確認するように招待されました"
+        title: あなたの確認を待っています
+        content_1_html: '%{sender_name} (%{sender_email})は%{signer_name} が<strong>"%{doc_name}"</strong>で署名した内容の確認をリクエストしました。'
+        content_2_html: ご注意：DottedSignに登録されていない場合、このリンクは<strong>2日間</strong>のみ有効です。 これはドキュメントへの不正アクセス防止措置のためです。
+        button: 閲覧＆チェック
+it:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} ti ha chiesto di controllare %{doc_name}"
+          without_signer_name: "È il tuo turno di controllare %{doc_name}"
+        title: In attesa della tua revisione
+        content_1_html: '%{sender_name} (%{sender_email}) ti ha chiesto di controllare il contenuto firmato completato da %{signer_name} in <strong>"%{doc_name}"</strong>.'
+        content_2_html: "*Si prega di notare che se non sei registrato a DottedSign, questo link scadrà tra <strong>2 giorni</strong>. Questo per prevenire l'accesso non autorizzato al documento."
+        button: Visualizza e controlla
+de:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} hat Sie gebeten, %{doc_name} zu überprüfen."
+          without_signer_name: "Sie sind an der Reihe %{doc_name} zu überprüfen"
+        title: Wartet auf Ihre Überprüfung
+        content_1_html: '%{sender_name} (%{sender_email}) hat Sie gebeten, den von %{signer_name} signierten Inhalt in <strong>"%{doc_name}"</strong> zu prüfen.'
+        content_2_html: "*Bitte beachten Sie, dass dieser Link in <strong>2 Tagen abläuft</strong>, wenn Sie nicht bei DottedSign registriert sind. Dies dient dazu, das Dokument vor unberechtigtem Zugriff zu schützen."
+        button: Ansehen & Prüfen
+es:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} le ha pedido que marque %{doc_name}"
+          without_signer_name: "Es su turno de revisar %{doc_name}"
+        title: Esperando su revisión
+        content_1_html: '%{sender_name} (%{sender_email}) le ha pedido que compruebe el contenido firmado completado por %{signer_name} en <strong>"%{doc_name}"</strong>.'
+        content_2_html: "*Tenga en cuenta que, en caso de no registrarse en DottedSign, este enlace expirará en <strong>2 días</strong>. Lo hacemos así para prevenir accesos no autorizados."
+        button: Ver y comprobar
+fr:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name} vous a demandé de vérifier %{doc_name}"
+          without_signer_name: "C'est à vous de vérifier %{doc_name}"
+        title: En attente de votre vérification
+        content_1_html: '%{sender_name} (%{sender_email}) vous a demandé de vérifier le contenu signé complété par %{signer_name} dans <strong>"%{doc_name}"</strong>.'
+        content_2_html: "*Veuillez noter que si vous n'êtes pas inscrit à DottedSign, ce lien expirera dans <strong>2 jours</strong>. Ceci est pour empêcher l'accès non autorisé au document."
+        button: Afficher
+ko:
+  sign_mailer:
+    sign_request:
+      review:
+        subject:
+          with_signer_name: "%{sender_name}(이)가 %{doc_name}|(을)를 확인하도록 요청했습니다."
+          without_signer_name: "%{doc_name}을(를) 검토할 차례입니다"
+        title: 귀하의 검토를 기다리고 있습니다
+        content_1_html: '%{sender_name} (%{sender_email})(은)는 <strong>"%{doc_name}"</strong>에서 %{signer_name}에 의해 완료된 서명한 내용을 확인하도록 요청했습니다.'
+        content_2_html: "DottedSign에 등록하지 않은 경우, 이 링크는 <strong>2일</strong> 내에 만료됨을 참고하십시오. 이는 무단 접근으로부터 문서를 보호하기 위함입니다."
+        button: 보기

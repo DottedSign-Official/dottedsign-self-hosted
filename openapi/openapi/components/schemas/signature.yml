@@ -1,0 +1,26 @@
+SignatureObject:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Signature ID.
+    member_id:
+      type: integer
+      description: Member ID who owns the signature.
+    category:
+      type: string
+      enum: [signature, initial, stamp]
+      description: Signature category.
+    file_type:
+      type: string
+      enum: [png, jpg]
+      description: Signature image file type.
+    raw:
+      type: string
+      description: Base64-encoded raw signature image string.
+    created_at:
+      type: string
+      description: Creation date.
+    updated_at:
+      type: string
+      description: Last updated date.

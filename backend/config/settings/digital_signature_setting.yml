@@ -1,0 +1,33 @@
+development: &development
+  provider: <%= ENV['DIGITAL_SIGNATURE_PROVIDER'].env_presence || 'cht_hsm' %>
+  psig:
+    path: <%= ENV['PSIG_PATH'].env_presence || Rails.root.join('lib/psig/psig.sh').to_s  %>
+    reason: >-
+      <%= ENV['PSIG_REASON'].env_presence(allow_blank: true) || 'Signed through DottedSign' %>
+    reason_for_signed: >-
+      <%= ENV['PSIG_REASON_FOR_SIGNED'].env_presence(allow_blank: true) || ENV['PSIG_REASON'].env_presence(allow_blank: true) || 'Signed by %(signer_name) through DottedSign' %>
+    reason_for_completed: >-
+      <%= ENV['PSIG_REASON_FOR_COMPLETED'].env_presence(allow_blank: true) || ENV['PSIG_REASON'].env_presence(allow_blank: true) || 'Signed through DottedSign' %>
+    location: >-
+      <%= ENV['PSIG_LOCATION'].env_presence(allow_blank: true) || 'Taiwan' %>
+    level: <%= ENV['PSIG_LEVEL'].env_presence || 'pades_t' %>
+    tsp_provider: <%= ENV['PSIG_TSP_PROVIDER'].env_presence || 'digicert' %>
+    timestamp_location: <%= ENV['PSIG_TIMESTAMP_LOCATION'].env_presence || 'signature' %>
+    digest_algorithm: <%= ENV['PSIG_DIGEST_ALGORITHM'].env_presence || 'sha512' %>
+    encryption_algorithm: <%= ENV['PSIG_ENCRYPTION_ALGORITHM'].env_presence || 'rsa' %>
+    timestamp_digest_algorithm: <%= ENV['PSIG_TIMESTAMP_DIGEST_ALGORITHM'].env_presence || 'sha256' %>
+    key_store_file: <%= ENV['PSIG_KEY_STORE_FILE'].env_presence || Rails.root.join('lib/psig/certificate.pfx').to_s %>
+    key_store_password: <%= ENV['PSIG_KEY_STORE_PASSWORD'].env_presence || '24373514' %>
+    permission: <%= ENV['PSIG_PERMISSION'].env_presence %>
+
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+qa:
+  <<: *development
+
+production:
+  <<: *development

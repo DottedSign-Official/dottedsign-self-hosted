@@ -1,0 +1,57 @@
+/api/v1/license_info:
+  get:
+    tags: [General]
+    summary: Get License Info
+    description: Get the on-premise license information.
+    responses:
+      '200':
+        description: License info retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                license_info:
+                  $ref: '../components/schemas/license.yml#/LicenseInfoObject'
+/api/v1/country_list:
+  get:
+    tags: [General]
+    summary: Get Country List
+    responses:
+      '200':
+        description: Country list retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countries:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      name:
+                        type: string
+                      phone_code:
+                        type: string
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: lang
+        in: query
+        required: false
+        schema:
+          type: string
+/api/v1/health_check:
+  get:
+    tags: [General]
+    summary: Health Check
+    responses:
+      '200':
+        description: Service is healthy.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'

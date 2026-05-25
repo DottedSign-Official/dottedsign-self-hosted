@@ -1,0 +1,25 @@
+development: &development
+  host: <%= ENV['CALLBACK_HOST'].env_presence || 'http://127.0.0.1' %>
+  events:
+    task_completed:
+      enable: <%= ENV['CALLBACK_ENABLE_TASK_COMPLETED'].env_presence || false %>
+      path: <%= ENV['TASK_COMPLETED_PATH'].env_presence || '/api/task_completed_callback' %>
+    envelope_completed:
+      enable: <%= ENV['CALLBACK_ENABLE_ENVELOPE_COMPLETED'].env_presence || false %>
+      path: <%= ENV['ENVELOPE_COMPLETED_PATH'].env_presence || '/api/envelope_completed_callback' %>
+    stage_done:
+      enable: <%= ENV['CALLBACK_ENABLE_STAGE_DONE'].env_presence || false %>
+      path: <%= ENV['STAGE_DONE_PATH'].env_presence || '/api/stage_done_callback' %>
+  signature_compress:
+    photo_file: <%= ENV['COMPRESS_SIGNATURE_PHOTO_FILE'].env_presence || false %>
+    stroke_file: <%= ENV['COMPRESS_SIGNATURE_STROKE_FILE'].env_presence || false %>
+    video_file: <%= ENV['COMPRESS_SIGNATURE_VIDEO_FILE'].env_presence || false %>
+
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+production:
+  <<: *development

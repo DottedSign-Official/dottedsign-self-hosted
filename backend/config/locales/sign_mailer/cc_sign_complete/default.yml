@@ -1,0 +1,91 @@
+---
+en:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name} Was Signed by All Parties"
+        title: 'Task Completed: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: The attached is the completed task <strong>"%{doc_name}"</strong>. Please note that you are receiving this email because %{sender_name} (%{sender_email}) has copied you as the recipient on the signature request.
+          more_than_10_mb_html: You can find the completed task <strong>"%{doc_name}"</strong> in the following link as the file size was too big. Please note that you are receiving this email because %{sender_name} (%{sender_email}) has copied you as the recipient on the signature request.
+        content_2_html: 'The task: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+hant:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: 所有人已簽署完成 %{doc_name}
+        title: 文件已完成："%{doc_name}"
+        content_1:
+          less_than_10_mb_html: '%{sender_name} (%{sender_email}) 將您加入簽署文件的副本收件人，您可以在信件夾檔中取得已完成簽署的文件<strong>"%{doc_name}"</strong>。'
+          more_than_10_mb_html: '%{sender_name} (%{sender_email}) 將您加入簽署文件的副本收件人。因檔案過大，您可以從下方連結取得已完成簽署的文件 <strong>"%{doc_name}"</strong>。'
+        content_2_html: 文件下載連結： <a href="%{doc_download_link}" target="_blank">(Link)</a>
+hans:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: 所有人已签署完成 %{doc_name}
+        title: 文件已完成："%{doc_name}"
+        content_1:
+          less_than_10_mb_html: '%{sender_name} (%{sender_email}) 将您加入签署文件的副本收件人，您可以在信件夹档中取得已完成签署的文件<strong>"%{doc_name}"</strong>。'
+          more_than_10_mb_html: '%{sender_name} (%{sender_email}) 将您加入签署文件的副本收件人。因档案过大，您可以从下方连结取得已完成签署的文件 <strong>"%{doc_name}"</strong>。'
+        content_2_html: 文件下载连结： <a href="%{doc_download_link}" target="_blank">(Link)</a>
+ja:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name}は全員が署名しています"
+        title: タスクが完了しました："%{doc_name}"
+        content_1:
+          less_than_10_mb_html: <strong>"%{doc_name}"</strong>完了したタスクを添付します。%{sender_name} (%{sender_email})が署名要求の受信者としてあなたをコピーしたため、この電子メールを受信していることに注意してください。
+          more_than_10_mb_html: ファイルサイズが大きすぎます。以下のリンクで完了したタスク<strong>"%{doc_name}"</strong>を見つけることができます。 署名リクエストに基づいて%{sender_name} (%{sender_email})があなたを受信者としてコピーしたため、このメールが届きます。
+        content_2_html: 'タスクをダウンロード: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+it:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name} è stato firmato da tutti i partecipanti"
+        title: 'Task completo: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: In allegato il task completo <strong>"%{doc_name}"</strong>. Stai ricevendo questa email perché %{sender_name} (%{sender_email}) ti ha messo in copia come destinatario nella richiesta di firma.
+          more_than_10_mb_html: Le dimensioni del file superano i limiti, il documento completo <strong>"%{doc_name}"</strong> si può trovare al seguente link. Stai ricevendo questa email perché %{sender_name} (%{sender_email}) ti ha messo in copia come destinatario nella richiesta di firma.
+        content_2_html: 'Il task: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+de:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name} wurde von allen Parteien unterschrieben"
+        title: 'Aufgabe erfüllt: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: im Anhang befindet sich die abgeschlossene Anfrage <strong>"%{doc_name}"</strong>. Bitte beachten Sie, dass Sie diese E-Mail erhalten, weil %{sender_name} (%{sender_email}) Sie als Empfänger auf dieser Unterschriftsanfrage kopiert hat.
+          more_than_10_mb_html: Sie finden die fertige Task <strong>"%{doc_name}"</strong> unter dem folgenden Link, da die Datei zu groß war. Bitte beachten Sie, dass Sie diese E-Mail erhalten, weil %{sender_name} (%{sender_email}) Sie als Empfänger auf dieser Unterschriftsanfrage kopiert hat.
+        content_2_html: 'Die Aufgabe: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+es:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name} ha sido firmado por todas las partes"
+        title: 'Tarea completada: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: El documento adjunto es la tarea completada <strong>"%{doc_name}"</strong>. Tenga en cuenta que está recibiendo este correo electrónico porque %{sender_name} (%{sender_email}) le ha copiado como destinatario en la solicitud de firma.
+          more_than_10_mb_html: Puede encontrar la tarea completa <strong>"%{doc_name}"</strong> en este link ya que el tamaño del archivo es demasiado grande. Tenga en cuenta que está recibiendo este correo electrónico porque %{sender_name} (%{sender_email}) lo ha copiado como el destinatario en la solicitud de firma.
+        content_2_html: 'La tarea: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+fr:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name} A Été Signé par Toutes les Parties"
+        title: 'Tâche Terminée: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: La pièce jointe est la tâche terminée <strong>"%{doc_name}"</strong>. Veuillez noter que vous recevez cet e-mail car %{sender_name} (%{sender_email}) vous a copié en tant que destinataire sur la demande de signature.
+          more_than_10_mb_html: Vous pouvez trouver la tâche terminée <strong>"%{doc_name}"</strong> dans le lien suivant car la taille du fichier était trop grande. Veuillez noter que vous recevez cet e-mail car %{sender_name} (%{sender_email}) vous a copié en tant que destinataire sur la demande de signature.
+        content_2_html: 'La tâche: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+ko:
+  sign_mailer:
+    cc_sign_complete:
+      default:
+        subject: "%{doc_name}은(는) 모든 당사자에 의해 서명되었습니다"
+        title: '완료 작업: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: 첨부파일은 <strong>"%{doc_name}"</strong> 완료작업입니다. 이 이메일은 서명요청에 수신자로 %{sender_name} (%{sender_email})을 복사했기때문에 발송되었습니다.
+          more_than_10_mb_html: 파일 크기가 너무 크므로 다음 링크에서 완료된 작업인 <strong>"%{doc_name}"</strong>을(를) 찾을 수 있습니다. 이 이메일은 %{sender_name} (%{sender_email})이(가) 귀하를 서명 요청의 수신자로 복사했기 때문에 발송되었습니다.
+        content_2_html: '작업 : <a href="%{doc_download_link}" target="_blank">(Link)</a>'

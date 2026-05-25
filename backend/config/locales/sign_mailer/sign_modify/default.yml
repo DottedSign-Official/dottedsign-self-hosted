@@ -1,0 +1,100 @@
+---
+en:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: The Document %{doc_name} Has Been Returned
+        title: The Document Has Been Returned
+        content_1_html: '%{sender_name} (%{sender_email}) returned <strong>"%{doc_name}"</strong> .'
+        content_2: 'Here is the reasons for returning:'
+        content_3_html: "*Please note that if you are not registered to DottedSign, this link will expire in <strong>2 days</strong>. This is to prevent the task from unauthorized access."
+        button: View
+        button_content_html: Can't click the button to open the link? <a href="%{file_link}">Click here</a>.
+hant:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: 您在 %{doc_name} 內的簽署內容已被退回
+        title: 您的簽署內容已被退回
+        content_1_html: '%{sender_name} (%{sender_email}) 已退回 <strong>"%{doc_name}"</strong> 。'
+        content_2: 以下為退回原因：
+        content_3_html: 請注意：若您尚未註冊點點簽，為了保障簽署安全性，此連結將於<strong>2天</strong>內失效。
+        button: 查看
+        button_content_html: 無法點選按鈕開啟連結？<a href="%{file_link}">請點此開啟</a>。
+hans:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: 您在 %{doc_name} 内的签署内容已被退回
+        title: 您的签署内容已被退回
+        content_1_html: '%{sender_name} (%{sender_email}) 已退回 <strong>"%{doc_name}"</strong> 。'
+        content_2: 以下为退回原因：
+        content_3_html: 请注意：若您尚未註册点点签，为了保障签署安全性，此连结将于<strong>2天</strong>内失效。
+        button: 查看
+        button_content_html: 无法点选按钮开启连结？<a href="%{file_link}">请点此开启</a>。
+ja:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: ドキュメント%{doc_name}が返却されました。
+        title: ドキュメントが返却されました。
+        content_1_html: '%{sender_name} (%{sender_email}) は<strong>"%{doc_name}"</strong>を返却しました。'
+        content_2: 返却理由：
+        content_3_html: ご注意：DottedSignに登録されていない場合、このリンクは<strong>2日間</strong>のみ有効です。 これはドキュメントへの不正アクセス防止措置のためです。
+        button: 閲覧する
+        button_content_html: ボタンをクリックしてもリンクが開きませんか？その場合、<a href="%{file_link}">ここをクリックしてください</a>。
+it:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: Il documento %{doc_name} è stato restituito
+        title: Il documento è stato restituito
+        content_1_html: '%{sender_name} (%{sender_email}) ha restituito <strong>"%{doc_name}"</strong> .'
+        content_2: 'Ecco le ragioni della restituzione:'
+        content_3_html: "*Si prega di notare che se non sei registrato a DottedSign, questo link scadrà tra <strong>2 giorni</strong>. Questo per prevenire l'accesso non autorizzato al documento."
+        button: Visualizza
+        button_content_html: Non riuscite a fare clic sul pulsante per aprire il link? <a href="%{file_link}">Fare clic qui</a>.
+de:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: Das Dokument %{doc_name} wurde zurückgegeben.
+        title: Das Dokument wurde zurückgegeben.
+        content_1_html: '%{sender_name} (%{sender_email}) hat <strong>"%{doc_name}"</strong> zurückgegeben.'
+        content_2: 'Hier sind die Gründe für die Rückgabe:'
+        content_3_html: "*Bitte beachten Sie, dass dieser Link in <strong>2 Tagen abläuft</strong>, wenn Sie nicht bei DottedSign registriert sind. Dies dient dazu, das Dokument vor unberechtigtem Zugriff zu schützen."
+        button: Ansehen
+        button_content_html: Können Sie nicht auf die Schaltfläche klicken, um den Link zu öffnen? <a href="%{file_link}">Klicken Sie hier</a>.
+es:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: Se ha devuelto el documento %{doc_name}
+        title: El documento ha sido devuelto
+        content_1_html: '%{sender_name} (%{sender_email}) devuelto <strong>"%{doc_name}"</strong> .'
+        content_2: 'Estas son las razones para regresar:'
+        content_3_html: "*Tenga en cuenta que, en caso de no registrarse en DottedSign, este enlace expirará en <strong>2 días</strong>. Lo hacemos así para prevenir accesos no autorizados."
+        button: Vista
+        button_content_html: ¿No puede hacer clic en el botón para abrir el enlace? <a href="%{file_link}">Pulse aquí</a>.
+fr:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: Le Document %{doc_name} A Été Renvoyé
+        title: Le Document A Été Renvoyé
+        content_1_html: '%{sender_name} (%{sender_email}) a renvoyé <strong>"%{doc_name}"</strong> .'
+        content_2: 'Voici les raisons du retour:'
+        content_3_html: "*Veuillez noter que si vous n'êtes pas inscrit à DottedSign, ce lien expirera dans <strong>2 jours</strong>. Ceci est pour empêcher l'accès non autorisé au document."
+        button: Vue
+        button_content_html: Vous ne pouvez pas cliquer sur le bouton pour ouvrir le lien ? <a href="%{file_link}">Cliquez ici</a>.
+ko:
+  sign_mailer:
+    sign_modify:
+      default:
+        subject: 문서 %{doc_name}(이)가 반환되었습니다.
+        title: 문서가 반환되었습니다.
+        content_1_html: '%{sender_name} (%{sender_email})(은)는 <strong>"%{doc_name}"</strong>(을)를 반환했습니다.'
+        content_2: 다음은 반환한 이유입니다.
+        content_3_html: "*DottedSign에 등록하지 않은 경우, 이 링크는 <strong>2일</strong> 내에 만료됨을 참고하십시오. 이는 무단 접근으로부터 문서를 보호하기 위함입니다."
+        button: 보기
+        button_content_html: '만료일 연장: 이 작업의 기한을 직접 연장합니다. <a href="%{file_link}">여기를 클릭하세요</a>.'

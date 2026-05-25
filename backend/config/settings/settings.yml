@@ -1,0 +1,74 @@
+development: &development
+  host: <%= ENV['SERVER_HOST'].env_presence || 'http://localhost:3000'  %>
+  pdf_tool_path: lib/kmpdf/kmpdf
+  pdf_font:
+    path: lib/kmpdf/DroidSansFallback.ttf
+    name: DroidSans
+    size: 14
+  pdf_font_folder:
+    enable: <%= ENV['FONT_FOLDER_ENABLE'].env_presence || false %>
+    path: lib/kmpdf/fonts
+    custom_font:
+      name: <%= ENV['CUSTOM_FONT_NAME'].env_presence || 'CustomFont' %>
+      path: <%= ENV['CUSTOM_FONT_PATH'].env_presence || 'lib/kmpdf/fonts/custom.ttf' %>
+  preview_share_link_path: <%= ENV['SHARE_LINK_PATH'].env_presence || '/preview-share-link'  %>
+  admin_regex: kdanmobile.com$
+  working_dir: tmp/storage
+  branch_deep_link:
+    web: <%= ENV['WEB_BRANCH_DEEPLINK'].env_presence %>
+    app: <%= ENV['APP_BRANCH_DEEPLINK'].env_presence %>
+  redis:
+    sidekiq:
+      url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:6379/1
+      password: <%= ENV['REDIS_PASSWORD'] || OnPremisePassword::Decrypt.call(ENV['CRYPTO_REDIS_PASSWORD'].env_presence)&.result %>
+    default:
+      url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:6379/2
+      password: <%= ENV['REDIS_PASSWORD'] || OnPremisePassword::Decrypt.call(ENV['CRYPTO_REDIS_PASSWORD'].env_presence)&.result %>
+    socket:
+      url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:6379/3
+      password: <%= ENV['REDIS_PASSWORD'] || OnPremisePassword::Decrypt.call(ENV['CRYPTO_REDIS_PASSWORD'].env_presence)&.result %>
+  on_premise:
+    license:
+      rsa_dir: config/on_premise_rsa/license
+    password:
+      rsa_dir: <%= ENV['CRYPTO_PASSWORD_RSA_FOLDER'].env_presence || 'config/on_premise_rsa/password' %>
+      private_key: <%= ENV['CRYPTO_PASSWORD_RSA_PRIVATE_KEY'].env_presence || 'private.pem' %>
+      public_key: <%= ENV['CRYPTO_PASSWORD_RSA_PUBLIC_KEY'].env_presence || 'public.pem' %>
+  kiosk_delay_threshold: 3600
+  gra:
+    host: <%= ENV['GRA_HOST'].env_presence %>
+    path:
+      v1:
+        check_ca:  <%= ENV['GRA_CHECK_CA_PATH'].env_presence || '/gra-test/aatl/v1/query/certificateStatus' %>
+        auth_ca: <%= ENV['GRA_AUTH_CA_PATH'].env_presence || '/gra-test/aatl/v1/ticket/user' %>
+        apply_ca: <%= ENV['GRA_APPLY_CA_PATH'].env_presence || '/gra-test/aatl/v1/certificate/partner/issue' %>
+      v2:
+        auth_ca: <%= ENV['GRA_AUTH_CA_PATH_V2'].env_presence || '/gra-test/aatl/v2/ticket/user' %>
+  hsm:
+    host: <%= ENV['HSM_HOST'].env_presence %>
+    system_cluster_id: <%= ENV['HSM_SYSTEM_CLUSTER_ID'].env_presence %>
+    sign_cluster_id: <%= ENV['HSM_SIGN_CLUSTER_ID'].env_presence %>
+    admin_email: <%= ENV['HSM_ADMIN_EMAIL'].env_presence %>
+    path:
+      v1:
+        user_cert:  <%= ENV['HSM_USER_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA_TPSSC_IV_CVS2.do' %>
+        user_cert_with_password: <%= ENV['HSM_USER_CERT_WITH_PASSWORD_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA_TPSSC_IV_CVS2.do' %>
+        ap_cert: <%= ENV['HSM_AP_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA_TPSSC_IV_CVS2_AP.do' %>
+        user_visible_cert: <%= ENV['HSM_USER_VISIBLE_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partyvpdfsign/GRA_TPSSC_IV_CVS2.do' %>
+        ap_visible_cert: <%= ENV['HSM_AP_VISIBLE_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partyvpdfsign/GRA_TPSSC_IV_CVS2_AP.do' %>
+      v2:
+        user_cert:  <%= ENV['HSM_USER_CERT_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA2_TPSSC_IV_CVS2.do' %>
+        user_cert_with_password: <%= ENV['HSM_USER_CERT_WITH_PASSWORD_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA2_TPSSC_IV_CVS2.do' %>
+        user_visible_cert: <%= ENV['HSM_USER_VISIBLE_CERT_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partyvpdfsign/GRA2_TPSSC_IV_CVS2.do' %>
+  default_group:
+    name: <%= ENV['DEFAULT_GROUP_NAME'].env_presence || 'Default Group' %>
+  system_members:
+    form_signer: form-signer@kdanmobile.com
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+production:
+  <<: *development

@@ -1,0 +1,169 @@
+MemberPreferenceObject:
+  type: object
+  properties:
+    receiver_lang:
+      type: string
+    date_format:
+      type: string
+    forget_remind:
+      type: boolean
+    expire_remind:
+      type: boolean
+    remind_days_before_expire:
+      type: integer
+    otp_via_email:
+      type: boolean
+    otp_via_phone:
+      type: boolean
+    force_receiver_otp:
+      type: boolean
+    signature_timestamp:
+      type: boolean
+    time_zone:
+      type: string
+
+MemberProfileObject:
+  type: object
+  properties:
+    id:
+      type: integer
+    member_id:
+      type: integer
+    language:
+      type: string
+      nullable: true
+    full_name:
+      type: string
+      nullable: true
+    first_name:
+      type: string
+      nullable: true
+    telephone:
+      type: string
+      nullable: true
+    nationality:
+      type: string
+      nullable: true
+    address:
+      type: string
+      nullable: true
+    organization:
+      type: string
+      nullable: true
+    email:
+      type: string
+      nullable: true
+    icon_url:
+      type: string
+      nullable: true
+
+PermissionObject:
+  type: object
+  properties:
+    role:
+      type: string
+    manage_users:
+      type: boolean
+    view_users:
+      type: boolean
+    manage_permission:
+      type: boolean
+    view_team_tasks:
+      type: boolean
+    download_processing_task_self_sender:
+      type: boolean
+    download_processing_task_group_sender:
+      type: boolean
+    download_processing_task_self_signer:
+      type: boolean
+    download_processing_task_group_signer:
+      type: boolean
+    download_completed_task_self_sender:
+      type: boolean
+    download_completed_task_group_sender:
+      type: boolean
+    download_completed_task_self_signer:
+      type: boolean
+    download_completed_task_group_signer:
+      type: boolean
+    download_sign_and_send_self_task:
+      type: boolean
+    download_sign_and_send_group_task:
+      type: boolean
+    download_audit_trail_self_sender:
+      type: boolean
+    download_audit_trail_group_sender:
+      type: boolean
+    download_audit_trail_self_signer:
+      type: boolean
+    download_audit_trail_group_signer:
+      type: boolean
+    delete_processing_task_self_sender:
+      type: boolean
+    delete_sign_and_send_self_task:
+      type: boolean
+    manage_company_name:
+      type: boolean
+    manage_company_logo:
+      type: boolean
+    manage_email_display_name:
+      type: boolean
+    manage_decline_reasons:
+      type: boolean
+    share_template:
+      type: boolean
+    share_combination:
+      type: boolean
+    bulk_send:
+      type: boolean
+    allow_kiosk:
+      type: boolean
+    report_access:
+      type: boolean
+    manage_system_ca:
+      type: boolean
+
+MemberObject:
+  type: object
+  properties:
+    id:
+      type: integer
+    group_id:
+      type: integer
+    name:
+      type: string
+    email:
+      type: string
+    phone_code:
+      type: string
+    phone_number:
+      type: string
+    unconfirmed_email:
+      type: string
+    created_at:
+      type: integer
+      description: Unix timestamp.
+    language:
+      type: string
+    icon_url:
+      type: string
+    is_registered:
+      type: boolean
+    is_admin:
+      type: boolean
+    confirmed:
+      type: boolean
+    preference:
+      $ref: '#/MemberPreferenceObject'
+    profile:
+      $ref: '#/MemberProfileObject'
+    current_permission:
+      $ref: '#/PermissionObject'
+
+MemberAuthResponse:
+  allOf:
+    - $ref: '#/MemberObject'
+    - type: object
+      properties:
+        token_info:
+          $ref: './common.yml#/TokenObject'

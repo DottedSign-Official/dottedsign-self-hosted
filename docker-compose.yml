@@ -1,0 +1,74 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.5-alpine
+    environment:
+      - POSTGRES_PASSWORD=01234567890123456789
+      - POSTGRES_DB=jackrabbit_server_development
+    restart: always
+  redis:
+    image: redis:alpine3.13
+    restart: always
+  on_premise_frontend:
+    image: jackrabbit-client-main:latest
+    platform: linux/amd64
+    build:
+      context: ./frontend
+      no_cache: true
+    restart: always
+  on_premise_backend:
+    image: jackrabbit-server-main:latest
+    platform: linux/amd64
+    build:
+      context: ./backend
+      no_cache: true
+      args:
+        BUNDLE_GEMS_CONTRIBSYS_COM: ${BUNDLE_GEMS_CONTRIBSYS_COM:-}
+    command: >
+      bash -c "
+        rake config:decrypt_files &&
+        rake db:create || echo 'db:create skipped' &&
+        rake db:migrate &&
+        rake db:seed && puma -C config/puma.rb
+      "
+    volumes:
+      - ./backend/tmp/storage:/jackrabbit/storage
+      - ./backend:/jackrabbit
+    env_file:
+      - ./backend.env
+    depends_on:
+      - postgres
+      - redis
+    restart: always
+  on_premise_worker:
+    image: jackrabbit-server-main:latest
+    platform: linux/amd64
+    command: >
+      bash -c "
+        rake config:decrypt_files &&
+        until timeout 1 bash -c '</dev/tcp/on_premise_backend/3000' 2>/dev/null; do
+          echo 'Waiting for backend to be ready...';
+          sleep 5;
+        done &&
+        sidekiq
+      "
+    volumes:
+      - ./backend/tmp/storage:/jackrabbit/storage
+      - ./backend:/jackrabbit
+    env_file:
+      - ./backend.env
+    depends_on:
+      - postgres
+      - redis
+      - on_premise_backend
+    restart: always
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./backend/local_config/nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    depends_on:
+      - on_premise_frontend
+      - on_premise_backend
+    restart: always

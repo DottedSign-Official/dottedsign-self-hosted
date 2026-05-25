@@ -1,0 +1,212 @@
+/api/v1/sign_tasks/bulk/missions:
+  get:
+    tags: [Sign Tasks - Bulk]
+    summary: List Bulk Missions
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Bulk missions list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                missions:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/bulk.yml#/BulkMissionObject'
+                current_page:
+                  type: integer
+                total_pages:
+                  type: integer
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              no_bulk_send_permission:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/NoBulkSendPermission'
+/api/v1/sign_tasks/bulk/create_mission:
+  post:
+    tags: [Sign Tasks - Bulk]
+    summary: Create Bulk Mission
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [template_id, tasks]
+                properties:
+                  template_id:
+                    type: integer
+                  tasks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        file_name:
+                          type: string
+                        message:
+                          type: string
+                        stages:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              email:
+                                type: string
+                                format: email
+                              name:
+                                type: string
+                              role:
+                                type: string
+          examples:
+            single_recipient_mission:
+              $ref: '../components/examples/requests/sign_task_bulk_requests.yml#/SingleRecipientMission'
+            multiple_recipients_mission:
+              $ref: '../components/examples/requests/sign_task_bulk_requests.yml#/MultipleRecipientsMission'
+            multi_role_template_mission:
+              $ref: '../components/examples/requests/sign_task_bulk_requests.yml#/MultiRoleTemplateMission'
+    responses:
+      '200':
+        description: Bulk mission created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/bulk.yml#/BulkMissionObject'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              template_deleted:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/TemplateDeleted'
+              not_match_stages_length:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/NotMatchStagesLength'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              no_bulk_send_permission:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/NoBulkSendPermission'
+              over_monthly_task_usage:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/OverMonthlyTaskUsage'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              template_not_found:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/TemplateNotFound'
+/api/v1/sign_tasks/bulk/download:
+  get:
+    tags: [Sign Tasks - Bulk]
+    summary: Download Bulk Mission Results
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: mission_uuid
+        in: query
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Bulk mission zip file download.
+        content:
+          application/zip:
+            schema:
+              type: string
+              format: binary
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/MemberAuthFailed'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              mission_not_found:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/MissionNotFound'
+/api/v1/sign_tasks/bulk/sample:
+  get:
+    tags: [Sign Tasks - Bulk]
+    summary: Download Bulk Mission CSV Sample
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Sample CSV file download.
+        content:
+          text/csv:
+            schema:
+              type: string
+              format: binary
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/MemberAuthFailed'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              template_not_found:
+                $ref: '../components/examples/errors/sign_task_bulk_errors.yml#/TemplateNotFound'
+    parameters:
+      - name: template_id
+        in: query
+        required: true
+        schema:
+          type: integer

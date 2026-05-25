@@ -1,0 +1,282 @@
+ClientRequestFields:
+  type: object
+  properties:
+    client:
+      type: string
+      enum: [web, app]
+      description: Source client type.
+    ip_address:
+      type: string
+      description: Task owner's IP address.
+    work_id:
+      type: string
+      description: Required if quick sign.
+    user_agent:
+      type: string
+    code:
+      type: string
+      description: Task preview code for non-registered members.
+
+SignStageRequestObject:
+  type: object
+  required: [xfdf_info]
+  properties:
+    email:
+      type: string
+      description: Required for task creation/update.
+    name:
+      type: string
+      description: Required for task creation/update.
+    role:
+      type: string
+      description: Required for template creation/update.
+    action:
+      type: string
+      enum: [sign, review]
+      default: sign
+      description: |
+        Stage action type.
+        - `sign` (default): The signer fills in fields and signs the document.
+        - `review`: The reviewer only reads the document. When action is `review`,
+          the server automatically ignores `xfdf_info`, `pdf_object_info`, `attachment_setting`,
+          `custom_message_setting`, `verify`, and `stage_setting` — they do not need to be provided.
+          A review stage must not be placed first; it must follow at least one sign stage.
+    attachment_setting:
+      type: array
+      items:
+        $ref: './sign_task.yml#/SignStageAttachmentSettingObject'
+    custom_message_setting:
+      $ref: './sign_task.yml#/SignStageCustomMessageSettingObject'
+    xfdf_info:
+      type: array
+      items:
+        $ref: './sign_task.yml#/FieldSettingObject'
+    stage_setting:
+      $ref: './sign_task.yml#/StageSettingObject'
+    verify:
+      type: array
+      items:
+        $ref: '#/OtpVerifyRequestObject'
+
+OtpVerifyRequestObject:
+  type: object
+  required: [verify_type]
+  properties:
+    verify_type:
+      type: string
+      enum: [email, phone, cht_personal, cht_company, signer_detect]
+      description: |
+        Type of identity verification.
+        - `signer_detect`: No additional fields required (system auto-detects).
+        - `email` / `phone`: Requires `verify_source` (the contact info to send OTP to) and `occassion`.
+        - `cht_personal` / `cht_company`: Requires `occassion`.
+    verify_source:
+      type: string
+      description: The contact value for OTP delivery (e.g. phone number or email). Required for `email` and `phone` verify types.
+    occassion:
+      type: string
+      enum: [sign, read]
+      description: When to trigger verification — before signing (`sign`) or before reading (`read`). Note — certificate-based types (cht_personal, cht_company) cannot use `read`.
+    sequence:
+      type: string
+      description: Order for signer. Start from 1.
+
+TaskSettingRequestObject:
+  type: object
+  properties:
+    deadline:
+      type: integer
+      description: Deadline Unix timestamp (seconds). Required if expire_remind is true.
+    forget_remind:
+      type: boolean
+      description: If true, the owner will not receive reminder emails about this task.
+    inform_enable:
+      type: boolean
+      description: If true, the owner receives email notifications at each signing event.
+    expire_remind:
+      type: boolean
+      description: |
+        If true, a reminder email is sent before the deadline expires.
+        Requires `deadline` and `remind_days_before_expire` to be set.
+        Internally converted to an `expire_remind_at` timestamp stored in the task setting.
+    remind_days_before_expire:
+      type: integer
+      description: >
+        Number of days before the deadline to send the expiry reminder.
+        Required if expire_remind is true. Falls back to the member's default if omitted.
+    cc_info:
+      type: array
+      items:
+        $ref: './sign_task.yml#/TaskSettingCcInfoObject'
+    message:
+      type: string
+      description: Custom message shown to signers before signing.
+    completed_message:
+      type: string
+      description: Custom message shown to signers after signing is complete.
+    receiver_lang:
+      type: string
+      enum: [en, zh-tw]
+      description: Language used for invitation and notification emails sent to signers.
+    reference_setting:
+      $ref: './sign_task.yml#/TaskSettingReferenceSettingObject'
+    completed_reference_setting:
+      $ref: './sign_task.yml#/TaskSettingReferenceSettingObject'
+    need_ca:
+      type: boolean
+      description: If true, requires CA (Certificate Authority) signature for this task.
+
+CreateSignTaskRequest:
+  allOf:
+    - type: object
+      required: [file_name, has_order, stages, client, ip_address, pdf_object_info]
+      properties:
+        file_name:
+          type: string
+        has_order:
+          type: boolean
+        stages:
+          type: array
+          items:
+            $ref: '#/SignStageRequestObject'
+        tags:
+          type: array
+          items:
+            type: string
+        client:
+          type: string
+          enum: [web, app]
+        ip_address:
+          type: string
+        pdf_object_info:
+          type: array
+          description: >
+            Client-side generated UUID list corresponding to all `field_object_id` values
+            defined in `stages[].xfdf_info`. Must not be empty — if omitted or empty,
+            signing will fail with error_code 400091 (invalid_object_id).
+          items:
+            type: string
+          example:
+            - "DottedSign_b7076000-5166-11eb-b97b-73074c50641c"
+            - "DottedSign_b7076000-5166-11eb-b97b-73074c50641d"
+    - $ref: '#/TaskSettingRequestObject'
+
+UpdateSignTaskRequest:
+  description: >
+    Partial update request for a sign task. All fields are optional — only provided
+    fields are updated. Used by PATCH /api/v1/sign_tasks/{sign_task_id}.
+  allOf:
+    - type: object
+      properties:
+        file_name:
+          type: string
+        has_order:
+          type: boolean
+        stages:
+          type: array
+          items:
+            $ref: '#/SignStageRequestObject'
+        tags:
+          type: array
+          items:
+            type: string
+        client:
+          type: string
+          enum: [web, app]
+        ip_address:
+          type: string
+        pdf_object_info:
+          type: array
+          description: >
+            Client-side generated UUID list corresponding to all `field_object_id` values
+            defined in `stages[].xfdf_info`. Must not be empty — if omitted or empty,
+            signing will fail with error_code 400091 (invalid_object_id).
+          items:
+            type: string
+    - $ref: '#/TaskSettingRequestObject'
+
+SignatureInfoItemObject:
+  type: object
+  description: A single signed field value submitted by the signer.
+  properties:
+    object_id:
+      type: string
+      description: The field object ID matching the field defined in xfdf_info.
+    type:
+      type: string
+      enum: [signature, guest_signature, checkbox, radio, textfield, datefield]
+      description: Type of the sign field.
+    value:
+      oneOf:
+        - type: integer
+        - type: boolean
+        - type: string
+      description: The value submitted for the field.
+    style:
+      type: string
+      description: Signature style (for signature fields).
+    font_size:
+      type: integer
+      description: Font size (for text fields).
+    alignment:
+      type: string
+      description: Text alignment (for text fields).
+    date_format:
+      type: string
+      description: Date format string (for date fields).
+    zone:
+      type: string
+      description: Timezone identifier (for date fields).
+    changed:
+      type: boolean
+      description: Whether the field value was changed by the signer.
+
+AttachmentInfoItemObject:
+  type: object
+  description: A single attachment submission from the signer.
+  properties:
+    attachment_id:
+      type: string
+      description: Attachment ID matching the attachment_setting defined in the stage.
+    attachment_type:
+      type: string
+      description: MIME type of the uploaded attachment.
+    uploaded:
+      type: boolean
+      description: Whether the attachment has been uploaded.
+    changed:
+      type: boolean
+      description: Whether the attachment was changed by the signer.
+
+VerifyInfoObject:
+  type: object
+  description: >
+    OTP verification payload sent by the signer when the stage requires identity verification.
+    Use the `uuid` returned from the trigger/first call and put the OTP received by the user
+    into `verify_data`.
+  properties:
+    uuid:
+      type: string
+      description: UUID returned from the OTP-trigger response.
+    verify_data:
+      type: string
+      description: OTP code received by the user.
+
+VerifyInfoFullObject:
+  type: object
+  description: >
+    Extended OTP verification payload. Used by endpoints that additionally accept a
+    pre-issued identity-verify token (e.g. certificate-based verification) — currently
+    `POST /sign_tasks/confirm`, `POST /sign_tasks/review`, `GET /sign_tasks/read` (internal
+    use via `info_controller`), and `PUT /public_forms/form_tasks/sign`.
+  properties:
+    uuid:
+      type: string
+      description: UUID returned from the OTP-trigger response.
+    verify_data:
+      type: string
+      description: OTP code received by the user.
+    identity_verify_token:
+      type: string
+      description: Pre-issued identity verification token (used when verification has already
+        been performed via certificate-based flow).

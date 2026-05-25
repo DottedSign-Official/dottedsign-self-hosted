@@ -1,0 +1,351 @@
+InvalidCategory:
+  summary: invalid category
+  description: The `category` query parameter value is not one of the allowed task category values.
+  value:
+    error_code: 400034
+    error_message: invalid category
+
+TasksTooMuch:
+  summary: tasks result over threshold
+  description: The query would return more tasks than the server threshold allows; apply additional filters or reduce the date range.
+  value:
+    error_code: 400070
+    error_message: tasks result over threshold
+
+SortTypeNotAllow:
+  summary: the sort type is not allowed
+  description: The `sort_type` query parameter is not a recognized sort value.
+  value:
+    error_code: 400069
+    error_message: the sort type is not allowed
+
+MemberAuthFailed:
+  summary: member auth failed
+  description: The Authorization header is missing, expired, or the bearer token does not match any active session.
+  value:
+    error_code: 401202
+    error_message: member auth failed
+
+TokenInvalid:
+  summary: token is invalid
+  description: The provided token is malformed or has been revoked.
+  value:
+    error_code: 401203
+    error_message: token is invalid
+
+NeedMoreInformation:
+  summary: some columns should not be null
+  description: One or more required fields are null; provide all required fields before submitting.
+  value:
+    error_code: 400001
+    error_message: some columns should not be null
+
+InvalidObjectId:
+  summary: invalid object id
+  description: The field object UUIDs do not match any stored sign field objects for this task; verify the object IDs are correct.
+  value:
+    error_code: 400091
+    error_message: invalid object id
+
+OverMonthlyTaskUsage:
+  summary: over monthly task usage
+  description: The monthly task creation quota has been reached; wait until the next billing cycle or upgrade the plan.
+  value:
+    error_code: 403032
+    error_message: over monthly task usage
+
+TaskIsNotDraft:
+  summary: task is not draft
+  description: This action is only allowed when the task is in `draft` status.
+  value:
+    error_code: 400030
+    error_message: task is not draft
+
+TaskNotOwned:
+  summary: current member not own this task
+  description: The authenticated member is not the owner of this task; only the task owner can perform this action.
+  value:
+    error_code: 403033
+    error_message: current member not own this task
+
+TaskNotFound:
+  summary: task not found
+  description: No sign task exists with the given task identifier.
+  value:
+    error_code: 404031
+    error_message: task not found
+
+TaskNotDeletable:
+  summary: only tasks that are self-signed or not yet completed can be deleted
+  description: Only self-signed tasks or tasks that have not yet been completed can be deleted.
+  value:
+    error_code: 400037
+    error_message: only tasks that are self-signed or not yet completed can be deleted
+
+FileProcessing:
+  summary: the file is processing, please wait
+  description: The uploaded PDF is still being processed by the server; wait a moment and try again.
+  value:
+    error_code: 400031
+    error_message: the file is processing, please wait
+
+FileNotReady:
+  summary: file not ready yet, please try later
+  description: |
+    The base64-decoded PDF could not be processed (decode failure, malformed PDF, or attachment write failed).
+    Returned by `POST /api/v1/sign_tasks/create_with_file` when the file pipeline cannot leave the draft state.
+  value:
+    error_code: 400040
+    error_message: file not ready yet, please try later
+
+InvalidPreviewCode:
+  summary: invalid preview code
+  description: The `code` parameter is malformed or does not match any valid quick sign preview code for this task.
+  value:
+    error_code: 400061
+    error_message: invalid preview code
+
+RequestTooFrequently:
+  summary: request too frequently
+  description: This endpoint has been called too frequently; wait before trying again.
+  value:
+    error_code: 400041
+    error_message: request too frequently
+
+MemberAlreadySecured:
+  summary: member has finished security check
+  description: The member has already completed the required security check and does not need to do it again.
+  value:
+    error_code: 400056
+    error_message: member has finished security check
+
+TaskNotAccessible:
+  summary: task is not accessible
+  description: The authenticated member is not a participant (owner or signer) of this task.
+  value:
+    error_code: 403036
+    error_message: task is not accessible
+
+NeedToCheckSecurity:
+  summary: security check process not finished
+  description: The signer must complete a required security check before they can access this task.
+  value:
+    error_code: 403031
+    error_message: security check process not finished
+
+CodeExpire:
+  summary: code is already expired
+  description: The quick sign preview code has passed its expiry time; the signer must request a new invitation link.
+  value:
+    error_code: 403035
+    error_message: code is already expired
+
+TaskWasExpired:
+  summary: task was expired
+  description: The task's signing deadline has passed; contact the task owner to reissue the task.
+  value:
+    error_code: 403055
+    error_message: task was expired
+
+TaskWasDeclined:
+  summary: the task has been declined
+  description: The task has already been declined by one of the signers and can no longer be acted on.
+  value:
+    error_code: 403048
+    error_message: the task has been declined.
+
+TaskIsDraft:
+  summary: task is draft
+  description: The task is still in `draft` status and has not been started yet; only started tasks can be accessed.
+  value:
+    error_code: 403069
+    error_message: task is draft
+
+StageNotFound:
+  summary: stage not found
+  description: No active stage was found for the current signer in the referenced task.
+  value:
+    error_code: 404032
+    error_message: stage not found
+
+SignerInfoNotReady:
+  summary: signer info not ready yet
+  description: Signer information has not been fully set up yet; wait a moment and try again.
+  value:
+    error_code: 400901
+    error_message: signer info not ready yet
+
+TemplateDeleted:
+  summary: template has deleted
+  description: The referenced template has been deleted and is no longer available for creating tasks.
+  value:
+    error_code: 400053
+    error_message: template has deleted
+
+NotMatchStagesLength:
+  summary: input stages length not match template's stages
+  description: The number of `stages` entries must match the number of stages defined in the template.
+  value:
+    error_code: 400910
+    error_message: input stages length not match template's stages
+
+TemplateWithInvalidStageAction:
+  summary: template has invalid stage action
+  description: The template contains a stage with an action type that is not valid for task creation.
+  value:
+    error_code: 400925
+    error_message: template has invalid stage action
+
+OverTemplateUsage:
+  summary: over template usage
+  description: The template usage quota has been reached; wait until the next cycle or upgrade the plan.
+  value:
+    error_code: 403042
+    error_message: over template usage
+
+TemplateNotAccessible:
+  summary: template not accessible to member
+  description: The authenticated member does not have access to this template.
+  value:
+    error_code: 403044
+    error_message: template not accessible to member
+
+TemplateNotFound:
+  summary: template not found
+  description: No template exists with the given template identifier.
+  value:
+    error_code: 404035
+    error_message: template not found
+
+RoleNotFound:
+  summary: sign stage role not found
+  description: No sign stage role was found with the given identifier in the template.
+  value:
+    error_code: 404044
+    error_message: sign stage role not found
+
+TaskNotDuplicable:
+  summary: task not in a duplicable status
+  description: The task is not in a status that allows duplication; only certain statuses (e.g. waiting, completed) can be duplicated.
+  value:
+    error_code: 403070
+    error_message: task not in a duplicable status
+
+FilterNotAllow:
+  summary: filter is not allowed
+  description: The `filter` query parameter value is not a recognized filter type.
+  value:
+    error_code: 400042
+    error_message: filter is not allowed
+
+TaskIsNotFinished:
+  summary: task is not completed or declined
+  description: The task must be completed or declined before this action can be performed.
+  value:
+    error_code: 400063
+    error_message: task is not completed or declined
+
+TaskIsNotCompleted:
+  summary: task is not completed
+  description: The task must be fully completed (all signers have signed) before this action can be performed.
+  value:
+    error_code: 400032
+    error_message: task is not completed
+
+DownloadTaskFileFailed:
+  summary: download task associate pdf failed
+  description: The associated PDF file could not be retrieved from storage; try again later.
+  value:
+    error_code: 406036
+    error_message: download task associate pdf failed
+
+MailFailed:
+  summary: send mail failed
+  description: The mail service failed to send the email; check the recipient address and try again later.
+  value:
+    error_code: 406030
+    error_message: send mail failed
+
+SignerNotFound:
+  summary: signer not found
+  description: No signer was found with the given email address for this task.
+  value:
+    error_code: 404034
+    error_message: signer not found
+
+ForwardMailAlreadyInFlow:
+  summary: forward mail has already included in the same sequence of sign flow
+  description: The new signer's email is already part of the same sequential sign flow; choose a different signer.
+  value:
+    error_code: 400050
+    error_message: forward mail has already included in the same sequence of sign flow
+
+ForwardNotAllowed:
+  summary: member not allowed to forward this stage
+  description: The authenticated member is not permitted to change the signer for this stage; check the stage configuration.
+  value:
+    error_code: 403038
+    error_message: member not allowed to forward this stage
+
+InvalidFileType:
+  summary: signature file type is invalid
+  description: The signature file type is not supported; use a valid image format (e.g. PNG, JPEG).
+  value:
+    error_code: 400057
+    error_message: signature file type is invalid
+
+TemplateMergeFailed:
+  summary: template merge failed
+  description: The template merge operation failed; ensure all selected templates are compatible and try again.
+  value:
+    error_code: 400085
+    error_message: template merge failed
+
+TaskNotTransferable:
+  summary: task is not transferable
+  description: The task is not in a status that allows ownership transfer.
+  value:
+    error_code: 4031304
+    error_message: task is not transferable
+
+MemberNotFound:
+  summary: member not found
+  description: No member was found with the given email address in this organization.
+  value:
+    error_code: 404201
+    error_message: member not found
+
+FieldContentInvalid:
+  summary: field content invalid
+  description: A sign field value does not pass server-side validation, such as a date format error or a missing required value.
+  value:
+    error_code: 400062
+    error_message: field content invalid
+
+TaskNotWaiting:
+  summary: task is not waiting
+  description: The task is not in the `waiting` status; reminder cannot be sent because no signer is currently waiting to sign.
+  value:
+    error_code: 400035
+    error_message: task is not waiting
+
+EnvelopeNotFound:
+  summary: envelope not found
+  description: No envelope exists with the given `envelope_id`.
+  value:
+    error_code: 404048
+    error_message: envelope not found
+
+EnvelopeNotOwned:
+  summary: envelope not owned
+  description: The authenticated member does not own this envelope and is not allowed to perform owner-only actions.
+  value:
+    error_code: 403065
+    error_message: current member not own this envelope
+
+EmailFormatInvalid:
+  summary: email format invalid
+  description: The provided email address does not match a valid format.
+  value:
+    error_code: 400220
+    error_message: email format invalid

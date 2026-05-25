@@ -1,0 +1,37 @@
+invalid_grant:
+  error_code: 401_001
+  error_message: invalid grant
+login_required:
+  error_code: 401_030
+  error_message: member need login first
+member_auth_failed:
+  app_code: 401
+  error_code: 401_202
+  error_message: member auth failed
+token_invalid:
+  error_code: 401_203
+  error_message: token is invalid
+password_not_match:
+  error_code: 401_204
+  error_message: password not match
+password_invalid:
+  error_code: 401_205
+  error_message: password is invalid
+callback_url_invalid:
+  error_code: 401_206
+  error_message: callback url is invalid
+api_key_invalid:
+  error_code: 401_207
+  error_message: unrecognized api_key, please make sure your plan is enterprise and your subscription hasn't expired
+invalid_member_use_standard_api:
+  error_code: 401_208
+  error_message: member token is not accessable for using standard api, please check your token and make sure token is obtain by login api
+password_and_confirmation_not_match:
+  error_code: 401_209
+  error_message: password and confirmation not match
+password_same_as_last_modification:
+  error_code: 401_210
+  error_message: password same as last modification
+authorize_failed:
+  error_code: 401_401
+  error_message: Authorize failed

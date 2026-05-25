@@ -1,0 +1,64 @@
+---
+en:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name} changed the task owner of %{doc_name}"
+        title: Task Owner Changed
+        content_1_html: "%{old_owner_name} has changed the task owner of <strong>\"%{doc_name}\"</strong> to %{new_owner_name} (%{new_owner_email})."
+hant:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{doc_name} 的任務發起者 %{old_owner_name} 已變更"
+        title: 任務發起者已變更
+        content_1_html: "%{old_owner_name} 已成功將 <strong>\"%{doc_name}\"</strong> 的任務發文者變更為 %{new_owner_name} (%{new_owner_email})。"
+hans:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{doc_name} 的任务发起者 %{old_owner_name} 已变更"
+        title: 任务发起者已变更
+        content_1_html: "%{old_owner_name} 已成功将 <strong>\"%{doc_name}\"</strong> 的任务发起者变更为 %{new_owner_name} (%{new_owner_email})。"
+ja:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name}は%{doc_name}のタスク作成者を変更しました"
+        title: タスク作成者が変更されました
+        content_1_html: "%{old_owner_name}は<strong>\"%{doc_name}\"</strong>のタスク作成者を%{new_owner_name}（%{new_owner_email}）に変更しました。"
+it:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name} ha cambiato il proprietario del task %{doc_name}"
+        title: Proprietario del task cambiato
+        content_1_html: "%{old_owner_name} ha cambiato il proprietario del task <strong>\"%{doc_name}\"</strong> in %{new_owner_name} (%{new_owner_email})."
+de:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name} hat den Aufgabeninhaber von %{doc_name} geändert"
+        title: Aufgabeninhaber geändert
+        content_1_html: "%{old_owner_name} hat den Aufgabeninhaber von <strong>\"%{doc_name}\"</strong> auf %{new_owner_name} (%{new_owner_email}) geändert."
+es:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name} cambió el propietario de la tarea %{doc_name}"
+        title: Propietario de la tarea cambiado
+        content_1_html: "%{old_owner_name} cambió el propietario de la tarea <strong>\"%{doc_name}\"</strong> a %{new_owner_name} (%{new_owner_email})."
+fr:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name} a changé le propriétaire de la tâche %{doc_name}"
+        title: Propriétaire de la tâche modifié
+        content_1_html: "%{old_owner_name} a changé le propriétaire de la tâche <strong>\"%{doc_name}\"</strong> pour %{new_owner_name} (%{new_owner_email})."
+ko:
+  sign_mailer:
+    owner_changed_notification:
+      default:
+        subject: "%{old_owner_name} 님이 %{doc_name}의 작업 발신자를 변경했습니다"
+        title: 작업 발신자 변경
+        content_1_html: "%{old_owner_name} 님이 <strong>\"%{doc_name}\"</strong>의 작업 발신자를 %{new_owner_name} (%{new_owner_email}) 님으로 변경했습니다."

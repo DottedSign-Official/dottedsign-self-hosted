@@ -1,0 +1,28 @@
+---
+en:
+  sign_mailer:
+    kiosk_complete:
+      default:
+        subject: "%{doc_name} Completed"
+        title: 'Document Completed: "%{doc_name}"'
+        content_1:
+          less_than_10_mb_html: The attached is the completed document <strong>"%{doc_name}"</strong>.
+          more_than_10_mb_html: You can find the completed document <strong>"%{doc_name}"</strong> in the following link as the file size was too big.
+        content_2:
+          the_task_html: 'The document: <a href="%{doc_download_link}" target="_blank">(Link)</a>'
+          the_attachment_html: 'The attachment: <a href="%{attachment_link}" target="_blank">(Link)</a>'
+    message_content: 'Here is the message from %{sender_name}:'
+hant:
+  sign_mailer:
+    kiosk_complete:
+      default:
+        subject: 文件已完成：%{doc_name}
+        title: 文件已完成："%{doc_name}"
+        content_1:
+          less_than_10_mb_html: 您可以在信件夾檔中取得已完成簽署的文件<strong>"%{doc_name}"</strong>。
+          more_than_10_mb_html: 因檔案過大，您可以從下方連結取得已完成簽署的文件 <strong>"%{doc_name}"</strong>。
+        content_2:
+          the_task_html: 文件下載連結： <a href="%{doc_download_link}" target="_blank">(Link)</a>
+          the_attachment_html: 文件夾檔下載連結： <a href="%{attachment_link}" target="_blank">(Link)</a>
+    message_content: 以下為%{sender_name}傳送給您的訊息：
+

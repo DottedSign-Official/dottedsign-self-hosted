@@ -1,0 +1,58 @@
+AdminReissueTask:
+  summary: Admin reissue — reactivate a declined task stage
+  description: |
+    Admin reissues a declined task by specifying `sign_task_id` and the `stage_id`
+    of the declined stage. The task returns to waiting status and the signer receives
+    a new invitation email.
+  value:
+    sign_task_id: 1234
+    stage_id: 56
+    client: web
+    ip_address: "10.0.0.1"
+
+CreateAdminRole:
+  summary: Create admin role — view-only role
+  description: |
+    Create a new group admin role named "Auditor" with read-only permissions.
+    `manage_users` and `manage_permission` are false; the role can only view tasks
+    and download completed documents for group members.
+  value:
+    group_id: 10
+    name: "Auditor"
+    permission:
+      role: "Auditor"
+      manage_users: false
+      view_users: true
+      manage_permission: false
+      view_team_tasks: true
+      download_completed_task_group_sender: true
+      download_completed_task_group_signer: true
+      download_audit_trail_group_sender: true
+      download_audit_trail_group_signer: true
+
+UpdateGroupPermissions:
+  summary: Update group permissions — two roles
+  description: |
+    Batch-update permissions for all roles in a group. The `permissions` array must
+    include every role to be updated; roles omitted from the array are left unchanged.
+  value:
+    group_id: 10
+    permissions:
+      - role: "Manager"
+        manage_users: true
+        view_users: true
+        manage_permission: true
+        view_team_tasks: true
+        download_completed_task_group_sender: true
+        download_completed_task_group_signer: true
+        download_audit_trail_group_sender: true
+        download_audit_trail_group_signer: true
+      - role: "Member"
+        manage_users: false
+        view_users: false
+        manage_permission: false
+        view_team_tasks: false
+        download_completed_task_group_sender: false
+        download_completed_task_group_signer: false
+        download_audit_trail_group_sender: false
+        download_audit_trail_group_signer: false

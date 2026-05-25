@@ -1,0 +1,13 @@
+export const LOGIN = "LOGIN";
+export const LOGIN_SUC = "LOGIN_SUC";
+export const LOGIN_FAL = "LOGIN_FAL";
+export const REGSITER = "REGSITER";
+export const REGSITER_SUC = "REGSITER_SUC";
+export const REGSITER_FAL = "REGSITER_FAL";
+export const FORGET_PWD = "FORGET_PWD";
+export const FORGET_PWD_SUC = "FORGET_PWD_SUC";
+export const FORGET_PWD_FAL = "FORGET_PWD_FAL";
+export const RESET_PWD = "RESET_PWD";
+export const RESET_PWD_SUC = "RESET_PWD_SUC";
+export const RESET_PWD_FAL = "RESET_PWD_FAL";
+export const SET_MODE = "SET_MODE";

@@ -1,0 +1,33 @@
+export const NAME = "default";
+
+export const EMAIL = "default@rabbit.com";
+export const INVALID_EMAIL = "default@";
+
+export const PASSWORD_EIGHT_ZEROS = "00000000";
+export const PASSWORD_EIGHT_ONES = "11111111";
+export const PASSWORD_SHORT_THAN_EIGHT = "1234567";
+
+export const PHONE_CODE = "123";
+export const INVALID_PHONE_CODE = "1a234";
+
+export const PHONE_NUMBER = "123456789";
+export const INVALID_PHONE_NUMBER = "1a2b34567890";
+export const PROFILE1 = {
+  FULL_NAME: "FULL_NAME",
+  FIRST_NAME: "FIRST_NAME",
+  EMAIL: "EMAIL",
+  TELEPHONE: "TELEPHONE",
+  ADDRESS: "ADDRESS",
+  ORGANIZATION: "ORGANIZATION",
+  NATIONALITY: "NATIONALITY",
+};
+
+export const PROFILE2 = {
+  FULL_NAME: "FULL_NAME2",
+  FIRST_NAME: "FIRST_NAME2",
+  EMAIL: "EMAIL2",
+  TELEPHONE: "TELEPHONE2",
+  ADDRESS: "ADDRESS2",
+  ORGANIZATION: "ORGANIZATION2",
+  NATIONALITY: "NATIONALITY2",
+};

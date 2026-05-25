@@ -1,0 +1,156 @@
+﻿套件名稱,安裝來源,套件 URL,License 名稱,License URL,VCS URL,備註
+build-essential,[直接依賴],https://tracker.debian.org/pkg/build-essential,See Copyright File,https://metadata.ftp-master.debian.org/changelogs/main/b/build-essential/build-essential_12.12_copyright,,
+cron,[直接依賴],https://tracker.debian.org/pkg/cron,"Paul-Vixie's-license
+Paul-Vixie's-license and GPL-2+ and ISC
+GPL-2.0-or-later
+GPL-1+ or Artistic
+GPL-1+
+Artistic
+ISC",https://metadata.ftp-master.debian.org/changelogs/main/c/cron/cron_3.0pl1-206_copyright,https://salsa.debian.org/debian/cron,
+libpq5,[直接依賴],https://tracker.debian.org/pkg/libpq5,"PostgreSQL
+PostgreSQL and Custom-regex and Tcl
+Custom-pg_dump
+BSD-3-Clause
+Custom-Unicode
+double-metaphone
+nagaysau-ishii
+BSD-2-Clause
+Custom-regex
+Tcl",https://metadata.ftp-master.debian.org/changelogs/main/p/postgresql-18/postgresql-18_18.1-2_copyright,https://salsa.debian.org/postgresql/postgresql,
+nodejs,[直接依賴],https://tracker.debian.org/pkg/nodejs,"MIT
+Expat or Apache-2.0
+CC0-1.0
+BSD-3-clause~holders
+BSD-3-clause~Google
+BSD-3-clause~contributors or W3C-Test-Suite
+CC0-1.0 or BSD-2-clause~holders
+ISC
+BSD-2-clause~holders
+GPL3+ with autoconf exception
+MIT/X11
+BSD-2-clause~holders and Expat
+Apache-2.0
+BD-3-clause~google
+BSD-3-clause~google
+BSD-3-Clause
+BSD-4-clause~author
+BSD-3-clause~intel
+Public Domain
+LGPL-2.1-or-later
+BSD-3-clause~holders or GPL-2
+BSD-3-clause~intel or GPL-2
+BSD-3-clause~contributors
+Python
+BSD-3-clause~Sun
+ISC-no-disclaim
+MPL-2.0
+curl
+BSD-3-clause~Intel
+GPL-2.0
+W3C-Test-Suite",https://metadata.ftp-master.debian.org/changelogs/main/n/nodejs/nodejs_24.13.0+dfsg+~cs24.10.7-2_copyright,https://salsa.debian.org/js-team/nodejs,
+vim,[直接依賴],https://tracker.debian.org/pkg/vim,"Vim
+OPL-1+
+BSD-3-Clause
+MIT
+BSD-2-Clause
+Apache or Expat
+GPL-1+ or Artistic-1
+Vim-Regexp
+UC
+Public Domain
+Expat or GPL-2
+X11
+Compaq
+GPL-2.0-or-later
+Expat or Vim
+XPM
+LGPL-2.1-or-later
+EDL-1
+Apache
+GPL-3.0-or-later
+Unlicense
+ISC
+HPND-sell
+GPL-2.0
+GPL-1+
+Artistic-1",https://sources.debian.org/src/vim/2:9.1.2103-1/debian/copyright/,https://salsa.debian.org/vim-team/vim,
+shared-mime-info,[直接依賴],https://tracker.debian.org/pkg/shared-mime-info,See Copyright File,https://metadata.ftp-master.debian.org/changelogs/main/s/shared-mime-info/shared-mime-info_2.4-5_copyright,https://salsa.debian.org/freedesktop-team/shared-mime-info,
+wkhtmltopdf,[直接依賴],https://tracker.debian.org/pkg/wkhtmltopdf,LGPL-3.0,https://metadata.ftp-master.debian.org/changelogs/main/w/wkhtmltopdf/wkhtmltopdf_0.12.6-2_copyright,https://salsa.debian.org/kolter/wkhtmltopdf,
+ttf-wqy-zenhei,[直接依賴],https://tracker.debian.org/pkg/ttf-wqy-zenhei,** GPL v2 with font embedding exception:,https://sources.debian.org/src/ttf-wqy-zenhei/0.9.45-4/debian/copyright/,,
+imagemagick,[直接依賴],https://tracker.debian.org/pkg/imagemagick,"ImageMagick
+aclocal
+Makefile-in and Imagemagick
+ImageMagickPartlibsquish
+ImageMagickPartGraphicsMagick
+ImageMagickPartlibjpeg
+ImageMagickLicensePartFIG
+GPL-2.0-or-later
+BSD-with-FSF-change-public-domain
+ImageMagickLicensePartGsview
+ImageMagickLicensePartOpenSSH
+Magick++
+GPL2+-with-Autoconf-Macros-exception
+GPL3+-with-Autoconf-Macros-exception
+GNU-All-Permissive-License
+LGPL-3+
+ImageMagickLicensePartEZXML
+Perllikelicence
+GPL3+-with-Autoconf-Macros-exception-GNU
+Makefile-in",https://sources.debian.org/src/imagemagick/8:7.1.2.13+dfsg1-1/debian/copyright/,https://salsa.debian.org/debian/imagemagick,
+libmagickwand-dev,[直接依賴],https://tracker.debian.org/pkg/libmagickwand-dev,"ImageMagick
+aclocal
+Makefile-in and Imagemagick
+ImageMagickPartlibsquish
+ImageMagickPartGraphicsMagick
+ImageMagickPartlibjpeg
+ImageMagickLicensePartFIG
+GPL-2.0-or-later
+BSD-with-FSF-change-public-domain
+ImageMagickLicensePartGsview
+ImageMagickLicensePartOpenSSH
+Magick++
+GPL2+-with-Autoconf-Macros-exception
+GPL3+-with-Autoconf-Macros-exception
+GNU-All-Permissive-License
+LGPL-3+
+ImageMagickLicensePartEZXML
+Perllikelicence
+GPL3+-with-Autoconf-Macros-exception-GNU
+Makefile-in",https://sources.debian.org/src/imagemagick/8:7.1.2.13+dfsg1-1/debian/copyright/,https://salsa.debian.org/debian/imagemagick,
+ffmpeg,[直接依賴],https://tracker.debian.org/pkg/ffmpeg,"LGPL-2.1-or-later
+LGPL-2.1+ and Sundry
+GPL-2.0-or-later
+GPL-3.0-or-later
+MIT
+LGPL-2.1+ and BSD-3-clause
+Public Domain
+ISC
+IJG
+LGPL-2.1+ and BSD-2-clause
+Zlib
+BSD-3-Clause
+LGPL-2.1+ and Expat
+BSD-2-Clause
+BSD-1-clause
+LGPL-2+
+LGPL-2.1+ and BSL
+BSD-2-clause or LGPL-2.1+
+BSD-3-clause or LGPL-2.1+
+BSL or LGPL-2.1+
+man-page
+BSL
+Sundry",https://sources.debian.org/src/ffmpeg/7:8.0.1-3/debian/copyright/,https://salsa.debian.org/multimedia-team/ffmpeg,
+openjdk-17-jdk,[直接依賴],https://tracker.debian.org/pkg/openjdk-17-jdk,"GPL with Classpath exception
+BSD-C3
+MIT
+LGPL",https://metadata.ftp-master.debian.org/changelogs/main/o/openjdk-17/openjdk-17_17.0.18+8-1_copyright,https://salsa.debian.org/openjdk-team/openjdk/tree/openjdk-17,
+libpq-dev,[直接依賴],https://tracker.debian.org/pkg/libpq-dev,"PostgreSQL
+PostgreSQL and Custom-regex and Tcl
+Custom-pg_dump
+BSD-3-Clause
+Custom-Unicode
+double-metaphone
+nagaysau-ishii
+BSD-2-Clause
+Custom-regex
+Tcl",https://metadata.ftp-master.debian.org/changelogs/main/p/postgresql-18/postgresql-18_18.1-2_copyright,https://salsa.debian.org/postgresql/postgresql,

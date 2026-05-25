@@ -1,0 +1,67 @@
+/oauth/token:
+  post:
+    tags: [OAuth]
+    summary: OAuth Login (Password Grant)
+    description: Obtain an access token using email/password credentials.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [client_id, client_secret, grant_type, email, password]
+            properties:
+              client_id:
+                type: string
+                description: Application UID.
+              client_secret:
+                type: string
+                description: Application secret.
+              grant_type:
+                type: string
+                enum: [password]
+              email:
+                type: string
+              password:
+                type: string
+              provider:
+                type: string
+                enum: [ldap]
+                description: Use database auth if omitted.
+    responses:
+      '200':
+        description: Token issued successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/TokenObject'
+
+/oauth/token/refresh:
+  post:
+    tags: [OAuth]
+    summary: Refresh Access Token
+    description: Obtain a new access token using a refresh token.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [client_id, client_secret, grant_type, refresh_token]
+            properties:
+              client_id:
+                type: string
+              client_secret:
+                type: string
+              grant_type:
+                type: string
+                enum: [refresh_token]
+              refresh_token:
+                type: string
+    responses:
+      '200':
+        description: Token refreshed successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/TokenObject'

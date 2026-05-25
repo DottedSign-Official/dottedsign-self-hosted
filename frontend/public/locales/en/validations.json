@@ -1,0 +1,7 @@
+{
+  "required": "Required",
+  "should_be_an_email": "Should be an E-mail",
+  "should_not_have_whitespace": "Should not have whitespace",
+  "invalid_password": "Invalid Password",
+  "exceed_length_limit":"Character length exceeded."
+}

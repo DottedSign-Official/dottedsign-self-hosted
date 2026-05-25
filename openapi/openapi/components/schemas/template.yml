@@ -1,0 +1,86 @@
+TemplateBasicObject:
+  type: object
+  description: Core template fields returned in list and detail responses.
+  properties:
+    template_id:
+      type: integer
+      description: Template ID.
+    file_name:
+      type: string
+      description: Template file name.
+    owner_id:
+      type: integer
+      description: Member ID of the template owner.
+    has_order:
+      type: boolean
+      description: Whether signers must sign in the defined order.
+    status:
+      type: string
+      enum: [active, deleted, processing]
+      description: Current status of the template.
+    code:
+      type: string
+      nullable: true
+      description: Optional unique code identifier for the template.
+    created_at:
+      type: integer
+      description: Creation timestamp (Unix epoch seconds).
+    thumbnail:
+      type: string
+      nullable: true
+      description: URL of the template thumbnail image.
+    share_info:
+      type: object
+      description: Sharing status of the template relative to the current member.
+      properties:
+        share_by_me:
+          type: boolean
+          description: Whether the current member owns this template and has shared it.
+        share_by_others:
+          type: boolean
+          description: Whether this template was shared to the current member by someone else.
+    detail:
+      type: array
+      description: List of stage definitions (signers/reviewers) configured in the template.
+      items:
+        type: object
+
+TemplateListItem:
+  allOf:
+    - $ref: './template.yml#/TemplateBasicObject'
+    - type: object
+      description: Additional fields returned only in the list response.
+      properties:
+        over_attachment_limit:
+          type: boolean
+          description: Whether the template exceeds the attachment limit.
+        tags:
+          type: object
+          description: Tag map for the current member. Keys are tag names, values indicate whether the tag is applied to this template.
+          additionalProperties:
+            type: boolean
+
+TemplateDetailObject:
+  allOf:
+    - $ref: './template.yml#/TemplateBasicObject'
+    - type: object
+      description: Full template detail fields returned in create, show, and update responses.
+      properties:
+        tags:
+          type: object
+          description: Tag map for the current member. Keys are tag names, values indicate whether the tag is applied to this template.
+          additionalProperties:
+            type: boolean
+        setting_info:
+          type: object
+          description: Template-level task settings (message, reminders, language, CC, etc.).
+        reference_upload_links:
+          type: array
+          description: Pre-signed upload links for reference attachments.
+          items:
+            type: string
+        completed_reference_upload_links:
+          type: array
+          description: Pre-signed upload links for completed reference attachments.
+          items:
+            type: string

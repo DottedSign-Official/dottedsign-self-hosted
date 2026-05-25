@@ -1,0 +1,845 @@
+/api/v1/sign_tasks/admin/tasks:
+  get:
+    tags: [Sign Tasks - Admin]
+    summary: Admin List All Tasks
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: query
+        name: group_id
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: category
+        required: false
+        schema:
+          default: waiting_for_group
+          type: string
+      - in: query
+        name: start_from
+        required: false
+        schema:
+          description: Start date string (e.g. 2024-01-01)
+          type: string
+      - in: query
+        name: end_at
+        required: false
+        schema:
+          description: End date string (e.g. 2024-12-31)
+          type: string
+      - in: query
+        name: emails
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+      - in: query
+        name: sort_type
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+      - in: query
+        name: per_page
+        required: false
+        schema:
+          default: 10
+          type: integer
+    responses:
+      '200':
+        description: Admin task list.
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  properties:
+                    current_page:
+                      type: integer
+                    summary:
+                      additionalProperties:
+                        type: integer
+                      description: Task counts per category
+                      type: object
+                    tasks:
+                      items:
+                        $ref: ../components/schemas/sign_task.yml#/SignTaskObject
+                      type: array
+                    total_pages:
+                      type: integer
+                  type: object
+              type: object
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              group_task_not_accessible:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/GroupTaskNotAccessible'
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              group_not_found:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/GroupNotFound'
+/api/v1/sign_tasks/admin/export:
+  post:
+    tags: [Sign Tasks - Admin]
+    summary: Export Admin Task Report
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              category:
+                type: string
+              emails:
+                items:
+                  type: string
+                type: array
+              end_at:
+                description: End date string (e.g. 2024-12-31)
+                type: string
+              group_id:
+                type: integer
+              order_by:
+                type: string
+              sort_type:
+                type: string
+              start_from:
+                description: Start date string (e.g. 2024-01-01)
+                type: string
+              zone:
+                type: number
+            required:
+              - group_id
+            type: object
+    responses:
+      '200':
+        description: Export initiated.
+        content:
+          text/csv:
+            schema:
+              format: binary
+              type: string
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/permission:
+  get:
+    tags: [Sign Tasks - Admin]
+    summary: Get Admin Permission Settings
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Permission settings retrieved.
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  items:
+                    properties:
+                      name:
+                        description: Role name
+                        type: string
+                      permission:
+                        additionalProperties:
+                          type: boolean
+                        description: Permission flags for this role
+                        type: object
+                    type: object
+                  type: array
+              type: object
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/change_permission:
+  put:
+    tags: [Sign Tasks - Admin]
+    summary: Update Admin Permission Settings
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - group_id
+              - permissions
+            properties:
+              group_id:
+                type: integer
+              permissions:
+                type: array
+                items:
+                  $ref: '../components/schemas/member.yml#/PermissionObject'
+          examples:
+            update_group_permissions:
+              $ref: '../components/examples/requests/sign_task_admin_requests.yml#/UpdateGroupPermissions'
+    responses:
+      '200':
+        description: Permissions updated.
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  items:
+                    properties:
+                      name:
+                        type: string
+                      permission:
+                        additionalProperties:
+                          type: boolean
+                        type: object
+                    type: object
+                  type: array
+              type: object
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              invalid_permission:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/InvalidPermission'
+              permission_interlocking:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/PermissionInterlocking'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/report:
+  get:
+    tags: [Sign Tasks - Admin]
+    summary: Get Admin Task Report
+    security:
+      - BearerAuth: []
+    parameters:
+      - in: query
+        name: group_id
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: start_from
+        required: true
+        schema:
+          description: Start date string (e.g. 2024-01-01)
+          type: string
+      - in: query
+        name: end_at
+        required: true
+        schema:
+          description: End date string (e.g. 2024-12-31)
+          type: string
+      - in: query
+        name: zone
+        required: true
+        schema:
+          description: Timezone offset (e.g. 8 for UTC+8)
+          type: number
+      - in: query
+        name: emails
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+    responses:
+      '200':
+        description: Report retrieved.
+        content:
+          application/json:
+            schema:
+              type: object
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/roles:
+  get:
+    tags: [Sign Tasks - Admin]
+    summary: List Admin Roles
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Roles list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      role:
+                        type: string
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+  post:
+    tags: [Sign Tasks - Admin]
+    summary: Create Admin Role
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - group_id
+              - name
+              - permission
+            properties:
+              group_id:
+                type: integer
+              name:
+                description: Role name
+                type: string
+              permission:
+                description: Permission flags for the role
+                $ref: '../components/schemas/member.yml#/PermissionObject'
+          examples:
+            create_admin_role:
+              $ref: '../components/examples/requests/sign_task_admin_requests.yml#/CreateAdminRole'
+    responses:
+      '200':
+        description: Role created.
+        content:
+          application/json:
+            schema:
+              type: object
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              duplicate_role_name:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/DuplicateRoleName'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+  delete:
+    tags: [Sign Tasks - Admin]
+    summary: Delete Admin Role
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: group_id
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: role_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: ID of the role to delete
+    responses:
+      '200':
+        description: Role deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              role_is_assigned:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/RoleIsAssigned'
+              role_not_allow_to_delete:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/RoleNotAllowToDelete'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              role_not_found:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/RoleNotFound'
+/api/v1/sign_tasks/admin/reissue:
+  post:
+    tags: [Sign Tasks - Admin]
+    summary: Admin Reissue Task
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            properties:
+              client:
+                type: string
+              ip_address:
+                type: string
+              sign_task_id:
+                type: integer
+              stage_id:
+                type: integer
+            required:
+              - sign_task_id
+              - stage_id
+            type: object
+          examples:
+            admin_reissue_task:
+              $ref: '../components/examples/requests/sign_task_admin_requests.yml#/AdminReissueTask'
+    responses:
+      '200':
+        description: Task reissued by admin.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_reissuable:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/TaskNotReissuable'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/TaskNotFound'
+              stage_not_found:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/StageNotFound'
+/api/v1/sign_tasks/admin/member_report:
+  post:
+    tags: [Sign Tasks - Admin]
+    summary: Get Group Member Tasks Report
+    description: Get a task statistics report for group members within a time range.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, start_from, end_at]
+            properties:
+              group_id:
+                type: integer
+                description: Group ID.
+              emails:
+                type: array
+                items:
+                  type: string
+                description: Filter by specific member emails.
+              start_from:
+                type: string
+                description: Report start timestamp (Unix).
+              end_at:
+                type: string
+                description: Report end timestamp (Unix).
+    responses:
+      '200':
+        description: Member task report.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sent_summary:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      waiting:
+                        type: integer
+                        description: Waiting task count.
+                      total:
+                        type: integer
+                        description: Total task count.
+                      completed:
+                        type: integer
+                        description: Completed task count.
+                      member:
+                        $ref: '../components/schemas/member.yml#/MemberObject'
+                complete_summary:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      completed:
+                        type: integer
+                        description: Completed task count.
+                      member:
+                        $ref: '../components/schemas/member.yml#/MemberObject'
+                sent_time_avg_summary:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      spent_time_avg:
+                        type: number
+                        format: float
+                        description: Average time to complete a task (seconds).
+                      member:
+                        $ref: '../components/schemas/member.yml#/MemberObject'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/summary_csv:
+  post:
+    tags: [Sign Tasks - Admin]
+    summary: Export Group Tasks Report as CSV
+    description: Export a group task summary as a CSV file with columns [Date, Created Tasks, Completed Tasks].
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, start_from, end_at, zone]
+            properties:
+              group_id:
+                type: integer
+                description: Group ID.
+              emails:
+                type: array
+                items:
+                  type: string
+                description: Filter by specific member emails.
+              start_from:
+                type: string
+                description: Report start timestamp (Unix).
+              end_at:
+                type: string
+                description: Report end timestamp (Unix).
+              zone:
+                type: integer
+                description: Timezone offset.
+    responses:
+      '200':
+        description: CSV file content.
+        content:
+          text/csv:
+            schema:
+              type: string
+              format: binary
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/member_summary_csv:
+  post:
+    tags: [Sign Tasks - Admin]
+    summary: Export Group Member Tasks Report as ZIP
+    description: Export individual member task reports as a ZIP archive containing CSV files.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, start_from, end_at]
+            properties:
+              group_id:
+                type: integer
+                description: Group ID.
+              emails:
+                type: array
+                items:
+                  type: string
+                description: Filter by specific member emails.
+              start_from:
+                type: string
+                description: Report start timestamp (Unix).
+              end_at:
+                type: string
+                description: Report end timestamp (Unix).
+    responses:
+      '200':
+        description: ZIP archive of member CSV reports.
+        content:
+          application/zip:
+            schema:
+              type: string
+              format: binary
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'
+/api/v1/sign_tasks/admin/roles/priorities:
+  put:
+    tags: [Sign Tasks - Admin]
+    summary: Change Group Role Priorities
+    description: Reorder the priority of roles within a group.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [group_id, role_ids]
+            properties:
+              group_id:
+                type: integer
+                description: Group ID.
+              role_ids:
+                type: array
+                items:
+                  type: integer
+                description: All role IDs ordered by the desired priority (highest priority first).
+    responses:
+      '200':
+        description: Role priorities updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_not_group_admin:
+                $ref: '../components/examples/errors/sign_task_admin_errors.yml#/MemberNotGroupAdmin'

@@ -1,0 +1,44 @@
+en:
+  member_mailer:
+    confirmation_instruction:
+      default:
+        subject: "Verify Your ID"
+        title: "Please Verify Your ID"
+        greeting_html: "Hello <b><a name='email'></a></b>,"
+        content_1: "Please Verify Your ID by clicking the link below,"
+        content_2_html: "To verify your account without receiving product updates."
+        content_3: "This email was sent from a notification-only address that cannot accept incoming email. Please do not reply to this email."
+        closing_html: "Best,<br /> Kdan Mobile Team"
+hant:
+  member_mailer:
+    confirmation_instruction:
+      default:
+        subject: "驗證您的 ID"
+        title: "Please Verify Your ID"
+        greeting_html: "Hello <b><a name='email'>%{email}</a></b>,"
+        content_1: "Please Verify Your ID by clicking the link below,"
+        content_2_html: "To verify your account without receiving product updates."
+        content_3: "This email was sent from a notification-only address that cannot accept incoming email. Please do not reply to this email."
+        closing_html: "Best,<br /> Kdan Mobile Team"
+hans:
+  member_mailer:
+    confirmation_instruction:
+      default:
+        subject: "请验证您的 ID"
+        title: "Please Verify Your ID"
+        greeting_html: "Hello <b><a name='email'>%{email}</a></b>,"
+        content_1: "Please Verify Your ID by clicking the link below,"
+        content_2_html: "To verify your account without receiving product updates."
+        content_3: "This email was sent from a notification-only address that cannot accept incoming email. Please do not reply to this email."
+        closing_html: "Best,<br /> Kdan Mobile Team"
+ja:
+  member_mailer:
+    confirmation_instruction:
+      default:
+        subject: " IDの認証"
+        title: "Please Verify Your ID"
+        greeting_html: "Hello <b><a name='email'>%{email}</a></b>,"
+        content_1: "Please Verify Your ID by clicking the link below,"
+        content_2_html: "To verify your account without receiving product updates."
+        content_3: "This email was sent from a notification-only address that cannot accept incoming email. Please do not reply to this email."
+        closing_html: "Best,<br /> Kdan Mobile Team"

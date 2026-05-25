@@ -1,0 +1,325 @@
+/api/internal/auth/member_token:
+  get:
+    tags: [Internal]
+    summary: Obtain Member Token (Internal)
+    description: Internal API to obtain a member access token.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: member_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Token obtained.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/TokenObject'
+
+/api/internal/sign_tasks/create_with_file:
+  post:
+    tags: [Internal]
+    summary: Create Sign Task with File (Internal)
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required: [file]
+            properties:
+              file:
+                type: string
+                format: binary
+              member_id:
+                type: integer
+    responses:
+      '200':
+        description: Task created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+
+/api/internal/sign_tasks/create_from_template:
+  post:
+    tags: [Internal]
+    summary: Create Sign Task from Template (Internal)
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [template_id, member_id]
+            properties:
+              template_id:
+                type: integer
+              member_id:
+                type: integer
+    responses:
+      '200':
+        description: Task created from template.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+
+/api/internal/sign_tasks/tasks:
+  get:
+    tags: [Internal]
+    summary: List Tasks (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: member_id
+        in: query
+        schema:
+          type: integer
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Task list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+
+/api/internal/sign_tasks/download:
+  get:
+    tags: [Internal]
+    summary: Download Task PDF (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Download link.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                download_link:
+                  type: string
+
+/api/internal/sign_tasks/task_info:
+  get:
+    tags: [Internal]
+    summary: Get Task Info (Internal)
+    description: Get task details by sign_task_id. Used for service-to-service integration.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: query
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Task info retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+
+/api/internal/sign_tasks:
+  get:
+    tags: [Internal]
+    summary: List Sign Tasks (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: member_id
+        in: query
+        schema:
+          type: integer
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Task list retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/common.yml#/PaginationMeta'
+                - type: object
+                  properties:
+                    tasks:
+                      type: array
+                      items:
+                        $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+  post:
+    tags: [Internal]
+    summary: Create Sign Task (Internal)
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/CreateSignTaskRequest'
+              - type: object
+                properties:
+                  member_id:
+                    type: integer
+                    description: Member ID on whose behalf the task is created.
+    responses:
+      '200':
+        description: Task created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+
+/api/internal/sign_tasks/{sign_task_id}:
+  get:
+    tags: [Internal]
+    summary: Get Sign Task (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Task retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+  put:
+    tags: [Internal]
+    summary: Update Sign Task (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/requests.yml#/UpdateSignTaskRequest'
+    responses:
+      '200':
+        description: Task updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+  patch:
+    tags: [Internal]
+    summary: Partial Update Sign Task (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/requests.yml#/UpdateSignTaskRequest'
+    responses:
+      '200':
+        description: Task updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+  delete:
+    tags: [Internal]
+    summary: Delete Sign Task (Internal)
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: sign_task_id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Task deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/BlankSuccessResponse'
+
+/api/internal/signatures/{id}:
+  get:
+    tags: [Internal]
+    summary: Get Signature (Internal)
+    description: Retrieve a signature by ID. Used for service-to-service integration.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Signature retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/signature.yml#/SignatureObject'
+
+/api/internal/files/download/{code}:
+  get:
+    tags: [Internal]
+    summary: Download File (Internal)
+    description: Download a file by code. Used for service-to-service integration.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+        description: File download code.
+    responses:
+      '200':
+        description: File content.
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary

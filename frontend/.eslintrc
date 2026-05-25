@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "commonjs": true,
+    "jest": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "React": "writable"
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "no-comments"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/prop-types": "off",
+    "react/jsx-uses-vars": "error",
+    "react/react-in-jsx-scope": "off",
+    "@next/next/no-img-element": "off",
+    "no-console": "off",
+    "require-yield": "off",
+    "curly": ["error", "all"],
+    "no-comments/disallowComments": [
+      // Change to warn
+      "warn",
+      {
+        "allow": ["TODO", "FIXME", "NOTE", "DEBUG", "UNUSED", "TYPE"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+SignTask:
+  summary: Sign — signature + text + date fields
+  description: |
+    Submit signed field values to complete the signer's stage.
+    Each entry in `signature_info` must match a `field_object_id` defined in the task's `xfdf_info`.
+    `verify_info` is required only when the stage uses OTP identity verification.
+  value:
+    sign_task_id: 1234
+    client: web
+    ip_address: "192.168.1.100"
+    signature_info:
+      - object_id: "DottedSign_a1b2c3d4-0001-11ec-89b0-0242ac120001"
+        type: signature
+        value: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+        style: "drawn"
+        changed: true
+      - object_id: "DottedSign_a1b2c3d4-0002-11ec-89b0-0242ac120001"
+        type: textfield
+        value: "Alice Chen"
+        font_size: 12
+        alignment: left
+        changed: true
+      - object_id: "DottedSign_a1b2c3d4-0003-11ec-89b0-0242ac120001"
+        type: datefield
+        value: "2026/04/27"
+        date_format: "YYYY/MM/DD"
+        zone: "Asia/Taipei"
+        changed: true
+
+DeclineTask:
+  summary: Decline — with preset reason and message
+  description: |
+    Decline the task with a preset `decline_reason_id` and an optional free-text message.
+    `reply_to` is required and receives a copy of the decline notification.
+    Omit `decline_reason_id` to provide a fully custom `reason` string instead.
+  value:
+    sign_task_id: 1234
+    client: web
+    ip_address: "192.168.1.100"
+    decline_reason_id: 3
+    message: "The contract terms need revision before I can sign."
+    reply_to:
+      - "sender@example.com"
+
+ReviewTaskPass:
+  summary: Review — all fields accepted (pass)
+  description: |
+    Submit a review decision where all fields and attachments are accepted.
+    If any `accepted` is `false`, the review is treated as rejected and `review_message` becomes required.
+  value:
+    sign_task_id: 1234
+    client: web
+    ip_address: "192.168.1.100"
+    review_fields:
+      - field_object_id: "DottedSign_a1b2c3d4-0001-11ec-89b0-0242ac120001"
+        accepted: true
+      - field_object_id: "DottedSign_a1b2c3d4-0002-11ec-89b0-0242ac120001"
+        accepted: true
+    review_attachments:
+      - attachment_id: "attach_id_001"
+        accepted: true

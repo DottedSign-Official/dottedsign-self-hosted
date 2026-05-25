@@ -1,0 +1,28 @@
+---
+en:
+  sign_mailer:
+    sign_decline:
+      default:
+        subject: "%{sender_name} Has Declined to Sign %{doc_name}"
+        title: The Document Was Declined.
+        content_1_html: '%{sender_name} (%{sender_email}) has declined to sign <strong>"%{doc_name}"</strong>.'
+        content_2_html: Here is the reason of this decline:<br />%{decline_reason}<br />%{decline_message}<br />
+        button: View Task
+hant:
+  sign_mailer:
+    sign_decline:
+      default:
+        subject: "%{sender_name} 已拒絕簽署 %{doc_name}"
+        title: 這份文件已被拒絕簽署
+        content_1_html: '%{sender_name} (%{sender_email}) 已拒絕簽署 <strong>"%{doc_name}"</strong>。'
+        content_2_html: 以下為拒絕簽署的原因：<br />%{decline_reason}<br />%{decline_message}<br />
+        button: 查看任務
+hans:
+  sign_mailer:
+    sign_decline:
+      default:
+        subject: "%{sender_name} 已拒絕簽署 %{doc_name}"
+        title: 這份文件已被拒絕簽署
+        content_1_html: '%{sender_name} (%{sender_email}) 已拒絕簽署 <strong>"%{doc_name}"</strong>。'
+        content_2_html: 以下為拒絕簽署的原因：<br />%{decline_reason}<br />%{decline_message}<br />
+        button: 查看任務

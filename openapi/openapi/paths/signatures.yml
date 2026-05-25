@@ -1,0 +1,191 @@
+/api/v1/signatures:
+  get:
+    tags: [Signatures]
+    summary: List Signatures
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        description: Signatures list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signatures:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/signature.yml#/SignatureObject'
+  post:
+    tags: [Signatures]
+    summary: Create Signature
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            required: [file_type, category, raw]
+            properties:
+              file_type:
+                type: string
+                description: MIME type of the image (e.g. image/png, image/jpg). The suffix is extracted internally.
+              category:
+                type: string
+                enum: [signature, initial, stamp]
+                description: Signature category.
+              raw:
+                type: string
+                description: Base64-encoded raw signature image content.
+              sign_video:
+                type: string
+                description: Base64-encoded sign video content.
+              sign_photo:
+                type: string
+                description: Base64-encoded sign photo content.
+              sign_stroke:
+                type: string
+                description: Sign stroke data in CSV format.
+    responses:
+      '200':
+        description: Signature created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/signature.yml#/SignatureObject'
+/api/v1/signatures/{id}:
+  get:
+    tags: [Signatures]
+    summary: Get Signature Detail
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Signature detail.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/signature.yml#/SignatureObject'
+  delete:
+    tags: [Signatures]
+    summary: Delete Signature
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Signature deleted.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    category:
+                      type: string
+                      description: Category of the deleted signature.
+/api/v1/signatures/guest_signature:
+  post:
+    tags: [Signatures]
+    summary: Create Guest Signature
+    description: |
+      Create a guest (non-member) signature. Can be used by both registered and non-registered members.
+      For non-registered members, pass the client request fields (`client`, `ip_address`, `work_id`, `code`).
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [raw]
+                properties:
+                  raw:
+                    type: string
+                    description: Base64-encoded image content.
+                  sign_video:
+                    type: string
+                    description: Base64-encoded sign video content.
+                  sign_photo:
+                    type: string
+                    description: Base64-encoded sign photo content.
+                  sign_stroke:
+                    type: string
+                    description: |
+                      Sign stroke data in CSV format.
+                      Each row: `x,y,pressure,timestamp,isStart`
+                      Example: `220.21,179.59,0.5,1764642544908,true`
+                  category:
+                    type: string
+                    description: Signature category (unlimited types).
+    responses:
+      '200':
+        description: Guest signature created.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Signature ID.
+                    raw:
+                      type: string
+                      description: Base64 image content.
+                    category:
+                      type: string
+                      description: Signature category (always "guest_signature").
+/api/v1/signatures/images_to_mp4_base64:
+  post:
+    tags: [Signatures]
+    summary: Convert Signature Images to MP4 (Base64)
+    description: |
+      Convert a series of signature images (base64) into a sign animation video,
+      returned as a Base64-encoded MP4.
+      Can be used by both registered and non-registered members.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                properties:
+                  base64_images:
+                    type: array
+                    items:
+                      type: string
+                    description: |
+                      Array of base64 Data URL images in sequence.
+                      Example: `["data:image/png;base64,iVBORw0...", ...]`
+    responses:
+      '200':
+        description: MP4 video as Base64 string.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                video:
+                  type: string
+                  description: Base64-encoded MP4 video of the sign animation.

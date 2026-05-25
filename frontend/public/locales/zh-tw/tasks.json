@@ -1,0 +1,16 @@
+{
+	"menu_sign_send_title": "自己簽署",
+	"menu_sign_send_desc": "你是文件的唯一簽署者",
+	"menu_create_form_title": "邀請他人簽署",
+	"menu_create_form_desc": "指派簽署欄位給其他簽署人",
+	"menu_envelope_sign_title": "信封簽署",
+	"menu_envelope_sign_desc": "指派一份信封含多份文件給相同簽署人",
+	"menu_front_desk_title": "臨櫃簽署",
+	"menu_front_desk_desc": "現場使用範本簽署",
+	"filter_all": "全部",
+	"filter_expire_soon": "即將過期",
+	"hint_expired": "已到期",
+	"hint_expire_today": "今日到期",
+	"hint_expire": "離到期：",
+	"days": "天"
+}

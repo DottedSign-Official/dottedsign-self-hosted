@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+  </head>
+
+  <body>
+    <% attachment_count = @file_info.size %>
+    <% @file_info.each_with_index do |info, index| %>
+      <% if index + 1 < attachment_count %>
+      <div style="text-align: center;width: 768px;page-break-after: always;">
+      <% else %>
+      <div style="text-align: center;width: 768px;">
+      <% end %>
+        <div style="max-width: 100%;padding: 20px;text-align: left">
+          <p>
+            <b><%= info[:file_name] %></b>
+            - <%= "#{info[:user_name]}" %><%= " (#{info[:user_email]})" if info[:user_email].present? %>
+          </p>
+          <% info[:files].each do |file| %>
+            <%= image_tag "data:#{file[:content_type]};base64, #{Base64.encode64(File.read(file[:path]))}", style: 'max-width: 100%' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </body>
+</html>

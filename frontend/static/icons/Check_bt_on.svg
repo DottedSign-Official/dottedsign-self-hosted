@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Check_bt_on</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="25" height="25" rx="5"></rect>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Check_bt_on">
+            <g id="Check_bt_on-Copy">
+                <g id="Base">
+                    <use fill="#00BFA5" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#CAD3DF" stroke-width="1" x="0.5" y="0.5" width="24" height="24" rx="5"></rect>
+                </g>
+                <path d="M10.1123858,15.50175 L6.76682452,12.11875 C6.3626359,11.71075 5.70733009,11.71075 5.30314147,12.11875 C4.89895284,12.52675 4.89895284,13.18875 5.30314147,13.59675 L9.35903422,17.69775 C9.56713133,17.90675 9.84025879,18.00675 10.1123858,18.00175 C10.3845128,18.00675 10.6586407,17.90675 10.8657373,17.69775 L19.6968585,8.78475 C20.1010472,8.37575 20.1010472,7.71475 19.6968585,7.30675 C19.2926699,6.89775 18.6373641,6.89775 18.2331755,7.30675 L10.1123858,15.50175 Z" id="Checked-Icon" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

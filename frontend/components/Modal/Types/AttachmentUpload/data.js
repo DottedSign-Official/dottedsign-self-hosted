@@ -1,0 +1,20 @@
+export const fileTypes = {
+  gif: "image/gif",
+  docx: "application/msword",
+  docxOpenXML:
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ppt: "application/vnd.ms-powerpoint",
+  pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  xls: "application/vnd.ms-excel",
+  excelApplication: "application/excel",
+  excelMsexcel: "application/vnd.msexcel",
+  dot: "application/msword",
+  zip: "application/zip",
+  xZip: "application/x-zip",
+  zipMime: "application/x-zip-compressed",
+  rarMime: "application/x-rar-compressed",
+  rarExt: ".rar",
+  sevenZMime: "application/x-7z-compressed",
+  sevenZExt: ".7z",
+};

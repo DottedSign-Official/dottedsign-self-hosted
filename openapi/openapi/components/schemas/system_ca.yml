@@ -1,0 +1,37 @@
+SystemCAObject:
+  type: object
+  description: A System CA (Certificate Authority) configuration for identity verification.
+  properties:
+    id:
+      type: integer
+      description: System CA ID.
+    name:
+      type: string
+      description: Display name for this CA.
+    cluster_id:
+      type: string
+      description: CA cluster identifier.
+    email:
+      type: string
+      format: email
+      description: Contact email associated with this CA.
+    pem:
+      type: string
+      description: PEM-encoded certificate content.
+    accessor_emails:
+      type: array
+      description: List of member emails who have access to this CA.
+      items:
+        type: string
+        format: email
+    group_id:
+      type: integer
+      description: ID of the group this CA belongs to.
+    created_at:
+      type: string
+      format: date-time
+      description: Creation timestamp.
+    updated_at:
+      type: string
+      format: date-time
+      description: Last updated timestamp.

@@ -1,0 +1,379 @@
+INVALID_PREVIEW_CODE:
+  error_code: 400061
+  http_status: 400
+  domain: quick_sign
+
+CODE_EXPIRE:
+  error_code: 403035
+  http_status: 403
+  domain: quick_sign
+
+TASK_NOT_FOUND:
+  error_code: 404031
+  http_status: 404
+  domain: sign_task
+
+VERIFY_STEP_NOT_FOUND:
+  error_code: 400039
+  http_status: 400
+  domain: verification
+
+MEMBER_AUTH_FAILED:
+  error_code: 401202
+  http_status: 401
+  domain: auth
+
+STAGE_NOT_FOUND:
+  error_code: 404032
+  http_status: 404
+  domain: stage
+
+VERIFY_SOURCE_NOT_SET:
+  error_code: 404033
+  http_status: 404
+  domain: verification
+
+DELIVER_OTP_FAILED:
+  error_code: 406032
+  http_status: 406
+  domain: verification
+
+TASK_NOT_SIGNABLE:
+  error_code: 400038
+  http_status: 400
+  domain: sign_task
+
+NOT_SIGNER_TURN:
+  error_code: 400044
+  http_status: 400
+  domain: sign_task
+
+STAGE_ALREADY_DONE:
+  error_code: 400046
+  http_status: 400
+  domain: stage
+
+FIELD_CONTENT_INVALID:
+  error_code: 400062
+  http_status: 400
+  domain: sign_field
+
+INVALID_OBJECT_ID:
+  error_code: 400091
+  http_status: 400
+  domain: sign_field
+
+EXECUTE_TYPE_NOT_ALLOW:
+  error_code: 400047
+  http_status: 400
+  domain: stage
+
+ATTACHMENT_NOT_READY:
+  error_code: 400051
+  http_status: 400
+  domain: attachment
+
+TASK_NOT_ACCESSIBLE:
+  error_code: 403036
+  http_status: 403
+  domain: sign_task
+
+QUICK_SIGN_NOT_ACCEPTED:
+  error_code: 403037
+  http_status: 403
+  domain: quick_sign
+
+TASK_WAS_EXPIRED:
+  error_code: 403055
+  http_status: 403
+  domain: sign_task
+
+TASK_WAS_DECLINED:
+  error_code: 403048
+  http_status: 403
+  domain: sign_task
+
+NEED_TO_CHECK_SECURITY:
+  error_code: 403031
+  http_status: 403
+  domain: verification
+
+STAGE_NEED_VERIFY:
+  error_code: 403034
+  http_status: 403
+  domain: verification
+
+SIGNATURE_NOT_FOUND:
+  error_code: 404030
+  http_status: 404
+  domain: signature
+
+TASK_NOT_WAITING:
+  error_code: 400035
+  http_status: 400
+  domain: sign_task
+
+DECLINE_NOT_ALLOWED:
+  error_code: 403049
+  http_status: 403
+  domain: decline
+
+DECLINE_REASON_NOT_FOUND:
+  error_code: 404042
+  http_status: 404
+  domain: decline
+
+TASK_NOT_REISSUABLE:
+  error_code: 400922
+  http_status: 400
+  domain: sign_task
+
+TASK_NOT_OWNED:
+  error_code: 403033
+  http_status: 403
+  domain: sign_task
+
+INVALID_REVIEW_INFO:
+  error_code: 400068
+  http_status: 400
+  domain: review
+
+TASK_IS_NOT_COMPLETED:
+  error_code: 400032
+  http_status: 400
+  domain: sign_task
+
+VERIFY_FAILED:
+  error_code: 406031
+  http_status: 406
+  domain: verification
+
+INVALID_CATEGORY:
+  error_code: 400034
+  http_status: 400
+  domain: sign_task
+
+TASKS_TOO_MUCH:
+  error_code: 400070
+  http_status: 400
+  domain: sign_task
+
+SORT_TYPE_NOT_ALLOW:
+  error_code: 400069
+  http_status: 400
+  domain: sign_task
+
+TOKEN_INVALID:
+  error_code: 401203
+  http_status: 401
+  domain: auth
+
+NEED_MORE_INFORMATION:
+  error_code: 400001
+  http_status: 400
+  domain: validation
+
+OVER_MONTHLY_TASK_USAGE:
+  error_code: 403032
+  http_status: 403
+  domain: billing
+
+TASK_IS_NOT_DRAFT:
+  error_code: 400030
+  http_status: 400
+  domain: sign_task
+
+TASK_NOT_DELETABLE:
+  error_code: 400037
+  http_status: 400
+  domain: sign_task
+
+FILE_PROCESSING:
+  error_code: 400031
+  http_status: 400
+  domain: sign_task
+
+REQUEST_TOO_FREQUENTLY:
+  error_code: 400041
+  http_status: 400
+  domain: rate_limit
+
+MEMBER_ALREADY_SECURED:
+  error_code: 400056
+  http_status: 400
+  domain: verification
+
+TASK_IS_DRAFT:
+  error_code: 403069
+  http_status: 403
+  domain: sign_task
+
+SIGNER_INFO_NOT_READY:
+  error_code: 400901
+  http_status: 400
+  domain: sign_task
+
+TEMPLATE_DELETED:
+  error_code: 400053
+  http_status: 400
+  domain: template
+
+NOT_MATCH_STAGES_LENGTH:
+  error_code: 400910
+  http_status: 400
+  domain: template
+
+TEMPLATE_WITH_INVALID_STAGE_ACTION:
+  error_code: 400925
+  http_status: 400
+  domain: template
+
+OVER_TEMPLATE_USAGE:
+  error_code: 403042
+  http_status: 403
+  domain: billing
+
+TEMPLATE_NOT_ACCESSIBLE:
+  error_code: 403044
+  http_status: 403
+  domain: template
+
+TEMPLATE_NOT_FOUND:
+  error_code: 404035
+  http_status: 404
+  domain: template
+
+ROLE_NOT_FOUND:
+  error_code: 404044
+  http_status: 404
+  domain: sign_task
+
+TASK_NOT_DUPLICABLE:
+  error_code: 403070
+  http_status: 403
+  domain: sign_task
+
+FILTER_NOT_ALLOW:
+  error_code: 400042
+  http_status: 400
+  domain: sign_task
+
+TASK_IS_NOT_FINISHED:
+  error_code: 400063
+  http_status: 400
+  domain: sign_task
+
+DOWNLOAD_TASK_FILE_FAILED:
+  error_code: 406036
+  http_status: 406
+  domain: sign_task
+
+MAIL_FAILED:
+  error_code: 406030
+  http_status: 406
+  domain: mail
+
+SIGNER_NOT_FOUND:
+  error_code: 404034
+  http_status: 404
+  domain: sign_task
+
+FORWARD_MAIL_ALREADY_IN_FLOW:
+  error_code: 400050
+  http_status: 400
+  domain: sign_task
+
+FORWARD_NOT_ALLOWED:
+  error_code: 403038
+  http_status: 403
+  domain: sign_task
+
+INVALID_FILE_TYPE:
+  error_code: 400057
+  http_status: 400
+  domain: file
+
+TEMPLATE_MERGE_FAILED:
+  error_code: 400085
+  http_status: 400
+  domain: template
+
+TASK_NOT_TRANSFERABLE:
+  error_code: 4031304
+  http_status: 403
+  domain: sign_task
+
+MEMBER_NOT_FOUND:
+  error_code: 404201
+  http_status: 404
+  domain: member
+
+GROUP_TASK_NOT_ACCESSIBLE:
+  error_code: 403041
+  http_status: 403
+  domain: group
+
+MEMBER_NOT_GROUP_ADMIN:
+  error_code: 403063
+  http_status: 403
+  domain: group
+
+GROUP_NOT_FOUND:
+  error_code: 404205
+  http_status: 404
+  domain: group
+
+INVALID_PERMISSION:
+  error_code: 400082
+  http_status: 400
+  domain: group
+
+PERMISSION_INTERLOCKING:
+  error_code: 400083
+  http_status: 400
+  domain: group
+
+DUPLICATE_ROLE_NAME:
+  error_code: 400081
+  http_status: 400
+  domain: group
+
+ROLE_IS_ASSIGNED:
+  error_code: 403061
+  http_status: 403
+  domain: group
+
+ROLE_NOT_ALLOW_TO_DELETE:
+  error_code: 403062
+  http_status: 403
+  domain: group
+
+NO_BULK_SEND_PERMISSION:
+  error_code: 403046
+  http_status: 403
+  domain: bulk
+
+MISSION_NOT_FOUND:
+  error_code: 404040
+  http_status: 404
+  domain: bulk
+
+KIOSK_NOT_ALLOWED:
+  error_code: 403900
+  http_status: 403
+  domain: kiosk
+
+KIOSK_REPEAT_ACCESS:
+  error_code: 400903
+  http_status: 400
+  domain: kiosk
+
+KIOSK_DELAY_SIGN:
+  error_code: 400904
+  http_status: 400
+  domain: kiosk
+
+KIOSK_NOT_READ:
+  error_code: 400905
+  http_status: 400
+  domain: kiosk

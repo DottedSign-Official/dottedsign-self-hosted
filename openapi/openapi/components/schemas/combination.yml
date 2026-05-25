@@ -1,0 +1,47 @@
+CombinationObject:
+  type: object
+  description: A combination is a reusable sign stage template grouping multiple signers/stages.
+  properties:
+    id:
+      type: integer
+      description: Combination ID.
+    name:
+      type: string
+      description: Combination name.
+    description:
+      type: string
+      nullable: true
+      description: Optional description.
+    has_order:
+      type: boolean
+      description: Whether stages must be completed in order.
+    stages:
+      type: array
+      description: List of sign stages in this combination.
+      items:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+            description: Signer email.
+          name:
+            type: string
+            description: Signer name.
+          stage_setting:
+            type: object
+            description: Stage-level settings (e.g. signing method, OTP).
+          verify:
+            type: object
+            description: Verification configuration for this stage.
+    group_id:
+      type: integer
+      description: ID of the group this combination belongs to.
+    created_at:
+      type: string
+      format: date-time
+      description: Creation timestamp.
+    updated_at:
+      type: string
+      format: date-time
+      description: Last updated timestamp.

@@ -1,0 +1,52 @@
+CreateKioskTask:
+  summary: Create kiosk task — name required, email optional
+  description: |
+    Create a kiosk sign task from template 301.
+    `stages[].requisite` controls which signer fields must be collected at the kiosk device.
+    `name: true` means the device must prompt for the signer's name before signing.
+  value:
+    template_id: 301
+    file_name: "visitor_agreement.pdf"
+    client: web
+    ip_address: "192.168.1.100"
+    stages:
+      - name: "Visitor"
+        requisite:
+          name: true
+          email: false
+          phone: false
+
+VerifyKioskTask:
+  summary: Verify kiosk task — provide signer actor_info
+  description: |
+    Read a kiosk task and supply signer identity. Call first without `actor_info` to check
+    if info is required (`signer_info_not_ready` error). Then call again with `actor_info`
+    populated. Returns `download_link` for rendering the PDF.
+  value:
+    sign_task_id: 5678
+    client: web
+    ip_address: "192.168.1.100"
+    actor_info:
+      name: "Jane Visitor"
+      email: "jane@example.com"
+
+SignKioskTask:
+  summary: Sign kiosk task — submit signature and checkbox
+  description: |
+    Submit field values to complete a kiosk task. `sign_task_id` comes from the
+    Create Kiosk Task response. Each entry in `signature_info` must match a
+    `field_object_id` in the template's `xfdf_info`.
+  value:
+    sign_task_id: 5678
+    client: web
+    ip_address: "192.168.1.100"
+    signature_info:
+      - object_id: "DottedSign_k1i2o3s4-0001-11ec-89b0-0242ac120010"
+        type: signature
+        value: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+        style: "drawn"
+        changed: true
+      - object_id: "DottedSign_k1i2o3s4-0002-11ec-89b0-0242ac120010"
+        type: checkbox
+        value: true
+        changed: true

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>ic-asterisk</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-706.000000, -360.000000)">
+            <g id="ic-asterisk" transform="translate(706.000000, 360.000000)">
+                <rect id="Rectangle-2" fill="#FFFFFF" opacity="0.0109375" x="0" y="0" width="32" height="32"></rect>
+                <g id="star" transform="translate(10.000000, 10.000000)" stroke="#FF305A" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+                    <path d="M6.5,6.5 L6.5,0" id="Path-2"></path>
+                    <path d="M6.5,6.5 L0,4.55" id="Path-3"></path>
+                    <path d="M6.5,6.5 L13,4.55" id="Path-4"></path>
+                    <path d="M6.5,6.5 L2.6,12.35" id="Path-5"></path>
+                    <path d="M6.5,6.5 L10.4,12.35" id="Path-6"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

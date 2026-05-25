@@ -1,0 +1,493 @@
+openapi: 3.0.3
+info:
+  title: DottedSign Self-Hosted API
+  description: |
+    DottedSign e-sign Self-Hosted API documentation.
+
+    ## Authentication
+    Most endpoints require a Bearer token obtained via OAuth login.
+    Include `Authorization: Bearer {access_token}` in the request header.
+  version: "1.0.0"
+  contact:
+    name: Kdan Mobile
+
+servers:
+  - url: https://{host}
+    description: DottedSign Self-Hosted Server
+    variables:
+      host:
+        default: your-domain.com
+        description: Your Self-Hosted server host
+
+tags:
+  - name: OAuth
+    description: OAuth authentication endpoints
+  - name: Members - Auth
+    description: Member registration and authentication
+  - name: Members - Info
+    description: Member profile and settings
+  - name: Groups
+    description: Group management
+  - name: Sign Tasks
+    description: Sign task lifecycle management
+  - name: Sign Tasks - Sign Flow
+    description: Signing process endpoints
+  - name: Sign Tasks - Admin
+    description: Administrative sign task operations
+  - name: Sign Tasks - Bulk
+    description: Bulk sign task operations
+  - name: Sign Tasks - Audit
+    description: Audit trail endpoints for sign tasks
+  - name: Templates
+    description: Template management
+  - name: Files
+    description: File upload and download
+  - name: Signatures
+    description: Signature management
+  - name: Tags
+    description: Tag management
+  - name: General
+    description: General system endpoints
+  - name: Shorten Link
+    description: URL shortener
+  - name: Developer
+    description: Developer API (admin-level access)
+  - name: Internal
+    description: Internal API (service-to-service)
+  - name: Envelopes
+    description: Envelope task management (bundle of multiple sign tasks)
+  - name: Sign Tasks - Kiosk
+    description: Kiosk sign task workflow (on-site signing without email invitation)
+  - name: Envelope Settings
+    description: Envelope-level signing settings configuration
+  - name: Combinations
+    description: Reusable sign stage combination templates
+  - name: System CAs
+    description: System CA (Certificate Authority) certificate management
+  - name: Public Forms
+    description: Public form sign task workflow (anonymous/multi-signer forms)
+
+components:
+  securitySchemes:
+    BearerAuth:
+      $ref: './components/securitySchemes.yml#/BearerAuth'
+  parameters:
+    SignTaskIdPath:
+      $ref: './components/parameters.yml#/SignTaskIdPath'
+    TemplateIdPath:
+      $ref: './components/parameters.yml#/TemplateIdPath'
+    GroupIdPath:
+      $ref: './components/parameters.yml#/GroupIdPath'
+    PageQuery:
+      $ref: './components/parameters.yml#/PageQuery'
+    PerPageQuery:
+      $ref: './components/parameters.yml#/PerPageQuery'
+  schemas:
+    AccessInfo:
+      $ref: './components/schemas/sign_task.yml#/AccessInfo'
+    BlankSuccessResponse:
+      $ref: './components/schemas/common.yml#/BlankSuccessResponse'
+    TokenObject:
+      $ref: './components/schemas/common.yml#/TokenObject'
+    PaginationMeta:
+      $ref: './components/schemas/common.yml#/PaginationMeta'
+    MemberPreferenceObject:
+      $ref: './components/schemas/member.yml#/MemberPreferenceObject'
+    MemberProfileObject:
+      $ref: './components/schemas/member.yml#/MemberProfileObject'
+    PermissionObject:
+      $ref: './components/schemas/member.yml#/PermissionObject'
+    MemberObject:
+      $ref: './components/schemas/member.yml#/MemberObject'
+    MemberAuthResponse:
+      $ref: './components/schemas/member.yml#/MemberAuthResponse'
+    SignTaskOwnerObject:
+      $ref: './components/schemas/sign_task.yml#/SignTaskOwnerObject'
+    SignTaskThumbnailObject:
+      $ref: './components/schemas/sign_task.yml#/SignTaskThumbnailObject'
+    FieldSettingOptionsObject:
+      $ref: './components/schemas/sign_task.yml#/FieldSettingOptionsObject'
+    FieldSettingObject:
+      $ref: './components/schemas/sign_task.yml#/FieldSettingObject'
+    StageSettingObject:
+      $ref: './components/schemas/sign_task.yml#/StageSettingObject'
+    SignStageAttachmentSettingObject:
+      $ref: './components/schemas/sign_task.yml#/SignStageAttachmentSettingObject'
+    SignStageCustomMessageSettingObject:
+      $ref: './components/schemas/sign_task.yml#/SignStageCustomMessageSettingObject'
+    SignStageObject:
+      $ref: './components/schemas/sign_task.yml#/SignStageObject'
+    TaskSettingCcInfoObject:
+      $ref: './components/schemas/sign_task.yml#/TaskSettingCcInfoObject'
+    TaskSettingReferenceSettingObject:
+      $ref: './components/schemas/sign_task.yml#/TaskSettingReferenceSettingObject'
+    TaskSettingObject:
+      $ref: './components/schemas/sign_task.yml#/TaskSettingObject'
+    DeclineReasonObject:
+      $ref: './components/schemas/sign_task.yml#/DeclineReasonObject'
+    SignTaskObject:
+      $ref: './components/schemas/sign_task.yml#/SignTaskObject'
+    TemplateBasicObject:
+      $ref: './components/schemas/template.yml#/TemplateBasicObject'
+    GroupObject:
+      $ref: './components/schemas/group.yml#/GroupObject'
+    SignatureObject:
+      $ref: './components/schemas/signature.yml#/SignatureObject'
+    BulkMissionObject:
+      $ref: './components/schemas/bulk.yml#/BulkMissionObject'
+    LicenseInfoObject:
+      $ref: './components/schemas/license.yml#/LicenseInfoObject'
+    ClientRequestFields:
+      $ref: './components/schemas/requests.yml#/ClientRequestFields'
+    SignStageRequestObject:
+      $ref: './components/schemas/requests.yml#/SignStageRequestObject'
+    OtpVerifyRequestObject:
+      $ref: './components/schemas/requests.yml#/OtpVerifyRequestObject'
+    TaskSettingRequestObject:
+      $ref: './components/schemas/requests.yml#/TaskSettingRequestObject'
+    CreateSignTaskRequest:
+      $ref: './components/schemas/requests.yml#/CreateSignTaskRequest'
+    SignatureInfoItemObject:
+      $ref: './components/schemas/requests.yml#/SignatureInfoItemObject'
+    AttachmentInfoItemObject:
+      $ref: './components/schemas/requests.yml#/AttachmentInfoItemObject'
+    CombinationObject:
+      $ref: './components/schemas/combination.yml#/CombinationObject'
+    SystemCAObject:
+      $ref: './components/schemas/system_ca.yml#/SystemCAObject'
+    PublicFormObject:
+      $ref: './components/schemas/public_form.yml#/PublicFormObject'
+    FormTaskObject:
+      $ref: './components/schemas/public_form.yml#/FormTaskObject'
+
+paths:
+  /oauth/token:
+    $ref: './paths/oauth.yml#/~1oauth~1token'
+  /oauth/token/refresh:
+    $ref: './paths/oauth.yml#/~1oauth~1token~1refresh'
+
+  /api/v1/members/register:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1register'
+  /api/v1/members/login:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1login'
+  /api/v1/members/send_confirm:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1send_confirm'
+  /api/v1/members/confirm:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1confirm'
+  /api/v1/members/forget_password:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1forget_password'
+  /api/v1/members/reset_password:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1reset_password'
+  /api/v1/members/email_check:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1email_check'
+  /api/v1/members/change_password:
+    $ref: './paths/members_auth.yml#/~1api~1v1~1members~1change_password'
+
+  /api/v1/members/me:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1me'
+  /api/v1/members/timelines:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1timelines'
+  /api/v1/members/upload_avatar:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1upload_avatar'
+  /api/v1/members/contact_list:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1contact_list'
+  /api/v1/members/preference:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1preference'
+  /api/v1/members/modify:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1modify'
+  /api/v1/members/profile:
+    $ref: './paths/members_info.yml#/~1api~1v1~1members~1profile'
+
+  /api/v1/groups:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups'
+  /api/v1/groups/{group_id}:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1{group_id}'
+  /api/v1/groups/upload_icon:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1upload_icon'
+  /api/v1/groups/add_member:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1add_member'
+  /api/v1/groups/remove_member:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1remove_member'
+  /api/v1/groups/assign_role:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1assign_role'
+  /api/v1/groups/accept:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1accept'
+  /api/v1/groups/sign_tasks/decline_reasons:
+    $ref: './paths/groups.yml#/~1api~1v1~1groups~1sign_tasks~1decline_reasons'
+
+  /api/v1/sign_tasks:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks'
+  /api/v1/sign_tasks/{sign_task_id}:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1{sign_task_id}'
+  /api/v1/sign_tasks/read:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1read'
+  /api/v1/sign_tasks/start:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1start'
+  /api/v1/sign_tasks/create_with_file:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1create_with_file'
+  /api/v1/sign_tasks/create_from_template:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1create_from_template'
+  /api/v1/sign_tasks/duplicate:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1duplicate'
+  /api/v1/sign_tasks/preview_share_link:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1preview_share_link'
+  /api/v1/sign_tasks/filter:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1filter'
+  /api/v1/sign_tasks/search:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1search'
+  /api/v1/sign_tasks/summary:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1summary'
+  /api/v1/sign_tasks/download:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1download'
+  /api/v1/sign_tasks/email_me:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1email_me'
+  /api/v1/sign_tasks/email_signer:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1email_signer'
+  /api/v1/sign_tasks/remind_now:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1remind_now'
+  /api/v1/sign_tasks/change_signer:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1change_signer'
+  /api/v1/sign_tasks/change_task_name:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1change_task_name'
+  /api/v1/sign_tasks/sign_and_send:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1sign_and_send'
+  /api/v1/sign_tasks/create_from_multi_template:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1create_from_multi_template'
+  /api/v1/sign_tasks/change_signer_requisition:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1change_signer_requisition'
+  /api/v1/sign_tasks/gra_authorize_status:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1gra_authorize_status'
+  /api/v1/sign_tasks/read_from_preview_share_link:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1read_from_preview_share_link'
+  /api/v1/sign_tasks/save_as_template:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1save_as_template'
+  /api/v1/sign_tasks/{sign_task_id}/change_owner:
+    $ref: './paths/sign_tasks.yml#/~1api~1v1~1sign_tasks~1{sign_task_id}~1change_owner'
+  /api/v1/sign_tasks/audit_trail:
+    $ref: './paths/sign_tasks_audit.yml#/~1api~1v1~1sign_tasks~1audit_trail'
+  /api/v1/sign_tasks/audit_trail_pdf:
+    $ref: './paths/sign_tasks_audit.yml#/~1api~1v1~1sign_tasks~1audit_trail_pdf'
+
+  /api/v1/sign_tasks/consent:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1consent'
+  /api/v1/sign_tasks/trigger_verify:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1trigger_verify'
+  /api/v1/sign_tasks/sign:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1sign'
+  /api/v1/sign_tasks/decline:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1decline'
+  /api/v1/sign_tasks/reissue:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1reissue'
+  /api/v1/sign_tasks/review:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1review'
+  /api/v1/sign_tasks/confirm:
+    $ref: './paths/sign_tasks_sign_flow.yml#/~1api~1v1~1sign_tasks~1confirm'
+
+  /api/v1/sign_tasks/bulk/missions:
+    $ref: './paths/sign_tasks_bulk.yml#/~1api~1v1~1sign_tasks~1bulk~1missions'
+  /api/v1/sign_tasks/bulk/create_mission:
+    $ref: './paths/sign_tasks_bulk.yml#/~1api~1v1~1sign_tasks~1bulk~1create_mission'
+  /api/v1/sign_tasks/bulk/download:
+    $ref: './paths/sign_tasks_bulk.yml#/~1api~1v1~1sign_tasks~1bulk~1download'
+  /api/v1/sign_tasks/bulk/sample:
+    $ref: './paths/sign_tasks_bulk.yml#/~1api~1v1~1sign_tasks~1bulk~1sample'
+
+  /api/v1/sign_tasks/admin/tasks:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1tasks'
+  /api/v1/sign_tasks/admin/export:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1export'
+  /api/v1/sign_tasks/admin/permission:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1permission'
+  /api/v1/sign_tasks/admin/change_permission:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1change_permission'
+  /api/v1/sign_tasks/admin/report:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1report'
+  /api/v1/sign_tasks/admin/roles:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1roles'
+  /api/v1/sign_tasks/admin/reissue:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1reissue'
+  /api/v1/sign_tasks/admin/member_report:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1member_report'
+  /api/v1/sign_tasks/admin/summary_csv:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1summary_csv'
+  /api/v1/sign_tasks/admin/member_summary_csv:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1member_summary_csv'
+  /api/v1/sign_tasks/admin/roles/priorities:
+    $ref: './paths/sign_tasks_admin.yml#/~1api~1v1~1sign_tasks~1admin~1roles~1priorities'
+
+  /api/v1/sign_tasks/kiosk:
+    $ref: './paths/sign_tasks_kiosk.yml#/~1api~1v1~1sign_tasks~1kiosk'
+  /api/v1/sign_tasks/kiosk/verify:
+    $ref: './paths/sign_tasks_kiosk.yml#/~1api~1v1~1sign_tasks~1kiosk~1verify'
+  /api/v1/sign_tasks/kiosk/sign:
+    $ref: './paths/sign_tasks_kiosk.yml#/~1api~1v1~1sign_tasks~1kiosk~1sign'
+
+  /api/v1/templates:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates'
+  /api/v1/templates/{id}:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1{id}'
+  /api/v1/templates/duplicate:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1duplicate'
+  /api/v1/templates/share_settings/share_template:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1share_settings~1share_template'
+  /api/v1/templates/share_settings/share_list:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1share_settings~1share_list'
+  /api/v1/templates/share_settings/admin_share:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1share_settings~1admin_share'
+  /api/v1/templates/share_settings/admin_remove_share:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1share_settings~1admin_remove_share'
+  /api/v1/templates/file_share:
+    $ref: './paths/templates.yml#/~1api~1v1~1templates~1file_share'
+
+  /api/v1/files/upload/{code}:
+    $ref: './paths/files.yml#/~1api~1v1~1files~1upload~1{code}'
+  /api/v1/files/download/{code}:
+    $ref: './paths/files.yml#/~1api~1v1~1files~1download~1{code}'
+  /api/v1/files/download_attachment:
+    $ref: './paths/files.yml#/~1api~1v1~1files~1download_attachment'
+
+  /api/v1/signatures:
+    $ref: './paths/signatures.yml#/~1api~1v1~1signatures'
+  /api/v1/signatures/{id}:
+    $ref: './paths/signatures.yml#/~1api~1v1~1signatures~1{id}'
+  /api/v1/signatures/guest_signature:
+    $ref: './paths/signatures.yml#/~1api~1v1~1signatures~1guest_signature'
+  /api/v1/signatures/images_to_mp4_base64:
+    $ref: './paths/signatures.yml#/~1api~1v1~1signatures~1images_to_mp4_base64'
+
+  /api/v1/tags:
+    $ref: './paths/tags.yml#/~1api~1v1~1tags'
+  /api/v1/tags/modify:
+    $ref: './paths/tags.yml#/~1api~1v1~1tags~1modify'
+  /api/v1/tags/remove:
+    $ref: './paths/tags.yml#/~1api~1v1~1tags~1remove'
+  /api/v1/tags/manage:
+    $ref: './paths/tags.yml#/~1api~1v1~1tags~1manage'
+  /api/v1/tags/move_behind:
+    $ref: './paths/tags.yml#/~1api~1v1~1tags~1move_behind'
+
+  /api/v1/license_info:
+    $ref: './paths/general.yml#/~1api~1v1~1license_info'
+  /api/v1/country_list:
+    $ref: './paths/general.yml#/~1api~1v1~1country_list'
+  /api/v1/health_check:
+    $ref: './paths/general.yml#/~1api~1v1~1health_check'
+
+  /api/v1/shorten_link:
+    $ref: './paths/shorten_link.yml#/~1api~1v1~1shorten_link'
+  /api/v1/shorten_link/{uuid}:
+    $ref: './paths/shorten_link.yml#/~1api~1v1~1shorten_link~1{uuid}'
+
+  /api/v1/developer/tasks:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1tasks'
+  /api/v1/developer/task_detail:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1task_detail'
+  /api/v1/developer/reissue:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1reissue'
+  /api/v1/developer/members:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1members'
+  /api/v1/developer/members/modify_status:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1members~1modify_status'
+  /api/v1/developer/groups:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1groups'
+  /api/v1/developer/groups/assign_member_to_group:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1groups~1assign_member_to_group'
+  /api/v1/developer/groups/remove_member_from_group:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1groups~1remove_member_from_group'
+  /api/v1/developer/groups/change_member_role_in_group:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1groups~1change_member_role_in_group'
+  /api/v1/developer/task_retry_ca:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1task_retry_ca'
+  /api/v1/developer/sign_tasks/decline_reasons:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1sign_tasks~1decline_reasons'
+  /api/v1/developer/debug_tools/sidekiq_retry_list:
+    $ref: './paths/developer.yml#/~1api~1v1~1developer~1debug_tools~1sidekiq_retry_list'
+
+  /api/v1/images:
+    $ref: './paths/images.yml#/~1api~1v1~1images'
+
+  /api/v1/task_settings/setup:
+    $ref: './paths/task_settings.yml#/~1api~1v1~1task_settings~1setup'
+
+  /api/v1/envelopes:
+    $ref: './paths/envelopes.yml#/~1api~1v1~1envelopes'
+  /api/v1/envelopes/{id}:
+    $ref: './paths/envelopes.yml#/~1api~1v1~1envelopes~1{id}'
+  /api/v1/envelopes/start:
+    $ref: './paths/envelopes.yml#/~1api~1v1~1envelopes~1start'
+  /api/v1/envelopes/duplicate:
+    $ref: './paths/envelopes.yml#/~1api~1v1~1envelopes~1duplicate'
+  /api/v1/envelopes/{envelope_id}/change_owner:
+    $ref: './paths/envelopes.yml#/~1api~1v1~1envelopes~1{envelope_id}~1change_owner'
+  /api/v1/envelopes/preview_share_link:
+    $ref: './paths/envelopes.yml#/~1api~1v1~1envelopes~1preview_share_link'
+
+  /api/internal/auth/member_token:
+    $ref: './paths/internal.yml#/~1api~1internal~1auth~1member_token'
+  /api/internal/sign_tasks/create_with_file:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks~1create_with_file'
+  /api/internal/sign_tasks/create_from_template:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks~1create_from_template'
+  /api/internal/sign_tasks/tasks:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks~1tasks'
+  /api/internal/sign_tasks/download:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks~1download'
+  /api/internal/sign_tasks/task_info:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks~1task_info'
+  /api/internal/sign_tasks:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks'
+  /api/internal/sign_tasks/{sign_task_id}:
+    $ref: './paths/internal.yml#/~1api~1internal~1sign_tasks~1{sign_task_id}'
+  /api/internal/signatures/{id}:
+    $ref: './paths/internal.yml#/~1api~1internal~1signatures~1{id}'
+  /api/internal/files/download/{code}:
+    $ref: './paths/internal.yml#/~1api~1internal~1files~1download~1{code}'
+
+  /api/v1/envelope_settings/setup:
+    $ref: './paths/envelope_settings.yml#/~1api~1v1~1envelope_settings~1setup'
+
+  /api/v1/combinations/list:
+    $ref: './paths/combinations.yml#/~1api~1v1~1combinations~1list'
+  /api/v1/combinations:
+    $ref: './paths/combinations.yml#/~1api~1v1~1combinations'
+  /api/v1/combinations/{id}:
+    $ref: './paths/combinations.yml#/~1api~1v1~1combinations~1{id}'
+  /api/v1/combinations/group_share:
+    $ref: './paths/combinations.yml#/~1api~1v1~1combinations~1group_share'
+  /api/v1/combinations/share_info:
+    $ref: './paths/combinations.yml#/~1api~1v1~1combinations~1share_info'
+
+  /api/v1/system_cas/list:
+    $ref: './paths/system_cas.yml#/~1api~1v1~1system_cas~1list'
+  /api/v1/system_cas:
+    $ref: './paths/system_cas.yml#/~1api~1v1~1system_cas'
+  /api/v1/system_cas/access_list:
+    $ref: './paths/system_cas.yml#/~1api~1v1~1system_cas~1access_list'
+  /api/v1/system_cas/system_ca_list_from_email:
+    $ref: './paths/system_cas.yml#/~1api~1v1~1system_cas~1system_ca_list_from_email'
+
+  /api/v1/public_forms:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms'
+  /api/v1/public_forms/{id}:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1{id}'
+  /api/v1/public_forms/create_from_template:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1create_from_template'
+  /api/v1/public_forms/change_status:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1change_status'
+  /api/v1/public_forms/preview:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1preview'
+  /api/v1/public_forms/export_csv:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1export_csv'
+  /api/v1/public_forms/compress:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1compress'
+  /api/v1/public_forms/form_tasks:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1form_tasks'
+  /api/v1/public_forms/form_tasks/start:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1form_tasks~1start'
+  /api/v1/public_forms/form_tasks/read:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1form_tasks~1read'
+  /api/v1/public_forms/form_tasks/sign:
+    $ref: './paths/public_forms.yml#/~1api~1v1~1public_forms~1form_tasks~1sign'
+
+security: 
+  - BearerAuth: []

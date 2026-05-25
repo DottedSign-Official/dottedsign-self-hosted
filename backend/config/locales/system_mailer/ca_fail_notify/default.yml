@@ -1,0 +1,21 @@
+en:
+  system_mailer:
+    system_ca_fail_notify:
+      default:
+        subject: "Task CA Failed"
+        title: "Task id: %{sign_task_id} CA Failed"
+        content_1_html: 'Hello, your task id : <b style="color:red">"%{sign_task_id}"</b> exec Certificate Authority failed. </br> Detail:</br>stages id : <b style="color:red">"%{sign_stage_id}"</b></br>error message : <b style="color:red">"%{error_message}"</b>  </br>Please contact the Kdan Mobile Team as soon as possible, or enter on premise dottedsign retry task again. </br> Thank you.'
+hant:
+  system_mailer:
+    system_ca_fail_notify:
+      default:
+        subject: "任務壓印憑證失敗"
+        title: "Task id: %{sign_task_id} 憑證壓印失敗"
+        content_1_html: '您好, 你的 task id : <b style="color:red">"%{sign_task_id}"</b>壓印憑證失敗. </br> 詳情:</br>stages id : <b style="color:red">"%{sign_stage_id}"</b></br>error message : <b style="color:red">"%{error_message}"</b>  </br>請盡快與 Kdan Mobile Team 聯絡，或請至 on premise dottedsign 再次執行壓印憑證. </br> 謝謝.'
+hans:
+  system_mailer:
+    system_ca_fail_notify:
+      default:
+        subject: "任務壓印憑證失敗"
+        title: "%{project_name} License Expire Soon"
+        content_1_html: '您好, 你的 task id : <b style="color:red">"%{sign_task_id}"</b>壓印憑證失敗. </br> 詳情:</br>stages id : <b style="color:red">"%{sign_stage_id}"</b></br>error message : <b style="color:red">"%{error_message}"</b>  </br>請盡快與 Kdan Mobile Team 聯絡，或請至 on premise dottedsign 再次執行壓印憑證. </br> 謝謝.'

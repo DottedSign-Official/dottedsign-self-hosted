@@ -1,0 +1,35 @@
+/api/v1/images:
+  post:
+    tags: [Files]
+    summary: Create Image
+    description: Upload a base64-encoded image (used for annotation or stamp images in sign tasks).
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [raw, file_type]
+            properties:
+              raw:
+                type: string
+                description: Base64-encoded image content.
+              file_type:
+                type: string
+                description: MIME type of the image (e.g. image/png).
+    responses:
+      '200':
+        description: Image created.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Image ID.
+                raw:
+                  type: string
+                  description: Base64-encoded image content.

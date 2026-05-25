@@ -1,0 +1,28 @@
+<svg width="117" height="117" viewBox="0 0 117 117" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter color-interpolation-filters="auto" id="a">
+            <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.843137 0 0 0 0 0.870588 0 0 0 0 0.976471 0 0 0 1.000000 0"/>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <ellipse fill="#DEE1EB" cx="58.5" cy="102.623" rx="41.366" ry="9.652"/>
+        <circle fill="#FFF" transform="rotate(135 58.5 58.5)" cx="58.5" cy="58.5" r="41.366"/>
+        <path d="M99.84 59.98c.394-11.073-3.636-22.276-12.09-30.73-16.154-16.154-42.346-16.154-58.5 0-16.154 16.154-16.154 42.346 0 58.5 8.557 8.557 19.93 12.581 31.135 12.073" stroke="#8998FF" stroke-width="5.515" fill="#FFF" stroke-linecap="round"/>
+        <path d="M29.765 88.256c16.434 15.87 42.621 15.413 58.491-1.02 15.87-16.435 15.413-42.622-1.02-58.492-16.435-15.87-42.622-15.413-58.492 1.02" stroke="#8998FF" stroke-width="5.515" stroke-linecap="round" stroke-dasharray="4.826003781598174,11.03086578651011"/>
+        <path d="M58.5 29.546v29.299L35.39 41.28c5.344-7.126 13.861-11.737 23.455-11.737l-.346.002z" fill="#D8DEF9"/>
+        <rect fill="#586AF2" x="56.432" y="39.196" width="4.137" height="19.304" rx="2.068"/>
+        <path d="M36.944 41.983c.6-.74 1.685-.854 2.425-.255l17.68 14.318a1.724 1.724 0 0 1-2.169 2.68L37.2 44.406a1.724 1.724 0 0 1-.256-2.424z" fill="#586AF2"/>
+        <circle stroke="#586AF2" stroke-width="2.068" fill="#FFF" cx="58.5" cy="58.5" r="3.102"/>
+        <g filter="url(#a)" stroke-linecap="round" stroke-linejoin="round">
+            <g stroke="#CECECE" stroke-width="2.758" fill="#D8DEF9">
+                <path d="M59.535 83.664v3.447M34.715 58.845h-3.447M87.8 58.845h-3.446"/>
+            </g>
+        </g>
+        <path stroke="#8998FF" stroke-width="4.137" stroke-linecap="round" stroke-linejoin="round" d="m109.245 54.895-9.911 7.469-7.468-9.911"/>
+        <circle fill="#F7BA3E" cx="88.835" cy="27.476" r="11.72"/>
+        <g transform="translate(86.767 20.581)" fill="#FFF">
+            <path fill-rule="nonzero" d="M4.137 0 3.62 8.273H.517L0 0z"/>
+            <ellipse cx="2.068" cy="12.134" rx="1.551" ry="1.655"/>
+        </g>
+    </g>
+</svg>

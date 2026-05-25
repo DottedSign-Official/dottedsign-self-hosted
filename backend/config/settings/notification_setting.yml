@@ -1,0 +1,14 @@
+development: &development
+  enable: <%= ENV['NOTIFICATION_ENABLE'].env_presence || false %>
+  host: <%= ENV['TARGET_PUSH_HOST'].env_presence %>
+  path:
+    target_push: <%= ENV['TARGET_PUSH_PATH'].env_presence || '/api/internal/target_push/dottedsign' %>
+
+test:
+  <<: *development
+
+preparing:
+  <<: *development
+
+production:
+  <<: *development

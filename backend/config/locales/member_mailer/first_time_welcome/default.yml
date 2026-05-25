@@ -1,0 +1,44 @@
+en:
+  member_mailer:
+    first_time_welcome:
+      default:
+        subject: "Welcome to DottedSign"
+        group_1_title:  "Welcome to DottedSign"
+        group_1_content_html: "HI %{user_name} welcome to Dottedsign"
+        footer_content_html: "Best Regards,<br>Dottedsign"
+hant:
+  member_mailer:
+    first_time_welcome:
+      default: 
+        subject: "歡迎使用 DottedSign"
+        group_1_title:  "歡迎使用 DottedSign"
+        group_1_content_html: "HI %{user_name} 歡迎使用 Dottedsign"
+        footer_content_html: "Best Regards,<br>Dottedsign"
+hans:
+  member_mailer:
+    first_time_welcome:
+      default: {}
+ja:
+  member_mailer:
+    first_time_welcome:
+      default: {}
+it:
+  member_mailer:
+    first_time_welcome:
+      default: {}
+de:
+  member_mailer:
+    first_time_welcome:
+      default: {}
+es:
+  member_mailer:
+    first_time_welcome:
+      default: {}
+fr:
+  member_mailer:
+    first_time_welcome:
+      default: {}
+ko:
+  member_mailer:
+    first_time_welcome:
+      default: {}

@@ -1,0 +1,26 @@
+{
+	"warning_pdf_task_login": "您的文件簽署已完成。",
+	"warning_pdf_task_deny": "您不在此簽署流程內，故無法編輯本文件。",
+	"warning_pdf_task_wait": "請耐心等候輪到您簽署。",
+	"warning_pdf_task_wait_all": "本文件正在等待所有簽署人完成簽名。",
+	"warning_pdf_task_wait_all_admin": "此文件簽署流程正在進行中。",
+  "warning_pdf_task_wait_checking": "本文件正在等待檢查者完成欄位檢查。",
+	"warning_pdf_task_wait_server":"此文件處理中。",
+	"warning_pdf_task_handling": "任務處理中。請稍等。",
+	"warning_pdf_task_not_finished": "簽署流程尚未完成。",
+	"warning_pdf_task_expired": "任務已過期。",
+	"warning_pdf_task_declined": "此文件簽署流程已中止。",
+	"warning_auth_error_login_first": "為驗證簽署者身份，請以<b id='hintEmail'></b><u id='getStarted'>登入</u>DottedSign以簽署文件。",
+	"warning_auth_error_login_first_no_email": "為驗證簽名者的身份，請<u id='getStarted'>登入</u>DottedSign以簽署文檔。",
+	"warning_auth_error_no_email": "請先登入以繼續",
+	"warning_auth_error_need_confirm": "請至信箱驗證帳號 或 <u id='resendReq'>重送驗證信</u>.",
+	"warning_group_access_denied": "因管理者帳號的訂閱已過期，您當前無法查看文件任務。請聯繫您的管理者完成續訂以恢復您的帳號權限。",
+	"warning_group_expired": "您當前的訂閱已過期，請聯繫您的管理者（<b id='adminEmail'></b>）完成續訂以恢復您的帳號權限。",
+	"warning_group_expired_admin": "您當前的訂閱已過期，請<u id='nav-upgrade'>完成您的續訂</u>以恢復您和團隊的帳號權限。",
+	"warning_group_task_suspended": "該任務已被暫停。有關的所有簽署者都無法簽署此文檔。請與發件人聯繫以獲取更多詳細訊息。",
+	"warning_upgrade": "您的免費帳號已達傳送文件數的上限，<u id='Task-Hint-Upgrade'>立即升級訂閱方案</u>以發送簽署邀請給他人！",
+	"warning_system_ca": "本文件使用系統憑證驗證簽署者身份，請先登入以繼續",
+
+  "warning_pdf_task_reviewing": "你正在檢查此文件，請逐一確認欄位內容。",
+  "warning_pdf_task_review_passed": "您的文件已經過檢查。 點擊「完成」以繼續。"
+}

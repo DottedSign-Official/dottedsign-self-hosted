@@ -1,0 +1,11 @@
+{
+  "name": "JackRabbit",
+  "short_name": "JR",
+  "theme_color": "#586af2",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "Scope": "/",
+  "start_url": "/",
+  "splash_pages": null
+}

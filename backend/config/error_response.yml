@@ -1,0 +1,9 @@
+source:
+  local:
+    - config/settings/error_responses/error_4xx.yml
+    - config/settings/error_responses/error_400.yml
+    - config/settings/error_responses/error_401.yml
+    - config/settings/error_responses/error_402.yml
+    - config/settings/error_responses/error_403.yml
+    - config/settings/error_responses/error_404.yml
+    - config/settings/error_responses/error_406.yml

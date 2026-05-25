@@ -1,0 +1,90 @@
+MemberAuthFailed:
+  summary: member auth failed
+  description: The Authorization header is missing, expired, or the bearer token does not match any active session.
+  value:
+    error_code: 401202
+    error_message: member auth failed
+
+GroupTaskNotAccessible:
+  summary: tasks of group not accessible to member
+  description: The authenticated member does not have permission to view tasks belonging to this group.
+  value:
+    error_code: 403041
+    error_message: tasks of group not accessible to member
+
+MemberNotGroupAdmin:
+  summary: member not group admin
+  description: The authenticated member does not have group admin privileges; only group admins can access admin endpoints.
+  value:
+    error_code: 403063
+    error_message: member not group admin
+
+GroupNotFound:
+  summary: group not found
+  description: No group exists with the given `group_id`.
+  value:
+    error_code: 404205
+    error_message: group not found
+
+InvalidPermission:
+  summary: permission is not allowed
+  description: The specified permission value is not a valid option for this group's role configuration.
+  value:
+    error_code: 400082
+    error_message: permission is not allowed
+
+PermissionInterlocking:
+  summary: permission interlocking
+  description: Two or more of the selected permissions conflict with each other and cannot be set simultaneously.
+  value:
+    error_code: 400083
+    error_message: permission interlocking.
+
+DuplicateRoleName:
+  summary: duplicate role name
+  description: A role with this name already exists in the group; choose a different name.
+  value:
+    error_code: 400081
+    error_message: duplicate role name
+
+RoleIsAssigned:
+  summary: still members are assigned roles
+  description: The role cannot be deleted because at least one member is still assigned to it; reassign those members first.
+  value:
+    error_code: 403061
+    error_message: still members are assigned roles
+
+RoleNotAllowToDelete:
+  summary: role cannot be removed
+  description: "Built-in roles (`admin`, `manager`, `member`) are system-reserved and cannot be deleted."
+  value:
+    error_code: 403062
+    error_message: "role: `admin`, `manager`, `member` can not be remove"
+
+RoleNotFound:
+  summary: sign stage role not found
+  description: No role exists with the given `role_id` in the specified group.
+  value:
+    error_code: 404044
+    error_message: sign stage role not found
+
+TaskNotReissuable:
+  summary: task is not reissuable
+  description: The task is not in a reissuable state; only tasks in `declined` status can be reissued by an admin.
+  value:
+    error_code: 400922
+    error_message: task is not reissuable
+
+TaskNotFound:
+  summary: task not found
+  description: No sign task exists with the given `sign_task_id`.
+  value:
+    error_code: 404031
+    error_message: task not found
+
+StageNotFound:
+  summary: stage not found
+  description: No stage exists with the given `stage_id` within the referenced task.
+  value:
+    error_code: 404032
+    error_message: stage not found

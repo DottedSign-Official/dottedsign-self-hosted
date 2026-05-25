@@ -1,0 +1,377 @@
+功能：
+1、导入、导出xfdf文件（Form、注释）
+kmpdf xfdf [options] <operate> <type> pdffile.pdf xfdffile.xfdf [fieldnames]
+
+2、文档Flatten
+kmpdf flatten [options] pdffile.pdf [page=]
+
+3、文档合并
+kmpdf merge [options] input.pdf [pages=] [input2.pdf] [pages=] ...
+
+4、创建注释、Form、水印
+kmpdf create [options] file.pdf <type> [key=value]
+
+5、删除所有注释
+kmpdf remove [options] file.pdf annot all
+
+6、PDF转图片
+kmpdf convert [options] file.pdf output_path
+
+7、页面编辑
+kmpdf page [options] file.pdf <type> [key=value]
+
+
+更新：
+v20201222
+- 不支持注释、Form旋转
+
+v20201231
+- 创建Form边框颜色、背景色问题
+
+v20210107
+- Form支持旋转
+- 添加删除所有注释接口
+- 导出xfdf文件，不指定fieldnames默认导出全部Form
+- 导出xfdf文件，添加导出watermark、all两种type
+
+v20210108
+- Checkbox创建默认参数设置
+
+v20210108_1
+- 修复创建注释重复添加问题
+
+v20210114
+- 修复签名Form导入旋转问题
+- 修复FreeText注释内存问题
+- 修复FreeText、Text注释文本乱码问题
+- FreeText注释添加对齐方式属性
+
+v20210118
+- Date Text Form导出标签缺失问题
+- 签名Form导入属性设置问题
+
+v20210120
+- 中华电信电子签名失败问题
+
+v20210127
+- 创建Text Form支持内嵌字体
+- xfdf导入Text Form支持内嵌字体
+
+v20210128
+- xfdf导入Text Form文本首行换行符丢失问题
+- Text Form内嵌字体英文排版问题
+
+v20210225
+- 添加PDF转图片接口
+
+v20210318
+- 修复水印导出旋转弧度问题
+
+v20210322
+- 创建Line注释箭头样式修改
+- 修复中华电信添加CA认证失败问题（修改了Flatten保存方式，确保中华电信添加CA前先进行Flatten）
+
+v20210323
+- 创建Line注释箭头样式调整
+- 修复创建FreeText注释无法显示问题
+
+v20210330
+- 修复Flatten后文档页面被裁剪问题
+
+v20210409
+- 创建Form新增设置边框宽度参数
+
+v20210409_1
+- 修复xfdf导入未签名Form显示黑边框问题
+
+v20210527
+- Text Form内嵌字体部分特殊字符支持
+
+v20210527_1
+- 修复Text Form包含不支持的特殊字符无法正常显示问题
+
+v20210622
+- 创建注释添加content是否base64编码属性
+
+v20210707
+- 修复xfdf导入文字缺失问题
+
+v20210716
+- 修复添加图片水印不显示问题
+
+v20210722
+- 支持满屏水印
+
+v20210723
+- 修改xfdf导入签名Form图片填充方式
+
+v20210818
+- 添加创建RadioButton
+
+v20210819
+- 修复创建RadioButton问题
+
+v20210910
+- Text Form添加对齐方式属性
+
+v20211001
+- 添加页面编辑接口
+- 添加插入图片接口
+
+v20211018
+- 添加图片注释接口
+- FreeText注释添加样式属性
+- Text注释添加字体大小属性
+- Form添加modified属性
+- 注释、From、水印添加扩展属性
+
+v20211019
+- 修复FreeText注释添加样式属性问题
+
+v20211117
+- FreeText注释支持背景色透明度
+- 添加页面抽取接口
+
+v20211213
+- FreeText注释支持旋转
+- 修复书签注释对齐方式问题
+- 添加页面大小修复接口
+
+v20220120
+- json方式创建注释、Form（测试）
+
+v20220126
+- json方式创建注释、Form
+- 修复FreeText注释背景色问题
+
+v20220524
+- 添加页面旋转接口
+- 修复FreeText注释旋转问题
+- 修复Flatten注释丢失问题
+
+v20220608
+- 修复Flatten问题
+
+v20220727
+- 修复Flatten后文档内容丢失问题
+
+v20220825
+- 修复Flatten后高亮注释问题
+
+v20220930
+- PDF转图片新增缩放比例
+
+v20221025
+- 签名Form问题
+
+v20221030
+- 新增xfdf导入签名Form转化成图片注释
+
+v20221208
+- 添加Form加入AcroForm
+
+v20221220
+- Convert命令问题
+
+v20221221
+- Convert命令问题
+
+v20230116
+- 添加Form转注释接口
+- 修改保存方法（交叉引用流），处理中华电信签名认证问题
+
+v20230117
+- 修复保存方法（交叉引用流）问题
+
+v20230118
+- 优化修复保存方法（交叉引用流）问题
+
+v20230129
+- 中华电信签名认证内嵌字体问题
+
+v20230314
+- xfdf导入添加Form填写接口
+
+v20230323
+- 修复xfdf导入Form填写问题
+
+v20230330
+- 修复交叉引用流保存问题
+
+v20230427
+- xfdf导入问题
+
+v20230505
+- 优化内嵌字体文档容量大问题，增加字体子集化
+
+v20230602
+- 修复多次导入xfdf，字体子集化文字乱码问题
+
+v20230606
+- 新增数字签名hash api
+
+v20230613
+- 修复字体子集化导致文字丢失问题
+
+v20230614
+- 修复字体子集化崩溃问题
+- 修复Flatten文档内容丢失问题
+
+v20230615
+- 撤销修复Flatten文档内容丢失问题
+
+v20230705
+- 数字签名hash api修改
+
+v20230710
+- 移除xfdf导入是进行字体裁剪操作，xfdf导入恢复到之前版本
+- 添加字体裁剪接口
+
+v20230807
+- 修复字体裁剪兼容问题
+
+v20230809
+- 修复字体裁剪兼容问题（注释中的字体）
+
+v20230823
+- 新增文档附件接口
+
+v20230829
+- 新增注释附件接口
+
+v20231012
+- 修复字体裁剪兼容问题（裁剪后文档Adobe预览问题）
+
+v20231016
+- 修复缺字问题
+
+v20231103
+- 修复缺字问题（完善）
+- 修复文本框黑底、Adobe部分內容會消失问题
+
+v20231104
+- 新增Link注释
+
+v20231107
+- 打包问题
+
+v20231122
+- 修复字体裁剪问题
+
+v20231208
+- 修复Bug #10082
+
+v20231220
+- 修复添加注释接口补充NM、AP字段
+
+v20240102
+- 修复字体裁剪后文本显示区域问题
+
+v20240118
+- 修复Flatten后文字复制乱码问题
+
+v20240124
+- 修复form_to_annot接口，FreeText注释移动后背景变黑问题
+
+v20240201
+- 修复Adobe开启错误提示问题
+
+v20240207
+- 修复康熙部首问题
+
+v20240229
+- 修复连续导入xfdf，导致注释NM字段相同问题
+
+v20240324
+- 修复导入xfdf，图片丢失问题
+
+v20240412
+- 修复导入xfdf，NM字段问题
+
+v20240418
+- 修复创建注释，NM字段问题
+
+v20240426
+- 修复注释附件（Attachment）显示透明问题，支持bdcolor、fcolor、transparency、ftransparency参数
+
+v20240606
+
+- 添加单个注释字体clip
+
+v202406024
+
+- 导入xfdf时新增clip功能
+
+v20240709
+
+- 导入xfdf时新增开启PDF交叉引用方式为交叉引用流选项
+
+v20240816
+
+- 修复字体子集化之后与Adobe安卓版本不兼容问题
+
+v20240911
+
+- 兼容HSM数字签名
+
+v20241015
+
+- 支持开启数字签名LTV
+
+v20241023
+
+- 修复注释添加字体Adobe错误提示问题
+- 增加数字签名开启LTV时不能获取OCSP响应时提示错误信息
+- 添加签名时允许指定SubFilter
+
+v20241220
+- 添加签名时允许指定name、location、reason
+
+v20250218
+- 修复特殊文件数字签名hash值错误bug
+
+v20250228
+- 注释、表单设置仅读属性
+- 验证数字签名是否过期
+
+v20250429
+- 增加智能表单识别功能
+
+v20250529
+- 数字签名新增签名最大长度参数
+
+v20250612
+- 修复水印重复绘制问题
+
+v20250731
+- 修复子集化后文件字体乱码问题
+
+v20250804
+- 增加导入字体接口
+
+v20250806
+- 修复子集化导致的字体消失问题
+
+v20250924
+- 修复form_to_annot不能单行显示问题
+
+v20251107
+- 修复form中全角字符自动换行问题
+
+v20251215
+- 修复日期欄位 設置alignment會偏移问题
+
+v20260313
+- LTV新增timeout参数，超时自动结束,默认timeout为60s
+示例
+./kmpdf sign -l test.pdf timeout=30
+
+v20260604
+- 增加获取producer命令，xfdf导入自动写入producer为Kdan Mobile Software Ltd.
+示例
+
+./kmpdf doc get producer test.pdf 
+
+
+详情：
+https://docs.google.com/spreadsheets/d/1v7yJNjF0cnIN-_ontXFVJehksdq2g_QvHKgf79W_K6I/edit#gid=448094219

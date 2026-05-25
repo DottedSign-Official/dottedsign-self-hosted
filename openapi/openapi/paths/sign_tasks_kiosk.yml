@@ -1,0 +1,292 @@
+/api/v1/sign_tasks/kiosk:
+  post:
+    tags: [Sign Tasks - Kiosk]
+    summary: Create Kiosk Task
+    description: |
+      Create a kiosk sign task from a template.
+
+      Workflow:
+      1. Call this API to create the kiosk task record. The response includes `sign_task_id`.
+      2. Call `POST /api/v1/sign_tasks/kiosk/verify` with the `sign_task_id` to read the task.
+         - If `signer_info_not_ready` error is returned, call verify again with required `actor_info` fields.
+      3. Call `PUT /api/v1/sign_tasks/kiosk/sign` to sign the kiosk task.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [template_id, file_name, stages]
+                properties:
+                  template_id:
+                    type: integer
+                    description: Template ID.
+                  file_name:
+                    type: string
+                    description: Kiosk task name.
+                  stages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Stage role name.
+                        requisite:
+                          type: object
+                          properties:
+                            name:
+                              type: boolean
+                              description: Whether signer name is required.
+                            email:
+                              type: boolean
+                              description: Whether signer email is required.
+                            phone:
+                              type: boolean
+                              description: Whether signer phone is required.
+                    description: Kiosk stage configurations.
+                  file:
+                    type: string
+                    description: Base64-encoded PDF to override the base document.
+          examples:
+            create_kiosk_task:
+              $ref: '../components/examples/requests/sign_task_kiosk_requests.yml#/CreateKioskTask'
+    responses:
+      '200':
+        description: Kiosk task created.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sign_task_id:
+                  type: integer
+                  description: Kiosk task ID. Use this to call the verify and sign APIs.
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              template_deleted:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/TemplateDeleted'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              kiosk_not_allowed:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/KioskNotAllowed'
+              over_monthly_task_usage:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/OverMonthlyTaskUsage'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              template_not_found:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/TemplateNotFound'
+/api/v1/sign_tasks/kiosk/verify:
+  post:
+    tags: [Sign Tasks - Kiosk]
+    summary: Read / Verify Kiosk Task
+    description: |
+      Read a kiosk task and optionally provide signer info.
+      If the stage requires signer info (name/email/phone), include `actor_info`.
+      Returns download_link for rendering the PDF with sign fields.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [sign_task_id]
+                properties:
+                  sign_task_id:
+                    type: integer
+                    description: Sign task ID.
+                  actor_info:
+                    type: object
+                    description: Signer identity info. Required fields depend on stage `requisite` settings.
+                    properties:
+                      name:
+                        type: string
+                        description: Signer name. Required if stage requisite `name` is true.
+                      email:
+                        type: string
+                        format: email
+                        description: Signer email. Required if stage requisite `email` is true.
+                      phone:
+                        type: string
+                        description: Signer phone. Required if stage requisite `phone` is true.
+          examples:
+            verify_kiosk_task:
+              $ref: '../components/examples/requests/sign_task_kiosk_requests.yml#/VerifyKioskTask'
+    responses:
+      '200':
+        description: Kiosk task info retrieved.
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+                - type: object
+                  properties:
+                    download_link:
+                      type: string
+                      description: URL to download the PDF. Returns completed PDF if done, otherwise original PDF.
+                    access_info:
+                      type: object
+                      properties:
+                        view:
+                          type: boolean
+                        sign:
+                          type: boolean
+                        review:
+                          type: boolean
+                        decline:
+                          type: boolean
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              signer_info_not_ready:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/SignerInfoNotReady'
+              kiosk_repeat_access:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/KioskRepeatAccess'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              kiosk_not_allowed:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/KioskNotAllowed'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/TaskNotFound'
+/api/v1/sign_tasks/kiosk/sign:
+  put:
+    tags: [Sign Tasks - Kiosk]
+    summary: Sign Kiosk Task
+    description: Submit signatures and field values to complete a kiosk task.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [sign_task_id, signature_info]
+                properties:
+                  sign_task_id:
+                    type: integer
+                    description: Sign task ID.
+                  signature_info:
+                    type: array
+                    description: Signature and field values.
+                    items:
+                      $ref: '../components/schemas/requests.yml#/SignatureInfoItemObject'
+                  attachment_info:
+                    type: array
+                    description: Attachment files. Required if the stage has attachment settings.
+                    items:
+                      $ref: '../components/schemas/requests.yml#/AttachmentInfoItemObject'
+          examples:
+            sign_kiosk_task:
+              $ref: '../components/examples/requests/sign_task_kiosk_requests.yml#/SignKioskTask'
+    responses:
+      '200':
+        description: Kiosk task signed.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/sign_task.yml#/SignTaskObject'
+      '400':
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              kiosk_delay_sign:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/KioskDelaySSign'
+              kiosk_not_read:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/KioskNotRead'
+              field_content_invalid:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/FieldContentInvalid'
+              invalid_object_id:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/InvalidObjectId'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              member_auth_failed:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/MemberAuthFailed'
+      '403':
+        description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              kiosk_not_allowed:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/KioskNotAllowed'
+      '404':
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/common.yml#/ErrorResponse'
+            examples:
+              task_not_found:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/TaskNotFound'
+              stage_not_found:
+                $ref: '../components/examples/errors/sign_task_kiosk_errors.yml#/StageNotFound'

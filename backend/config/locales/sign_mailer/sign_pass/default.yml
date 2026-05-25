@@ -1,0 +1,64 @@
+---
+en:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: Your Signed Content in %{doc_name} Has Passed the Check
+        title: Your Signed Content Has Passed the Check
+        content_1_html: <strong>"%{doc_name}"</strong> has passed the check.
+hant:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: 您在 %{doc_name} 內的簽署內容已通過檢查
+        title: 您的簽署內容已通過檢查
+        content_1_html: <strong>"%{doc_name}"</strong> 已通過檢查。
+hans:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: 您在 %{doc_name} 内的签署内容已通过检查
+        title: 您的签署内容已通过检查
+        content_1_html: <strong>"%{doc_name}"</strong> 已通过检查。
+ja:
+  sign_mailer:
+    sign_pass:
+      sign_pass:
+        subject: "%{doc_name}の署名の内容チェックが完了しました"
+        title: 署名したタスクの内容が確認完了しました。
+        content_1_html: <strong>"%{doc_name}"</strong> が確認完了しました。
+it:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: Il tuo contenuto firmato in %{doc_name} ha superato il controllo
+        title: Il tuo contenuto firmato ha superato il controllo
+        content_1_html: <strong>"%{doc_name}"</strong> ha superato il controllo.
+de:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: Ihr signierter Inhalt in %{doc_name} hat die Prüfung bestanden.
+        title: Ihr signierter Inhalt hat die Prüfung bestanden.
+        content_1_html: <strong>"%{doc_name}"</strong> hat die Prüfung bestanden.
+es:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: El contenido firmado en %{doc_name} ha pasado la comprobación
+        title: Su contenido firmado ha pasado la comprobación
+        content_1_html: <strong>"%{doc_name}"</strong> ha pasado la comprobación.
+fr:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: Votre Contenu Signé dans %{doc_name} A Réussi la Vérification
+        title: Votre Contenu Signé a Réussi la Vérification
+        content_1_html: <strong>"%{doc_name}"</strong> a réussi le vérification.
+ko:
+  sign_mailer:
+    sign_pass:
+      default:
+        subject: "%{doc_name}에서 서명된 내용은 확인이 통과되었습니다."
+        title: 서명된 내용은 확인이 통과되었습니다.
+        content_1_html: <strong>"%{doc_name}"</strong>(은)는 확인이 통과되었습니다.

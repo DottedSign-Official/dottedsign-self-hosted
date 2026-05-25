@@ -1,0 +1,161 @@
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+require_relative 'lib/on_premise_license/plan_reader'
+
+ruby '3.2.2'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 6.1.7.7'
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 1.5.3'
+# Use Puma as the app server
+gem 'puma', '~> 5.6.5'
+
+# Use Active Storage variant
+gem 'image_processing', '~> 1.2'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '~> 1.16.0', require: false
+
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'rack-cors', '~> 2.0.1'
+
+# Keep all your secret files within openssl
+gem 'secret-keeper', '~> 2.0.3'
+
+# A simple and straightforward settings solution that uses an ERB enabled YAML file and a singleton design pattern.
+gem 'settingslogic', '~> 2.0.9'
+
+# Pagination
+gem 'kaminari', '~> 1.2.2'
+
+# Sidekiq —— 依 license plan 決定要 Pro 還是 OSS
+if OnPremiseLicense::PlanReader.enterprise?
+  source 'https://gems.contribsys.com/' do
+    gem 'sidekiq-pro'
+  end
+else
+  gem 'sidekiq', '~> 6.5.9'
+end
+
+# This gem adds a Redis::Namespace class which can be used to namespace Redis keys.
+gem 'redis-namespace', '~> 1.11.0'
+
+# mini replacement for RMagick
+gem 'mini_magick', '>= 4.9.5' , '< 5.0'
+# A PDF generation plugin for Ruby on Rails
+gem 'wicked_pdf', '~> 2.6.3'
+# Ruby gem containing easily installable access to wkhtmltopdf application
+gem 'wkhtmltopdf-binary', '~> 0.12.6.6'
+
+# Service Base
+gem 'service_caller', '~> 1.2.1'
+# HTTP Requester
+gem 'json_requester', '~> 1.0.11'
+# Error Response
+gem 'error_response', '~> 1.1.3'
+
+# Json Web Token
+gem 'jwt', '~> 2.7.1'
+
+# i18n
+gem 'rails-i18n', '~> 7.0.8'
+
+# flexible authentication solution
+gem 'devise', '~> 4.8.1'
+# Oauth 2
+gem 'doorkeeper', '~> 5.6.6'
+
+# AWS SES Ruby SDK
+gem 'aws-sdk-ses', '~> 1.55.0'
+
+# AWS S3 Ruby SDK
+gem "aws-sdk-s3", '~> 1.132.1'
+
+# Azure Blob Storage Ruby SDK
+gem "azure-storage-blob", '~> 2.0.3', require: false
+
+# User Agent Parser
+gem 'user_agent_parser', '~> 2.16.0'
+
+# One-Time Password
+gem 'rotp', '~> 6.2.2'
+# Cron jobs in Ruby
+gem 'whenever', require: false
+
+# License management
+gem 'gitlab-license', '~> 1.5.0'
+
+# Tag
+gem 'acts-as-taggable-on', '~> 7.0.0'
+
+# ZIP files
+gem 'rubyzip', '~> 2.3.0'
+
+# Generate postman doc after run rspec
+gem 'rpdoc', '~> 0.1.16'
+
+# State Machine
+gem 'aasm', '~> 5.5.0'
+
+gem 'mimemagic', '~> 0.4.3'
+
+# Serialize response
+gem 'grape-entity', '~> 0.10.2'
+gem 'grape_serializer', '~> 1.0.6'
+
+# Phone verify
+gem 'phonelib', '~> 0.8.2'
+
+# use to count pdf file pages
+gem 'pdf-reader', '>= 2.11.0'
+
+# LDAP Devise gem
+gem 'leveret_auth', '>= 0.0.2'
+
+# YAML parse
+gem 'psych', '< 4'
+
+# Redis
+gem 'redis', '~> 4.2', '< 5'
+
+# text length calculator
+gem 'ttfunk', '~> 1.8'
+
+# library for bulk inserting data using ActiveRecord
+gem 'activerecord-import', '~> 2.1'
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # RSpec for Rails-4+
+  gem 'rspec-rails'
+  # Factory Bot ♥ Rails
+  gem 'factory_bot_rails'
+  # test for controller
+  gem 'rails-controller-testing'
+  # pry debug tool
+  gem 'pry', '~> 0.14.2'
+  gem 'pry-byebug', '~> 3.10.0'
+  # Strategies for cleaning databases in Ruby.
+  gem 'database_cleaner', '~> 2.0.1'
+  # Run rspec in parallel processes
+  gem 'parallel_tests', '~> 4.5'
+  # Brakeman
+  gem 'brakeman'
+end
+
+group :development do
+  gem 'listen', '~> 3.3'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+end
+
+group :preparing, :production do
+  # An attempt to tame Rails' default policy to log everything
+  gem 'lograge'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

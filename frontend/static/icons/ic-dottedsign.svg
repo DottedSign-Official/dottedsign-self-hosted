@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <rect id="a" width="24" height="24" rx="6.5"/>
+        <rect id="c" width="24" height="24" rx="5.379"/>
+        <linearGradient id="d" x1="88.53%" x2="18.117%" y1="92.505%" y2="-19.89%">
+            <stop offset="0%" stop-color="#586AF2"/>
+            <stop offset="100%" stop-color="#3345C7"/>
+        </linearGradient>
+        <linearGradient id="f" x1="50%" x2="50%" y1="0%" y2="100%">
+            <stop offset="0%" stop-color="#262E52" stop-opacity=".149"/>
+            <stop offset="100%" stop-color="#111529" stop-opacity=".149"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="b" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+        <use fill="#D8D8D8" xlink:href="#a"/>
+        <g mask="url(#b)">
+            <g>
+                <mask id="e" fill="#fff">
+                    <use xlink:href="#c"/>
+                </mask>
+                <use fill="#D8D8D8" xlink:href="#c"/>
+                <path fill="url(#d)" d="M0 0h24v24H0z" mask="url(#e)"/>
+                <path fill="#FFF" fill-rule="nonzero" d="M3.563 21.305a.422.422 0 0 1 0-.844h4.5a.422.422 0 0 1 0 .844h-4.5zm6.187 0a.422.422 0 0 1 0-.844h4.5a.422.422 0 0 1 0 .844h-4.5zm6.188 0a.422.422 0 0 1 0-.844h4.456a.422.422 0 1 1 0 .844h-4.456z" mask="url(#e)"/>
+                <path fill="#FFF" d="M5.818 17.543l.848-.847a.375.375 0 0 1 .53 0l.026.026a.375.375 0 0 1 0 .53l-.847.848.847.847a.375.375 0 0 1 0 .53l-.026.026a.375.375 0 0 1-.53 0l-.848-.847-.847.847a.375.375 0 0 1-.53 0l-.026-.026a.375.375 0 0 1 0-.53l.847-.847-.847-.848a.375.375 0 0 1 0-.53l.026-.026a.375.375 0 0 1 .53 0l.847.847z" mask="url(#e)"/>
+                <path fill="url(#f)" d="M12.68 7.132l3.586-2.252L15.086 0H0v7.005L11.541 18.61h.963z" mask="url(#e)"/>
+                <path fill="#BDC7CE" d="M6.234 7.131c0 1.156.299 2.291.866 3.297l4.346 7.704c.01.02.023.038.036.056a.212.212 0 1 0 .247.21V6.782a1.927 1.927 0 0 1-1.699-2.028c.06-1.02.95-1.816 1.97-1.815V0H6.234v7.131z" mask="url(#e)"/>
+                <path fill="#FFF" d="M12 2.94c1.02 0 1.91.796 1.97 1.815a1.927 1.927 0 0 1-1.699 2.028v11.6h.002v.013a.212.212 0 1 0 .247-.209.696.696 0 0 0 .035-.055l4.345-7.704a6.711 6.711 0 0 0 .866-3.297V0H12v2.94z" mask="url(#e)"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,532 @@
+/api/v1/public_forms:
+  get:
+    tags: [Public Forms]
+    summary: List Public Forms
+    description: Returns a paginated list of public forms belonging to the current member.
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: '../components/parameters.yml#/PageQuery'
+      - $ref: '../components/parameters.yml#/PerPageQuery'
+    responses:
+      '200':
+        description: Public form list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                public_forms:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+                current_page:
+                  type: integer
+                total_pages:
+                  type: integer
+  post:
+    tags: [Public Forms]
+    summary: Create Public Form
+    description: Create a new public form with signer role configuration and PDF stage settings.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [form_name, signer_infos, stages]
+                properties:
+                  form_name:
+                    type: string
+                    description: Name of the public form.
+                  description:
+                    type: string
+                    description: Optional description.
+                  goal_num:
+                    type: integer
+                    description: Target number of submissions (optional).
+                  end_at:
+                    type: integer
+                    description: Unix timestamp for form expiry (optional).
+                  signer_infos:
+                    type: array
+                    description: Signer role configurations.
+                    items:
+                      type: object
+                      properties:
+                        signer_type:
+                          type: string
+                        name:
+                          type: string
+                        email:
+                          type: string
+                          format: email
+                        phone:
+                          type: string
+                        requisite:
+                          type: object
+                          properties:
+                            name:
+                              type: boolean
+                            email:
+                              type: boolean
+                  stages:
+                    type: array
+                    description: PDF stage configurations for the form.
+                    items:
+                      $ref: '../components/schemas/requests.yml#/SignStageRequestObject'
+    responses:
+      '200':
+        description: Public form created.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+/api/v1/public_forms/{id}:
+  get:
+    tags: [Public Forms]
+    summary: Get Public Form Detail
+    description: Returns detailed information about a public form.
+    security:
+      - BearerAuth: []
+    parameters:
+      - description: Public form ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: Whether to include full stage/field detail.
+        in: query
+        name: with_detail
+        required: false
+        schema:
+          type: boolean
+    responses:
+      '200':
+        description: Public form detail.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+  put:
+    tags: [Public Forms]
+    summary: Update Public Form
+    description: Update an existing public form's settings and stage configuration.
+    security:
+      - BearerAuth: []
+    parameters:
+      - description: Public form ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/requests.yml#/ClientRequestFields
+              - properties:
+                  description:
+                    type: string
+                  end_at:
+                    description: Unix timestamp for form expiry.
+                    type: integer
+                  form_id:
+                    description: Public form ID (used to identify the form to update).
+                    type: integer
+                  form_name:
+                    type: string
+                  goal_num:
+                    type: integer
+                  signer_infos:
+                    items:
+                      type: object
+                    type: array
+                  stages:
+                    description: PDF stage configurations (required).
+                    items:
+                      $ref: ../components/schemas/requests.yml#/SignStageRequestObject
+                    type: array
+                required:
+                  - form_id
+                  - stages
+                type: object
+    responses:
+      '200':
+        description: Public form updated.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+  delete:
+    tags: [Public Forms]
+    summary: Delete Public Form
+    description: Delete a public form. The form must be in unpublished state.
+    security:
+      - BearerAuth: []
+    parameters:
+      - description: Public form ID.
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: Public form deleted.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+/api/v1/public_forms/create_from_template:
+  post:
+    tags: [Public Forms]
+    summary: Create Public Form from Template
+    description: Create a new public form based on an existing template.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '../components/schemas/requests.yml#/ClientRequestFields'
+              - type: object
+                required: [template_id, form_name, signer_infos]
+                properties:
+                  template_id:
+                    type: integer
+                    description: Source template ID.
+                  form_name:
+                    type: string
+                    description: Name of the new public form.
+                  description:
+                    type: string
+                  goal_num:
+                    type: integer
+                  end_at:
+                    type: integer
+                    description: Unix timestamp for form expiry.
+                  signer_infos:
+                    type: array
+                    items:
+                      type: object
+    responses:
+      '200':
+        description: Public form created from template.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+/api/v1/public_forms/change_status:
+  put:
+    tags: [Public Forms]
+    summary: Change Public Form Status
+    description: |
+      Change a public form's status (e.g. publish, unpublish).
+      A form can only be published if it has not reached its submission limit and its template is still usable.
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [form_id, status]
+            properties:
+              form_id:
+                type: integer
+                description: Public form ID.
+              status:
+                type: string
+                enum: [draft, publish, unpublish]
+                description: Target status.
+    responses:
+      '200':
+        description: Status changed.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+/api/v1/public_forms/preview:
+  get:
+    tags: [Public Forms]
+    summary: Preview Public Form
+    description: |
+      Preview a public form by UUID. Does not require authentication.
+      Returns the form with full detail for rendering a preview to the signer.
+    parameters:
+      - name: form_uuid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Public form UUID.
+      - name: signer_info[name]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Signer name (if required by form).
+      - name: signer_info[email]
+        in: query
+        required: false
+        schema:
+          type: string
+          format: email
+        description: Signer email (if required by form).
+    responses:
+      '200':
+        description: Form preview data.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/PublicFormObject'
+/api/v1/public_forms/export_csv:
+  get:
+    tags: [Public Forms]
+    summary: Export Public Form Submissions as CSV
+    description: Download all form submissions as a CSV file. The form must be unpublished.
+    security:
+      - BearerAuth: []
+    parameters:
+      - name: form_id
+        in: query
+        required: true
+        schema:
+          type: integer
+        description: Public form ID.
+      - name: zone
+        in: query
+        required: false
+        schema:
+          type: number
+        description: Timezone offset in hours (e.g. 8 for UTC+8).
+    responses:
+      '200':
+        description: CSV file download.
+        content:
+          text/csv:
+            schema:
+              type: string
+              format: binary
+/api/v1/public_forms/compress:
+  put:
+    description: |
+      Compress all signed PDFs from form submissions and download as a ZIP file.
+      Also sends a download notification email to the form owner. The form must be unpublished.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            properties:
+              form_id:
+                description: Public form ID.
+                type: integer
+            required:
+              - form_id
+            type: object
+      required: true
+    responses:
+      "200":
+        content:
+          application/zip:
+            schema:
+              format: binary
+              type: string
+        description: ZIP file download.
+    security:
+      - BearerAuth: []
+    summary: Download Public Form Submissions as ZIP
+    tags:
+      - Public Forms
+/api/v1/public_forms/form_tasks:
+  get:
+    tags: [Public Forms]
+    summary: List Form Tasks
+    description: Returns a paginated list of form task submissions for the current member's forms.
+    security:
+      - BearerAuth: []
+    parameters:
+      - description: Filter by task category. Must be one of the allowed values.
+        in: query
+        name: category
+        required: true
+        schema:
+          enum:
+            - reissue_for_me
+            - waiting_for_me
+            - waiting_for_others
+            - completed
+            - canceled
+            - draft
+          type: string
+      - description: Search terms.
+        in: query
+        name: terms
+        required: false
+        schema:
+          type: string
+      - description: Page number.
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: per_page
+        required: false
+        schema:
+          default: 10
+          type: integer
+    responses:
+      '200':
+        description: Form task list.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                form_tasks:
+                  type: array
+                  items:
+                    $ref: '../components/schemas/public_form.yml#/FormTaskObject'
+                summary:
+                  type: object
+                  description: Count summary by category.
+                current_page:
+                  type: integer
+                total_pages:
+                  type: integer
+/api/v1/public_forms/form_tasks/start:
+  post:
+    tags: [Public Forms]
+    summary: Start Form Task
+    description: |
+      Start a new form task submission for a public form.
+      Creates a sign task for the signer to complete.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/requests.yml#/ClientRequestFields
+              - properties:
+                  form_uuid:
+                    description: UUID of the public form to submit.
+                    type: string
+                  signer_email:
+                    description: Signer email (required if form mandates email).
+                    format: email
+                    type: string
+                  signer_name:
+                    description: Signer name.
+                    type: string
+                required:
+                  - form_uuid
+                  - signer_name
+                type: object
+    responses:
+      '200':
+        description: Form task started.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/FormTaskObject'
+/api/v1/public_forms/form_tasks/read:
+  get:
+    tags: [Public Forms]
+    summary: Read Form Task
+    description: |
+      Retrieve a form task to display the PDF and field data for signing.
+      Returns XFDF annotations and page images.
+    parameters:
+      - description: JWT form token for authentication (alternative to Bearer token). Required when accessing without a session.
+        in: query
+        name: form_token
+        required: false
+        schema:
+          type: string
+      - description: Signer name.
+        in: query
+        name: signer_info[name]
+        required: false
+        schema:
+          type: string
+      - description: Signer email.
+        in: query
+        name: signer_info[email]
+        required: false
+        schema:
+          format: email
+          type: string
+      - description: UUID returned from the OTP-trigger response.
+        in: query
+        name: verify_info[uuid]
+        required: false
+        schema:
+          type: string
+      - description: OTP code received by the user.
+        in: query
+        name: verify_info[verify_data]
+        required: false
+        schema:
+          type: string
+      - description: Pre-issued identity verification token (certificate-based flow).
+        in: query
+        name: verify_info[identity_verify_token]
+        required: false
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Form task reading data.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/FormTaskObject'
+/api/v1/public_forms/form_tasks/sign:
+  put:
+    tags: [Public Forms]
+    summary: Sign Form Task
+    description: Submit the signed form task with signature data and optional attachments.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../components/schemas/requests.yml#/ClientRequestFields
+              - properties:
+                  attachment_info:
+                    description: Optional attachment data.
+                    type: object
+                  form_token:
+                    description: JWT form token for authentication (alternative to Bearer token).
+                    type: string
+                  signature_info:
+                    description: Signing data (XFDF, signature images, etc.).
+                    type: object
+                  verify_info:
+                    $ref: ../components/schemas/requests.yml#/VerifyInfoFullObject
+                type: object
+    responses:
+      '200':
+        description: Form task signed successfully.
+        content:
+          application/json:
+            schema:
+              $ref: '../components/schemas/public_form.yml#/FormTaskObject'

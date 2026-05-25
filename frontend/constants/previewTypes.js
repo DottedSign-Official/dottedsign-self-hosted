@@ -1,0 +1,12 @@
+export const FETCH_INFO = "fetch_info";
+export const FETCH_DRAFT = "fetch_draft";
+export const FETCH_SUCCEEDED = "fetch_successed";
+export const FETCH_FAILED = "fetch_failed";
+export const SET_FILES = "set_files";
+export const SET_SHARE_STATUS = "set_share_status";
+export const SET_SHARE_TAB = "set_share_tab";
+export const SWITCH_TAB = "switch_tab";
+export const SET_RES_LENGTH = "set_res_length";
+export const SET_LOADED = "set_loaded";
+export const RESET_PREVIEW = "reset_preview";
+export const SET_PREVIEW_EMAIL = "set_preview_email";

@@ -1,0 +1,11 @@
+GroupObject:
+  properties:
+    group_id:
+      type: integer
+    name:
+      type: string
+    status:
+      type: string
+    unique_name:
+      type: string
+  type: object

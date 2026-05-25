@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>ic-reviewed</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="task/cc" transform="translate(-722.000000, -1858.000000)">
+            <g id="ic-reviewed" transform="translate(722.000000, 1858.000000)">
+                <polygon id="Path" fill-opacity="0.01" fill="#D8D8D8" points="0 0 24 0 24 24 0 24"></polygon>
+                <g id="Group-9" transform="translate(4.000000, 4.000000)">
+                    <polygon id="Shape" fill="#586AF2" fill-rule="nonzero" points="6.51281902 9.2204637 11.7654033 4 13 5.24277288 6.50172283 11.7019214 3 8.15698184 4.24627694 6.92588915"></polygon>
+                    <circle id="Oval-4" stroke="#586AF1" stroke-width="2" cx="8" cy="8" r="8"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
