@@ -23,7 +23,8 @@ const Code = WindowWidth(
 
             // NOTE: add logo
             if (refCanvas.current) {
-              const imgDim = { width: 30, height: 30 };
+              const logoSize = canvas.width * 0.16;
+              const imgDim = { width: logoSize, height: logoSize };
               const context = canvas.getContext("2d");
               const imageObj = new Image();
               imageObj.src = "/static/icons/img-qrcode-logo.svg";
