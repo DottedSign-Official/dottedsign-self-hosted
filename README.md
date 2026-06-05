@@ -2,14 +2,14 @@
 
 # DottedSign Self-Hosted: Enterprise-Grade eSignature System
 
-A self-hosted e-signature solution built for enterprises that prioritize data sovereignty.
-DottedSign Self-Hosted gives enterprises the option to deploy the DottedSign system independently within their internal network environment. This offering is designed to help organizations with compliance requirements or restricted, closed-network environments build more flexible e-signature workflows.
+A self-hosted eSignature solution built for enterprises that prioritize data sovereignty.
+DottedSign Self-Hosted gives enterprises the option to deploy the DottedSign system independently within their internal network environment. This offering is designed to help organizations with compliance requirements or restricted, closed-network environments build more flexible eSignature workflows.
 
 ## Key Features
 
 - Local data storage: The system is designed to run independently within an intranet, keeping documents and signing records on your organization's private servers.
 - Docker-based deployment: Provides a Docker Compose installation process to help IT teams quickly set up the environment and run proof-of-concept (POC) tests.
-- Free open-source edition: This open-source version is available under a perpetual license, including core signing features and API modules with unlimited signings and users. (Note: documents signed with this edition will carry a free-tier watermark.)
+- Free open-source edition: This open-source version is available under a perpetual license, including core signing features and API modules with unlimited signings and users. (Note: Documents signed with this edition will include an embedded free-tier identifier code)
 
 
 ## Quick Start
@@ -72,9 +72,9 @@ Before exposing the service to any network beyond localhost, make sure to change
 
 ## API Integration Use Cases
 
-**Embed e-signatures directly into your internal systems via API**
+**Embed eSignatures directly into your internal systems via API**
 
-DottedSign Self-Hosted provides a complete REST API, allowing IT teams to embed e-signature workflows into existing business systems without requiring users to switch platforms.
+DottedSign Self-Hosted provides a complete REST API, allowing IT teams to embed eSignature workflows into existing business systems without requiring users to switch platforms.
 
 **Common integration scenarios**
 
@@ -98,12 +98,12 @@ DottedSign has extensive enterprise service experience, offering technical compl
 - Market traction: Serving over 4,200 businesses globally, with more than 1 million users worldwide.
 - Large-scale manufacturing: Driving ESG paperless initiatives and accelerating internal compliance processes with digital signatures.
 - Multinational travel group: Digitizing travel contracts for a low-carbon signing experience.
-- Major financial securities firm: Adopting video-based e-signatures to enable new fintech applications.
+- Major financial securities firm: Adopting video-based eSignatures to enable new fintech applications.
 - Retail / chain group: Full paperless processing of over 1,000 HR documents per year.
 - Listed technology company: Streamlining external e-commerce business processes.
 - Leading travel e-commerce platform: Combined with RPA automation, recruitment contracts are signed back within 1 day.
 
-👉 [View more customer stories](https://www.dottedsign.com/en/blog/category/client-story)
+👉 [View more client success cases](https://www.dottedsign.com/en/blog/category/client-story)
 
 ## Advanced Features and Commercial Licensing
 
@@ -122,5 +122,5 @@ This open-source version is released under the **AGPL-3.0 license**.
 
 ## Support
 
-- Open-source technical discussion: For deployment issues, please open a [GitHub Issue](https://github.com/DottedSign-Official/dottedsign-self-hosted/issues) so the community can assist.
+- Open-source technical discussion: For deployment issues, please open a GitHub Issue so the community can assist.
 - Commercial licensing and service support: Licensed customers receive SLA-backed support equivalent to the SaaS standard. Contact the sales team for details.
