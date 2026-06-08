@@ -117,8 +117,8 @@ The current open-source edition covers the core signing workflow. If your organi
 ## AGPL-3.0 Open-Source License and Notes
 
 This open-source version is released under the **AGPL-3.0 license**.
-- If your organization installs and uses this software internally only and has not modified the source code, you are not subject to the open-source disclosure requirements.
-- If you modify the source code (e.g., customize the UI) and provide the modified system as a service to third parties, you are required under the license to release the modified source code. If you need to keep customizations proprietary, we recommend inquiring about a commercial license.
+- If your organization installs and uses this software internally only, without distributing it externally or providing it as a service to third parties over a network, you are not subject to the open-source disclosure requirements.
+- If you modify the source code (e.g., customize the UI) and provide the modified system as a service to third parties, you are required to make the modified source code available under AGPL-3.0. If you need to keep customizations proprietary, we recommend inquiring about a commercial license.
 
 ## Support
 
