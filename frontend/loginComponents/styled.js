@@ -36,8 +36,8 @@ export const Logo = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  width: 45px;
-  height: 45px;
+  width: 80px;
+  height: 80px;
   background-size: 100% 100%;
   background-image: url("/static/images/jackrabbit.png");
 `;

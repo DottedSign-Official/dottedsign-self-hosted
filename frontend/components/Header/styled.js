@@ -44,9 +44,9 @@ export const WrapperLogo = styled.div`
 `;
 
 export const Logo = styled.div`
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 200px;
+  height: 44px;
+  background-size: 100% 100%;
   background-image: url("/static/images/jackrabbit-ds.png");
 `;
 
