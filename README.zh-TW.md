@@ -33,7 +33,7 @@ cd dottedsign-self-hosted
 請複製 .env.example 並更名為 .env，根據您的環境進行設定
 
 ```bash
-cp backend.env.sapmle backend.env
+cp backend.env.sample backend.env
 ```
 
 可完整參考（每個變數、預設值與是否必填）位於

@@ -33,7 +33,7 @@ cd dottedsign-self-hosted
 Copy the example file and rename it to `.env`, then update the values for your environment.
 
 ```bash
-cp backend.env.sapmle backend.env
+cp backend.env.sample backend.env
 ```
 
 Full reference (each variable, default value, and whether it is required) is available at
