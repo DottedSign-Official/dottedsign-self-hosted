@@ -4,7 +4,7 @@
 
 This document lists every environment variable consumed by JackRabbit Server.
 Variables are grouped by purpose, matching the section headers in
-`backend.env.sapmle`. Defaults reflect the values in that sample file unless
+`backend.env.sample`. Defaults reflect the values in that sample file unless
 noted otherwise.
 
 ## Table of Contents
@@ -112,7 +112,7 @@ noted otherwise.
 ## Internal Mailer Paths
 
 These map mailer events to internal API paths. Default values match
-`backend.env.sapmle`; override only if you re-wire the mailer service.
+`backend.env.sample`; override only if you re-wire the mailer service.
 
 | Name | Required | Default |
 | --- | --- | --- |
