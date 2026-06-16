@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { color } from "../global/styled";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -71,4 +72,22 @@ export const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
   column-gap: 10px;
+`;
+
+export const EnterpriseCta = styled.div`
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(31, 46, 78, 0.6);
+
+  a {
+    color: ${color.hyperlink};
+    font-weight: normal;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;

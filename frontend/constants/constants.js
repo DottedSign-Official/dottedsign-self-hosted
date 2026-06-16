@@ -281,6 +281,14 @@ export const MODAL_TYPE = {
   signingGroupDetails: "signingGroupDetails",
   signingGroupOverwrite: "signingGroupOverwrite",
   taskOnBackHint: "taskOnBackHint",
+  enterprisePlanCta: "enterprisePlanCta",
+};
+
+export const ENTERPRISE_CTA_COOKIE = "enterprise_cta_dismissed";
+export const ENTERPRISE_CTA_LINKS = {
+  en: "https://www.dottedsign.com/request-demo/?help=inquiry_enterprise_plan",
+  "zh-tw":
+    "https://www.dottedsign.com/zh-tw/request-demo/?help=inquiry_enterprise_plan",
 };
 
 export const rolesSystem = ["admin", "manager", "member"];

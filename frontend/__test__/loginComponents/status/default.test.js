@@ -2,11 +2,20 @@ import "@testing-library/jest-dom";
 import * as React from "react";
 import { setup } from "../../helpers/setup";
 import * as USER from "../../constants/user";
+import { mockReduxBeforeAll, mockRedux } from "../../helpers/redux";
 import Default from "../../../loginComponents/status/default";
+
+jest.mock("react-redux");
 
 const CHILDREN = "CHILDREN";
 
 describe("Login", () => {
+  mockReduxBeforeAll();
+
+  beforeEach(() => {
+    mockRedux({ license: { data: null } });
+  });
+
   test("onKeyDown should be called as many times as user types in password field.", async () => {
     const handleLogin = jest.fn();
     const onKeyDown = jest.fn();
