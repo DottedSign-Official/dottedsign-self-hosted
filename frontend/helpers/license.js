@@ -16,6 +16,7 @@ const licenseSelector = {
   [LICENSE_TYPE.KIOSK_TASK]: (data) => data?.sign_task?.kiosk_task_enable,
   [LICENSE_TYPE.SIGN_VIDEO]: (data) => data?.sign_task?.sign_video_enable,
   [LICENSE_TYPE.GROUP_SHARE]: (data) => data?.template?.group_share,
+  [LICENSE_TYPE.ENTERPRISE_PLAN]: (data) => data?.plan?.enterprise,
 };
 
 export const useLicenseReady = () => {

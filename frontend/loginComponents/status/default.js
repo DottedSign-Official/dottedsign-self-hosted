@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useTranslation } from "next-i18next";
 
+import { LICENSE_TYPE } from "../../constants/licenseTypes";
+import { LOGIN_STATE } from "../../constants/constants";
+import { getEnterpriseCtaLink } from "../../helpers/link";
+import { checkEmailValid } from "../../helpers/checkFormat";
+import { useLicenseHook } from "../../helpers/license";
 import InputField from "../../components/InputField";
 import ButtonWithLoading from "../../components/ButtonWithLoading";
 import Button from "../../components/Button";
-import { checkEmailValid } from "../../helpers/checkFormat";
 import {
   Wrapper,
   Inner,
@@ -12,17 +17,13 @@ import {
   Logo,
   BtnWrapper,
   ButtonGroup,
+  EnterpriseCta,
 } from "../styled";
-import { LOGIN_STATE } from "../../constants/constants";
 
-const Default = ({
-  isLoading,
-  callback,
-  handleLogin,
-  onKeyDown,
-  t,
-  children,
-}) => {
+const Default = ({ isLoading, callback, handleLogin, onKeyDown, children }) => {
+  const { t, i18n } = useTranslation("login");
+  const isEnterprisePlan = useLicenseHook(LICENSE_TYPE.ENTERPRISE_PLAN);
+  const enterpriseCtaLink = getEnterpriseCtaLink(i18n.language);
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [error, setError] = useState({ email: null });
@@ -88,6 +89,17 @@ const Default = ({
         </BtnWrapper>
 
         {children}
+
+        {!isEnterprisePlan && (
+          <EnterpriseCta
+            dangerouslySetInnerHTML={{
+              __html: t("enterprise_cta", {
+                link: enterpriseCtaLink,
+                interpolation: { escapeValue: false },
+              }),
+            }}
+          />
+        )}
       </Inner>
     </Wrapper>
   );

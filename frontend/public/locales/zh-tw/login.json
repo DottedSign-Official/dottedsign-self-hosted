@@ -37,5 +37,7 @@
   "verify_email": "請檢查您的信箱並立即驗證。",
 
   "email_empty":"信箱不可為空白",
-  "email_invalid":"信箱格式錯誤"
+  "email_invalid":"信箱格式錯誤",
+
+  "enterprise_cta": "此為免費開源版，如需商業授權、進階功能模組或客製化需求報價，請<a href=\"{{link}}\" target=\"_blank\" rel=\"noreferrer\">聯繫我們</a>。"
 }

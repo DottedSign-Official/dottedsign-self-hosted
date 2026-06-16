@@ -3,9 +3,12 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrganization } from "../../redux/actions/admin";
 import { openModal as openModalAction } from "../../redux/actions/common";
-import { onBlurWithDelay as onBlur } from "../../helpers/onBlur";
-import AvatarCollapse from "../../components/AvatarCollapse";
+import { LICENSE_TYPE } from "../../constants/licenseTypes";
 import { MODAL_TYPE } from "../../constants/constants";
+import { onBlurWithDelay as onBlur } from "../../helpers/onBlur";
+import { getEnterpriseCtaLink } from "../../helpers/link";
+import { useLicenseHook } from "../../helpers/license";
+import AvatarCollapse from "../../components/AvatarCollapse";
 
 const AvatarCollapseContainer = ({ isAlignRight }) => {
   const Router = useRouter();
@@ -15,6 +18,7 @@ const AvatarCollapseContainer = ({ isAlignRight }) => {
   const { user, features } = useSelector((state) => state.auth);
   const { organization } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
+  const isEnterprise = useLicenseHook(LICENSE_TYPE.ENTERPRISE_PLAN);
   const openModal = (data) => dispatch(openModalAction(data));
 
   useEffect(() => {
@@ -92,6 +96,21 @@ const AvatarCollapseContainer = ({ isAlignRight }) => {
         };
   })();
 
+  const enterpriseItem = (() => {
+    if (isEnterprise) {
+      return null;
+    }
+    return {
+      event: () =>
+        window.open(
+          getEnterpriseCtaLink(Router.locale),
+          "_blank",
+          "noreferrer",
+        ),
+      text: "btn_get_commercial_license",
+    };
+  })();
+
   if (!user) {
     return null;
   }
@@ -103,6 +122,7 @@ const AvatarCollapseContainer = ({ isAlignRight }) => {
       user={user}
       adminItem={adminItem}
       devItem={developerItem}
+      enterpriseItem={enterpriseItem}
       onBlurEvent={onBlurEvent}
       onToggle={onToggle}
     />

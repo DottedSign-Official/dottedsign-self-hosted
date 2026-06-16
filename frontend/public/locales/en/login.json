@@ -37,5 +37,7 @@
   "enter_password": "Enter your password",
 
   "email_empty":"Email is empty",
-  "email_invalid":"Email is invalid"
+  "email_invalid":"Email is invalid",
+
+  "enterprise_cta": "This is the free open-source version. For commercial licensing, advanced feature modules, or custom solutions, please <a href=\"{{link}}\" target=\"_blank\" rel=\"noreferrer\">contact us</a> for a quote."
 }

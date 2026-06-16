@@ -20,6 +20,7 @@ const AvatarCollapse = ({
   user,
   adminItem,
   devItem,
+  enterpriseItem,
   onBlurEvent,
   onToggle,
 }) => {
@@ -49,6 +50,14 @@ const AvatarCollapse = ({
           {devItem && (
             <Item>
               <ItemBtn onClick={devItem.event}>{t(devItem.text)}</ItemBtn>
+            </Item>
+          )}
+
+          {enterpriseItem && (
+            <Item>
+              <ItemBtn onClick={enterpriseItem.event}>
+                {t(enterpriseItem.text)}
+              </ItemBtn>
             </Item>
           )}
 

@@ -154,8 +154,8 @@
 	"label_cc": "CC",
 	"msg_placeholder": "Type Your Message Here",
 	"manage_permissions": "Manage Permissions",
-	"modal_review_send_public_form_settings_tip": "If both stop conditions are set, the one that is met first will take effect.", 
-	"modal_review_send_public_form_settings_date": "Automatically stop publishing when the deadline is reached", 
+	"modal_review_send_public_form_settings_tip": "If both stop conditions are set, the one that is met first will take effect.",
+	"modal_review_send_public_form_settings_date": "Automatically stop publishing when the deadline is reached",
 	"modal_review_send_public_form_settings_count": "Automatically stop publishing when a certain number of responses is received",
 
 	"modal_check_confirm_title": "Check Confirm",
@@ -456,5 +456,9 @@
 	"public_form_unpublish_confirm_content": "Once unpublished, recipients can no longer open or sign via this link. You can publish it again anytime, and ongoing signers may continue signing. Are you sure you want to unpublish this form?",
 	"btn_unpublish": "Unpublish",
 	"public_form_delete_confirm_title": "Delete this form?",
-	"public_form_delete_confirm_content": "Deleting the public form keeps any tasks already created through it. Are you sure you want to delete this form?"
+	"public_form_delete_confirm_content": "Deleting the public form keeps any tasks already created through it. Are you sure you want to delete this form?",
+
+	"enterprise_cta_modal_title": "💼 Explore DottedSign Commercial Licensing",
+	"enterprise_cta_modal_body": "Thank you for deploying and using the free open-source version of DottedSign!<br/>To meet higher corporate operational standards, we offer commercial licensing solutions designed for enterprise scalability:<ul><li><strong>Certificate Verification &amp; Compliance:</strong> Integrate Natural Person, Business, and System Certificates. Embed visual certificates and audit trails directly into PDFs to enhance non-repudiation and security.</li><li><strong>Diverse Business Scenarios:</strong> Unlock the \"In-Person Signing\" module. Create digital tasks on-site using templates, perfectly matching counter services or face-to-face transactions.</li><li><strong>Cross-Departmental Access Control:</strong> Establish corporate hierarchies with flexible member permissions and groups to enforce strict internal data and file isolation.</li><li><strong>Enterprise Security &amp; Maintenance:</strong> Benefit from dedicated technical support and the latest system updates.</li></ul><a href=\"{{link}}\" target=\"_blank\" rel=\"noreferrer\">Contact us</a> to receive our commercial package details and a tailored quotation.",
+	"enterprise_cta_modal_btn": "Contact Us"
 }

@@ -87,6 +87,7 @@ import SigningGroupImport from "./Types/SigningGroupImport";
 import SigningGroupDetails from "./Types/SigningGroupDetails";
 import SigningGroupOverwrite from "./Types/SigningGroupOverwrite";
 import TaskOnBackHint from "./Types/TaskOnBackHint";
+import EnterprisePlanCta from "./Types/EnterprisePlanCta";
 
 import { ModalBack, ModalWrapper } from "./styled";
 
@@ -340,6 +341,9 @@ const getChild = (modalType) => {
 
     case MODAL_TYPE.taskOnBackHint:
       return TaskOnBackHint;
+
+    case MODAL_TYPE.enterprisePlanCta:
+      return EnterprisePlanCta;
 
     default:
       return null;

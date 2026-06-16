@@ -475,5 +475,9 @@
 	"public_form_unpublish_confirm_content":"取消發布後，此份公開表單的連結將不可查看與簽署，但仍可重新發布。尚未完成簽署的表單仍可繼續簽署，確定要取消發布表單？",
 	"btn_unpublish":"取消發布",
 	"public_form_delete_confirm_title":"是否刪除表單",
-	"public_form_delete_confirm_content":"刪除後，透過此公開表單建立的任務仍會被保留，確認要刪除表單？"
+	"public_form_delete_confirm_content":"刪除後，透過此公開表單建立的任務仍會被保留，確認要刪除表單？",
+
+	"enterprise_cta_modal_title": "💼 探索點點簽商業授權",
+	"enterprise_cta_modal_body": "感謝您部署並使用點點簽免費開源版！<br/>為了滿足企業更高規格的營運需求，我們另提供專為企業打造的商業授權方案供隨時擴充：<ul><li><strong>憑證驗證與合規加密：</strong>支援整合自然人、工商憑證與系統型憑證，將可視化憑證與完整稽核軌跡壓製於 PDF 文件中，提升數位合約的不可否認性與安全防護。</li><li><strong>滿足多元商務場景：</strong>解鎖「臨櫃簽署」模組，支援現場調用範本進行數位簽署，完美對接實體臨櫃或臨場交易的商務日常。</li><li><strong>跨部門組織權限控管：</strong>建立專屬企業的組織階層，彈性編輯成員權限與群組，落實嚴謹的內部資料與檔案隔離。</li><li><strong>企業級安全維護：</strong>享有專屬技術支援與系統最新版更。</li></ul>歡迎點擊<a href=\"{{link}}\" target=\"_blank\" rel=\"noreferrer\">聯繫我們</a>，獲取商業授權方案介紹及報價。",
+	"enterprise_cta_modal_btn": "聯繫我們"
 }
