@@ -11,8 +11,7 @@ export const Inner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 320px;
-  min-height: 320px;
+  width: 320px;
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;

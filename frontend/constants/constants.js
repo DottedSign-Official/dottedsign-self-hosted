@@ -286,9 +286,9 @@ export const MODAL_TYPE = {
 
 export const ENTERPRISE_CTA_COOKIE = "enterprise_cta_dismissed";
 export const ENTERPRISE_CTA_LINKS = {
-  en: "https://www.dottedsign.com/request-demo/?help=inquiry_enterprise_plan",
+  en: "https://www.dottedsign.com/request-demo/?help=inquiry_enterprise_plan&utm_source=App&utm_campaign=App_SelfHosted_contactus&utm_medium=SelfHosted",
   "zh-tw":
-    "https://www.dottedsign.com/zh-tw/request-demo/?help=inquiry_enterprise_plan",
+    "https://www.dottedsign.com/zh-tw/request-demo/?help=inquiry_enterprise_plan&utm_source=App&utm_campaign=App_SelfHosted_contactus&utm_medium=SelfHosted",
 };
 
 export const rolesSystem = ["admin", "manager", "member"];
