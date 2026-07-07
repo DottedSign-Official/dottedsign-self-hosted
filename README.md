@@ -2,14 +2,20 @@
 
 # DottedSign Self-Hosted: Enterprise-Grade eSignature System
 
-A self-hosted eSignature solution built for enterprises that prioritize data sovereignty.
-DottedSign Self-Hosted gives enterprises the option to deploy the DottedSign system independently within their internal network environment. This offering is designed to help organizations with compliance requirements or restricted, closed-network environments build more flexible eSignature workflows.
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-4b5fe6)](./LICENSE) ![Deploy: Docker Compose](https://img.shields.io/badge/deploy-Docker%20Compose-2496ed?logo=docker&logoColor=white)
+
+*Self-host DottedSign with Docker Compose — your data, your server.*
+
+![DottedSign Self-Hosted — your data, your server, full eSignature workflow](./docs/assets/dottedsign-self-hosted-overview.svg)
+
+**Trusted by 4,200+ businesses and 1M+ users worldwide.** DottedSign Self-Hosted lets enterprises that prioritize data sovereignty run the full DottedSign signing system independently — inside their own network or on their preferred cloud. It's built for organizations with compliance requirements or closed-network environments that need a flexible eSignature workflow they fully control.
 
 ## Key Features
 
-- Local data storage: The system is designed to run independently within an intranet, keeping documents and signing records on your organization's private servers.
+- Data sovereignty: Documents and signing records live on your organization's own servers — not on a third party's infrastructure. Full custody, full control over access and retention.
 - Docker-based deployment: Provides a Docker Compose installation process to help IT teams quickly set up the environment and run proof-of-concept (POC) tests.
 - Free open-source edition: This open-source version is available under a perpetual license, including core signing features and API modules with unlimited signings and users. (Note: Documents signed with this edition will include an embedded free-tier identifier code)
+- Deploy anywhere: One Docker Compose stack, your choice of environment — your own servers, or the cloud you already use (AWS, GCP, Azure, Snowflake). Move between them without changing how it runs.
 
 
 ## Quick Start
@@ -89,6 +95,48 @@ With the API, you can:
 - Initiate signing tasks: specify signers, field positions, and expiration times.
 - Track status in real time: monitor the signing progress of every document.
 - Auto-archive: automatically retrieve the signed PDF and store it in your document management system.
+
+
+## Self-Hosted or SaaS — Which Fits You?
+
+Both run the same DottedSign signing experience. The difference is **where your data lives and who maintains it**.
+
+| | Self-Hosted (this repo) | SaaS |
+| --- | --- | --- |
+| Where data lives | Your own server — intranet, or your cloud (AWS / GCP / Azure / Snowflake) | DottedSign-managed cloud |
+| Best for | Data-sovereignty / compliance needs, closed-network environments | Teams who want to start signing right away with zero setup |
+| Deployment | You deploy via Docker Compose | Nothing to deploy — sign up and go |
+| Maintenance & updates | Managed by your IT team | Handled by DottedSign |
+| License | Open-source AGPL-3.0 (perpetual); commercial license available | Subscription plan |
+| Advanced security modules | Available via commercial license (e.g. approved digital certificates, Email / SMS OTP) | Included per plan |
+
+Not sure which path fits? [Talk to the DottedSign team](https://www.dottedsign.com/request-demo/).
+
+## FAQ
+
+### Is the open-source edition really free?
+
+Yes. It's released under AGPL-3.0 with a perpetual license, and includes core signing features and API modules with unlimited signings and users. Documents signed with this edition carry an embedded free-tier identifier code.
+
+### Can I deploy it on the cloud, not just my own servers?
+
+Yes. The same Docker Compose stack runs inside your intranet or on the cloud you already use — AWS, GCP, Azure, or Snowflake.
+
+### What do I need to get started?
+
+Docker 20+, Docker Compose v2, and 8 GB RAM recommended (covers Postgres, Redis, backend, worker, frontend, and nginx). See the Quick Start above.
+
+### What's the difference between the open-source edition and the commercial license?
+
+The open-source edition covers the core signing workflow. The commercial license unlocks advanced security modules (e.g. approved digital certificates, Email OTP, SMS OTP), organization role & permission management via the Admin Console, and deep integration / custom development without the AGPL-3.0 disclosure terms.
+
+### Does AGPL-3.0 apply if I only use it internally?
+
+If your organization installs and uses the software internally — without distributing it externally or offering it as a service to third parties over a network — you are not subject to the open-source disclosure requirements. If you modify the source and offer it as a service to third parties, the modified source must be made available under AGPL-3.0. For proprietary customizations, ask about a commercial license.
+
+### How do I get support?
+
+For deployment questions, open a GitHub Issue so the community can help. Licensed customers receive SLA-backed support equivalent to the SaaS standard — [contact the sales team](https://www.dottedsign.com/request-demo/?help=inquiry_enterprise_plan) for details.
 
 
 ## Enterprise Adoption and Case Studies
