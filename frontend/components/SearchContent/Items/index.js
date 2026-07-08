@@ -218,7 +218,7 @@ const Items = ({ isMobile, isPlaceholder, onModalOpen, onManageLabel }) => {
               )}
               {task.envelope_id && (
                 <WrapperEnvelopeIcon>
-                  <Icon type="envelope" size="28px" />
+                  <Icon type="envelopeBadge" size="28px" />
                 </WrapperEnvelopeIcon>
               )}
             </Item>

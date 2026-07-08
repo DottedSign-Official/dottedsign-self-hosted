@@ -12,8 +12,11 @@ import ListAssignesView from "../../../ListAssignesView";
 import DateManual from "./DateManual";
 import Message from "./Msg";
 import tooltipType from "../../../../constants/tooltip";
+import { LICENSE_TYPE } from "../../../../constants/licenseTypes";
+import { validateCompletionPassword } from "../../../../helpers/createForm/passwordValidation";
 import { supportedLangMail } from "../../../../constants/languages";
 import { DividerBtn } from "../../../../global/styled";
+import { LicenseWrapper } from "../../../../containers/License";
 import { expireOptions } from "./data";
 import {
   Wrapper,
@@ -41,6 +44,8 @@ import {
   ResponseCountInput,
   ErrorMessage,
   TipWrapper,
+  CheckboxRow,
+  PasswordInput,
 } from "./styled";
 
 const CreateConfirm = ({
@@ -75,6 +80,12 @@ const CreateConfirm = ({
   onSettingChange,
   onLabelChange,
   onAuthIdentity,
+  isEnvelope,
+  isEncrypted,
+  completionPassword,
+  isEncryptionToggleDisabled,
+  onEncryptedToggle,
+  setCompletionPassword,
   onDraft,
   onConfirm,
   onSaveForm,
@@ -83,6 +94,18 @@ const CreateConfirm = ({
   const { t } = useTranslation(["modal", "create"]);
   const isCcListDisplay = !isInfoFix || (isInfoFix && ccInfos.length > 0);
   const [hasResponseCountFocused, setHasResponseCountFocused] = useState(false);
+  const [passwordError, setPasswordError] = useState(null);
+
+  const handleConfirm = () => {
+    if (isEncrypted) {
+      const error = validateCompletionPassword(completionPassword);
+      if (error) {
+        setPasswordError(error);
+        return;
+      }
+    }
+    onConfirm();
+  };
   const isEditingPublicForm = isPublicForm && !!formId;
   const hasSentCount =
     typeof publicFormSentCount === "number" && publicFormSentCount >= 0;
@@ -469,6 +492,69 @@ const CreateConfirm = ({
               </Item>
             )}
           </Items>
+
+          {!isEnvelope && !isPublicForm && (
+            <LicenseWrapper type={LICENSE_TYPE.ENCRYPTABLE}>
+              <>
+                <Items>
+                  <Item>
+                    <WrapperLabel>
+                      <ChkboxLabel>
+                        {t("label_template_encrypt")}
+                        <span>
+                          <Tooltip
+                            type={tooltipType.encryptionChtAuthConflict}
+                            position={"top"}
+                          />
+                        </span>
+                      </ChkboxLabel>
+                    </WrapperLabel>
+                    <CheckboxRow isDisabled={isEncryptionToggleDisabled}>
+                      <Chkbox
+                        id="CreateConfirm-Encrypt"
+                        isChecked={isEncrypted}
+                        isReadOnly={isEncryptionToggleDisabled}
+                        onToggle={() => {
+                          onEncryptedToggle();
+                          setPasswordError(null);
+                        }}
+                      />
+                      <ChkboxText>{t("label_template_encrypt_yes")}</ChkboxText>
+                    </CheckboxRow>
+                  </Item>
+                </Items>
+
+                {isEncrypted && (
+                  <Items>
+                    <Item>
+                      <WrapperLabel>
+                        <ChkboxLabel>
+                          {t("label_template_completion_password")}
+                          <span>
+                            <Tooltip
+                              type={tooltipType.completionPassword}
+                              position={"top"}
+                            />
+                          </span>
+                        </ChkboxLabel>
+                      </WrapperLabel>
+                      <PasswordInput
+                        value={completionPassword}
+                        hasError={!!passwordError}
+                        onChange={(e) => {
+                          setCompletionPassword(e.target.value);
+                          setPasswordError(null);
+                        }}
+                      />
+                      {passwordError && (
+                        <ErrorMessage>{t(passwordError)}</ErrorMessage>
+                      )}
+                    </Item>
+                  </Items>
+                )}
+              </>
+            </LicenseWrapper>
+          )}
         </Content>
       </>
     );
@@ -575,7 +661,11 @@ const CreateConfirm = ({
           id={isLoading ? "" : "ReviewSend-Send-GetSignatures"}
           type={isButtonDisabled ? "disabled" : "primary"}
           handleEvent={
-            isButtonDisabled ? null : isPublicForm ? onPublishForm : onConfirm
+            isButtonDisabled
+              ? null
+              : isPublicForm
+              ? onPublishForm
+              : handleConfirm
           }
         >
           {getPrimaryBtnName()}

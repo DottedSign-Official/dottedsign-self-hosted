@@ -1,9 +1,10 @@
 const withPlugins = require("next-compose-plugins");
 const path = require("path");
-const { i18n } = require("./next-i18next.config");
+const i18nConfig = require("./next-i18next.config");
+const { defaultLocale, locales } = i18nConfig.i18n;
 
 const nextConfig = {
-  i18n,
+  i18n: { defaultLocale, locales },
   webpack: (config) => {
     // NOTE: Unshift polyfills in main entrypoint.
     const originalEntry = config.entry;

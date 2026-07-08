@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "next-i18next";
+import Icon from "../Icon";
 import Loader from "../Loaders/ItemContact";
 import { Input } from "../../global/styledForm";
 import { Wrapper, Menu, MenuItem } from "./styled";
@@ -14,6 +15,7 @@ const InputAssignes = ({
   onBlur,
   onInputChange,
   onAddContact,
+  onDelContactUser,
   isReadOnly,
 }) => {
   const { t } = useTranslation("common");
@@ -25,6 +27,16 @@ const InputAssignes = ({
       isMe={cont.isMe}
     >
       {cont.label}
+      {!cont.isMe && (
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelContactUser(cont.email);
+          }}
+        >
+          <Icon type="cancel" size="18px" />
+        </span>
+      )}
     </MenuItem>
   );
 

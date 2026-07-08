@@ -33,6 +33,10 @@ const settingTabs = [
     isSigningGroup: true,
     id: "Settings_SignerGroup",
   },
+  {
+    key: "license",
+    name: "settings_tab_license",
+  },
 ];
 
 export default settingTabs;

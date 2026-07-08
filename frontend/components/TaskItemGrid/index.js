@@ -4,7 +4,7 @@ import More from "../../containers/More";
 import HintExpire from "../HintExpire";
 import FilePreview from "../FilePreview";
 import TagCounter from "../TagCounter";
-import Icon from "../Icon";
+import TaskOverlayIcon from "../TaskOverlayIcon";
 
 import {
   Wrapper,
@@ -15,7 +15,6 @@ import {
   Time,
   WrapperExpire,
   WrapperMore,
-  WrapperEnvelopeIcon,
 } from "./styled";
 
 const TaskItemGrid = ({ task, onNav, isEnvelope }) => {
@@ -28,16 +27,17 @@ const TaskItemGrid = ({ task, onNav, isEnvelope }) => {
     stages,
     moreMenu,
     tag_info,
+    isEncrypted,
+    completionPassword,
   } = task;
 
   return (
     <Wrapper>
       <Title onClick={onNav}>
         <WrapperPreview>
-          {isEnvelope && (
-            <WrapperEnvelopeIcon>
-              <Icon type="envelope" size="28px" />
-            </WrapperEnvelopeIcon>
+          {isEnvelope && <TaskOverlayIcon iconType="envelopeBadge" />}
+          {isEncrypted && completionPassword && (
+            <TaskOverlayIcon iconType="lockBadge" />
           )}
           <FilePreview thumbnail={thumbnail} />
         </WrapperPreview>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearChtRelated, iniSocket } from "../../../../redux/actions/socket";
 import { getGraAuthorizeStatus } from "../../../../redux/actions/sign";
@@ -29,13 +29,20 @@ const ChtVerify = ({
   const { isLoading, isOtpFail, code, stage_id } = useSelector(
     (state) => state.sign,
   );
-  const { chtApplied, chtVerified, isSocketConnected } = useSelector(
+  const { chtApplied, chtVerified, chtFal, isSocketConnected } = useSelector(
     (state) => state.socket,
   );
   const { form_token } = useSelector((state) => state.publicForm);
 
   const dispatch = useDispatch();
   const isVisible = usePageVisibility();
+  const hadSocketConnected = useRef(false);
+
+  useEffect(() => {
+    if (isSocketConnected) {
+      hadSocketConnected.current = true;
+    }
+  }, [isSocketConnected]);
 
   useEffect(() => {
     return () => dispatch(clearChtRelated());
@@ -107,10 +114,39 @@ const ChtVerify = ({
 
   // NOTE: Update missed messages with getGraAuthorizeStatus due to app-switching suspensions in mobile browsers
   useEffect(() => {
-    if (isVisible && stage_id) {
-      dispatch(getGraAuthorizeStatus({ stage_id }));
+    if (
+      isVisible &&
+      stage_id &&
+      !isSystemCA &&
+      hadSocketConnected.current &&
+      !isSocketConnected
+    ) {
+      dispatch(
+        getGraAuthorizeStatus({
+          code,
+          stage_id,
+        }),
+      );
     }
-  }, [dispatch, isVisible, stage_id]);
+  }, [dispatch, isVisible, stage_id, code, isSystemCA, isSocketConnected]);
+
+  if (chtFal) {
+    const srcSketch = `/static/images/identity/verify-failed.svg`;
+    return (
+      <Wrapper width="500px">
+        <Close onClick={onModalClose}>
+          <Icon type="cancel" />
+        </Close>
+        <Title>{t("modal_identity_verify_title")}</Title>
+        <Body id="modal-body-scrollable">
+          <Content center>
+            <Img src={srcSketch} alt="failed-img" />
+            <Text>{t("modal_auth_verify_fal")}</Text>
+          </Content>
+        </Body>
+      </Wrapper>
+    );
+  }
 
   if (isSystemCA) {
     return (

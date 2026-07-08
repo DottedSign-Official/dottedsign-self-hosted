@@ -1,5 +1,6 @@
 import { isReviewAction } from "../../../../helpers/assignees/review";
 import { isFormSigner } from "../../../../helpers/assignees/publicForm";
+import { hasChtVerify } from "../../../../helpers/assignees/cht";
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,7 +26,9 @@ const AuthIdentity = ({ data }) => {
   const { isInfoUpdate } = data;
   const { t } = useTranslation("modal");
 
-  const { assignes, assigneesWarnings } = useSelector((state) => state.create);
+  const { assignes, assigneesWarnings, is_encrypted } = useSelector(
+    (state) => state.create,
+  );
   const { stagesUpdate } = useSelector((state) => state.sign);
 
   const dispatch = useDispatch();
@@ -35,7 +38,15 @@ const AuthIdentity = ({ data }) => {
 
   const targets = isInfoUpdate ? stagesUpdate : assignes;
 
-  const isPrevValid = (() => {
+  // NOTE: validates all assignees
+  const prevValidation = (() => {
+    if (is_encrypted && targets.some(({ verify }) => hasChtVerify(verify))) {
+      return {
+        isValid: false,
+        toastType: toastType.encryptionChtAuthConflict,
+      };
+    }
+
     const phoneValid = targets.every(({ verify }) => {
       const smsItm = verify?.find((itm) => itm.verify_type === "sms");
       if (typeof smsItm === "undefined") {
@@ -43,7 +54,12 @@ const AuthIdentity = ({ data }) => {
       }
       return isPhone(smsItm.verify_source);
     });
-    return phoneValid;
+
+    if (!phoneValid) {
+      return { isValid: false, toastType: toastType.invalidPhone };
+    }
+
+    return { isValid: true };
   })();
 
   const onPrev = () => {
@@ -64,8 +80,8 @@ const AuthIdentity = ({ data }) => {
   };
 
   const onPrevious = () => {
-    if (!isPrevValid) {
-      openToast({ payload: toastType.invalidPhone });
+    if (!prevValidation.isValid) {
+      openToast({ payload: prevValidation.toastType });
       return;
     }
     onPrev();

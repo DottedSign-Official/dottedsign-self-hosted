@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "next-i18next";
-import { getContacts } from "../../redux/actions/member";
+import { getContacts, delContact } from "../../redux/actions/member";
 import InputAssigne from "../../components/InputAssigne";
 
 const InputAssigneContainer = ({
@@ -22,7 +22,7 @@ const InputAssigneContainer = ({
   const [typingItem, setTypingItem] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
-  const isLoading = useSelector((state) => state.create.isLoadingContact);
+  const isLoading = useSelector((state) => state.member.isLoading);
   const contacts = useSelector((state) => state.member.contacts);
   const dispatch = useDispatch();
 
@@ -131,6 +131,13 @@ const InputAssigneContainer = ({
     setIsCollapse(true);
   };
 
+  const onDelContactUser = (email) => {
+    if (isReadOnly) {
+      return;
+    }
+    dispatch(delContact({ email }));
+  };
+
   if (!tag) {
     return null;
   }
@@ -147,6 +154,7 @@ const InputAssigneContainer = ({
       onBlur={onBlur}
       onInputChange={onInputChange}
       onAddContact={onAddContact}
+      onDelContactUser={onDelContactUser}
       isReadOnly={isReadOnly}
     />
   );

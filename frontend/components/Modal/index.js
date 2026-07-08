@@ -88,6 +88,7 @@ import SigningGroupDetails from "./Types/SigningGroupDetails";
 import SigningGroupOverwrite from "./Types/SigningGroupOverwrite";
 import TaskOnBackHint from "./Types/TaskOnBackHint";
 import EnterprisePlanCta from "./Types/EnterprisePlanCta";
+import CompletionPassword from "./Types/CompletionPassword";
 
 import { ModalBack, ModalWrapper } from "./styled";
 
@@ -344,6 +345,9 @@ const getChild = (modalType) => {
 
     case MODAL_TYPE.enterprisePlanCta:
       return EnterprisePlanCta;
+
+    case MODAL_TYPE.completionPassword:
+      return CompletionPassword;
 
     default:
       return null;

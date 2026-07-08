@@ -18,6 +18,8 @@
 	"warning_group_expired": "您當前的訂閱已過期，請聯繫您的管理者（<b id='adminEmail'></b>）完成續訂以恢復您的帳號權限。",
 	"warning_group_expired_admin": "您當前的訂閱已過期，請<u id='nav-upgrade'>完成您的續訂</u>以恢復您和團隊的帳號權限。",
 	"warning_group_task_suspended": "該任務已被暫停。有關的所有簽署者都無法簽署此文檔。請與發件人聯繫以獲取更多詳細訊息。",
+	"warning_license_expiry": "您的 License 即將到期，請<u id='nav-license'>查看授權資訊</u>。",
+	"warning_license_expired": "您的 License 已到期，請<u id='nav-license'>查看授權資訊</u>。",
 	"warning_upgrade": "您的免費帳號已達傳送文件數的上限，<u id='Task-Hint-Upgrade'>立即升級訂閱方案</u>以發送簽署邀請給他人！",
 	"warning_system_ca": "本文件使用系統憑證驗證簽署者身份，請先登入以繼續",
 

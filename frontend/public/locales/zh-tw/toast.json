@@ -36,6 +36,8 @@
 
 	"draft_suc": "草稿已成功儲存",
 	"create_suc": "文件任務已成功新增",
+	"create_suc_encrypted": "文件任務已成功新增且已啟用完成檔加密功能",
+	"encryption_cht_auth_conflict": "完成檔加密與 CHT 認證不能同時使用",
 	"put_draft_suc": "草稿已更新",
 
 	"preview_share_link_fal":"產生預覽共享連結失敗。",
@@ -48,8 +50,8 @@
 	"verify_invalid":"請確認身份驗證方式皆正確",
 	"no_fields": "沒有指派任何簽署欄位。請重新檢查，然後再試一次。",
 	"cc_has_empty_value": "CC收件人姓名以及信箱不得空白。",
-		"cc_has_duplicate_email": "CC收件人信箱不得重複。",
-		"envelope_at_least_one_field": "每一簽署人須在每個檔案至少有一簽署欄位。請重新檢查，然後再試一次。",
+	"cc_has_duplicate_email": "CC收件人信箱不得重複。",
+	"envelope_at_least_one_field": "每一簽署人須在每個檔案至少有一簽署欄位。請重新檢查，然後再試一次。",
 	"assigne_fal": "請確認所有簽名者都參與其中",
 	"set_ccs_fal": "無法將此電子郵件添加到CC清單，該郵件地址可能已在簽署者清單中。",
 	"post_draft_fal": "草稿儲存失敗，請再試一次",

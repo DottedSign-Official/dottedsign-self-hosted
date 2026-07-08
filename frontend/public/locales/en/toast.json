@@ -37,6 +37,8 @@
   "draft_suc": "Draft saved.",
   "put_draft_suc": "Draft updated.",
   "create_suc": "Task created.",
+  "create_suc_encrypted": "Task created with completion file encryption enabled.",
+  "encryption_cht_auth_conflict": "Completion file encryption and CHT authentication cannot be used together.",
 
   "preview_share_link_fal":"Failed to create the link.",
   "copy_suc":"Copy Successfully.",

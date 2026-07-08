@@ -79,14 +79,14 @@
 
 	"task_personal_status_send": "Sent",
 	"task_personal_status_processing": "Pending",
-  "task_personal_status_signed": "Signed",
+	"task_personal_status_signed": "Signed",
 	"task_personal_status_done": "Signed",
 	"task_personal_status_initial": "Waiting",
-  "task_personal_status_modifying": "Pending*",
-  "task_personal_status_review": "Check Needed",
-  "task_personal_status_review_pending": "Waiting*",
-  "task_personal_status_reviewed": "Pending*",
-  "task_personal_status_review_done": "Completed",
+	"task_personal_status_modifying": "Pending*",
+	"task_personal_status_review": "Check Needed",
+	"task_personal_status_review_pending": "Waiting*",
+	"task_personal_status_reviewed": "Pending*",
+	"task_personal_status_review_done": "Completed",
 	"task_personal_status_canceled":"Canceled",
 	"task_personal_status_declined":"Declined",
 	"task_personal_status_processing_file_failed":"Rollback",
@@ -169,7 +169,7 @@
 	"tooltip_otp_email": "You will receive a one-time password in your email or mobile message to authenticate your identity to sign a document.",
 	"tooltip_otp_email_create": "You can require signers to authenticate their identities with one-time passwords that will be sent to their emails or SMS to continue signing.",
 	"tooltip_message": "Message from sender",
-  "tooltip_return_message": "Return message",
+	"tooltip_return_message": "Return message",
 	"tooltip_attachment": "Attachment",
 	"tooltip_file_download": "File Download",
 	"tooltip_back_task": "Back to Tasks Management",
@@ -192,10 +192,12 @@
 	"tooltip_verify_timing": "You can request the signers to authenticate their identities at a specified time.",
 	"tooltip_background_removal_threshold":"When the tolerance value is larger, more areas with colors similar to the background will be removed.",
 	"tooltip_eraser_restore_mode":"This mode allows you to restore the previously cleared region using the eraser tool.",
-  "tooltip_review": "Before proceeding to the next stage, this stage need to be checked as soon as the signer finish signing.",
-  "tooltip_email_per_request": "The OTP SMS verification is required. Please provide the new signer’s phone number.",
-   "tooltip_public_form_terminated": "When the content of the template changes, the public form will be terminated.",
-  "tooltip_signing_group": "You can import the pre-established group of signers with their signing order to the task, making the process more efficient.",
+	"tooltip_review": "Before proceeding to the next stage, this stage need to be checked as soon as the signer finish signing.",
+	"tooltip_email_per_request": "The OTP SMS verification is required. Please provide the new signer’s phone number.",
+	"tooltip_public_form_terminated": "When the content of the template changes, the public form will be terminated.",
+	"tooltip_signing_group": "You can import the pre-established group of signers with their signing order to the task, making the process more efficient.",
+	"tooltip_completion_password": "Only English letters (upper/lowercase), numbers, and underscores are allowed, up to 50 characters.",
+	"tooltip_encryption_cht_auth_conflict": "Completion file encryption is unavailable while any signer uses CHT authentication.",
 
 	"left": "Left",
 	"right": "Right",
@@ -242,7 +244,7 @@
 	"tips_admin_decline_reasons": "This is the decline reasons for the group.",
 	"tips_developer_decline_reasons": "This is the decline reasons by the system.",
 	"tips_bulk_send": "When you create signing task from Templates, you can send up to 100 requests at one time by using Bulk Send feature.",
-  	"tips_review_failed": "Upon return, the signature field will be cleared. The signer must re-sign.",
+	"tips_review_failed": "Upon return, the signature field will be cleared. The signer must re-sign.",
 	"tips_template_replace_file_info": "The replacement document must have the same dimensions as the original document and contain no fewer pages than the original. Please confirm the page count and dimensions are correct before proceeding with the change.",
     "tips_public_forms": "With Public Form, you can create a self-service document for signature. A Public Form is initiated from a unique, secure URL that you make available for signers to complete.",
 
@@ -268,8 +270,8 @@
 	"optional": "Optional",
 
 	"hint_date_restrict": "The sender has restricted this date to: ",
-  "hint_not_modified": "Not modified by signer",
-  "hint_modified": "Modified by signer",
+	"hint_not_modified": "Not modified by signer",
+	"hint_modified": "Modified by signer",
 
 	"google_contact_search_placeholder": "enter name or email to search",
 
@@ -297,19 +299,23 @@
 	"template_replace_document":"TemplateReplaceDocument",
 	"save_as_template": "Save as Template",
 
-  "pass_all": "All Pass",
-  "fail_all": "All Fail",
-  "pass_rest": "Pass the Rest",
-  "fail_rest": "Fail the Rest",
-  "clear_all": "All Clear",
-  "clear": "Clear",
+	"pass_all": "All Pass",
+	"fail_all": "All Fail",
+	"pass_rest": "Pass the Rest",
+	"fail_rest": "Fail the Rest",
+	"clear_all": "All Clear",
+	"clear": "Clear",
 
 	"signing_group_not_found": " No group found",
 
 	"from_the_group": "Shared from the group",
-  "from_me": "Shared from me",
+	"from_me": "Shared from me",
 
-   "post_duplicate_sign_task": "Duplicate and republish",
+	"post_duplicate_sign_task": "Duplicate and republish",
 
-   "btn_get_commercial_license": "Get Commercial Licensing"
+	"btn_get_commercial_license": "Get Commercial Licensing",
+
+	"post_duplicate_sign_task": "Duplicate and republish",
+
+	"task_more_completion_password": "Completion Password"
 }

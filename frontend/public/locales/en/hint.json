@@ -18,6 +18,8 @@
 	"warning_group_expired": "Your subscription is currently expired. To restore your access, please contact your Admin to renew the subscription.",
 	"warning_group_expired_admin": "Your subscription is currently expired. To restore you and your team's full access, please <u id='nav-upgrade'>renew your subscription</u>.",
 	"warning_group_task_suspended": "This task has been suspended due to the expiry of the Sender's subscription. All signing parties involved are unable to sign this document.",
+	"warning_license_expiry": "Your license will expire soon. Please <u id='nav-license'>review your license</u>.",
+	"warning_license_expired": "Your license has expired. Please <u id='nav-license'>review your license</u>.",
   "warning_system_ca": "This task uses system credentials to verify the identity of the signer, please log in to continue",
 
   "warning_pdf_task_reviewing": "Please view and check the fields.",

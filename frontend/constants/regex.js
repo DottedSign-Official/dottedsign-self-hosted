@@ -8,6 +8,7 @@ const regex = {
   [VALIDATION_TYPE.CREDIT_CARD]:
     "^((4\\d{3})|(5[1-5]\\d{2})|(6011)|(7\\d{3}))-?\\d{4}-?\\d{4}-?\\d{4}|3[4,7]\\d{13}$",
   [VALIDATION_TYPE.LINK]: /\bhttps?:\/\/[^\s]+/g,
+  [VALIDATION_TYPE.COMPLETION_PASSWORD]: /^[A-Za-z0-9_]+$/,
 };
 
 export default regex;

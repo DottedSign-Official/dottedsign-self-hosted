@@ -91,7 +91,7 @@ const Cont = ({ fileUrl, windowWidth }) => {
     setTimeout(() => {
       setDocument(data);
       setTotalPage(data.numPages);
-    }, [1000]);
+    }, 1000);
   };
 
   const onPgLoadSuccess = (data) => setCurrentPage(data.pageIndex + 1);

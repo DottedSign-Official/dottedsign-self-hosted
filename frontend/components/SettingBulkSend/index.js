@@ -16,7 +16,7 @@ import Error from "../../components/ErrorAdmin";
 import tips from "../../constants/tips";
 import Tips from "../../components/Tips";
 
-const ItemTask = ({ t, task, onDlod }) => {
+const ItemTask = ({ t, task, onDlod, onExport }) => {
   const isReady = task.status === "completed";
 
   return (
@@ -35,6 +35,9 @@ const ItemTask = ({ t, task, onDlod }) => {
       <Block onClick={() => isReady && onDlod(task.uuid)} isDlod>
         {isReady && <Icon type="download" size="16px" />}
       </Block>
+      <Block onClick={() => onExport(task.uuid, task.template_name)} isExport>
+        <div>{t("export_csv")}</div>
+      </Block>
     </Item>
   );
 };
@@ -45,6 +48,7 @@ const SettingsBulkSend = ({
   pageTotal,
   missions,
   onDlod,
+  onExport,
   onPageChange,
   authorized,
 }) => {
@@ -83,6 +87,7 @@ const SettingsBulkSend = ({
                       <Block isTitle>{`${t("created_date")} (UTC)`}</Block>
                       <Block isTitle>{t("status")}</Block>
                       <Block isTitle isDlod>{`DL`}</Block>
+                      <Block isTitle>.csv</Block>
                     </Item>
                     {missions.map((mission, idx) => (
                       <ItemTask
@@ -90,6 +95,7 @@ const SettingsBulkSend = ({
                         t={t}
                         task={mission}
                         onDlod={onDlod}
+                        onExport={onExport}
                       />
                     ))}
                   </WrapperTasks>

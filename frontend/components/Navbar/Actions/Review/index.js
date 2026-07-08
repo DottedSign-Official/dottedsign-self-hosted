@@ -300,7 +300,21 @@ const StatusReview = () => {
 
   useEffect(() => {
     if (reviewFields) {
-      setMyReviewFields(reviewFields);
+      const sortByPosition = (a, b) => {
+        if (a.page !== b.page) {
+          return a.page - b.page;
+        }
+        return b.coord[3] - a.coord[3];
+      };
+
+      const sortedFields = [...reviewFields]
+        .sort(sortByPosition)
+        .map((field, idx) => ({
+          ...field,
+          order: idx,
+        }));
+
+      setMyReviewFields(sortedFields);
     }
   }, [reviewFields]);
 

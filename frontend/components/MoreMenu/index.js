@@ -24,6 +24,7 @@ const Menu = ({
     deleteTask,
     templateReplaceDocument,
     taskResend,
+    completionPassword,
   },
   isMenuUpward,
   onFileInfoClick,
@@ -39,6 +40,7 @@ const Menu = ({
   onSaveAsTemplate,
   onLabel,
   onTaskResend,
+  onCompletionPassword,
 }) => {
   const { t } = useTranslation("common");
 
@@ -130,6 +132,14 @@ const Menu = ({
           icon="share"
           text={t("preview_share_link")}
           onClickEvent={onGetPreviewShareLink}
+        />
+      )}
+
+      {completionPassword?.isVisible && (
+        <Item
+          icon="lock"
+          text={t("task_more_completion_password")}
+          onClickEvent={onCompletionPassword}
         />
       )}
 

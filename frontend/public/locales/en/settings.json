@@ -45,6 +45,8 @@
   "settings_tab_protected_task": "Advanced Protection",
   "settings_tab_bulk_send": "Bulk Send",
   "settings_tab_signing_group": "Signer Group",
+  "settings_tab_license": "System License",
+  "settings_license_period": "License key validity period",
 
   "label_account": "Account Info",
   "settings_account_avatar": "Avatar",

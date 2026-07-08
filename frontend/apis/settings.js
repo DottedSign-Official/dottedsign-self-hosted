@@ -38,6 +38,41 @@ export const getBulkFile = (uuid) => {
     .catch((error) => ({ error: true, message: error.message }));
 };
 
+export const getBulkCsv = (data) => {
+  const accessToken = Cookie.get("access_token");
+  const { uuid, template_name } = data;
+
+  const options = {
+    method: "GET",
+    headers: { "Content-type": "application/json" },
+    responseType: "blob",
+  };
+
+  if (accessToken) {
+    options.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  const apiHost = getAPIHost();
+  let url = `${apiHost}${PATH.bulk}/export_signers_csv?mission_uuid=${uuid}`;
+
+  return fetch(url, options)
+    .then((res) => {
+      if (res.status !== 200) {
+        return null;
+      }
+      return res.blob();
+    })
+    .then((blob) => {
+      if (!blob) {
+        return { error: true };
+      }
+
+      downloadFromBlob(false, blob, `${template_name}.csv`);
+      return {};
+    })
+    .catch((error) => ({ error: true, message: error.message }));
+};
+
 export const getSigningGroup = (data) => {
   const accessToken = Cookie.get("access_token");
 

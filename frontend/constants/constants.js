@@ -110,6 +110,11 @@ export const PDF_TASK_HINT = {
   reviewPassed: "reviewPassed",
 };
 
+export const LICENSE_EXPIRY_HINT = {
+  warning: "licenseExpiryWarning",
+  expired: "licenseExpiryExpired",
+};
+
 export const PDF_TASK_STATUS = {
   waiting: "waiting",
   completed: "completed",
@@ -282,6 +287,7 @@ export const MODAL_TYPE = {
   signingGroupOverwrite: "signingGroupOverwrite",
   taskOnBackHint: "taskOnBackHint",
   enterprisePlanCta: "enterprisePlanCta",
+  completionPassword: "completionPassword",
 };
 
 export const ENTERPRISE_CTA_COOKIE = "enterprise_cta_dismissed";
@@ -536,6 +542,7 @@ export const VALIDATION_TYPE = {
   CREDIT_CARD: "credit_card",
   LINK: "link",
   REGEX: "regex",
+  COMPLETION_PASSWORD: "completion_password",
 };
 
 export const FILED_SETTING_DEFAULT_OPTIONS = {

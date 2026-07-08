@@ -54,6 +54,7 @@ const apiPath = {
   putPassword: "/api/v1/members/change_password",
   postAvatarUpload: "/api/v1/members/upload_avatar",
   getContacts: "/api/v1/members/contact_list",
+  delContact: "/api/v1/members/contact",
   organization: "/api/v1/groups",
   postGroupMember: "/api/v1/groups/add_member",
   delGroupMember: "/api/v1/groups/remove_member",

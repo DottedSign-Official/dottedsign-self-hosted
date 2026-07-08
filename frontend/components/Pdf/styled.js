@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   margin-top: -10px;
   margin-bottom: -10px;
 
-  touch-action: auto;
+  touch-action: pan-x pan-y;
   overscroll-behavior: contain; /* keep scroll/zoom */
 `;
 

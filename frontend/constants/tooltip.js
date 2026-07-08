@@ -40,6 +40,8 @@ const tooltip = {
   publicFormTerminated: "publicFormTerminated",
   publicForm: "publicForm",
   signingGroup: "signingGroup",
+  completionPassword: "completionPassword",
+  encryptionChtAuthConflict: "encryptionChtAuthConflict",
 };
 
 export default tooltip;

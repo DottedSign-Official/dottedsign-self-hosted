@@ -79,14 +79,14 @@
 
 	"task_personal_status_send": "已傳送",
 	"task_personal_status_processing": "處理中",
-  "task_personal_status_signed": "已簽署",
+	"task_personal_status_signed": "已簽署",
 	"task_personal_status_done": "已簽署",
 	"task_personal_status_initial": "等待中",
-  "task_personal_status_modifying": "處理中*",
-  "task_personal_status_review": "待檢查",
-  "task_personal_status_reviewed": "處理中*",
-  "task_personal_status_review_pending": "等待中*",
-  "task_personal_status_review_done": "已完成",
+	"task_personal_status_modifying": "處理中*",
+	"task_personal_status_review": "待檢查",
+	"task_personal_status_reviewed": "處理中*",
+	"task_personal_status_review_pending": "等待中*",
+	"task_personal_status_review_done": "已完成",
 	"task_personal_status_declined": "已拒絕",
 	"task_personal_status_canceled": "已取消",
 	"task_personal_status_processing_file_failed":"待重簽",
@@ -165,7 +165,7 @@
 	"tooltip_otp_email": "為驗證簽署者身份，系統會自動寄送一組一次性安全密碼至您的電子信箱或手機簡訊。",
 	"tooltip_otp_email_create": "您可以要求簽署者透過電子郵件或是簡訊接收一次性安全密碼，在簽署前先驗證身份。",
 	"tooltip_message": "發文者訊息",
-  "tooltip_return_message": "退回訊息",
+	"tooltip_return_message": "退回訊息",
 	"tooltip_file_download": "檔案下載",
 	"tooltip_back_task": "返回任務管理",
 	"tooltip_template_downgrade": "文件範本無效。請更新以使用",
@@ -191,9 +191,11 @@
 	"tooltip_attachment":"夾檔",
 	"tooltip_background_removal_threshold":"當容許值較大時，會有更多與背景顏色相近的區域被移除。",
 	"tooltip_eraser_restore_mode":"這個模式允許您使用橡皮擦工具還原先前清除的區域",
-  "tooltip_review": "該階段的簽名需要被檢查，才算完成簽署。",
-  "tooltip_public_form_terminated": "當範本的內容異動時，公開表單將變更成停用狀態。",
-  "tooltip_signing_group": "你可以將簽署者設定和簽署順序快速加入任務內，以節省作業時間。",
+	"tooltip_review": "該階段的簽名需要被檢查，才算完成簽署。",
+	"tooltip_public_form_terminated": "當範本的內容異動時，公開表單將變更成停用狀態。",
+	"tooltip_signing_group": "你可以將簽署者設定和簽署順序快速加入任務內，以節省作業時間。",
+	"tooltip_completion_password": "僅允許英文大小寫、數字及底線，且在 50 字元以內。",
+	"tooltip_encryption_cht_auth_conflict": "已有簽署者設定 CHT 認證時，無法啟用完成檔加密。",
 
 	"left": "左",
 	"right": "右",
@@ -201,7 +203,7 @@
 	"top":"上",
 	"bottom":"下",
 	"none": "無",
-  	"numbers": "數字",
+	"numbers": "數字",
 	"letters": "英文字母",
 	"credit_card":"信用卡",
 	"regex": "正則表達式",
@@ -269,8 +271,8 @@
 	"optional": "選填",
 
 	"hint_date_restrict": "發文者已將此日期限制為：",
-  "hint_not_modified": "簽署者未修改",
-  "hint_modified": "簽署者已修改",
+	"hint_not_modified": "簽署者未修改",
+	"hint_modified": "簽署者已修改",
 
 	"google_contact_search_placeholder": "輸入姓名或電子郵件進行搜尋",
 	"unbind-group": "解除團隊",
@@ -312,18 +314,22 @@
 	"template_replace_document":"替換文件",
 	"save_as_template": "另存為範本",
 
-  "pass_all": "全部通過",
-  "fail_all": "全部否決",
-  "pass_rest": "剩餘通過",
-  "fail_rest": "剩餘否決",
-  "clear_all": "全部清除",
-  "clear": "清除",
+	"pass_all": "全部通過",
+	"fail_all": "全部否決",
+	"pass_rest": "剩餘通過",
+	"fail_rest": "剩餘否決",
+	"clear_all": "全部清除",
+	"clear": "清除",
 
 	"signing_group_not_found": "找不到組合",
-  "from_the_group": "由團隊分享",
-  "from_me": "由我分享",
+	"from_the_group": "由團隊分享",
+	"from_me": "由我分享",
 
-  "post_duplicate_sign_task": "複製並重新發布",
+	"post_duplicate_sign_task": "複製並重新發布",
 
-  "btn_get_commercial_license": "洽詢商業授權"
+	"btn_get_commercial_license": "洽詢商業授權",
+
+	"post_duplicate_sign_task": "複製並重新發布",
+
+	"task_more_completion_password": "完成檔密碼"
 }

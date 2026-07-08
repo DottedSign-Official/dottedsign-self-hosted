@@ -74,12 +74,16 @@ export const parseTaskToPreview = (() => {
     task_id,
     envelope_id,
     tag_info,
+    is_encrypted,
+    completion_password,
   }) => {
     const owner_info = task_owner_info || envelope_owner_info;
     return {
       task_id,
       envelope_id,
       tag_info,
+      isEncrypted: !!is_encrypted,
+      completionPassword: completion_password || "",
       link:
         status === "draft"
           ? envelope_id
@@ -187,6 +191,8 @@ export const parseTaskToMoreMenu = (() => {
     receiver_lang,
     isFastSigning,
     access_info,
+    is_encrypted,
+    completion_password,
   }) => {
     const owner_info = task_owner_info || envelope_owner_info;
     const isEnvelope = !!envelope_id;
@@ -326,6 +332,13 @@ export const parseTaskToMoreMenu = (() => {
           data: {
             ...(task_id ? { taskId: task_id } : {}),
             ...(envelope_id ? { envelopeId: envelope_id } : {}),
+          },
+        },
+        completionPassword: {
+          isVisible:
+            isMyCase(owner_info) && !!is_encrypted && !!completion_password,
+          data: {
+            completionPassword: completion_password || "",
           },
         },
       },

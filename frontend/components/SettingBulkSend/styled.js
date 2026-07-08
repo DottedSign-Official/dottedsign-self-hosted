@@ -36,7 +36,8 @@ export const Block = styled.div`
   font-weight: 400;
   width: ${(props) => (props.isDlod ? "15%" : "28.3%")};
   cursor: ${(props) =>
-    props.isDlod && !props.isTitle ? "pointer" : "default"};
+    (props.isDlod || props.isExport) && !props.isTitle ? "pointer" : "default"};
+  text-decoration: ${(props) => (props.isExport ? "underline" : "none")};
 
   ${(props) =>
     props.isTitle

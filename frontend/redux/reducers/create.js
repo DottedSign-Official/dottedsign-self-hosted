@@ -111,6 +111,8 @@ const initialState = {
   assigneesWarnings: {},
   assigneFocus: null,
   templateCode: "",
+  is_encrypted: false,
+  completion_password: "",
 
   stages: [],
   fieldGroups: [],
@@ -313,6 +315,8 @@ const create = (state = initialState, action) =>
         draft.templatePages = action.payload.templatePages;
         draft.files = action.payload.files;
         draft.tmpFiles = action.payload.tmpFiles;
+        draft.is_encrypted = action.payload.is_encrypted;
+        draft.completion_password = action.payload.completion_password;
         if (action.payload.shareInfo) {
           draft.shareInfo = action.payload.shareInfo;
         }

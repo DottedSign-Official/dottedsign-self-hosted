@@ -24,6 +24,7 @@ import * as createApi from "../../apis/create";
 import * as signApi from "../../apis/sign";
 
 import { isEmail, isPhone } from "../../helpers/utility";
+import { CHT_VERIFY_TYPES } from "../../helpers/assignees/cht";
 import xfdf2Obj from "../../helpers/xfdf";
 import getAllViewport from "../../helpers/getViewport";
 import { getImageFormat } from "../../helpers/image";
@@ -65,7 +66,7 @@ export function* fetchFileData({
   isRevertDraft,
   isGetSignTask,
 }) {
-  let fileName, fileId, fileData, fileUrl, pageNum, fileSizeText;
+  let fileName, fileId, fileData, fileUrl, pageNum, fileSizeText, vpData;
 
   if (isCheckSettings) {
     fileName = file.name.replace(/.pdf/gi, "");
@@ -77,7 +78,12 @@ export function* fetchFileData({
     const { doc, fileSize } = yield call(getDocAndFileSize, file.download_link);
     fileName = file.file_name;
     fileId = file.task_id;
-    fileUrl = file.download_link;
+    if (isGetSignTask) {
+      fileUrl = yield call(getPdfDocDataURL, doc);
+      vpData = yield call(getAllViewport, doc);
+    } else {
+      fileUrl = file.download_link;
+    }
     pageNum = doc._pdfInfo.numPages;
     fileSizeText = formatFileSize(fileSize);
   }
@@ -89,6 +95,7 @@ export function* fetchFileData({
     fileId,
     pageNum,
     fileSizeText,
+    vpData,
   };
 }
 
@@ -530,7 +537,9 @@ function* postDraftToCreate({ data }) {
     yield put({ type: createActions.POST_CREATE_SUC });
     yield put({
       type: commonActions.OPEN_TOAST,
-      payload: toastStatus.createSuc,
+      payload: data.is_encrypted
+        ? toastStatus.createSucEncrypted
+        : toastStatus.createSuc,
       toastId: "ReviewSend-Send-Suc-GetSignatures",
     });
     yield put({ type: commonActions.CLOSE_MODAL });
@@ -596,7 +605,9 @@ function* postCreate({ data }) {
     yield put({ type: commonActions.CLOSE_MODAL });
     yield put({
       type: commonActions.OPEN_TOAST,
-      payload: toastStatus.createSuc,
+      payload: data.is_encrypted
+        ? toastStatus.createSucEncrypted
+        : toastStatus.createSuc,
       toastId: "ReviewSend-Send-Suc-GetSignatures",
     });
     yield take(commonActions.CLOSE_TOAST);
@@ -668,6 +679,8 @@ function* postTemplate({ data }) {
       templateCode: data?.templateCode,
       ccInfos,
       fieldGroups,
+      is_encrypted: data.is_encrypted,
+      completion_password: data.completion_password,
     };
 
     // NOTE: create
@@ -717,6 +730,8 @@ function* putTemplate({ data }) {
       ccInfos,
       isReplaceTemplate,
       fieldGroups,
+      is_encrypted: data.is_encrypted,
+      completion_password: data.completion_password,
     };
 
     const resp = yield call(modifyDraft, { data: param, isTemplate: true });
@@ -1037,6 +1052,8 @@ function* getTemplate({ data }) {
       templatePages: numPages,
       files,
       tmpFiles,
+      is_encrypted: resp.data.is_encrypted,
+      completion_password: resp.data.completion_password,
     };
 
     if (isPublicForm) {
@@ -1111,6 +1128,8 @@ function* prepareDraftData({ data, isTemplate }) {
   try {
     const getPdf = (state) => state.pdf;
     const { viewport, pdfRotates } = yield select(getPdf);
+    const getLicense = (state) => state.license.data;
+    const licenseData = yield select(getLicense);
     const {
       envelopeId,
       file_name,
@@ -1139,6 +1158,8 @@ function* prepareDraftData({ data, isTemplate }) {
       ccInfos,
       isReplaceTemplate,
       isPublicForm,
+      is_encrypted,
+      completion_password,
     } = data;
 
     const key = isTemplate ? "role" : "email";
@@ -1244,6 +1265,26 @@ function* prepareDraftData({ data, isTemplate }) {
         return {
           isFailed: true,
           error: toastStatus.envelopeAtLeastOneField,
+        };
+      }
+    }
+
+    if (is_encrypted && !licenseData?.setting?.encryptable_enable) {
+      return {
+        isFailed: true,
+      };
+    }
+
+    if (is_encrypted) {
+      const hasChtAuth = assignes.some((ass) =>
+        ass.verify?.some((verify) =>
+          CHT_VERIFY_TYPES.includes(verify.verify_type),
+        ),
+      );
+      if (hasChtAuth) {
+        return {
+          isFailed: true,
+          error: toastStatus.encryptionChtAuthConflict,
         };
       }
     }
@@ -1610,6 +1651,11 @@ function* prepareDraftData({ data, isTemplate }) {
 
     if (templateCode) {
       toTransfer.code = templateCode;
+    }
+
+    if (typeof is_encrypted === "boolean") {
+      toTransfer.is_encrypted = is_encrypted;
+      toTransfer.completion_password = completion_password;
     }
 
     if (typeof message === "string") {
@@ -2508,6 +2554,8 @@ function* revertDraft({ data }) {
       completed_reference_setting,
       msgRequestReceivers,
       msgCompletedReceivers,
+      is_encrypted: data.is_encrypted,
+      completion_password: data.completion_password,
     };
 
     if (deadline) {
