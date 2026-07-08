@@ -1,3 +1,12 @@
+## 環境變數
+
+容器部署時，環境變數由專案根目錄的 `frontend.env` 提供（參考根目錄的
+`frontend.env.sample`，各變數說明見 `docs/configuration.md`）。
+
+本機開發（`yarn dev`）時，請在此目錄自行建立 `.env`（內容同
+`frontend.env.sample`）。此檔已被 git 與 docker build 排除，不會被提交或
+打包進 image。
+
 ## Available Scripts
 
 在專案目錄中，您可以運行以下指令：

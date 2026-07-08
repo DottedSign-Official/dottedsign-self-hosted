@@ -8,7 +8,7 @@
 
 ![DottedSign Self-Hosted — your data, your server, full eSignature workflow](./docs/assets/dottedsign-self-hosted-overview.svg)
 
-**Trusted by 4,200+ businesses and 1M+ users worldwide.** DottedSign Self-Hosted lets enterprises that prioritize data sovereignty run the full DottedSign signing system independently — inside their own network or on their preferred cloud. It's built for organizations with compliance requirements or closed-network environments that need a flexible eSignature workflow they fully control.
+**Trusted by 4,200+ businesses and 1M+ users worldwide.** DottedSign Self-Hosted lets enterprises that prioritize data sovereignty run the full DottedSign signing system independently — inside their own network or on their preferred cloud. It's built for organizations with compliance requirements or closed-network environments that need a flexible eSignature workflow they fully control.Open source DocuSign alternative.
 
 ## Key Features
 
@@ -36,11 +36,19 @@ cd dottedsign-self-hosted
 
 ### Step 2: Configure environment variables
 
-Copy the example file and rename it to `.env`, then update the values for your environment.
+Copy the example files and rename them to `backend.env` / `frontend.env`, then update the values for your environment.
 
 ```bash
 cp backend.env.sample backend.env
+cp frontend.env.sample frontend.env
 ```
+
+`frontend.env` must stay in sync with `backend.env`: `AUTH_CLIENT_ID` and
+`AUTH_CLIENT_SECRET` must be identical in both files — the backend seeds this
+OAuth client at first boot, and the frontend uses the same pair to obtain
+tokens. Whenever you change them in one file, change the other. `BACKEND_HOST`
+defaults to the backend service name inside Docker Compose and normally does
+not need to be changed.
 
 Full reference (each variable, default value, and whether it is required) is available at
 [`docs/configuration.md`](./docs/configuration.md).
@@ -54,8 +62,28 @@ Required variables to start the service:
 | `SERVER_HOST` / `WEB_BRANCH_DEEPLINK` | Public-facing service URL |
 | `JWT_SECRET` | JWT signing key |
 | `OTP_KEY` | OTP key |
+| `RECORD_ENCRYPTION_KEY` | Encryption key for sensitive database fields |
 | `SUPER_ADMIN` / `SUPER_ADMIN_PASSWORD` | Initial super administrator |
 | `MEMBER` / `MEMBER_PASSWORD` | Initial regular user |
+
+#### Generate your own secrets (important)
+
+`JWT_SECRET` and `OTP_KEY` ship empty in `backend.env.sample`. If you leave
+them empty or reuse the sample values, the service falls back to defaults that
+are publicly visible in this open-source repository — effectively a known weak
+key that lets anyone forge tokens or one-time passwords. Always generate your
+own values before any real deployment:
+
+```bash
+openssl rand -hex 32   # JWT_SECRET
+openssl rand -hex 32   # OTP_KEY
+openssl rand -hex 16   # RECORD_ENCRYPTION_KEY (32 hex characters)
+```
+
+`AUTH_CLIENT_ID` and `AUTH_CLIENT_SECRET` in the sample files are example
+values only. For the same reason, replace them with your own randomly
+generated values (e.g. `openssl rand -hex 32`) before production use — and
+remember to set the same pair in both `backend.env` and `frontend.env`.
 
 
 ### Step 3: Start the services
@@ -68,7 +96,44 @@ Once the services are up, open your browser and navigate to `http://127.0.0.1` o
 
 Default credentials can be found in `backend.env`.
 
-Before exposing the service to any network beyond localhost, make sure to change all default passwords.
+#### Before exposing the service beyond localhost
+
+The Quick Start defaults are for local proof-of-concept only. Before any
+deployment reachable by other people, go through this checklist:
+
+- Change all default passwords: `SUPER_ADMIN_PASSWORD`, `MEMBER_PASSWORD`, and
+  `SIDEKIQ_USER_NAME` / `SIDEKIQ_PASSWORD` — the bundled nginx routes the
+  `/sidekiq` admin dashboard publicly, protected only by these basic-auth
+  credentials.
+- `DATABASE_PASSWORD` must be changed together with `POSTGRES_PASSWORD` in
+  `docker-compose.yml` (they must match), and `REDIS_PASSWORD` should be set
+  if Redis is reachable beyond the internal compose network.
+- `OPENSSL_PASS` in the sample file is publicly known, so the bundled `*.enc`
+  config files it protects should be treated as public. To use your own
+  passphrase, re-encrypt first with `rake config:encrypt_files`, then update
+  `OPENSSL_PASS` — changing only the variable makes the service fail to boot.
+- Set `RAILS_ENV=production`.
+
+
+#### Auto-generated secrets and data persistence
+
+On first boot the backend automatically generates per-install secrets
+(`rake config:bootstrap_secrets`):
+
+- `backend/config/master.key` / `backend/config/credentials.yml.enc` — Rails credentials
+- `backend/config/on_premise_rsa/password/` — RSA key pair used to encrypt/decrypt the `CRYPTO_*` password values
+
+If you want to keep or reuse these secrets, mount the corresponding files or
+directories as volumes so they survive container rebuilds.
+
+The bundled `docker-compose.yml` is a minimal example: it mounts the whole
+`./backend` directory, which keeps the generated keys and uploaded documents
+(`backend/tmp/storage`) on the host. Adjust it to your deployment needs —
+for example where document storage and the password RSA key pair (the `.pem`
+files under `backend/config/on_premise_rsa/password`) are stored and mounted.
+If you switch to pre-built images without the source mount, be sure to mount
+those paths (and the PostgreSQL data directory) as volumes, otherwise the
+generated keys and data are lost when containers are rebuilt.
 
 
 ### Additional Technical Documentation
@@ -84,12 +149,13 @@ DottedSign Self-Hosted provides a complete REST API, allowing IT teams to embed 
 
 **Common integration scenarios**
 
-| Department | Example |
+| Industry / Role | Use Case |
 | --- | --- |
-| Legal | Automatically trigger a signing workflow after contract review; both parties complete signing online. |
-| Procurement | After a PO is submitted in the procurement system, use the API to initiate electronic approval from suppliers. |
-| Travel | Automatically generate and send insurance contracts to customers for signing after an order is placed. |
-| HR | On a new employee's first day, the HR system automatically sends an onboarding document package (employment contract, NDA, etc.). |
+| Legal | Once legal contract review is complete, the signing workflow is automatically triggered, and both parties complete e-sealing online.Applicable Systems: CLM (Contract Lifecycle Management) systems, e.g., Ironclad, Icertis, Conga. |
+| Travel | Once an order is placed, an insurance contract is automatically generated and sent to the customer for signature.Applicable Systems: Travel platform order management systems. |
+| HR | On a new employee's first day, the HR system automatically sends onboarding documents for signature (labor contract, NDA, etc.).Applicable Systems: HRM (Human Resource Management) systems. |
+| Healthcare | Surgical consent forms are signed online, with results saved back to the patient's medical record.Applicable Systems: HIS (Hospital Information System), EMR (Electronic Medical Record) systems.). |
+| Business | A sales contract is automatically generated and sent to the customer for signature; once signed, the deal status is written back.Applicable Systems: CRM systems, e.g., Salesforce, HubSpot, Pipedrive. |
 
 With the API, you can:
 - Initiate signing tasks: specify signers, field positions, and expiration times.
