@@ -1,6 +1,7 @@
 class Api::V1::Members::InfoController < Api::ApplicationController
   before_action :check_file_type!, only: [:upload_avatar]
   before_action :check_preference_params, only: [:preference]
+  before_action -> { check_email_if_present(params[:email]) }, only: [:destroy_contact]
 
   def me
     with_signature = strict_boolean(params[:include_signature])
@@ -35,6 +36,13 @@ class Api::V1::Members::InfoController < Api::ApplicationController
 
   def contact_list
     success_response(current_member.contact_list)
+  end
+
+  def destroy_contact
+    service = Contacts::Destroy.call(member: current_member, email: params[:email])
+    return error_response(service.error.key) if service.failed?
+
+    success_response(:ok)
   end
 
   # PUT

@@ -196,5 +196,19 @@ RSpec.describe Api::V1::SignTasksController, type: :request do
       expect(json['data']['stage_infos'][1]['field_settings'][0]['field_group_object_id']).to eq(stage2_info[:xfdf_info][0][:field_group_object_id])
       expect(json['data']['stage_infos'][1]['field_settings'][2]['field_group_object_id']).to eq(stage2_info[:xfdf_info][2][:field_group_object_id])
     end
+
+    it 'should return 200 and apply custom_message_setting', rpdoc_example_key: 200_2, rpdoc_example_name: 'create task with file with custom_message_setting' do
+      @params[:stages][0][:custom_message_setting] = { 'processing_viewable' => true, 'completed_viewable' => false }
+      @params[:stages][1][:custom_message_setting] = { 'processing_viewable' => false, 'completed_viewable' => true }
+
+      post @path, params: @params.to_json, headers: @headers
+
+      expect(response).to have_http_status(200)
+
+      first_stage = json['data']['stage_infos'][0]
+      second_stage = json['data']['stage_infos'][1]
+      expect(first_stage['custom_message_setting']).to eq({ 'processing_viewable' => true, 'completed_viewable' => false })
+      expect(second_stage['custom_message_setting']).to eq({ 'processing_viewable' => false, 'completed_viewable' => true })
+    end
   end
 end

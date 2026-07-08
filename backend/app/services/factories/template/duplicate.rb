@@ -1,5 +1,6 @@
 class Factories::Template::Duplicate < ServiceCaller
   include StageCopier
+  ENCRYPTABLE_SETTING_KEYS = %i[is_encrypted completion_password].freeze
 
   attr_reader :template
 
@@ -36,9 +37,9 @@ class Factories::Template::Duplicate < ServiceCaller
 
   def duplicate_template_setting
     source_setting = @source_template.setting_info(member_id: @member.id)
-    setting_info = source_setting.merge(@setting_info).symbolize_keys
+    setting_info = source_setting.merge(@setting_info).symbolize_keys.except(*ENCRYPTABLE_SETTING_KEYS)
     return if setting_info.blank?
-    TemplateSetting.setup_from_request(@member.id, @template.id, setting_info.slice(*TemplateSetting.column_names.map(&:to_sym)))
+    TemplateSetting.setup_from_request(@member.id, @template.id, setting_info)
   end
 
   def duplicate_dummy_stages

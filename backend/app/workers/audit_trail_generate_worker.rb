@@ -8,7 +8,8 @@ class AuditTrailGenerateWorker < GeneralWorker
     pdf = prepare_audit_pdf(task)
     audit_dir = Settings.working_dir_for(task, create_dir: true)
     audit_trail = write_pdf_to_file(pdf, audit_dir)
-    file_name = need_digital_certificate?(options) ? digit_sign_audit_trail(audit_trail, task) : audit_trail
+    file_name = encrypt_audit_trail(audit_trail, task)
+    file_name = digit_sign_audit_trail(file_name, task) if need_digital_certificate?(options)
 
     task.upload_service_file('audit_trail', io: File.open(file_name), content_type: 'application/pdf', filename: 'file.pdf', callback_options: options)
     pdf
@@ -42,11 +43,23 @@ class AuditTrailGenerateWorker < GeneralWorker
   end
 
   def digit_sign_audit_trail(audit_trail, task)
+    cert_type = 'system_cert'
     cert_info = { long_id: task.long_id }
+    if task.setting&.is_encrypted && task.setting.completion_password.present?
+      cert_info[:password] = task.setting.completion_password
+    end
+
     log_info = { file_type: 'audit_trail', task_id: task.id }
-    dc_service = DigitalCertificator::PdfSign.call(audit_trail, cert_info: cert_info, log_info: log_info)
+    dc_service = DigitalCertificator::PdfSign.call(audit_trail, cert_type: cert_type, cert_info: cert_info, log_info: log_info)
     raise dc_service.error if dc_service.failed?
     dc_service.result
+  end
+
+  def encrypt_audit_trail(file_path, task)
+    return file_path unless task.setting&.is_encrypted
+    return file_path if task.setting.completion_password.blank?
+
+    Document::SetPassword.new(file_path, task.setting.completion_password).call
   end
 
 end

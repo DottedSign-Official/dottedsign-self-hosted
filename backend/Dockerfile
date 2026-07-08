@@ -20,7 +20,7 @@ WORKDIR /jackrabbit
 ARG JAVA_VERSION=17
 RUN apt-get update \
         && apt-get install -qq -y build-essential cron libpq5 nodejs vim \
-        shared-mime-info wkhtmltopdf ttf-wqy-zenhei imagemagick libmagickwand-dev ffmpeg \
+        shared-mime-info wkhtmltopdf ttf-wqy-zenhei imagemagick libmagickwand-dev ffmpeg qpdf \
         openjdk-${JAVA_VERSION}-jdk --fix-missing --no-install-recommends
 
 # Change pdf policy in imagemagick policy file

@@ -2,8 +2,6 @@ require "pdf-reader"
 
 module DigitalCertificator
   class FieldSign < ServiceCaller
-    include DigitalCertLog
-
     attr_reader :working_dir
 
     def initialize(file_path, xfdf_document_id, field_object_id, custom_cert: false, system_ca: nil, cert_type: 'user_cert', cert_info: {}, log_info: {})
@@ -23,8 +21,7 @@ module DigitalCertificator
       FileUtils.mkdir_p(@images_dir)
       get_xfdf_xml
       get_pdf_page_infos
-      signed_signature_field
-      @result = write_signed_data_to_file
+      @result = sign_visible_field
     ensure
       FileUtils.rm_rf(@images_dir)
     end
@@ -54,44 +51,26 @@ module DigitalCertificator
       end
     end
 
-    def signed_signature_field
+    def sign_visible_field
       field_xml = @xfdf_xml.at_xpath("//*[@fieldname=\"#{@field_object_id}\"]")
       field_info = get_basic_info_from_field_xml(field_xml)
-      image_hex = field_xml.at('image').content
-      image_path = save_image_hex(image_hex)
-      process = ImageProcess.call(image_path, field_info[:coords], field_info[:field_size], field_info[:page_info])
-      raise process.error if process.failed?
-      @signed_data = apply_digital_certification(process.result, nil)
+      image_path = save_image_hex(field_xml.at('image').content)
+
+      signer = visible_ca_sign_class.call(
+        @file_path, image_path, field_info,
+        custom_cert: @custom_cert, system_ca: @system_ca,
+        cert_type: @cert_type, cert_info: @cert_info,
+        log_info: @log_info, working_dir: @working_dir
+      )
+      raise signer.error if signer.failed?
+      signer.result
     end
 
-    def apply_digital_certification(image_info, b64pdf)
-      if @cert_type == 'user_cert'
-        resp = DigitalCertificate::Hsm.apply_user_visible_cert(@file_path, image_info.delete(:path), image_info, @cert_info, b64pdf)
-      else
-        ap_info = if @system_ca.present?
-                    @system_ca.cert_info.merge!(long_id: @cert_info[:long_id])
-                  else
-                    @custom_cert ? @cert_info : DigitalCertificate::Gra.get_system_ap_info(task_id: @log_info[:task_id])
-                  end
-        resp = DigitalCertificate::Hsm.apply_ap_visible_cert(@file_path, image_info.delete(:path), image_info, ap_info, b64pdf)
-      end
-      raise ServiceError.new(:digit_sign_failed, error_message: resp.to_s) unless resp['status'] == 200
-      raise ServiceError.new(:digit_sign_failed, error_message: resp.to_s) unless resp['code'] == '0'
-      record_digital_cert_apply_log(:successed)
-      resp['msg']
-    rescue => error
-      record_digital_cert_apply_log(:failed, error_message: error.message)
-      raise error
-    end
-
-    def write_signed_data_to_file
-      return nil if @signed_data.nil?
-
-      output_path = "#{@working_dir}/visible_signed_#{Time.now.to_i}.pdf"
-      File.open(output_path, 'wb+', encoding: 'ascii-8bit') do |f|
-        f.write(Base64.decode64(@signed_data))
-      end
-      output_path
+    def visible_ca_sign_class
+      provider = Settings.digital_signature.provider
+      klass = "DigitalCertificator::#{provider.camelize}FieldSign".safe_constantize
+      raise ServiceError.new(:invalid_params, error_msg: "unsupported provider for visible CA: #{provider}") if klass.nil?
+      klass
     end
 
     def get_basic_info_from_field_xml(field_xml)
@@ -113,17 +92,10 @@ module DigitalCertificator
 
     def calc_field_size(coords, height_width_change = false)
       if height_width_change
-        {
-          width: coords[3] - coords[1],
-          height: coords[2] - coords[0]
-        }
+        { width: coords[3] - coords[1], height: coords[2] - coords[0] }
       else
-        {
-          width: coords[2] - coords[0],
-          height: coords[3] - coords[1]
-        }
+        { width: coords[2] - coords[0], height: coords[3] - coords[1] }
       end
     end
-
   end
 end

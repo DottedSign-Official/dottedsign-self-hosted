@@ -16,6 +16,7 @@ Return status `200` and data: of `license_info_object`.
 
 | Property Name | Value | Description |
 | --- | --- | --- |
+| **starts_at** | `String` | License start time. |
 | **expires_at** | `String` | License expire time. |
 | **group_enable** | `Boolean` | Enable or disable group.   |
 | **sign_task** | `Object` | Object of  [Sign Task Object](#sign-task-object). |
@@ -47,4 +48,3 @@ Return status `200` and data: of `license_info_object`.
 | Property Name | Value | Description |
 | --- | --- | --- |
 | **system_ca_enable** | `Boolean` |  Enable or disable system ca  |
-

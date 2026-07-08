@@ -39,7 +39,7 @@ development: &development
     host: <%= ENV['GRA_HOST'].env_presence %>
     path:
       v1:
-        check_ca:  <%= ENV['GRA_CHECK_CA_PATH'].env_presence || '/gra-test/aatl/v1/query/certificateStatus' %>
+        check_ca: <%= ENV['GRA_CHECK_CA_PATH'].env_presence || '/gra-test/aatl/v1/query/certificateStatus' %>
         auth_ca: <%= ENV['GRA_AUTH_CA_PATH'].env_presence || '/gra-test/aatl/v1/ticket/user' %>
         apply_ca: <%= ENV['GRA_APPLY_CA_PATH'].env_presence || '/gra-test/aatl/v1/certificate/partner/issue' %>
       v2:
@@ -51,14 +51,15 @@ development: &development
     admin_email: <%= ENV['HSM_ADMIN_EMAIL'].env_presence %>
     path:
       v1:
-        user_cert:  <%= ENV['HSM_USER_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA_TPSSC_IV_CVS2.do' %>
-        user_cert_with_password: <%= ENV['HSM_USER_CERT_WITH_PASSWORD_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA_TPSSC_IV_CVS2.do' %>
+        user_cert: <%= ENV['HSM_USER_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA_TPSSC_IV_CVS2.do' %>
+        user_cert_encrypt_sign: <%= ENV['HSM_USER_CERT_ENCRYPT_SIGN_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA_TPSSC_IV_CVS2.do' %>
         ap_cert: <%= ENV['HSM_AP_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA_TPSSC_IV_CVS2_AP.do' %>
+        ap_cert_encrypt_sign: <%= ENV['HSM_AP_CERT_ENCRYPT_SIGN_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA_TPSSC_IV_CVS2_AP.do' %>
         user_visible_cert: <%= ENV['HSM_USER_VISIBLE_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partyvpdfsign/GRA_TPSSC_IV_CVS2.do' %>
         ap_visible_cert: <%= ENV['HSM_AP_VISIBLE_CERT_PATH'].env_presence || '/CryptoKeyManageCVS2API/3partyvpdfsign/GRA_TPSSC_IV_CVS2_AP.do' %>
       v2:
-        user_cert:  <%= ENV['HSM_USER_CERT_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA2_TPSSC_IV_CVS2.do' %>
-        user_cert_with_password: <%= ENV['HSM_USER_CERT_WITH_PASSWORD_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA2_TPSSC_IV_CVS2.do' %>
+        user_cert: <%= ENV['HSM_USER_CERT_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partypdfsign/GRA2_TPSSC_IV_CVS2.do' %>
+        user_cert_encrypt_sign: <%= ENV['HSM_USER_CERT_ENCRYPT_SIGN_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partypdfencsign/GRA2_TPSSC_IV_CVS2.do' %>
         user_visible_cert: <%= ENV['HSM_USER_VISIBLE_CERT_PATH_V2'].env_presence || '/CryptoKeyManageCVS2API/3partyvpdfsign/GRA2_TPSSC_IV_CVS2.do' %>
   default_group:
     name: <%= ENV['DEFAULT_GROUP_NAME'].env_presence || 'Default Group' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_12_04_154306) do
+ActiveRecord::Schema.define(version: 2026_06_08_000001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 2025_12_04_154306) do
     t.boolean "need_ca"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_encrypted", default: false, null: false
+    t.text "completion_password"
     t.index ["envelope_id"], name: "index_envelope_settings_on_envelope_id"
   end
 
@@ -612,6 +614,8 @@ ActiveRecord::Schema.define(version: 2025_12_04_154306) do
     t.boolean "need_ca", default: false
     t.text "completed_message"
     t.json "completed_reference_setting", default: []
+    t.boolean "is_encrypted", default: false, null: false
+    t.text "completion_password"
     t.index ["sign_task_id"], name: "index_task_settings_on_sign_task_id", unique: true
   end
 
@@ -631,6 +635,8 @@ ActiveRecord::Schema.define(version: 2025_12_04_154306) do
     t.boolean "need_ca", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_encrypted", default: false, null: false
+    t.text "completion_password"
     t.index ["template_id"], name: "index_template_settings_on_template_id"
   end
 

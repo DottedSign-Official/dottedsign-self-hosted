@@ -18,11 +18,13 @@ module OnPremiseLicense
     def license_info
       restrictions = @license&.restrictions
       {
+        starts_at: @license&.starts_at,
         expires_at: @license&.expires_at,
         group_enable: restrictions[:group_enable],
         plan: restrictions[:plan],
         template: template_license(restrictions[:template]),
         sign_task: restrictions[:sign_task],
+        setting: restrictions[:setting],
         otp_verify: otp_verify_license(restrictions[:otp_verify]),
         authenticate_member: restrictions[:authenticate_member],
         certificate_authority: certificate_authority_license(restrictions[:certificate_authority])

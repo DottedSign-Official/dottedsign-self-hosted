@@ -26,7 +26,7 @@ class Api::V1::SignTasksController < Api::ApplicationController
 
   def update
     return error_response(:task_is_not_draft) unless @task.draft?
-    task_info = @task.update_from_request(task_params, client_params, setting_params)
+    task_info = @task.update_from_request(task_params, client_params, task_setting_params)
     task_info[:tag_info] = add_tag(@task) if params.key?(:tags)
     success_response(task_info)
   end
@@ -39,7 +39,7 @@ class Api::V1::SignTasksController < Api::ApplicationController
   end
 
   def create
-    task_info = SignTask.create_from_request(task_params, client_params, setting_params)
+    task_info = SignTask.create_from_request(task_params, client_params, task_setting_params)
     task_info[:tag_info] = add_tag(SignTask.find_by_id(task_info[:task_id])) if params[:tags].present?
     success_response(task_info)
   end
@@ -72,7 +72,7 @@ class Api::V1::SignTasksController < Api::ApplicationController
   end
 
   def create_with_file
-    creator = FileTaskCreator.call(task_params, client_params, setting_params)
+    creator = FileTaskCreator.call(task_params, client_params, task_setting_params)
     return error_response(creator.error.key, creator.error.message) if creator.failed?
 
     task = creator.task
@@ -84,7 +84,7 @@ class Api::V1::SignTasksController < Api::ApplicationController
   end
 
   def create_from_template
-    creator = Factories::TemplateTask::CreateAndInvite.call(current_member, params[:template_id], template_create_task_info, template_code: params[:template_code], setting_info: setting_params, client_info: client_params, check_access: true, role_mapping: true, pdf_base64: params[:file])
+    creator = Factories::TemplateTask::CreateAndInvite.call(current_member, params[:template_id], template_create_task_info, template_code: params[:template_code], setting_info: template_setting_params, client_info: client_params, check_access: true, role_mapping: true, pdf_base64: params[:file])
     return error_response(creator.error.key, creator.error.message) if creator.failed?
 
     task = creator.task
@@ -96,7 +96,7 @@ class Api::V1::SignTasksController < Api::ApplicationController
   end
 
   def create_from_multi_template
-    creator = Factories::TemplateTask::MultiTemplate.call(current_member, params[:template_codes], params[:template_ids], template_create_task_info, setting_info: setting_params, client_info: client_params, check_access: true, role_mapping: true, pdf_base64: params[:file])
+    creator = Factories::TemplateTask::MultiTemplate.call(current_member, params[:template_codes], params[:template_ids], template_create_task_info, setting_info: template_setting_params, client_info: client_params, check_access: true, role_mapping: true, pdf_base64: params[:file])
     return error_response(creator.error.key, creator.error.message) if creator.failed?
 
     task = creator.task

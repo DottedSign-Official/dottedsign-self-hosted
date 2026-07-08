@@ -81,6 +81,21 @@ RSpec.describe Api::Internal::SignTasksController, type: :request do
       end
     end
 
+    it 'should return 200 and apply custom_message_setting from request', rpdoc_example_key: 200_4, rpdoc_example_name: 'create task from template with custom_message_setting override' do
+      @params[:stages][0][:custom_message_setting] = { 'processing_viewable' => true, 'completed_viewable' => false }
+      @params[:stages][1][:custom_message_setting] = { 'processing_viewable' => false, 'completed_viewable' => false }
+      @params[:template_id] = @template.id
+
+      post "#{@path}/create_from_template", params: @params.to_json, headers: @headers
+
+      expect(response).to have_http_status(200)
+
+      first_stage = json['data']['stage_infos'].find { |stage| stage['sequence'] == 1 }
+      second_stage = json['data']['stage_infos'].find { |stage| stage['sequence'] == 2 }
+      expect(first_stage['custom_message_setting']).to eq({ 'processing_viewable' => true, 'completed_viewable' => false })
+      expect(second_stage['custom_message_setting']).to eq({ 'processing_viewable' => false, 'completed_viewable' => false })
+    end
+
     it 'should return 200 and get task info', rpdoc_example_key: 200_3, rpdoc_example_name: 'create task add otp success' do
       @params = {
         'template_code': @template.code,

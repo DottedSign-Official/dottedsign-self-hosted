@@ -163,9 +163,8 @@ class SignTask < ApplicationRecord
 
   def before_completed
     return unless waiting?
-    file = ServiceFile.setup_for(self, 'completed')
     SystemtimeFiller.call(self)
-    ReadableFileGeneratorWorker.perform_async(file.id, self.setting_info['need_ca'])
+    SignTaskProcess::CompletedFileSetup.call(self)
   end
 
   def do_completed

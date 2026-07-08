@@ -6,7 +6,7 @@ class Api::V1::SignTasks::BulkController < Api::ApplicationController
   before_action :setup_template, only: [:create_mission, :sample]
   before_action :setup_mission, only: [:download]
   def create_mission
-    mission = BulkMission.setup_from_request(current_member.id, @template.id, task_infos[:tasks], setting_info: setting_params, client_info: client_params)
+    mission = BulkMission.setup_from_request(current_member.id, @template.id, task_infos[:tasks], setting_info: task_setting_params, client_info: client_params)
     mission.start
 
     success_response(bulk_uuid: mission.uuid, bulk_count: mission.count)

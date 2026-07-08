@@ -123,6 +123,7 @@ Rails.application.routes.draw do
           get 'timelines'
           post 'upload_avatar'
           get 'contact_list'
+          delete 'contact', action: :destroy_contact
           put 'preference'
           put 'modify'
         end

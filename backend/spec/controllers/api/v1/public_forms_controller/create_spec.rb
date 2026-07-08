@@ -256,6 +256,15 @@ RSpec.describe Api::V1::PublicFormsController, type: :request do
       expect(json['error_key']).to eq('invalid_params')
     end
 
+    it 'should return 400_417 if params include encryptable settings', rpdoc_example_key: 400_417_5, rpdoc_example_name: 'create public form failed (invalid_params, encryptable settings are not supported)' do
+      @params[:is_encrypted] = true
+      @params[:completion_password] = 'test_password'
+      post @path, params: @params.to_json, headers: @headers
+      expect(response).to have_http_status(400)
+      expect(json['error_code']).to eq(400_417)
+      expect(json['error_key']).to eq('invalid_params')
+    end
+
     it 'should return 400_001 if template params is missing', rpdoc_example_key: 400_001, rpdoc_example_name: 'create public form failed (template params missing)' do
       @params.delete(:stages)
       post @path, params: @params.to_json, headers: @headers

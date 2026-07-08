@@ -4,6 +4,7 @@ class TemplateSetting < Setting
   alias :source :template
   alias_attribute :source_id, :template_id
 
+  include Settings::Encryptable
   class << self
 
     def setup_from_source_id(template_id)

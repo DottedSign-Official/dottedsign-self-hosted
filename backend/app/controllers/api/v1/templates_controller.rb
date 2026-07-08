@@ -19,7 +19,7 @@ class Api::V1::TemplatesController < Api::ApplicationController
   end
 
   def create
-    template = Template.create_from_request(current_member.id, template_params)
+    template = Template.create_from_request(current_member.id, template_params, template_setting_params)
     current_member.tag(template, with: params[:tags], on: :tags) if params[:tags].present?
     serialize_response(:template, template, with_upload_link: true, with_tag: true)
   end
@@ -29,7 +29,7 @@ class Api::V1::TemplatesController < Api::ApplicationController
   end
 
   def update
-    @template.update_from_request(template_params)
+    @template.update_from_request(template_params, template_setting_params)
     current_member.tag(@template, with: params[:tags], on: :tags) if params.key?(:tags)
     serialize_response(:template, @template, with_upload_link: true, with_tag: true)
   end
