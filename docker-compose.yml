@@ -26,6 +26,7 @@ services:
         BUNDLE_GEMS_CONTRIBSYS_COM: ${BUNDLE_GEMS_CONTRIBSYS_COM:-}
     command: >
       bash -c "
+        rake config:bootstrap_secrets &&
         rake config:decrypt_files &&
         rake db:create || echo 'db:create skipped' &&
         rake db:migrate &&
@@ -45,6 +46,7 @@ services:
     platform: linux/amd64
     command: >
       bash -c "
+        rake config:bootstrap_secrets &&
         rake config:decrypt_files &&
         until timeout 1 bash -c '</dev/tcp/on_premise_backend/3000' 2>/dev/null; do
           echo 'Waiting for backend to be ready...';

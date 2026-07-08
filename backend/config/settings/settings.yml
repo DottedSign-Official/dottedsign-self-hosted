@@ -32,8 +32,8 @@ development: &development
       rsa_dir: config/on_premise_rsa/license
     password:
       rsa_dir: <%= ENV['CRYPTO_PASSWORD_RSA_FOLDER'].env_presence || 'config/on_premise_rsa/password' %>
-      private_key: <%= ENV['CRYPTO_PASSWORD_RSA_PRIVATE_KEY'].env_presence || 'private.pem' %>
-      public_key: <%= ENV['CRYPTO_PASSWORD_RSA_PUBLIC_KEY'].env_presence || 'public.pem' %>
+      private_key: <%= ENV['CRYPTO_PASSWORD_RSA_PRIVATE_KEY_FILE'].env_presence || 'private.pem' %>
+      public_key: <%= ENV['CRYPTO_PASSWORD_RSA_PUBLIC_KEY_FILE'].env_presence || 'public.pem' %>
   kiosk_delay_threshold: 3600
   gra:
     host: <%= ENV['GRA_HOST'].env_presence %>

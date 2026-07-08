@@ -14,6 +14,12 @@ namespace :config do
     SecretKeeper.decrypt_files
   end
 
+  desc 'generate per-install secrets if missing (generate-once)'
+  task :bootstrap_secrets do
+    require_relative '../on_premise_secrets/bootstrap'
+    OnPremiseSecrets::Bootstrap.new.call
+  end
+
   desc 'encrypt the password from public key'
   task :encrypt_password, [:password] do |_, args|
     encrypter = OnPremisePassword::Encrypt.call(args[:password])
