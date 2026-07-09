@@ -206,7 +206,7 @@ AGPL-3.0 開源。有不開源的客製化需求，建議洽詢商業授權。
 - **科技上市企業**：完善對外電子化商務流程。
 - **知名旅遊電商**：結合 RPA 自動化，招募合約 1 天內有效簽回。
 
-👉 [查看更多客戶故事](https://www.dottedsign.com/zh-tw/blog/category/client-story)
+👉 [查看更多客戶故事](https://www.dottedsign.com/zh-tw/blog/category/user-story)
 
 ## 進階需求與商業授權
 
