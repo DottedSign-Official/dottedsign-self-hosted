@@ -6,7 +6,7 @@
 
 *Self-host DottedSign with Docker Compose — your data, your server.*
 
-![點點簽 DottedSign Self-Hosted — 你的資料、你的伺服器，完整簽署流程](./docs/assets/dottedsign-self-hosted-overview.svg)
+![點點簽 DottedSign Self-Hosted — 你的資料、你的伺服器，完整簽署流程](./docs/assets/dottedsign-self-hosted-overview.png)
 
 **已服務全球超過 4,200 家企業、突破 100 萬用戶。** 點點簽 DottedSign Self-Hosted 讓重視資料主權的企業，在自有網路環境或常用雲端中，自主運行完整的點點簽簽署系統。專為有合規需求或封閉網路環境的組織打造，提供一套你能完全掌控的彈性電子簽署流程。
 
