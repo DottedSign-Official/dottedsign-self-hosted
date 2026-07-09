@@ -217,7 +217,7 @@ DottedSign has extensive enterprise service experience, offering technical compl
 - Listed technology company: Streamlining external e-commerce business processes.
 - Leading travel e-commerce platform: Combined with RPA automation, recruitment contracts are signed back within 1 day.
 
-👉 [View more client success cases](https://www.dottedsign.com/en/blog/category/client-story)
+👉 [View more client success cases](https://www.dottedsign.com/en/blog/category/user-story)
 
 ## Advanced Features and Commercial Licensing
 
