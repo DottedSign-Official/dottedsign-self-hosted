@@ -6,7 +6,7 @@
 
 *Self-host DottedSign with Docker Compose — your data, your server.*
 
-![DottedSign Self-Hosted — your data, your server, full eSignature workflow](./docs/assets/dottedsign-self-hosted-overview.svg)
+![DottedSign Self-Hosted — your data, your server, full eSignature workflow](./docs/assets/dottedsign-self-hosted-overview.png)
 
 **Trusted by 4,200+ businesses and 1M+ users worldwide.** DottedSign Self-Hosted lets enterprises that prioritize data sovereignty run the full DottedSign signing system independently — inside their own network or on their preferred cloud. It's built for organizations with compliance requirements or closed-network environments that need a flexible eSignature workflow they fully control.Open source DocuSign alternative.
 
