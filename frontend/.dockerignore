@@ -1,5 +1,7 @@
 .git
 .dockerignore
 /node_modules
+.env
+.env.*
 
 /*.tar

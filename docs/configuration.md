@@ -9,6 +9,7 @@ noted otherwise.
 
 ## Table of Contents
 
+- [Secrets Generated at First Boot](#secrets-generated-at-first-boot)
 - [Backend Environment](#backend-environment)
 - [Storage](#storage)
 - [Encrypted Settings](#encrypted-settings)
@@ -24,15 +25,34 @@ noted otherwise.
 - [Callback](#callback)
 - [SignTask](#signtask)
 - [KMPDF](#kmpdf)
+- [Frontend Environment (frontend.env)](#frontend-environment-frontendenv)
+
+## Secrets Generated at First Boot
+
+On first start, `rake config:bootstrap_secrets` (already wired into the sample
+`docker-compose.yml`) generates the following per-install secrets if they do
+not exist:
+
+- `backend/config/master.key` and `backend/config/credentials.yml.enc` —
+  Rails credentials (contains a random `secret_key_base`).
+- `backend/config/on_premise_rsa/password/private.pem` / `public.pem` —
+  RSA key pair used to encrypt/decrypt the `CRYPTO_*` password values.
+
+These files are unique to your installation. If you want to keep or reuse
+them, mount the corresponding paths as volumes (the sample compose file mounts
+the whole `./backend` directory, which covers them). Without a volume mount,
+the keys are regenerated when the container is rebuilt, and any previously
+encrypted `CRYPTO_*` values or credentials become undecryptable.
 
 ## Backend Environment
 
-| Name | Required | Default | Description |
-| --- | --- | --- | --- |
-| `RAILS_ENV` | Yes | `development` | Rails environment. Use `production` in deployments. |
-| `OPENSSL_PASS` | Yes | (sample value) | Master pass for decrypting `CRYPTO_*` fields via `rake config:decrypt_files`. Must be set before service start. |
-| `WEB_BRANCH_DEEPLINK` | Yes | `http://127.0.0.1` | Base URL embedded in outbound deep links. |
-| `SERVER_HOST` | Yes | `http://127.0.0.1` | Public base URL of the backend. |
+| Name | Required | Default | Description                                                                                                                                                                                                                            |
+| --- | --- | --- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `RAILS_ENV` | Yes | `development` | Rails environment. Use `production` in deployments.                                                                                                                                                                                    |
+| `OPENSSL_PASS` | Yes | (sample value) | Passphrase used by `rake config:decrypt_files` to decrypt the bundled `*.enc` config files. Must be set before service start. The bundled `.enc` files are encrypted with the public sample passphrase, so treat their current contents as public. If you change this value, re-encrypt the config files first with `rake config:encrypt_files` — otherwise the service fails to boot. |
+| `WEB_BRANCH_DEEPLINK` | Yes | `http://127.0.0.1` | Base URL embedded in outbound deep links.                                                                                                                                                                                              |
+| `SERVER_HOST` | Yes | `http://127.0.0.1` | Public base URL of the backend.                                                                                                                                                                                                        |
+| `RECORD_ENCRYPTION_KEY` | Yes | (empty) | Key for encrypting sensitive database fields such as CA digital-signature certificates (32 hex chars). The service refuses to boot when unset. Generate your own with `openssl rand -hex 16`. Keep it stable and backed up — changing or losing it makes previously encrypted records unreadable. |
 
 ## Storage
 
@@ -51,11 +71,18 @@ noted otherwise.
 
 ## Encrypted Settings
 
+`CRYPTO_*` password variables (e.g. `CRYPTO_DATABASE_PASSWORD`) hold values
+encrypted with the RSA key pair below. Encrypt a plaintext password with
+`rake config:encrypt_password[your_password]`. The key pair is auto-generated
+at first boot if missing — see
+[Secrets Generated at First Boot](#secrets-generated-at-first-boot) for how to
+persist it across container rebuilds.
+
 | Name | Required | Default | Description |
 | --- | --- | --- | --- |
-| `CRYPTO_PASSWORD_RSA_FOLDER` | No | (empty) | Encrypted RSA folder location. Decrypted at boot. |
-| `CRYPTO_PASSWORD_RSA_PRIVATE_KEY` | No | (empty) | Encrypted RSA private key. |
-| `CRYPTO_PASSWORD_RSA_PUBLIC_KEY` | No | (empty) | Encrypted RSA public key. |
+| `CRYPTO_PASSWORD_RSA_FOLDER` | No | `config/on_premise_rsa/password` | Folder holding the RSA key pair used for `CRYPTO_*` values. |
+| `CRYPTO_PASSWORD_RSA_PRIVATE_KEY_FILE` | No | `private.pem` | Private key file name inside the RSA folder. |
+| `CRYPTO_PASSWORD_RSA_PUBLIC_KEY_FILE` | No | `public.pem` | Public key file name inside the RSA folder. |
 
 ## Connection
 
@@ -65,9 +92,9 @@ noted otherwise.
 | `DATABASE_PORT` | Yes | `5432` | PostgreSQL port. |
 | `DATABASE_NAME` | Yes | `jackrabbit_server_development` | Database name. |
 | `DATABASE_USERNAME` | Yes | `postgres` | Database user. |
-| `DATABASE_PASSWORD` | Yes | (sample value) | Database password. Prefer `CRYPTO_DATABASE_PASSWORD` in production. |
+| `DATABASE_PASSWORD` | Yes | (sample value) | Database password. Must match `POSTGRES_PASSWORD` in `docker-compose.yml` — change both together. Prefer `CRYPTO_DATABASE_PASSWORD` in production. |
 | `CRYPTO_DATABASE_PASSWORD` | No | (empty) | Encrypted variant of `DATABASE_PASSWORD`. |
-| `REDIS_PASSWORD` | No | (empty) | Redis password. |
+| `REDIS_PASSWORD` | No | (empty) | Redis password. Set one if Redis is reachable beyond the internal compose network; never expose port 6379 publicly without auth. |
 | `CRYPTO_REDIS_PASSWORD` | No | (empty) | Encrypted variant of `REDIS_PASSWORD`. |
 | `REDIS_HOST` | Yes | `redis` | Redis host. |
 
@@ -97,7 +124,7 @@ noted otherwise.
 | `SMTP_PASSWORD` | Conditional | (empty)                 | SMTP auth password. Prefer `CRYPTO_SMTP_PASSWORD`.                                                                                                                       |
 | `CRYPTO_SMTP_PASSWORD` | No | (empty)                 | Encrypted variant.                                                                                                                                                       |
 | `SMTP_AUTH` | Conditional | (empty)                 | Auth method (`plain`, `login`, `cram_md5`).                                                                                                                              |
-| `SMTP_OPENSSL_VERIFY_MODE` | No | `none`                  | TLS verify mode (`none`, `peer`).                                                                                                                                        |
+| `SMTP_OPENSSL_VERIFY_MODE` | No | `none`                  | TLS verify mode (`none`, `peer`). Use `peer` in production — `none` skips certificate verification and exposes SMTP credentials to man-in-the-middle attacks.            |
 
 ## SMS
 
@@ -144,17 +171,17 @@ These map mailer events to internal API paths. Default values match
 | --- | --- | --- | --- |
 | `AUTH_HOST` | No | (empty) | External auth host, if delegated. |
 | `AUTH_CLIENT_NAME` | No | (empty) | OAuth client display name. |
-| `AUTH_CLIENT_ID` | Yes | (sample value) | OAuth client ID seeded at first boot. Replace before exposing the service. |
-| `AUTH_CLIENT_SECRET` | Yes | (sample value) | OAuth client secret. Replace before exposing the service. |
+| `AUTH_CLIENT_ID` | Yes | (sample value) | OAuth client ID seeded at first boot. The sample value is publicly known — generate your own (e.g. `openssl rand -hex 32`) before any production deployment. |
+| `AUTH_CLIENT_SECRET` | Yes | (sample value) | OAuth client secret. The sample value is publicly known — generate your own before any production deployment. |
 | `MEMBER` | Yes | `default@sample.com` | Initial regular user email. |
 | `MEMBER_PASSWORD` | Yes | `00000000` | Initial regular user password. Change before exposing the service. |
 | `CRYPTO_MEMBER_PASSWORD` | No | (empty) | Encrypted variant of `MEMBER_PASSWORD`. |
-| `JWT_SECRET` | Yes | (empty) | JWT signing secret. Must be set. |
-| `OTP_KEY` | Yes | (empty) | OTP secret. Must be set. |
+| `JWT_SECRET` | Yes | (empty) | JWT signing secret. Must be set to a self-generated random value (e.g. `openssl rand -hex 32`). If left empty, the app falls back to a default that is publicly visible in this open-source codebase, allowing anyone to forge tokens. |
+| `OTP_KEY` | Yes | (empty) | OTP derivation secret. Must be set to a self-generated random value (e.g. `openssl rand -hex 32`). Same risk as `JWT_SECRET` if left empty. |
 | `SUPER_ADMIN` | Yes | `admin1@test.com,admin2@test.com` | Comma-separated initial super-admin emails. |
 | `SUPER_ADMIN_PASSWORD` | Yes | `00000000` | Super-admin initial password. Change before exposing the service. |
 | `CRYPTO_SUPER_ADMIN_PASSWORD` | No | (empty) | Encrypted variant. |
-| `SIDEKIQ_USER_NAME` | Yes | `jackrabbit` | Basic-auth user for `/sidekiq`. |
+| `SIDEKIQ_USER_NAME` | Yes | `test` | Basic-auth user for the `/sidekiq` dashboard. Note: the bundled nginx routes `/sidekiq` publicly — change these credentials or restrict access before exposing the service. |
 | `SIDEKIQ_PASSWORD` | Yes | `00000000` | Basic-auth password for `/sidekiq`. Change before exposing the service. |
 | `CRYPTO_SIDEKIQ_PASSWORD` | No | (empty) | Encrypted variant. |
 
@@ -206,3 +233,17 @@ These map mailer events to internal API paths. Default values match
 | `FONT_FOLDER_ENABLE` | No | `false` | Use custom font folder when rendering PDFs. |
 | `CUSTOM_FONT_NAME` | Conditional | (empty) | Required when `FONT_FOLDER_ENABLE=true`. |
 | `CUSTOM_FONT_PATH` | Conditional | (empty) | Required when `FONT_FOLDER_ENABLE=true`. |
+
+## Frontend Environment (frontend.env)
+
+Variables consumed by the frontend service, provided via the top-level
+`frontend.env` file (copy `frontend.env.sample`). `AUTH_CLIENT_ID` /
+`AUTH_CLIENT_SECRET` must be identical to the values in `backend.env` —
+change both files together.
+
+| Name | Required | Default | Description |
+| --- | --- | --- | --- |
+| `NEXT_PUBLIC_API_HOST` | No | (empty) | Base URL the browser uses to reach the API. Leave empty to use the same origin as the site (recommended behind the bundled nginx). Baked into the client bundle at image build time — pass it as a build argument (`NEXT_PUBLIC_API_HOST=... docker compose build`); setting it in `frontend.env` only affects the server side. |
+| `BACKEND_HOST` | Yes | `http://on_premise_backend:3000` | Internal URL the frontend server uses to reach the backend container. Matches the compose service name. |
+| `AUTH_CLIENT_ID` | Yes | (sample value) | OAuth client ID. Must equal `AUTH_CLIENT_ID` in `backend.env`. The sample value is publicly known — replace before production. |
+| `AUTH_CLIENT_SECRET` | Yes | (sample value) | OAuth client secret. Must equal `AUTH_CLIENT_SECRET` in `backend.env`. Replace before production. |

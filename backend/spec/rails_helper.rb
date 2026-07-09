@@ -2,6 +2,14 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
+
+require 'securerandom'
+ENV['RECORD_ENCRYPTION_KEY'] ||= SecureRandom.hex(16)
+
+
+require_relative '../lib/on_premise_secrets/bootstrap'
+OnPremiseSecrets::Bootstrap.new.call
+
 require File.expand_path('../config/environment', __dir__)
 
 # Prevent database truncation if the environment is production
