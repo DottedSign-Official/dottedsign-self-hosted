@@ -85,6 +85,8 @@ class UploadFileProcessWorker < GeneralWorker
   end
 
   def make_thumbnail
+    return unless @file.thumbnail_processable?
+
     ThumbnailMakerWorker.perform_async(@file.id)
   end
 end

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LICENSE_TYPE } from "../constants/licenseTypes";
-import { getLicense } from "../redux/actions/license";
+import { getLicense as getLicenseAction } from "../redux/actions/license";
 
 const licenseSelector = {
   [LICENSE_TYPE.LDAP]: (data) => data?.authenticate_member?.ldap_enable,
@@ -17,6 +17,7 @@ const licenseSelector = {
   [LICENSE_TYPE.SIGN_VIDEO]: (data) => data?.sign_task?.sign_video_enable,
   [LICENSE_TYPE.GROUP_SHARE]: (data) => data?.template?.group_share,
   [LICENSE_TYPE.ENTERPRISE_PLAN]: (data) => data?.plan?.enterprise,
+  [LICENSE_TYPE.ENCRYPTABLE]: (data) => data?.setting?.encryptable_enable,
 };
 
 export const useLicenseReady = () => {
@@ -25,7 +26,7 @@ export const useLicenseReady = () => {
 
   useEffect(() => {
     if (!data) {
-      dispatch(getLicense());
+      dispatch(getLicenseAction());
     }
   }, [data, dispatch]);
 
@@ -38,7 +39,7 @@ export const useLicenseHook = (type) => {
 
   useEffect(() => {
     if (!data) {
-      dispatch(getLicense());
+      dispatch(getLicenseAction());
     }
   }, [data, dispatch]);
 

@@ -1,5 +1,32 @@
 namespace :transfer do
 
+  desc 'Normalize contact emails (strip whitespace) and remove resulting duplicates'
+  task normalize_contact_emails: :environment do
+    puts "[#{Time.zone.now}] Start normalizing contact emails"
+
+    normalized_count = 0
+    removed_count = 0
+
+    Contact.where("email != TRIM(email)").find_each do |contact|
+      stripped_email = contact.email.strip.downcase
+
+      duplicate = Contact.where(member_id: contact.member_id)
+                         .where("LOWER(TRIM(email)) = ?", stripped_email)
+                         .where.not(id: contact.id)
+                         .first
+
+      if duplicate
+        contact.destroy
+        removed_count += 1
+      else
+        contact.update_column(:email, stripped_email)
+        normalized_count += 1
+      end
+    end
+
+    puts "[#{Time.zone.now}] Done. Normalized: #{normalized_count}, Removed duplicates: #{removed_count}"
+  end
+
   desc 'move signature raw from db to active_storage'
   task :signature => :environment do
     class_list = ['Signature', 'GuestSignature'].freeze

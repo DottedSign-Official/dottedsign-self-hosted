@@ -191,6 +191,15 @@ RSpec.describe Api::V1::PublicFormsController, type: :request do
       expect(json['error_key']).to eq('invalid_params')
     end
 
+    it 'should return 400_417 if params include encryptable settings', unpublish_form: true, rpdoc_example_key: 400_417_4, rpdoc_example_name: 'update public form failed (invalid_params, encryptable settings are not supported)' do
+      @params[:is_encrypted] = true
+      @params[:completion_password] = 'test_password'
+      put @path, params: @params.to_json, headers: @headers
+      expect(response).to have_http_status(400)
+      expect(json['error_code']).to eq(400_417)
+      expect(json['error_key']).to eq('invalid_params')
+    end
+
     it 'should return 400_918 if public form not unpublish', rpdoc_example_key: 400_918, rpdoc_example_name: 'update public form failed (public form should be unpublish)' do
       put @path, params: @params.to_json, headers: @headers
       expect(response).to have_http_status(400)

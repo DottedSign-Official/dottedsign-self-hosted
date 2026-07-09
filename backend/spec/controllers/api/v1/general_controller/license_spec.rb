@@ -13,6 +13,7 @@ RSpec.describe '/api/v1/license_info', type: :request do
 
     stub_const('LICENSE_KEY', 'dummy_license_key')
     license = OpenStruct.new(
+      starts_at: Time.zone.parse('2026-01-01 00:00:00'),
       expires_at: nil,
       restrictions: {
         group_enable: true,
@@ -32,6 +33,10 @@ RSpec.describe '/api/v1/license_info', type: :request do
     it 'should return 200', rpdoc_example_key: 200, rpdoc_example_name: 'show license_info success' do
       get @path, headers: @headers
       expect(response).to have_http_status(200)
+      expect(response.parsed_body['data']).to include(
+        'starts_at' => '2026-01-01T00:00:00.000Z',
+        'expires_at' => nil
+      )
     end
   end
 

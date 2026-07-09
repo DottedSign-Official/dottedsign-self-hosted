@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { gbColor } from "../../../../global/styled";
+import { Input } from "../../../../global/styledForm";
 
 export const Content = styled.div`
   width: 100%;
@@ -107,4 +108,35 @@ export const Link = styled.div`
   color: ${gbColor.purple};
   margin-bottom: 20px;
   cursor: pointer;
+`;
+
+export const CheckboxRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+`;
+
+export const CheckboxText = styled.span`
+  font-size: 14px;
+  color: black;
+  margin-left: 8px;
+`;
+
+export const PasswordInput = styled(Input)`
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      border-color: #ff4d4f;
+      &:focus {
+        border-color: #ff4d4f;
+        outline: none;
+      }
+    `}
+`;
+
+export const ErrorMessage = styled.div`
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  line-height: 1.4;
 `;

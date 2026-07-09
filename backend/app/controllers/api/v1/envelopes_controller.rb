@@ -16,13 +16,13 @@ class Api::V1::EnvelopesController < Api::ApplicationController
   before_action :check_field_setting_group_params, only: [:create, :update]
 
   def create
-    creator = Factories::Envelope::Creator.call(current_member, envelope_params, tasks_params, client_params, setting_params)
+    creator = Factories::Envelope::Creator.call(current_member, envelope_params, tasks_params, client_params, envelope_setting_params)
     return error_response(creator.error) if creator.failed?
     success_response(creator.result)
   end
 
   def update
-    updater = Factories::Envelope::Updater.call(current_member, @envelope, envelope_params, tasks_params, client_params, setting_params)
+    updater = Factories::Envelope::Updater.call(current_member, @envelope, envelope_params, tasks_params, client_params, envelope_setting_params)
     return error_response(updater.error) if updater.failed?
     success_response(updater.result)
   end

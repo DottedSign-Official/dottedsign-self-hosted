@@ -4,7 +4,7 @@ import Flow from "../Flow";
 import HintExpire from "../HintExpire";
 import More from "../../containers/More";
 import TagCounter from "../TagCounter";
-import Icon from "../Icon";
+import TaskOverlayIcon from "../TaskOverlayIcon";
 import {
   Wrapper,
   BlockName,
@@ -13,7 +13,6 @@ import {
   BlockFlow,
   WrapperExpire,
   BlockMore,
-  WrapperEnvelopeIcon,
 } from "./styled";
 
 const TaskItemList = ({
@@ -47,6 +46,8 @@ const TaskItemList = ({
     owner,
     moreMenu,
     tag_info,
+    isEncrypted,
+    completionPassword,
   } = task;
 
   return (
@@ -77,10 +78,9 @@ const TaskItemList = ({
         </BlockMore>
       )}
 
-      {isEnvelope && (
-        <WrapperEnvelopeIcon>
-          <Icon type="envelope" size="28px" />
-        </WrapperEnvelopeIcon>
+      {isEnvelope && <TaskOverlayIcon iconType="envelopeBadge" />}
+      {isEncrypted && completionPassword && (
+        <TaskOverlayIcon iconType="lockBadge" />
       )}
     </Wrapper>
   );

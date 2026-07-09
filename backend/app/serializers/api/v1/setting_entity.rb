@@ -11,6 +11,8 @@ class Api::V1::SettingEntity < BaseEntity
   expose :cc_info
   expose :reference_setting
   expose :completed_reference_setting
+  expose :is_encrypted
+  expose :completion_password, if: ->(setting, options) { options[:current_member].try(:id) == setting.source.owner_id }
 
   private
 

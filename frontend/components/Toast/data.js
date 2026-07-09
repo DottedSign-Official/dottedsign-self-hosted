@@ -167,6 +167,13 @@ const data = {
   [toast.createSuc]: {
     text: "create_suc",
   },
+  [toast.createSucEncrypted]: {
+    text: "create_suc_encrypted",
+  },
+  [toast.encryptionChtAuthConflict]: {
+    text: "encryption_cht_auth_conflict",
+    isWarning: true,
+  },
   [toast.overLimit]: {
     text: "over_limit",
     isWarning: true,

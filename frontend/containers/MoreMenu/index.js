@@ -23,6 +23,7 @@ const MoreMenuContainer = ({ isMobile, menu, isMenuUpward }) => {
     manageTags,
     deleteTask,
     taskResend,
+    completionPassword,
   } = menu;
 
   // NOTE: containers/MoreMenu
@@ -124,6 +125,14 @@ const MoreMenuContainer = ({ isMobile, menu, isMenuUpward }) => {
     getPreviewShareLink({ ...previewShareLink.data, language: i18n.language });
   };
 
+  const onCompletionPassword = () => {
+    const payload = {
+      modalType: MODAL_TYPE.completionPassword,
+      modalData: completionPassword.data,
+    };
+    openModal(payload);
+  };
+
   const onSaveAsTemplate = () => {
     const payload = {
       modalType: MODAL_TYPE.saveAsTemplate,
@@ -159,6 +168,7 @@ const MoreMenuContainer = ({ isMobile, menu, isMenuUpward }) => {
       onChangeOwner={onChangeOwner}
       onNotifyOwner={onNotifyOwner}
       onGetPreviewShareLink={onGetPreviewShareLink}
+      onCompletionPassword={onCompletionPassword}
       onSaveAsTemplate={onSaveAsTemplate}
       onLabel={onLabel}
       onTaskResend={onTaskResend}

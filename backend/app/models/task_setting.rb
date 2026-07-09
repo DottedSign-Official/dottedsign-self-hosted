@@ -6,6 +6,7 @@ class TaskSetting < Setting
   alias :source :sign_task
   alias_attribute :source_id, :sign_task_id
 
+  include Settings::Encryptable
   class << self
 
     def setup_from_source_id(sign_task_id)

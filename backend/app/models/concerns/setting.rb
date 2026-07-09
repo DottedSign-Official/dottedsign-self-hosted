@@ -1,6 +1,8 @@
 class Setting < ApplicationRecord
   self.abstract_class = true
 
+  class_attribute :extra_permitted_attributes, default: [], instance_writer: false
+
   before_save :setup_cc_members, if: :cc_info_changed?
   after_commit :process_reference_setting, on: :update, if: :reference_setting_previously_changed?
   after_commit :process_completed_reference_setting, on: :update, if: :completed_reference_setting_previously_changed?
@@ -9,11 +11,16 @@ class Setting < ApplicationRecord
   attr_writer :update_setting_only
 
   class << self
+    def assignable_setting_attributes
+      column_names.map(&:to_sym)
+    end
 
     def setup_from_request(owner_id, source_id, setting_attrs)
       source_setting = setup_from_source_id(source_id)
-      source_setting.assign_attributes(setting_attrs)
-      return unless source_setting.save
+      source_setting.assign_attributes(setting_attrs.slice(*assignable_setting_attributes))
+      unless source_setting.save
+        raise ServiceError.new(:invalid_params, error_message: source_setting.errors.full_messages.to_sentence)
+      end
       source_setting.cc_info&.each do |cc_info|
         Contact.setup_for_member(owner_id, cc_info)
       end
@@ -22,7 +29,10 @@ class Setting < ApplicationRecord
   end
 
   def display_info(member_id: nil)
-    info = as_json(only: [:forget_remind, :cc_info, :need_otp_verify, :receiver_lang, :need_ca], methods: [:expire_remind, :remind_days_before_expire, :expires_in_days])
+    info = as_json(
+      only: [:forget_remind, :cc_info, :need_otp_verify, :receiver_lang, :need_ca],
+      methods: [:expire_remind, :remind_days_before_expire, :expires_in_days]
+    )
     info[:message] = source.can_view_processing_message?(member_id: member_id) ? message : nil
     info[:reference_setting] = source.can_view_processing_message?(member_id: member_id) ? reference_setting : []
     info[:completed_message] = source.can_view_completed_message?(member_id: member_id) ? completed_message : nil
@@ -60,6 +70,7 @@ class Setting < ApplicationRecord
   def cc_emails
     cc_info.pluck('email')
   end
+
 
   private
 

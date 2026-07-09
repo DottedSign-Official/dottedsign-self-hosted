@@ -78,10 +78,6 @@ export const Content = styled.div`
       : css`
           align-items: flex-start;
         `};
-
-  @media (max-width: 767px) {
-    padding: 10px 20px;
-  }
 `;
 
 export const Text = styled.div`

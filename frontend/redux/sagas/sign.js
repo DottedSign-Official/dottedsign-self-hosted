@@ -402,21 +402,35 @@ function* getPreviewShareSignTask({
       ? file_list[0].download_link
       : (yield select((state) => state.create.fileUrl)) || download_link;
 
-    // NOTE: set fileUrl for PdfViewer
-    yield put({
-      type: signActions.SET_FILE_URL,
-      payload: {
-        url: fileUrl,
-      },
-    });
+    let pdfDataUrl;
+    let vpData;
+    let envelopeFiles;
 
-    const doc = yield call(getDoc, fileUrl);
-    const pdfDataUrl = yield call(getPdfDocDataURL, doc);
-    const vpData = yield call(getAllViewport, doc);
+    if (isEnvelope) {
+      envelopeFiles = yield all(
+        file_list.map((file) =>
+          call(fetchFileData, { file, isGetSignTask: true }),
+        ),
+      );
+      pdfDataUrl = envelopeFiles[0].fileUrl;
+      vpData = envelopeFiles[0].vpData;
+    } else {
+      const doc = yield call(getDoc, fileUrl);
+      pdfDataUrl = yield call(getPdfDocDataURL, doc);
+      vpData = yield call(getAllViewport, doc);
+    }
 
     if (!vpData) {
       throw COMMON_ERROR.error;
     }
+
+    // NOTE: set fileUrl for PdfViewer
+    yield put({
+      type: signActions.SET_FILE_URL,
+      payload: {
+        url: pdfDataUrl,
+      },
+    });
 
     const { viewport, rotates } = vpData;
 
@@ -433,23 +447,20 @@ function* getPreviewShareSignTask({
 
       let vpDataMap = {};
 
-      for (const f of file_list) {
-        const { download_link, task_id } = f;
-        const doc = yield call(getDoc, download_link);
-        const vpData = yield call(getAllViewport, doc);
-
-        if (!vpData) {
+      for (const envelopeFile of envelopeFiles) {
+        if (!envelopeFile.vpData) {
           yield put({
             type: commonActions.OPEN_TOAST,
             payload: toastStatus.revertDraftFal,
           });
           yield delay(5000);
           yield call(Router.push, "/tasks");
-          throw new Error(`Viewport data not found for task_id: ${task_id}`);
+          throw new Error(
+            `Viewport data not found for task_id: ${envelopeFile.fileId}`,
+          );
         }
 
-        const { viewport, rotates } = vpData;
-        vpDataMap[task_id] = { viewport, rotates };
+        vpDataMap[envelopeFile.fileId] = envelopeFile.vpData;
       }
 
       stage_infos.map((stage, idx) => {
@@ -959,20 +970,11 @@ function* getPreviewShareSignTask({
     }
 
     if (envelope_id) {
-      const results = yield all(
-        file_list.map((file) =>
-          call(fetchFileData, {
-            file,
-            isGetSignTask: true,
-          }),
-        ),
-      );
-
       payload.isEnvelope = true;
 
-      payload.fileList = results;
+      payload.fileList = envelopeFiles;
 
-      payload.fileFocus = results[0];
+      payload.fileFocus = envelopeFiles[0];
 
       payload.allFilesInvolvers = allFilesInvolvers;
     }
@@ -1283,21 +1285,35 @@ function* getSignTask({ data }) {
       ? file_list[0].download_link
       : (yield select((state) => state.create.fileUrl)) || download_link;
 
-    // NOTE: set fileUrl for PdfViewer
-    yield put({
-      type: signActions.SET_FILE_URL,
-      payload: {
-        url: fileUrl,
-      },
-    });
+    let pdfDataUrl;
+    let vpData;
+    let envelopeFiles;
 
-    const doc = yield call(getDoc, fileUrl);
-    const pdfDataUrl = yield call(getPdfDocDataURL, doc);
-    const vpData = yield call(getAllViewport, doc);
+    if (isEnvelope) {
+      envelopeFiles = yield all(
+        file_list.map((file) =>
+          call(fetchFileData, { file, isGetSignTask: true }),
+        ),
+      );
+      pdfDataUrl = envelopeFiles[0].fileUrl;
+      vpData = envelopeFiles[0].vpData;
+    } else {
+      const doc = yield call(getDoc, fileUrl);
+      pdfDataUrl = yield call(getPdfDocDataURL, doc);
+      vpData = yield call(getAllViewport, doc);
+    }
 
     if (!vpData) {
       throw COMMON_ERROR.error;
     }
+
+    // NOTE: set fileUrl for PdfViewer
+    yield put({
+      type: signActions.SET_FILE_URL,
+      payload: {
+        url: pdfDataUrl,
+      },
+    });
 
     const { viewport, rotates } = vpData;
 
@@ -1438,23 +1454,21 @@ function* getSignTask({ data }) {
       attachments = [];
 
       let vpDataMap = {};
-      for (const f of file_list) {
-        const { download_link, task_id } = f;
-        const doc = yield call(getDoc, download_link);
-        const vpData = yield call(getAllViewport, doc);
 
-        if (!vpData) {
+      for (const envelopeFile of envelopeFiles) {
+        if (!envelopeFile.vpData) {
           yield put({
             type: commonActions.OPEN_TOAST,
             payload: toastStatus.revertDraftFal,
           });
           yield delay(5000);
           yield call(Router.push, "/tasks");
-          throw new Error(`Viewport data not found for task_id: ${task_id}`);
+          throw new Error(
+            `Viewport data not found for task_id: ${envelopeFile.fileId}`,
+          );
         }
 
-        const { viewport, rotates } = vpData;
-        vpDataMap[task_id] = { viewport, rotates };
+        vpDataMap[envelopeFile.fileId] = envelopeFile.vpData;
       }
 
       stage_infos.map((stage, idx) => {
@@ -2088,20 +2102,11 @@ function* getSignTask({ data }) {
 
     // NOTE: isEnvelope
     if (envelope_id) {
-      const results = yield all(
-        file_list.map((file) =>
-          call(fetchFileData, {
-            file,
-            isGetSignTask: true,
-          }),
-        ),
-      );
-
       payload.isEnvelope = true;
 
-      payload.fileList = results;
+      payload.fileList = envelopeFiles;
 
-      payload.fileFocus = results[0];
+      payload.fileFocus = envelopeFiles[0];
 
       payload.allFilesInvolvers = allFilesInvolvers;
     }

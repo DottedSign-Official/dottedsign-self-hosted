@@ -363,7 +363,9 @@ const StatusSign = ({ data: { colorId, requiredIds } }) => {
   };
 
   const scrollEvent = (target, signNumber) => {
-    const inputId = `signInput-${target[signNumber]?.id}`;
+    const blk = target[signNumber];
+    const groupId = blk?.field_group_object_id;
+    const inputId = groupId ? groupId : `signInput-${blk?.id}`;
     scrollToDom(inputId, true);
     setSignNumber((prev) => (prev + 1) % target.length);
   };

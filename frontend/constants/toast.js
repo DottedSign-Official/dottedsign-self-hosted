@@ -39,6 +39,8 @@ const toast = {
   sendRequestSuc: "sendRequestSuc",
   sendRequestFal: "sendRequestFal",
   createSuc: "createSuc",
+  createSucEncrypted: "createSucEncrypted",
+  encryptionChtAuthConflict: "encryptionChtAuthConflict",
   draftSuc: "draftSuc",
   putDraftSuc: "putDraftSuc",
   checkFal: "checkFal",

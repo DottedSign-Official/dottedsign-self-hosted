@@ -118,17 +118,3 @@ export const Text = styled.div`
   letter-spacing: 0.3px;
   padding: 2px 0 0;
 `;
-
-export const WrapperEnvelopeIcon = styled.div`
-  position: absolute;
-  top: -2px;
-  left: -2px;
-
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-`;

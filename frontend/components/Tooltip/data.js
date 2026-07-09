@@ -156,5 +156,15 @@ const data = {
     hint: "tooltip_signing_group",
     size: "24px",
   },
+
+  [tooltip.completionPassword]: {
+    icon: "help",
+    hint: "tooltip_completion_password",
+  },
+
+  [tooltip.encryptionChtAuthConflict]: {
+    icon: "help",
+    hint: "tooltip_encryption_cht_auth_conflict",
+  },
 };
 export default data;

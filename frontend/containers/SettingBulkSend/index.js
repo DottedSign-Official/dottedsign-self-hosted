@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBulks } from "../../redux/actions/settings";
-import { getBulkFile as getBulkFileApi } from "../../apis/settings";
+import {
+  getBulkFile as getBulkFileApi,
+  getBulkCsv as getBulkCsvApi,
+} from "../../apis/settings";
 import BulkSend from "../../components/SettingBulkSend";
 
 const BulkSendContainer = () => {
@@ -18,6 +21,13 @@ const BulkSendContainer = () => {
       return;
     }
     getBulkFileApi(uuid);
+  };
+
+  const onExport = (uuid, template_name) => {
+    if (!uuid) {
+      return;
+    }
+    getBulkCsvApi({ uuid, template_name });
   };
 
   const onPageChange = (pageId) => {
@@ -40,6 +50,7 @@ const BulkSendContainer = () => {
       pageTotal={bulkSendPages}
       missions={bulkSendMissions}
       onDlod={onDlod}
+      onExport={onExport}
       onPageChange={onPageChange}
       authorized={authorized}
     />

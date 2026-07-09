@@ -20,6 +20,7 @@ module.exports = {
   },
   setupFiles: ["jest-canvas-mock"],
   moduleNameMapper: {
+    "^pdfjs-dist$": "<rootDir>/__mocks__/pdfjs-dist.js",
     "^next/router$": "next-router-mock",
   },
 };

@@ -3,6 +3,7 @@ import {
   AUTH_ERROR,
   SYSTEM_HINT,
   GROUP_HINT,
+  LICENSE_EXPIRY_HINT,
 } from "../../constants/constants";
 
 const data = {
@@ -87,6 +88,14 @@ const data = {
   },
   [GROUP_HINT.taskSuspended]: {
     msg: "warning_group_task_suspended",
+    color: "red",
+  },
+  [LICENSE_EXPIRY_HINT.warning]: {
+    msg: "warning_license_expiry",
+    color: "yellow",
+  },
+  [LICENSE_EXPIRY_HINT.expired]: {
+    msg: "warning_license_expired",
     color: "red",
   },
 

@@ -13,6 +13,7 @@ class ServiceFile < ApplicationRecord
 
   PREVIEW_EXPIRED_IN = 2.day.to_i.freeze
   PREVIEWABLE_STORABLE_TYPE = %w[SignTask Envelope]
+  THUMBNAIL_PROCESSABLE_CONTENT_TYPES = %w[application/pdf].freeze
   #MIME types list: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
   ALLOW_FILE_TYPES = %w[msword vnd.openxmlformats-officedocument.wordprocessingml.document vnd.ms-powerpoint
                       vnd.openxmlformats-officedocument.presentationml.presentation vnd.ms-excel vnd.openxmlformats-officedocument.spreadsheetml.sheet
@@ -42,6 +43,13 @@ class ServiceFile < ApplicationRecord
 
   def previewable?
     PREVIEWABLE_STORABLE_TYPE.include?(storable_type)
+  end
+
+  def thumbnail_processable?
+    return false unless file.attached?
+
+    content_type = file_blob.content_type
+    THUMBNAIL_PROCESSABLE_CONTENT_TYPES.include?(content_type) || content_type.start_with?('image/')
   end
 
   def preview_code(stage = nil, will_expired: true, default_member_email: nil)

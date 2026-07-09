@@ -13,7 +13,7 @@ class ThumbnailMaker < ServiceCaller
   def call
     obtain_service_file
     source_path = download_processed_file
-    thumbnail_path = make_thumbnail(source_path)
+    thumbnail_path = make_thumbnail_with_fallback(source_path)
     @result = compress_png!(thumbnail_path)
   end
 
@@ -30,6 +30,15 @@ class ThumbnailMaker < ServiceCaller
     downloaded_path = File.join(@working_dir, "source.pdf")
     @service_file.download_to_local(downloaded_path)
     downloaded_path
+  end
+
+  def make_thumbnail_with_fallback(file_path)
+    password = thumbnail_password
+    return make_thumbnail(file_path) if password.blank?
+    return make_thumbnail(file_path) unless encrypted?(file_path)
+
+    decrypted_path = decrypt_pdf(file_path, password)
+    make_thumbnail(decrypted_path)
   end
 
   def make_thumbnail(file_path)
@@ -59,7 +68,30 @@ class ThumbnailMaker < ServiceCaller
       output_path: @working_dir
     }
     convert_result = execute_system_cmd(convert_cmd)
+
     raise ServiceError.new(:thumbnail_failed) if command_failed?(convert_result)
+  end
+
+  def decrypt_pdf(input_path, password)
+    decrypted_path = File.join(@working_dir, 'source_decrypted.pdf')
+    Document::PdfDecryptor.decrypt(
+      input: input_path,
+      output: decrypted_path,
+      password: password
+    )
+
+    decrypted_path
+  end
+
+  def thumbnail_password
+    setting = @service_file.storable&.setting
+    return nil unless setting&.respond_to?(:completion_password)
+
+    setting.completion_password
+  end
+
+  def encrypted?(file_path)
+    Document::PdfEncryptionChecker.encrypted?(input: file_path)
   end
 
   def first_thumbnail_png(output_filename)

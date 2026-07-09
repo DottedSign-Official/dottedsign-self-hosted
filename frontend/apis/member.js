@@ -50,3 +50,17 @@ export const getContacts = () => {
 
   return invokeApi(param);
 };
+
+export const delContact = (data) => {
+  const accessToken = Cookie.get("access_token");
+
+  const param = {
+    app: "member",
+    path: PATH.delContact,
+    method: "DELETE",
+    accessToken,
+    data,
+  };
+
+  return invokeApi(param);
+};

@@ -153,6 +153,37 @@ RSpec.describe Api::V1::SignTasksController, type: :request do
       expect(json['data']['own_by_me']).to eq(true)
     end
 
+    it 'should return 200 and inherit custom_message_setting from template', rpdoc_example_key: 200_6, rpdoc_example_name: 'create task from template with custom_message_setting' do
+      @template.dummy_stages.first.update(custom_message_setting: { 'processing_viewable' => true, 'completed_viewable' => false })
+      @template.dummy_stages.second.update(custom_message_setting: { 'processing_viewable' => false, 'completed_viewable' => true })
+      @params[:template_id] = @template.id
+
+      post "#{@path}/create_from_template", params: @params.to_json, headers: @headers
+      
+      expect(response).to have_http_status(200)
+
+      first_stage = json['data']['stage_infos'].find { |stage| stage['sequence'] == 1 }
+      second_stage = json['data']['stage_infos'].find { |stage| stage['sequence'] == 2 }
+      expect(first_stage['custom_message_setting']).to eq({ 'processing_viewable' => true, 'completed_viewable' => false })
+      expect(second_stage['custom_message_setting']).to eq({ 'processing_viewable' => false, 'completed_viewable' => true })
+    end
+
+
+    it 'should return 200 and custom_message_setting', rpdoc_example_key: 200_7, rpdoc_example_name: 'create task from template with custom_message_setting' do
+      @params[:stages][0][:custom_message_setting] = {'processing_viewable' => true, 'completed_viewable' => false}
+      @params[:stages][1][:custom_message_setting] = {'processing_viewable' => false, 'completed_viewable' => false}
+      @params[:template_id] = @template.id
+
+      post "#{@path}/create_from_template", params: @params.to_json, headers: @headers
+      
+      expect(response).to have_http_status(200)
+
+      first_stage = json['data']['stage_infos'].find { |stage| stage['sequence'] == 1 }
+      second_stage = json['data']['stage_infos'].find { |stage| stage['sequence'] == 2 }
+      expect(first_stage['custom_message_setting']).to eq({ 'processing_viewable' => true, 'completed_viewable' => false })
+      expect(second_stage['custom_message_setting']).to eq({ 'processing_viewable' => false, 'completed_viewable' => false })
+    end
+
     it 'should return 200 and get task info', rpdoc_example_key: 200_4, rpdoc_example_name: 'create task from template and change base pdf success' do
       original_file = File.read("#{Rails.root}/spec/fixtures/files/test.pdf")
       allow_any_instance_of(ServiceFile).to receive_message_chain(:file, :attached?).and_return(true)

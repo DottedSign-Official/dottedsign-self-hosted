@@ -4,7 +4,7 @@ class Api::Internal::SignTasksController < Api::Internal::ApplicationController
   before_action :check_cert_occassion, only: [:create_with_file, :create_from_template]
 
   def create_with_file
-    creator = FileTaskCreator.call(task_params, client_params, setting_params)
+    creator = FileTaskCreator.call(task_params, client_params, task_setting_params)
     return error_response(creator.error.key, creator.error.message) if creator.failed?
 
     task = creator.task
@@ -16,7 +16,7 @@ class Api::Internal::SignTasksController < Api::Internal::ApplicationController
   end
 
   def create_from_template
-    creator = Factories::TemplateTask::CreateAndInvite.call(current_member, params[:template_id], template_create_task_info, template_code: params[:template_code], setting_info: setting_params, client_info: client_params, check_access: true, role_mapping: true, pdf_base64: params[:file])
+    creator = Factories::TemplateTask::CreateAndInvite.call(current_member, params[:template_id], template_create_task_info, template_code: params[:template_code], setting_info: template_setting_params, client_info: client_params, check_access: true, role_mapping: true, pdf_base64: params[:file])
     return error_response(creator.error.key, creator.error.message) if creator.failed?
 
     task = creator.task
@@ -75,7 +75,7 @@ class Api::Internal::SignTasksController < Api::Internal::ApplicationController
 
   def task_params
     process_task_params_for('create_and_invite')
-    params.permit(:sign_type, :owner_id, :file_name, :has_order, :file, stages: [:email, :name, pdf_object_info: [], xfdf_info: xfdf_permit_attrs, field_setting_groups: field_setting_group_permit_attrs, attachment_setting: attachment_permit_attrs, stage_setting: stage_setting_attrs, verify: verify_attrs])
+    params.permit(:sign_type, :owner_id, :file_name, :has_order, :file, stages: [:email, :name, pdf_object_info: [], xfdf_info: xfdf_permit_attrs, field_setting_groups: field_setting_group_permit_attrs, custom_message_setting: custom_message_setting_attrs, attachment_setting: attachment_permit_attrs, stage_setting: stage_setting_attrs, verify: verify_attrs])
   end
 
   def process_task_params_for(sign_type)

@@ -1,9 +1,11 @@
 module FormCheck
+  FORBIDDEN_ENCRYPTABLE_SETTING_KEYS = %i[is_encrypted completion_password].freeze
 
   def check_form_info
     check_form_template
     check_form_name_and_description
     check_form_signer_infos
+    check_forbidden_encryptable_settings
   end
 
   def check_form_template
@@ -55,5 +57,15 @@ module FormCheck
     return true if phone_num.nil?
     normalize_phone_number = phone_num.scan(/\d+/).join('')
     !Phonelib.parse(normalize_phone_number).valid?
+  end
+
+  def check_forbidden_encryptable_settings
+    return unless forbidden_encryptable_setting_keys_present?
+
+    raise ServiceError.new(:invalid_params, error_message: 'public form does not support encryptable settings')
+  end
+
+  def forbidden_encryptable_setting_keys_present?
+    FORBIDDEN_ENCRYPTABLE_SETTING_KEYS.any? { |key| @setting_info.key?(key) || @setting_info.key?(key.to_s) }
   end
 end

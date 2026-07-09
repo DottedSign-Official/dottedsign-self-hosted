@@ -45,6 +45,8 @@
 	"settings_tab_protected_task": "進階保護",
 	"settings_tab_bulk_send": "批次簽署任務",
 	"settings_tab_signing_group": "常用簽署組合",
+	"settings_tab_license": "系統授權",
+	"settings_license_period": "License key 授權期間",
 
 	"label_account": "帳戶資訊",
 	"settings_account_hint": "以下為您的個人帳戶資訊。",

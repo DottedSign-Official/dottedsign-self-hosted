@@ -17,12 +17,25 @@ module ParamsHelper
     params.permit(:client, :ip_address, :user_agent, :work_id, :code)
   end
 
-  def setting_params
+  def setting_params(setting_class)
     process_setting_params(params)
-    params.permit(
+    [
       :inform_enable, :forget_remind, :deadline, :message, :completed_message, :expire_remind_at, :need_otp_verify, :receiver_lang, :need_ca,
+      *setting_class.extra_permitted_attributes,
       cc_info: [:email, :name], reference_setting: reference_attrs, completed_reference_setting: reference_attrs
-    )
+    ]
+  end
+
+  def task_setting_params
+    params.permit(*setting_params(TaskSetting))
+  end
+
+  def envelope_setting_params
+    params.permit(*setting_params(EnvelopeSetting))
+  end
+
+  def template_setting_params
+    params.permit(*setting_params(TemplateSetting))
   end
 
   def pagination_params
@@ -34,7 +47,7 @@ module ParamsHelper
   end
 
   def template_create_task_info
-    params.permit(:file_name, :has_order, stages: [:email, :name, :role, verify: verify_attrs, stage_setting: stage_setting_attrs])
+    params.permit(:file_name, :has_order, stages: [:email, :name, :role, verify: verify_attrs, stage_setting: stage_setting_attrs, custom_message_setting: custom_message_setting_attrs])
   end
 
   def task_list_filter_params

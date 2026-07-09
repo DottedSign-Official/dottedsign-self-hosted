@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { openModal as openModalAction } from "../../redux/actions/common";
 import { resendRequest as resendRequestAction } from "../../redux/actions/auth";
 import { onAuth } from "../../helpers/auth";
-import { AUTH_ERROR } from "../../constants/constants";
+import { getLicenseExpiryInfo } from "../../helpers/licenseExpiry";
+import { AUTH_ERROR, LICENSE_EXPIRY_HINT } from "../../constants/constants";
 import Icon from "../Icon";
 import dataset from "./data";
 import { Wrapper, Msg, WrapperIcon } from "./styled";
@@ -14,11 +15,15 @@ const Hint = ({ router, type }) => {
   const { t } = useTranslation("hint");
 
   const [isVisible, setIsVisible] = useState(true);
-  const { role } = useSelector((state) => state.admin);
+  const authRole = useSelector((state) => state.auth.user?.role);
+  const adminRole = useSelector((state) => state.admin.role);
+  const licenseData = useSelector((state) => state.license.data);
   const signerEmail = useSelector((state) => state.sign.signerEmail);
   const dispatch = useDispatch();
   const openModal = (data) => dispatch(openModalAction(data));
   const resendReq = () => dispatch(resendRequestAction());
+  const role = authRole || adminRole;
+  const isLicenseHintVisible = !type && ["admin", "manager"].includes(role);
 
   useEffect(() => {
     if (signerEmail && type && type === AUTH_ERROR.loginFirst) {
@@ -29,7 +34,25 @@ const Hint = ({ router, type }) => {
     }
   }, [signerEmail, type]);
 
-  const data = dataset[type];
+  const expiryInfo =
+    isLicenseHintVisible && licenseData
+      ? getLicenseExpiryInfo(licenseData)
+      : null;
+
+  const fallbackType = (() => {
+    if (!expiryInfo) {
+      return null;
+    }
+    if (expiryInfo.hintType === "warning") {
+      return LICENSE_EXPIRY_HINT.warning;
+    }
+    if (expiryInfo.hintType === "expired") {
+      return LICENSE_EXPIRY_HINT.expired;
+    }
+    return null;
+  })();
+
+  const data = dataset[type || fallbackType];
 
   const onEventTrigger = (e) => {
     if (e.target.id === "resendReq") {
@@ -50,6 +73,8 @@ const Hint = ({ router, type }) => {
       if (!role) {
         return;
       }
+    } else if (e.target.id === "nav-license") {
+      router.push("/settings/license");
     }
   };
 

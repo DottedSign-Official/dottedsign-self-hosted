@@ -40,7 +40,7 @@ class Api::V1::PublicFormsController < Api::ApplicationController
   end
 
   def create
-    setup = Form::Create.call(current_member, create_params, template_params, setting_params)
+    setup = Form::Create.call(current_member, create_params, template_params, template_setting_params)
     if setup.success?
       serialize_response(:public_form, setup.public_form, show_detail: true)
     else
@@ -50,7 +50,7 @@ class Api::V1::PublicFormsController < Api::ApplicationController
 
   # corresponding to SaaS 'create' API
   def create_from_template
-    setup = Form::CreateFromTemplate.call(current_member, params.require(:template_id), create_params, setting_params)
+    setup = Form::CreateFromTemplate.call(current_member, params.require(:template_id), create_params, template_setting_params)
     if setup.success?
       serialize_response(:public_form, setup.public_form)
     else
@@ -59,7 +59,7 @@ class Api::V1::PublicFormsController < Api::ApplicationController
   end
 
   def update
-    setup = Form::Update.call(current_member, params.require(:form_id), update_params, template_params, setting_params)
+    setup = Form::Update.call(current_member, params.require(:form_id), update_params, template_params, template_setting_params)
     if setup.success?
       serialize_response(:public_form, setup.public_form, show_detail: true)
     else

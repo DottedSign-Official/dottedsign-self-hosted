@@ -6,12 +6,11 @@ class EnvelopeSetting < Setting
   alias :source :envelope
   alias_attribute :source_id, :envelope_id
 
+  include Settings::Encryptable
   class << self
-
     def setup_from_source_id(envelope_id)
       find_or_initialize_by(envelope_id: envelope_id)
     end
-
   end
 
   def source_type

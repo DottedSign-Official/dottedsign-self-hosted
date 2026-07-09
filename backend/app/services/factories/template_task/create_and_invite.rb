@@ -162,7 +162,7 @@ class Factories::TemplateTask::CreateAndInvite < ServiceCaller
     source_setting = @template.setting_info(member_id: @member.id)
     setting_info = source_setting.merge(@setting_info).symbolize_keys
     return if setting_info.blank?
-    TaskSetting.setup_from_request(@member.id, @task.id, setting_info.slice(*TemplateSetting.column_names.map(&:to_sym)))
+    TaskSetting.setup_from_request(@member.id, @task.id, setting_info)
   end
 
   def add_template_tags_to_task

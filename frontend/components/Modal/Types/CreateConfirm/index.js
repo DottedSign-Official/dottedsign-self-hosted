@@ -13,6 +13,7 @@ import {
 } from "../../../../redux/actions/create";
 import { iniSocket as iniSocketAction } from "../../../../redux/actions/socket";
 import { dateAddDays, getUnix } from "../../../../helpers/time";
+import { hasChtVerify } from "../../../../helpers/assignees/cht";
 import { MODAL_TYPE } from "../../../../constants/constants";
 import { SOCKET_CHANNEL_TYPE_SIGN } from "../../../../constants/socketTypes";
 import CreateConfirmComponent from "./component";
@@ -56,6 +57,8 @@ const CreateConfirm = ({ onModalClose }) => {
     formId,
     isPublicForm,
     publicFormSentCount,
+    is_encrypted,
+    completion_password,
   } = useSelector((state) => state.create);
 
   const Router = useRouter();
@@ -73,6 +76,7 @@ const CreateConfirm = ({ onModalClose }) => {
 
   const isInfoUpdate = false;
   const isEnvelope = Router.pathname.includes("create-envelope/assign-fields");
+  const hasChtAssignee = assignes?.some(({ verify }) => hasChtVerify(verify));
 
   const onSignerPermissions = () => {
     openModal({
@@ -142,6 +146,13 @@ const CreateConfirm = ({ onModalClose }) => {
       completedReferences,
       ccInfos,
     };
+
+    if (is_encrypted) {
+      dataTrans.is_encrypted = true;
+      if (completion_password) {
+        dataTrans.completion_password = completion_password;
+      }
+    }
 
     if (isEnvelope) {
       dataTrans.is_envelope = isEnvelope;
@@ -232,6 +243,15 @@ const CreateConfirm = ({ onModalClose }) => {
     }
   }, [taskId, envelopeId, user, onSettingChange]);
 
+  useEffect(() => {
+    if (hasChtAssignee && (is_encrypted || completion_password)) {
+      onSettingChange({
+        is_encrypted: false,
+        completion_password: "",
+      });
+    }
+  }, [hasChtAssignee, is_encrypted, completion_password, onSettingChange]);
+
   return (
     <CreateConfirmComponent
       isLoading={isLoading}
@@ -264,6 +284,19 @@ const CreateConfirm = ({ onModalClose }) => {
       onSettingChange={onSettingChange}
       onLabelChange={onLabelChange}
       onAuthIdentity={onAuthIdentity}
+      isEnvelope={isEnvelope}
+      isEncrypted={is_encrypted}
+      completionPassword={completion_password}
+      isEncryptionToggleDisabled={hasChtAssignee}
+      onEncryptedToggle={() => {
+        onSettingChange({
+          is_encrypted: !is_encrypted,
+          completion_password: "",
+        });
+      }}
+      setCompletionPassword={(value) =>
+        onSettingChange({ completion_password: value })
+      }
       onDraft={onAction("draft")}
       onConfirm={onAction("confirm")}
       onSaveForm={onAction("saveForm")}

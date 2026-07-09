@@ -7,6 +7,7 @@ import {
   openToast as openToastAction,
 } from "../../../../redux/actions/common";
 import { setSignerSettingsParams as setSignerSettingsParamsAction } from "../../../../redux/actions/modalCache";
+import { hasChtVerify } from "../../../../helpers/assignees/cht";
 
 import toastType from "../../../../constants/toast";
 import { MODAL_TYPE } from "../../../../constants/constants";
@@ -31,6 +32,7 @@ const ModalAuthMethod = ({ data }) => {
   const { uid, email } = data;
 
   const { signerSettingsSigners } = useSelector((state) => state.modalCache);
+  const { is_encrypted } = useSelector((state) => state.create);
 
   const dispatch = useDispatch();
   const openModal = (data) => dispatch(openModalAction(data));
@@ -65,19 +67,7 @@ const ModalAuthMethod = ({ data }) => {
       return;
     }
 
-    const verifyType = signerFocus.verify[0]?.verify_type;
-    const isCht = (() => {
-      if (verifyType === "cht_personal") {
-        return true;
-      }
-      if (verifyType === "cht_company") {
-        return true;
-      }
-      if (verifyType === "cht_system") {
-        return true;
-      }
-      return false;
-    })();
+    const isCht = hasChtVerify([signerFocus.verify[0]].filter(Boolean));
 
     const valSkipConfirm = signerFocus?.stage_setting?.reviewed_skip_confirm;
 
@@ -90,7 +80,7 @@ const ModalAuthMethod = ({ data }) => {
         return {
           ...signer,
           stage_setting: {
-            ...signer.others,
+            ...signer.stage_setting,
             reviewed_skip_confirm: false,
           },
         };
@@ -104,9 +94,17 @@ const ModalAuthMethod = ({ data }) => {
     return signerFocus?.verify?.length > 0;
   })();
 
-  const isPrevValid = (() => {
+  // NOTE: validates focused signer
+  const prevValidation = (() => {
     if (!signerFocus || !signerFocus.verify) {
-      return true;
+      return { isValid: true };
+    }
+
+    if (is_encrypted && hasChtVerify(signerFocus.verify)) {
+      return {
+        isValid: false,
+        toastType: toastType.encryptionChtAuthConflict,
+      };
     }
 
     const smsItm = signerFocus?.verify?.find(
@@ -114,18 +112,18 @@ const ModalAuthMethod = ({ data }) => {
     );
 
     if (typeof smsItm === "undefined") {
-      return true;
+      return { isValid: true };
     }
     if (!isPhone(smsItm.verify_source)) {
-      return false;
+      return { isValid: false, toastType: toastType.invalidPhone };
     }
 
-    return true;
+    return { isValid: true };
   })();
 
   const onPrevious = () => {
-    if (!isPrevValid) {
-      openToast({ payload: toastType.invalidPhone });
+    if (!prevValidation.isValid) {
+      openToast({ payload: prevValidation.toastType });
       return;
     }
 
@@ -133,14 +131,10 @@ const ModalAuthMethod = ({ data }) => {
   };
 
   const onUpdateMethods = (verifyMethod) => {
-    const isTargetCht =
-      verifyMethod[0]?.verify_type === "cht_personal" ||
-      verifyMethod[0]?.verify_type === "cht_company";
+    const isTargetCht = hasChtVerify(verifyMethod);
 
     const newSigners = signers.map((signer) => {
-      const isCurrentCht =
-        signer.verify?.[0]?.verify_type === "cht_personal" ||
-        signer.verify?.[0]?.verify_type === "cht_company";
+      const isCurrentCht = hasChtVerify(signer.verify);
 
       if (
         (signer.email === email && isTargetCht && isCurrentCht) ||
