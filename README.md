@@ -176,7 +176,7 @@ Both run the same DottedSign signing experience. The difference is **where your 
 | License | Open-source AGPL-3.0 (perpetual); commercial license available | Subscription plan |
 | Advanced security modules | Available via commercial license (e.g. approved digital certificates, Email / SMS OTP) | Included per plan |
 
-Not sure which path fits? [Talk to the DottedSign team](https://www.dottedsign.com/request-demo/).
+Not sure which path fits? [Talk to the DottedSign team](https://www.dottedsign.com/request-demo/?utm_source=GitHub&utm_campaign=GitHub_Repo_DSselfhosted_requestdemo&utm_medium=Repo).
 
 ## FAQ
 
@@ -202,7 +202,7 @@ If your organization installs and uses the software internally — without distr
 
 ### How do I get support?
 
-For deployment questions, open a GitHub Issue so the community can help. Licensed customers receive SLA-backed support equivalent to the SaaS standard — [contact the sales team](https://www.dottedsign.com/request-demo/?help=inquiry_enterprise_plan) for details.
+For deployment questions, open a GitHub Issue so the community can help. Licensed customers receive SLA-backed support equivalent to the SaaS standard — [contact the sales team](https://www.dottedsign.com/request-demo/?utm_source=GitHub&utm_campaign=GitHub_Repo_DSselfhosted_requestdemo&utm_medium=Repo) for details.
 
 
 ## Enterprise Adoption and Case Studies
@@ -217,7 +217,7 @@ DottedSign has extensive enterprise service experience, offering technical compl
 - Listed technology company: Streamlining external e-commerce business processes.
 - Leading travel e-commerce platform: Combined with RPA automation, recruitment contracts are signed back within 1 day.
 
-👉 [View more client success cases](https://www.dottedsign.com/en/blog/category/user-story)
+👉 [View more client success cases](https://www.dottedsign.com/blog/category/user-story?utm_source=GitHub&utm_campaign=GitHub_Repo_DSselfhosted_userstory&utm_medium=Repo)
 
 ## Advanced Features and Commercial Licensing
 
@@ -226,7 +226,7 @@ The current open-source edition covers the core signing workflow. If your organi
 1. Unlock advanced security modules: such as legally binding document certificates, Email OTP, SMS OTP, and more.
 2. Custom development and deep integration: need to deeply integrate the system, or prefer not to be subject to the AGPL-3.0 open-source terms.
 
-👉 Contact [DottedSign Sales](https://www.dottedsign.com/en/request-demo/?help=inquiry_enterprise_plan) to inquire about commercial licensing options and pricing.
+👉 Contact [DottedSign Sales](https://www.dottedsign.com/request-demo/?utm_source=GitHub&utm_campaign=GitHub_Repo_DSselfhosted_requestdemo&utm_medium=Repo) to inquire about commercial licensing options and pricing.
 
 ## AGPL-3.0 Open-Source License and Notes
 
